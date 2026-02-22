@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HomeSectionWrapper = ({ children, id, className = "", bgColor = "bg-white" }) => {
+const HomeSectionWrapper = ({ children, id, className = "", bgColor = "bg-[]" }) => {
   return (
     // py-24 (96px) تضمن مسافة احترافية جداً بين كل سكشن والتاني
     <section 

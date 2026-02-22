@@ -10,10 +10,10 @@ import { RiInstagramLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
-  return (
-    <footer className=" pt-24 pb-10 border-t border-gray-100 relative overflow-hidden">
+  return (<>
+    <footer className=" pt-24 pb-10 border-t border-gray-100 relative overflow-hidden ">
         
-        <div className="flex flex-col items-center mb-24 relative z-10 bg-[#FAFAFA]font-inter">
+        <div className="flex flex-col items-center mb-24 relative z-10 bg-[#FAFAFA] font-inter">
            <button className="px-10 py-5 rounded-full flex items-center gap-4 bg-gradient-to-r from-[#0913C3] to-[#FF0000] shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 group">
              <FaRocket className="w-6 h-6 text-white" />
              <span className="font-inter font-bold text-[18px] text-white tracking-wide">
@@ -41,8 +41,10 @@ const Footer = () => {
              </div>
            </div>
         </div>
-
-        <div className="h-[1px] w-full bg-gray-300  mb-16 "></div>
+        
+        </footer> 
+<footer className="pt-24 pb-10 border-t border-gray-100 relative overflow-hidden bg-white shadow-5xl">
+       
 
         <div className=" max-w-7xl mx-auto px-4  font-inter grid grid-cols-1  bg-white md:grid-cols-12 gap-12 md:gap-8 mb-16">
           
@@ -94,7 +96,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex flex-col max-w-7xl mx-auto px-4   md:flex-row justify-between items-end border-t border-gray-100 pt-8 gap-8">
+        <div className="flex flex-col max-w-7xl mx-auto px-4  bg-white   md:flex-row justify-between items-end border-t border-gray-100 pt-8 gap-8">
           <div className="flex items-center gap-6">
             <a href="#" className="text-main hover:text-[#333CF5] transition-colors"> <RiInstagramLine alt="PulseX" className="w-6 h-6 object-contain" /></a>
             <a href="#" className="text-main hover:text-[#333CF5] transition-colors"> <SiLinkedin alt="PulseX" className="w-6 h-6 object-contain" /></a>
@@ -111,7 +113,7 @@ const Footer = () => {
           </div>
         </div>
  
-        <div className="mt-12 flex flex-col max-w-7xl mx-auto px-4   md:flex-row justify-between items-center text-[14px] text-gray-text-dim2 pt-8 border-t border-[#757575]">
+        <div className="mt-12 flex flex-col max-w-7xl mx-auto px-4  bg-white  md:flex-row justify-between items-center text-[14px] text-gray-text-dim2 pt-8 border-t border-[#757575]">
           
           <p>© 2025 PulseX. All rights reserved.</p>
           <div className="flex items-center gap-8 mt-4 md:mt-0">
@@ -127,7 +129,7 @@ const Footer = () => {
         </div>
 
 
-    </footer>
+    </footer></>
   );
 };
 
