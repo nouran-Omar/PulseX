@@ -9,7 +9,7 @@ const PatientCriticalAlert = () => {
   return (
     <div className={styles.alertCard}>
       <div className={styles.iconCircle}>
-        <HiOutlineXCircle className="text-red-600 text-4xl" />
+        <HiOutlineXCircle className="text-[#E7000B] text-4xl" />
       </div>
       
       <h2 className={styles.alertTitle}>Critical Alert: Medical Consultation Recommended</h2>

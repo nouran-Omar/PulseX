@@ -33,7 +33,7 @@ const PatientStories = () => {
   const currentStories = allStories.slice(indexOfFirst, indexOfLast);
 
   return (
-    <div className={styles.container}>
+ <>
       <header className={styles.header}>
         <div className="flex items-center gap-3">
           <SiMicrodotblog className="text-3xl text-[#010218]" />
@@ -50,7 +50,7 @@ const PatientStories = () => {
               <img src={story.img} alt={story.author} className={styles.avatar} />
               <div>
                 <h4>{story.author}</h4>
-                <span>{story.date}</span>
+                <span className='text-[#6B7280]'>{story.date}</span>
               </div>
             </div>
             <h3 className={styles.storyTitle}>{story.title}</h3>
@@ -107,7 +107,7 @@ const PatientStories = () => {
           <HiOutlinePencilAlt /> Write Story
         </button>
       </div>
-    </div>
+</>
   );
 };
 

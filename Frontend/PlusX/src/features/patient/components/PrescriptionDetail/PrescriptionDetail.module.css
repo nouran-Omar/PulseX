@@ -1,9 +1,8 @@
 .pageWrapper {
-  padding: 20px 40px;
-  background: #f6f7f8;
   min-height: 100vh;
   font-family: "inter", sans-serif;
 }
+
 
 .backBtn {
   display: flex;

@@ -8,7 +8,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend,
 } from 'recharts';
 
 /* ─── Custom Tooltip ────────────────────────────── */
@@ -23,11 +22,7 @@ const CustomTooltip = ({ active, payload, label }) => {
           <span className={styles.tooltipKey}>{entry.name}:</span>
           <span className={styles.tooltipVal} style={{ color: entry.color }}>
             {entry.value}
-            {entry.dataKey === 'heartRate'
-              ? ' bpm'
-              : entry.dataKey === 'oxygenLevel'
-              ? '%'
-              : ' mg/dl'}
+            {entry.dataKey === 'heartRate' ? ' bpm' : entry.dataKey === 'oxygenLevel' ? '%' : ' mg/dl'}
           </span>
         </div>
       ))}
@@ -35,11 +30,11 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-/* ─── Chart filters ──────────────────────────────── */
+/* ─── Metric definitions ─────────────────────────── */
 const METRICS = [
-  { key: 'heartRate',    label: 'Heart Rate',    color: '#155DFC', active: true  },
-  { key: 'bloodSugar',   label: 'Blood Sugar',   color: '#00A63E', active: true  },
-  { key: 'oxygenLevel',  label: 'Oxygen Level',  color: '#8B5CF6', active: false },
+  { key: 'heartRate',   label: 'Heart Rate',   color: '#4F46E5', active: true  },
+  { key: 'bloodSugar',  label: 'Blood Sugar',  color: '#00A63E', active: true  },
+  { key: 'oxygenLevel', label: 'Oxygen Level', color: '#8B5CF6', active: false },
 ];
 
 /* ─────────────────────────────────────────────────── */
@@ -59,59 +54,58 @@ const PatientWeeklyChart = ({ weeklyData }) => {
       <div className={styles.header}>
         <div>
           <h3 className={styles.title}>Weekly Health Overview</h3>
-          <p className={styles.subtitle}>Last 7 days — Feb 9 – 15, 2026</p>
+          <p className={styles.subtitle}>Analyze how your heart health improves throughout the week</p>
         </div>
+        <div className={styles.headerRight}>
+          <span className={styles.thisWeek}>This Week</span>
+        </div>
+      </div>
 
-        {/* Metric toggle pills */}
-        <div className={styles.pills}>
-          {METRICS.map((m) => {
-            const isOn = activeMetrics.includes(m.key);
-            return (
-              <button
-                key={m.key}
-                onClick={() => toggle(m.key)}
-                className={`${styles.pill} ${isOn ? styles.pillActive : ''}`}
-                style={isOn ? { borderColor: m.color, color: m.color, background: m.color + '12' } : {}}
-              >
-                <span
-                  className={styles.pillDot}
-                  style={{ background: isOn ? m.color : '#d1d5db' }}
-                />
-                {m.label}
-              </button>
-            );
-          })}
-        </div>
+      {/* Metric toggle pills */}
+      <div className={styles.pills}>
+        {METRICS.map((m) => {
+          const isOn = activeMetrics.includes(m.key);
+          return (
+            <button
+              key={m.key}
+              onClick={() => toggle(m.key)}
+              className={`${styles.pill} ${isOn ? styles.pillActive : ''}`}
+              style={isOn ? { borderColor: m.color, color: m.color, background: m.color + '12' } : {}}
+            >
+              <span className={styles.pillDot} style={{ background: isOn ? m.color : '#d1d5db' }} />
+              {m.label}
+            </button>
+          );
+        })}
       </div>
 
       {/* Chart */}
       <div className={styles.chartArea}>
-        <ResponsiveContainer width="100%" height={260}>
-          <AreaChart data={weeklyData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+        <ResponsiveContainer width="100%" height={240}>
+          <AreaChart data={weeklyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
               {METRICS.map((m) => (
                 <linearGradient key={m.key} id={`grad-${m.key}`} x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%"  stopColor={m.color} stopOpacity={0.25} />
+                  <stop offset="5%"  stopColor={m.color} stopOpacity={0.35} />
                   <stop offset="95%" stopColor={m.color} stopOpacity={0.02} />
                 </linearGradient>
               ))}
             </defs>
-
-            <CartesianGrid strokeDasharray="3 3" stroke="#f1f3f5" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
             <XAxis
               dataKey="day"
-              tick={{ fontSize: 12, fill: '#9ca3af', fontWeight: 600 }}
+              tick={{ fontSize: 10, fill: '#7d7d7d', fontWeight: 500, fontFamily: 'Roboto' }}
               axisLine={false}
               tickLine={false}
             />
             <YAxis
-              tick={{ fontSize: 11, fill: '#9ca3af' }}
+              tick={{ fontSize: 10, fill: '#7d7d7d', fontFamily: 'Roboto' }}
               axisLine={false}
               tickLine={false}
-              domain={['auto', 'auto']}
+              domain={[0, 100]}
+              ticks={[0, 10, 20, 50, 100]}
             />
             <Tooltip content={<CustomTooltip />} />
-
             {METRICS.map(
               (m) =>
                 activeMetrics.includes(m.key) && (
@@ -123,8 +117,8 @@ const PatientWeeklyChart = ({ weeklyData }) => {
                     stroke={m.color}
                     strokeWidth={2.5}
                     fill={`url(#grad-${m.key})`}
-                    dot={{ r: 4, fill: m.color, strokeWidth: 0 }}
-                    activeDot={{ r: 6, fill: m.color, stroke: '#fff', strokeWidth: 2 }}
+                    dot={false}
+                    activeDot={{ r: 5, fill: m.color, stroke: '#fff', strokeWidth: 2 }}
                   />
                 )
             )}

@@ -1,0 +1,441 @@
+﻿/* ═══════════════════════════════════════════════════════════════
+   PatientRatingModal — fully responsive CSS module
+   Desktop  : centered card  (max-width 440px)
+   ≤ 768px  : centered card fills more width
+   ≤ 600px  : bottom sheet slides up, scrollable
+   ≤ 360px  : ultra-small phones
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Overlay ──────────────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  /* allow scroll if viewport is tiny */
+  overflow-y: auto;
+}
+
+/* ── Modal card ───────────────────────────────────────────────── */
+.modal {
+  background: #ffffff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 440px;
+  /* never taller than viewport */
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 40px 32px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+/* hide scrollbar cosmetically but keep functionality */
+.modal::-webkit-scrollbar {
+  width: 4px;
+}
+.modal::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+/* ── Close button ─────────────────────────────────────────────── */
+.closeBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #6b7280;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  flex-shrink: 0;
+  z-index: 2;
+}
+.closeBtn:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+.closeBtn:active {
+  transform: scale(0.9);
+}
+
+/* ── Doctor avatar ring ───────────────────────────────────────── */
+.avatarRing {
+  width: 88px;
+  height: 88px;
+  min-width: 88px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #333cf5 0%, #818cf8 100%);
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+.docAvatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  display: block;
+}
+
+/* ── Titles ───────────────────────────────────────────────────── */
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #010218;
+  margin: 0 0 6px;
+  text-align: center;
+  line-height: 1.3;
+}
+.subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0 0 18px;
+  text-align: center;
+  line-height: 1.4;
+  padding: 0 8px;
+}
+
+/* ── Appointment pill ─────────────────────────────────────────── */
+.apptPill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f0f4ff;
+  border-radius: 14px;
+  padding: 12px 16px;
+  width: 100%;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+.apptIcon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 10px;
+  background: #e0e4ff;
+  color: #333cf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.apptLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #010218;
+  margin: 0;
+}
+.apptDate {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 2px 0 0;
+  word-break: break-word;
+}
+
+/* ── Star rating ──────────────────────────────────────────────── */
+.rateLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #010218;
+  margin: 0 0 10px;
+  text-align: center;
+}
+.stars {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+  flex-wrap: nowrap;
+}
+.starBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.13s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.starBtn:hover {
+  transform: scale(1.18);
+}
+.starBtn:active {
+  transform: scale(0.95);
+}
+.starFilled {
+  font-size: 34px;
+  color: #f59e0b;
+  filter: drop-shadow(0 1px 3px rgba(245, 158, 11, 0.3));
+}
+.starEmpty {
+  font-size: 34px;
+  color: #d1d5db;
+}
+.rateHint {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0 0 16px;
+  min-height: 18px;
+  text-align: center;
+}
+
+/* ── Feedback textarea ────────────────────────────────────────── */
+.feedbackWrap {
+  width: 100%;
+  margin-bottom: 18px;
+  box-sizing: border-box;
+}
+.feedbackLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #010218;
+  margin-bottom: 8px;
+}
+.optional {
+  font-weight: 400;
+  color: #9ca3af;
+}
+.textarea {
+  width: 100%;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #374151;
+  resize: vertical;
+  min-height: 90px;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.55;
+  transition:
+    border-color 0.18s,
+    box-shadow 0.18s;
+  box-sizing: border-box;
+}
+.textarea::placeholder {
+  color: #9ca3af;
+}
+.textarea:focus {
+  border-color: #333cf5;
+  box-shadow: 0 0 0 3px rgba(51, 60, 245, 0.08);
+}
+.feedbackHint {
+  font-size: 11px;
+  color: #9ca3af;
+  margin: 6px 0 0;
+}
+
+/* ── Submit button ────────────────────────────────────────────── */
+.submitBtn {
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  margin-bottom: 10px;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s,
+    transform 0.1s;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.submitDisabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.submitActive {
+  background: #333cf5;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(51, 60, 245, 0.28);
+}
+.submitActive:hover {
+  background: #2730d4;
+  box-shadow: 0 6px 20px rgba(51, 60, 245, 0.38);
+}
+.submitActive:active {
+  transform: scale(0.98);
+}
+.submitSuccess {
+  background: #10b981;
+  color: #fff;
+  cursor: default;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.28);
+}
+.submitInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.sendIcon,
+.checkIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ── Maybe Later ──────────────────────────────────────────────── */
+.laterBtn {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.laterBtn:hover {
+  color: #374151;
+}
+.laterBtn:active {
+  color: #111827;
+}
+
+/* ════════════════════  RESPONSIVE  ════════════════════ */
+
+/* ── Tablet / small desktop (≤ 768px) ── */
+@media (max-width: 768px) {
+  .overlay {
+    padding: 16px;
+  }
+  .modal {
+    max-width: 420px;
+    padding: 36px 28px 28px;
+  }
+}
+
+/* ── Mobile — bottom sheet (≤ 600px) ── */
+@media (max-width: 600px) {
+  .overlay {
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+  }
+  .modal {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 22px 22px 0 0;
+    padding: 28px 20px 36px;
+    max-height: 90svh;
+    /* safe area for notches */
+    padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+  .avatarRing {
+    width: 76px;
+    height: 76px;
+    min-width: 76px;
+  }
+  .title {
+    font-size: 18px;
+  }
+  .subtitle {
+    font-size: 12px;
+  }
+  .starFilled,
+  .starEmpty {
+    font-size: 30px;
+  }
+  .submitBtn {
+    padding: 13px 0;
+  }
+}
+
+/* ── Small phones (≤ 400px) ── */
+@media (max-width: 400px) {
+  .modal {
+    padding: 24px 16px calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+  .avatarRing {
+    width: 68px;
+    height: 68px;
+    min-width: 68px;
+  }
+  .title {
+    font-size: 16px;
+  }
+  .subtitle {
+    font-size: 11px;
+  }
+  .stars {
+    gap: 4px;
+  }
+  .starFilled,
+  .starEmpty {
+    font-size: 27px;
+  }
+  .apptPill {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .apptIcon {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    font-size: 15px;
+  }
+  .apptLabel {
+    font-size: 12px;
+  }
+  .textarea {
+    font-size: 12px;
+    min-height: 76px;
+  }
+  .submitBtn {
+    padding: 12px 0;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+}
+
+/* ── Ultra-small (≤ 320px) ── */
+@media (max-width: 320px) {
+  .modal {
+    padding: 20px 12px calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+  .starFilled,
+  .starEmpty {
+    font-size: 24px;
+  }
+  .stars {
+    gap: 2px;
+  }
+  .title {
+    font-size: 15px;
+  }
+}

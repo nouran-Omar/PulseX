@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import PatientSidebar from '../PatientSidebar/PatientSidebar';
 import PatientHeader from '../PatientHeader/PatientHeader';
+import PatientChatbot from '../PatientChatbot/PatientChatbot';
 import styles from './PatientMainLayout.module.css';
 
 /* ─────────────────────────────────────────────────────
@@ -10,6 +11,8 @@ import styles from './PatientMainLayout.module.css';
    │  [Sidebar 310px]  │  [Header sticky]             │
    │                   │  [<Outlet /> — page content] │
    └──────────────────────────────────────────────────┘
+   PatientChatbot is rendered here so it appears on ALL
+   patient pages (sidebar navigation).
 ───────────────────────────────────────────────────── */
 const PatientMainLayout = () => {
   return (
@@ -34,6 +37,10 @@ const PatientMainLayout = () => {
         </main>
 
       </div>
+
+      {/* ── Floating Chatbot (visible on all patient pages) ── */}
+      <PatientChatbot />
+
     </div>
   );
 };

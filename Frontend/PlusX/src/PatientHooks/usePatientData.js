@@ -9,14 +9,14 @@ import { useState } from "react";
 const PATIENT_MOCK = {
   // ── Identity ──────────────────────────────────────
   id: "PT-20260215-001",
-  name: "Mohamed Salem",
+  name: "Mohamed",
   age: 34,
   gender: "Male",
   bloodType: "O+",
   dateOfBirth: "1992-04-10",
   phone: "+20 100 000 0001",
   email: "mohamed.salem@pulsex.io",
-  avatarUrl: "", // fallback handled in components
+  avatarUrl: "",
   lastUpdated: "Sunday, February 15, 2026",
 
   // ── Vital Signs ───────────────────────────────────
@@ -25,7 +25,7 @@ const PATIENT_MOCK = {
       value: 75,
       unit: "bpm",
       status: "Normal",
-      trend: "+2", // vs last reading
+      trend: "+2",
       color: "#155DFC",
       gradientFrom: "#155DFC",
       gradientTo: "#5B8EFF",
@@ -35,7 +35,7 @@ const PATIENT_MOCK = {
       diastolic: 60,
       unit: "mmHg",
       display: "80/60",
-      status: "Low — Monitor",
+      status: "Low",
       trend: "-3",
       color: "#F59E0B",
       gradientFrom: "#F59E0B",
@@ -49,6 +49,15 @@ const PATIENT_MOCK = {
       color: "#00A63E",
       gradientFrom: "#00A63E",
       gradientTo: "#34D399",
+    },
+    bloodCount: {
+      value: 40,
+      unit: "g/dl",
+      status: "Normal",
+      trend: "0",
+      color: "#8B5CF6",
+      gradientFrom: "#8B5CF6",
+      gradientTo: "#C4B5FD",
     },
     oxygenLevel: {
       value: 98,
@@ -74,34 +83,52 @@ const PATIENT_MOCK = {
 
   // ── AI Risk Score & Recommendations ───────────────
   aiRisk: {
-    score: 25, // percentage
+    score: 25,
     level: "Low",
     color: "#00A63E",
     recommendations: [
-      "Maintain regular physical activity (30 min/day)",
-      "Monitor blood pressure — readings are slightly low",
-      "Keep blood sugar stable with balanced meals",
+      "Try to reduce foods high in saturated fat.",
+      "Walk 30 mins daily.",
+      "Sleep 7–8 hours.",
       "Schedule next check-up within 30 days",
     ],
   },
+
+  // ── Featured Doctors (Dashboard) ──────────────────
+  featuredDoctors: [
+    {
+      id: 1,
+      name: "Dr. Ebrahim Moustafa",
+      location: "Cairo",
+      rating: 4,
+      img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=300&q=80",
+    },
+    {
+      id: 2,
+      name: "Dr. Jehan Osama",
+      location: "Menoufia",
+      rating: 4,
+      img: "https://images.unsplash.com/photo-1559839734-2b71f1536780?auto=format&fit=crop&w=300&q=80",
+    },
+    {
+      id: 3,
+      name: "Dr. Yassin Mansour",
+      location: "Giza",
+      rating: 3,
+      img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=300&q=80",
+    },
+  ],
 
   // ── Appointments ──────────────────────────────────
   appointments: [
     {
       id: 1,
-      doctor: "Dr. Ahmed Hassan",
-      specialty: "Cardiologist",
-      date: "2026-02-20",
-      time: "10:00 AM",
+      doctor: "Dr. Ghada Adel",
+      location: "Cairo",
+      date: "13/12/2025",
+      time: "7:00 PM",
       status: "Confirmed",
-    },
-    {
-      id: 2,
-      doctor: "Dr. Sara Mansour",
-      specialty: "General Practitioner",
-      date: "2026-03-05",
-      time: "02:30 PM",
-      status: "Pending",
+      img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=300&q=80",
     },
   ],
 
@@ -131,7 +158,10 @@ const usePatientData = () => {
   const [isLoading] = useState(false);
   const [error] = useState(null);
 
-  return { patient, isLoading, error };
+  // true = patient has vitals recorded (controls dashboard state)
+  const hasVitals = Boolean(patient.vitals?.heartRate?.value);
+
+  return { patient, isLoading, error, hasVitals };
 };
 
 export default usePatientData;

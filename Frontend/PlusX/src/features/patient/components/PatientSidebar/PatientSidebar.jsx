@@ -1,57 +1,62 @@
-import React, { useState } from 'react'; // 👈 ضيفنا useState هنا
-import { NavLink, useNavigate } from 'react-router-dom'; // 👈 ضيفنا useNavigate للتحويل بعد الخروج
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './PatientSidebar.module.css';
-import { LuLayoutDashboard, LuClipboardList, LuQrCode } from 'react-icons/lu';
+import { LuLayoutDashboard, LuClipboardList, LuQrCode, LuActivity, LuUsers } from 'react-icons/lu';
 import { FaHeartPulse, FaUserDoctor } from 'react-icons/fa6';
-import { HiOutlineCalendarDays, HiOutlineChatBubbleLeftRight, HiOutlineCog6Tooth, HiOutlineArrowLeftOnRectangle } from 'react-icons/hi2';
-import { MdOutlineMedicalInformation } from "react-icons/md";
+import {
+  HiOutlineCalendarDays,
+  HiOutlineChatBubbleLeftRight,
+  HiOutlineCog6Tooth,
+  HiOutlineArrowLeftOnRectangle,
+  HiOutlineDocumentText,
+  HiOutlineClipboardDocumentList,
+  HiOutlineQrCode,
+  HiOutlineBookOpen,
+} from 'react-icons/hi2';
+import { MdOutlineMedicalInformation } from 'react-icons/md';
+import { RiFileList3Line } from 'react-icons/ri';
 import ConfirmModal from '../../../admin/components/ConfirmModal/ConfirmModal';
-import { Label } from 'recharts';
+import logo from '../../../../assets/Images/f1.png';
+
+const MENU_ITEMS = [
+  { label: 'Dashboard',            path: '/patient/dashboard',    icon: <LuLayoutDashboard /> },
+  { label: 'Health Survey',        path: '/patient/survey',       icon: <LuClipboardList /> },
+  { label: 'Heart Risk Assessment',path: '/patient/heart-risk',   icon: <FaHeartPulse /> },
+  { label: 'Doctor List',          path: '/patient/doctors',      icon: <FaUserDoctor /> },
+  { label: 'Appointments',         path: '/patient/appointments', icon: <HiOutlineCalendarDays /> },
+  { label: 'Messages',             path: '/patient/messages',     icon: <HiOutlineChatBubbleLeftRight /> },
+  { label: 'Prescription',         path: '/patient/prescription', icon: <HiOutlineDocumentText /> },
+  { label: 'Medical Records',      path: '/patient/records',      icon: <MdOutlineMedicalInformation /> },
+  { label: 'QR Code',              path: '/patient/qr',           icon: <HiOutlineQrCode /> },
+  { label: 'Stories & community',  path: '/patient/stories',      icon: <HiOutlineBookOpen /> },
+];
 
 const PatientSidebar = () => {
   const navigate = useNavigate();
-  // 1. تعريف الـ State للمودال (Validation & UI Logic)
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
-  // 2. الأكشن: تنفيذ الخروج الفعلي (Handling Logout)
   const confirmLogout = () => {
-    console.log("User logged out");
-    // هنا ممكن تمسحي الـ Token لو موجود
     setIsLogoutModalOpen(false);
-    navigate('/login'); // التحويل لصفحة تسجيل الدخول
+    navigate('/login');
   };
 
-  const MENU_ITEMS = [
-    { label: 'Dashboard', path: '/patient/dashboard', icon: <LuLayoutDashboard /> },
-    { label: 'Health Survey', path: '/patient/survey', icon: <LuClipboardList /> },
-    { label: 'Heart Risk Assessment', path: '/patient/heart-risk', icon: <FaHeartPulse /> },
-    { label: 'Doctor List', path: '/patient/doctors', icon: <FaUserDoctor /> },
-    { label: 'Appointments', path: '/patient/appointments', icon: <HiOutlineCalendarDays /> },
-    { label: 'Messages', path: '/patient/messages', icon: <HiOutlineChatBubbleLeftRight /> },
-    { label: 'Medical Records', path: '/patient/records', icon: <MdOutlineMedicalInformation /> },
-    { label: 'Stories', path: '/patient/stories', icon: <LuClipboardList /> },
-    { label: 'Prescription', path: '/patient/prescription', icon: <LuClipboardList /> },
-    
-    { label: 'QR Code', path: '/patient/qr', icon: <LuQrCode /> },
-  ];
-
   return (
-    <aside className={`${styles.sidebarContainer} w-[310px] fixed left-[18px] top-[24px]`}>
+    <aside className={styles.sidebarContainer}>
       <div className={styles.sidebarContent}>
-        {/* Logo Section */}
+
+        {/* ── Logo ── */}
         <div className={styles.logoSection}>
-          <div className="flex items-center gap-2 px-6 pt-6">
-            <span className="text-black text-2xl font-bold">Pulse<span className="text-[#333CF5]">X</span></span>
-          </div>
+          <img src="/logo/logo.svg" alt="PulseX" className={styles.logoImg} onError={e => { e.target.style.display='none'; }} />
+          <span className={styles.logoText}>Pulse<span className={styles.logoAccent}>X</span></span>
         </div>
 
-        <nav className="mt-10 px-4">
+        <nav className={styles.nav}>
           <p className={styles.sectionLabel}>Menu</p>
-          <ul className="space-y-2">
+          <ul className={styles.menuList}>
             {MENU_ITEMS.map((item) => (
               <li key={item.path}>
-                <NavLink 
-                  to={item.path} 
+                <NavLink
+                  to={item.path}
                   className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}
                 >
                   <span className={styles.icon}>{item.icon}</span>
@@ -61,17 +66,19 @@ const PatientSidebar = () => {
             ))}
           </ul>
 
-          <div className="mt-8">
+          <div className={styles.generalSection}>
             <p className={styles.sectionLabel}>General</p>
-            <NavLink to="/patient/settings" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
+            <NavLink
+              to="/patient/settings"
+              className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}
+            >
               <span className={styles.icon}><HiOutlineCog6Tooth /></span>
               <span className={styles.labelText}>Settings & Profile</span>
             </NavLink>
-            
-            {/* الأكشن: فتح المودال عند الضغط */}
-            <button 
-              onClick={() => setIsLogoutModalOpen(true)} 
-              className={`${styles.navLink} mt-2 w-full text-left border-none bg-transparent cursor-pointer`}
+
+            <button
+              onClick={() => setIsLogoutModalOpen(true)}
+              className={`${styles.navLink} ${styles.logoutBtn}`}
             >
               <span className={styles.icon}><HiOutlineArrowLeftOnRectangle /></span>
               <span className={styles.labelText}>Log out</span>
@@ -80,8 +87,7 @@ const PatientSidebar = () => {
         </nav>
       </div>
 
-      {/* مودال التأكيد */}
-      <ConfirmModal 
+      <ConfirmModal
         isOpen={isLogoutModalOpen}
         title="Log Out?"
         desc="Are you sure you want to log out of your account?"

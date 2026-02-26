@@ -21,7 +21,7 @@ const PatientRiskGauge = ({ percentage = 84 }) => {
       </div>
       
       <div className={styles.statusLabel}>
-        <LuTriangleAlert className="text-yellow-500 text-2xl" />
+        <LuTriangleAlert className="text-[#F0B100] text-2xl" />
         <span className={styles.statusText}>High Risk</span>
       </div>
     </div>

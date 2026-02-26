@@ -35,7 +35,7 @@ const PatientLifestyleSurvey = () => {
 
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.surveyCard}>
+    
         
         {/* Header */}
         <div className={styles.header}>
@@ -143,7 +143,7 @@ const PatientLifestyleSurvey = () => {
           </div>
         )}
       </div>
-    </div>
+ 
   );
 };
 

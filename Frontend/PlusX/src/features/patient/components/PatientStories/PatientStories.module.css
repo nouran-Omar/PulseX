@@ -15,7 +15,7 @@
   color: #010218;
 }
 .subtitle {
-  color: #6b7280;
+  color: #757575;
   font-size: 18px;
   margin-top: 4px;
 }
@@ -72,7 +72,7 @@
   line-height: 1.4;
 }
 .excerpt {
-  color: #4b5563;
+  color: #4B5563;
   font-size: 15px;
   line-height: 1.6;
   margin-bottom: 24px;
@@ -96,11 +96,11 @@
   font-weight: 500;
 }
 .orange {
-  background: #ffedd5;
-  color: #ea580c;
+  background:#FFEDD5;
+  color: #EA580C;
 }
 .blue {
-  background: rgba(51, 60, 245, 0.1);
+  background: #3B82F61A;
   color: #333cf5;
 }
 

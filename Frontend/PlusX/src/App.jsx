@@ -46,10 +46,13 @@ import PatientMessages        from './features/patient/components/PatientMessage
 import PatientMedicalRecords  from './features/patient/components/PatientMedicalRecords/PatientMedicalRecords'
 import PatientStories         from './features/patient/components/PatientStories/PatientStories'
 import PatientStoryDetails    from './features/patient/components/PatientStoryDetails/PatientStoryDetails'
+import PatientAllComments     from './features/patient/components/PatientAllComments/PatientAllComments'
 import WriteStory             from './features/patient/components/WriteStory/WriteStory'
-import PatientPrescriptions   from './features/patient/components/PatientPrescriptions/PatientPrescriptions'
-import PrescriptionDetail     from './features/patient/components/PrescriptionDetail/PrescriptionDetail'
-import PrescriptionDetailModal from './features/patient/components/PrescriptionDetailModal/PrescriptionDetailModal'
+import PatientPrescriptions     from './features/patient/components/PatientPrescriptions/PatientPrescriptions'
+import PrescriptionDetail       from './features/patient/components/PrescriptionDetail/PrescriptionDetail'
+import PrescriptionDetailModal  from './features/patient/components/PrescriptionDetailModal/PrescriptionDetailModal'
+import PatientSettingsProfile   from './features/patient/components/PatientSettingsProfile/PatientSettingsProfile'
+import PatientUpdateHealth       from './features/patient/components/PatientUpdateHealth/PatientUpdateHealth'
 
 // ─── Doctor feature pages ──────────────────────────────────────
 import DoctorDashboard from './features/doctor/pages/DoctorDashboard/DoctorDashboard'
@@ -105,11 +108,13 @@ function App() {
         { path: "payment/:id",           element: <PatientPayment /> },
         { path: "appointments",          element: <PatientAppointments /> },
         { path: "qr",                    element: <PatientQRCode /> },
-        { path: "settings",              element: <SettingsProfile /> },
+        { path: "settings",              element: <PatientSettingsProfile /> },
+        { path: "update-health",         element: <PatientUpdateHealth /> },
         { path: "messages",              element: <PatientMessages /> },
         { path: "records",               element: <PatientMedicalRecords /> },
         { path: "stories",               element: <PatientStories /> },
         { path: "stories/:id",           element: <PatientStoryDetails /> },
+        { path: "stories/:id/comments",  element: <PatientAllComments /> },
         { path: "write-story",           element: <WriteStory /> },
         { path: "prescription",          element: <PatientPrescriptions /> },
         { path: "prescription/:id",      element: <PrescriptionDetail /> },
