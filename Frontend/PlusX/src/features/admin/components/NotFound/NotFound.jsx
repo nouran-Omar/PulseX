@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { HiArrowSmallLeft } from "react-icons/hi2";
-import styles from './NotFound.module.css';
 
 const astronautImg = '/image/Astronaut.svg';
 
@@ -21,7 +20,7 @@ const NotFound = () => {
         </div>
 
         {/* النصوص التوضيحية مطابق للصورة بالظبط */}
-        <h2 className="text-[28px] md:text-[32px] font-extrabold text-[#010218] mb-3">
+        <h2 className="text-[28px] md:text-[32px] font-extrabold text-black-main-text mb-3">
           Page Not Found
         </h2>
         
@@ -33,7 +32,7 @@ const NotFound = () => {
         {/* زرار العودة للوحة التحكم */}
         <Link 
           to="/admin/dashboard" 
-          className="bg-[#333CF5] hover:bg-[#252CBF] text-white font-bold py-3.5 px-8 rounded-full shadow-lg shadow-[#333CF5]/20 transition-all active:scale-95 inline-flex items-center gap-2"
+          className="bg-brand-main hover:bg-[#252CBF] text-white font-bold py-3.5 px-8 rounded-full shadow-lg shadow-brand-main/20 transition-all active:scale-95 inline-flex items-center gap-2"
         >
           <HiArrowSmallLeft className="text-xl" />
           Back to Dashboard

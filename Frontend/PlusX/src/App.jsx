@@ -1,90 +1,93 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { lazy, Suspense } from 'react' // ضيفنا دول
 import './index.css'
 
-// ─── Layouts ───────────────────────────────────────────────────
-// الـ AdminLayout خاص بلوحة تحكم الأدمن
-import AdminLayout      from './features/admin/components/AdminLayout/AdminLayout'
-// الـ PatientMainLayout خاص بلوحة تحكم المريض
+// ─── Loading Component ─────────────────────────────────────────
+// ده اللي هيظهر للمستخدم وهو بينتقل بين الصفحات
+const PageLoader = () => (
+  <div className="flex h-screen items-center justify-center bg-white">
+    <div className="h-12 w-12 animate-spin rounded-full border-4 border-brand-main border-t-transparent"></div>
+  </div>
+);
+
+// ─── Layouts (يفضل تحميلهم عادي لأنهم الهيكل الأساسي) ──────────
+import AdminLayout from './features/admin/components/AdminLayout/AdminLayout'
 import PatientMainLayout from './features/patient/components/PatientLayout/PatientMainLayout'
-// الـ DoctorLayout خاص بلوحة تحكم الدكتور
-import DoctorLayout     from './features/doctor/components/DoctorLayout/DoctorLayout'
-import Layout           from './components/Layout/Layout'
-// ─── Home & Auth pages ─────────────────────────────────────────
-import Home             from './features/home/pages/Home/Home'
-import Login            from './features/auth/pages/Login/Login'
-import Register         from './features/auth/pages/Register/Register'
-import ForgotPassword   from './features/auth/pages/ForgotPassword/ForgotPassword'
-// صفحة 404 — موجودة داخل features/admin
-import NotFound         from './features/admin/components/NotFound/NotFound'
+import DoctorLayout from './features/doctor/components/DoctorLayout/DoctorLayout'
+import Layout from './components/Layout/Layout'
 
-// ─── Admin feature pages ───────────────────────────────────────
-import AdminDashboard    from './features/admin/components/AdminDashboard/AdminDashboard'
-import DoctorManagement  from './features/admin/components/DoctorManagement/DoctorManagement'
-import PatientManagement from './features/admin/components/PatientManagement/PatientManagement'
-import StoriesManagement from './features/admin/components/StoriesManagement/StoriesManagement'
-import ActivityLogs      from './features/admin/components/ActivityLogs/ActivityLogs'
-import SettingsProfile   from './features/admin/components/SettingsProfile/SettingsProfile'
-import AddDoctorBtn      from './features/admin/components/AddDoctorBtn/AddDoctorBtn'
-import AddPatientBtn     from './features/admin/components/AddPatientBtn/AddPatientBtn'
-import EditPatient       from './features/admin/components/EditPatient/EditPatient'
-import EditDoctor        from './features/admin/components/EditDoctor/EditDoctor'
-import AdminReports      from './features/admin/components/AdminReports/AdminReports'
-import StoryDetails      from './features/admin/components/StoryDetails/StoryDetails'
-import StoryAllComments  from './features/admin/components/StoryAllComments/StoryAllComments'
+// ─── Lazy Loading Pages (نحمل الصفحات بالطلب) ──────────────────
+// Home & Auth
+const Home = lazy(() => import('./features/home/pages/Home/Home'))
+const Login = lazy(() => import('./features/auth/pages/Login/Login'))
+const Register = lazy(() => import('./features/auth/pages/Register/Register'))
+const ForgotPassword = lazy(() => import('./features/auth/pages/ForgotPassword/ForgotPassword'))
+const NotFound = lazy(() => import('./features/admin/components/NotFound/NotFound'))
 
-// ─── Patient feature pages ─────────────────────────────────────
-import PatientDashboard       from './features/patient/pages/PatientDashboard/PatientDashboard'
-import PatientLifestyleSurvey from './features/patient/components/PatientLifestyleSurvey/PatientLifestyleSurvey'
-import PatientHeartRisk       from './features/patient/components/HeartRisk/PatientHeartRisk'
-import PatientDoctorList      from './features/patient/components/PatientDoctorList/PatientDoctorList'
-import PatientDoctorProfile   from './features/patient/components/PatientDoctorProfile/PatientDoctorProfile'
-import PatientBooking         from './features/patient/components/PatientBooking/PatientBooking'
-import PatientPayment         from './features/patient/components/PatientPayment/PatientPayment'
-import PatientAppointments    from './features/patient/components/PatientAppointments/PatientAppointments'
-import PatientQRCode          from './features/patient/components/PatientQRCode/PatientQRCode'
-import PatientMessages        from './features/patient/components/PatientMessages/PatientMessages'
-import PatientMedicalRecords  from './features/patient/components/PatientMedicalRecords/PatientMedicalRecords'
-import PatientStories         from './features/patient/components/PatientStories/PatientStories'
-import PatientStoryDetails    from './features/patient/components/PatientStoryDetails/PatientStoryDetails'
-import PatientAllComments     from './features/patient/components/PatientAllComments/PatientAllComments'
-import WriteStory             from './features/patient/components/WriteStory/WriteStory'
-import PatientPrescriptions     from './features/patient/components/PatientPrescriptions/PatientPrescriptions'
-import PrescriptionDetail       from './features/patient/components/PrescriptionDetail/PrescriptionDetail'
-import PrescriptionDetailModal  from './features/patient/components/PrescriptionDetailModal/PrescriptionDetailModal'
-import PatientSettingsProfile   from './features/patient/components/PatientSettingsProfile/PatientSettingsProfile'
-import PatientUpdateHealth       from './features/patient/components/PatientUpdateHealth/PatientUpdateHealth'
+// Admin Pages
+const AdminDashboard = lazy(() => import('./features/admin/components/AdminDashboard/AdminDashboard'))
+const DoctorManagement = lazy(() => import('./features/admin/components/DoctorManagement/DoctorManagement'))
+const PatientManagement = lazy(() => import('./features/admin/components/PatientManagement/PatientManagement'))
+const StoriesManagement = lazy(() => import('./features/admin/components/StoriesManagement/StoriesManagement'))
+const ActivityLogs = lazy(() => import('./features/admin/components/ActivityLogs/ActivityLogs'))
+const SettingsProfile = lazy(() => import('./features/admin/components/SettingsProfile/SettingsProfile'))
+const AddDoctorBtn = lazy(() => import('./features/admin/components/AddDoctorBtn/AddDoctorBtn'))
+const AddPatientBtn = lazy(() => import('./features/admin/components/AddPatientBtn/AddPatientBtn'))
+const EditPatient = lazy(() => import('./features/admin/components/EditPatient/EditPatient'))
+const EditDoctor = lazy(() => import('./features/admin/components/EditDoctor/EditDoctor'))
+const AdminReports = lazy(() => import('./features/admin/components/AdminReports/AdminReports'))
+const StoryDetails = lazy(() => import('./features/admin/components/StoryDetails/StoryDetails'))
+const StoryAllComments = lazy(() => import('./features/admin/components/StoryAllComments/StoryAllComments'))
 
-// ─── Doctor feature pages ──────────────────────────────────────
-import DoctorDashboard from './features/doctor/pages/DoctorDashboard/DoctorDashboard'
+// Patient Pages
+const PatientDashboard = lazy(() => import('./features/patient/pages/PatientDashboard/PatientDashboard'))
+const PatientLifestyleSurvey = lazy(() => import('./features/patient/components/PatientLifestyleSurvey/PatientLifestyleSurvey'))
+const PatientHeartRisk = lazy(() => import('./features/patient/components/HeartRisk/PatientHeartRisk'))
+const PatientDoctorList = lazy(() => import('./features/patient/components/PatientDoctorList/PatientDoctorList'))
+const PatientDoctorProfile = lazy(() => import('./features/patient/components/PatientDoctorProfile/PatientDoctorProfile'))
+const PatientBooking = lazy(() => import('./features/patient/components/PatientBooking/PatientBooking'))
+const PatientPayment = lazy(() => import('./features/patient/components/PatientPayment/PatientPayment'))
+const PatientAppointments = lazy(() => import('./features/patient/components/PatientAppointments/PatientAppointments'))
+const PatientQRCode = lazy(() => import('./features/patient/components/PatientQRCode/PatientQRCode'))
+const PatientMessages = lazy(() => import('./features/patient/components/PatientMessages/PatientMessages'))
+const PatientMedicalRecords = lazy(() => import('./features/patient/components/PatientMedicalRecords/PatientMedicalRecords'))
+const PatientStories = lazy(() => import('./features/patient/components/PatientStories/PatientStories'))
+const PatientStoryDetails = lazy(() => import('./features/patient/components/PatientStoryDetails/PatientStoryDetails'))
+const PatientAllComments = lazy(() => import('./features/patient/components/PatientAllComments/PatientAllComments'))
+const WriteStory = lazy(() => import('./features/patient/components/WriteStory/WriteStory'))
+const PatientPrescriptions = lazy(() => import('./features/patient/components/PatientPrescriptions/PatientPrescriptions'))
+const PrescriptionDetail = lazy(() => import('./features/patient/components/PrescriptionDetail/PrescriptionDetail'))
+const PatientSettingsProfile = lazy(() => import('./features/patient/components/PatientSettingsProfile/PatientSettingsProfile'))
+const PatientUpdateHealth = lazy(() => import('./features/patient/components/PatientUpdateHealth/PatientUpdateHealth'))
 
+// Doctor Pages
+const DoctorDashboard = lazy(() => import('./features/doctor/pages/DoctorDashboard/DoctorDashboard'))
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 function App() {
   const routing = createBrowserRouter([
-    // 1. المسار الأساسي (Landing Page) — Home تعرض Navbar/Footer بنفسها
     {
       path: "/",
-      element: <Layout />,  
-      children: [{ index: true, element: <Home/>}]
+      element: <Layout />,
+      children: [{ index: true, element: <Home /> }]
     },
-
-    // 2. صفحات الـ Auth (Standalone - تملأ الشاشة)
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
     { path: "/forgot-password", element: <ForgotPassword /> },
 
-    // 3. مسارات لوحة تحكم الأدمن (بداخل AdminLayout)
     {
       path: "/admin",
-      element: <AdminLayout />, 
+      element: <AdminLayout />,
       children: [
-        { index: true, element: <AdminDashboard /> }, 
-        { path: "dashboard", element: <AdminDashboard /> }, 
+        { index: true, element: <AdminDashboard /> },
+        { path: "dashboard", element: <AdminDashboard /> },
         { path: "doctor-management", element: <DoctorManagement /> },
         { path: "patient-management", element: <PatientManagement /> },
         { path: "stories-management", element: <StoriesManagement /> },
         { path: "activity-logs", element: <ActivityLogs /> },
         { path: "settings", element: <SettingsProfile /> },
-        { path: "/admin/AddDoctorBtn", element: <AddDoctorBtn /> }, 
-        { path: "/admin/AddPatientBtn", element: <AddPatientBtn /> },
+        // تم تصليح المسارات هنا (شيلنا /admin/ وخليناها Path نضيق)
+        { path: "AddDoctorBtn", element: <AddDoctorBtn /> },
+        { path: "AddPatientBtn", element: <AddPatientBtn /> },
         { path: "edit-doctor/:id", element: <EditDoctor /> },
         { path: "edit-patient/:id", element: <EditPatient /> },
         { path: "reports", element: <AdminReports /> },
@@ -93,50 +96,51 @@ function App() {
       ]
     },
 
-    // 4. لوحة تحكم المريض (داخل PatientMainLayout)
     {
       path: "/patient",
       element: <PatientMainLayout />,
       children: [
-        { index: true,                   element: <PatientDashboard /> },
-        { path: "dashboard",             element: <PatientDashboard /> },
-        { path: "survey",                element: <PatientLifestyleSurvey /> },
-        { path: "heart-risk",            element: <PatientHeartRisk /> },
-        { path: "doctors",               element: <PatientDoctorList /> },
-        { path: "doctor-profile/:id",    element: <PatientDoctorProfile /> },
-        { path: "booking/:id",           element: <PatientBooking /> },
-        { path: "payment/:id",           element: <PatientPayment /> },
-        { path: "appointments",          element: <PatientAppointments /> },
-        { path: "qr",                    element: <PatientQRCode /> },
-        { path: "settings",              element: <PatientSettingsProfile /> },
-        { path: "update-health",         element: <PatientUpdateHealth /> },
-        { path: "messages",              element: <PatientMessages /> },
-        { path: "records",               element: <PatientMedicalRecords /> },
-        { path: "stories",               element: <PatientStories /> },
-        { path: "stories/:id",           element: <PatientStoryDetails /> },
-        { path: "stories/:id/comments",  element: <PatientAllComments /> },
-        { path: "write-story",           element: <WriteStory /> },
-        { path: "prescription",          element: <PatientPrescriptions /> },
-        { path: "prescription/:id",      element: <PrescriptionDetail /> },
+        { index: true, element: <PatientDashboard /> },
+        { path: "dashboard", element: <PatientDashboard /> },
+        { path: "survey", element: <PatientLifestyleSurvey /> },
+        { path: "heart-risk", element: <PatientHeartRisk /> },
+        { path: "doctors", element: <PatientDoctorList /> },
+        { path: "doctor-profile/:id", element: <PatientDoctorProfile /> },
+        { path: "booking/:id", element: <PatientBooking /> },
+        { path: "payment/:id", element: <PatientPayment /> },
+        { path: "appointments", element: <PatientAppointments /> },
+        { path: "qr", element: <PatientQRCode /> },
+        { path: "settings", element: <PatientSettingsProfile /> },
+        { path: "update-health", element: <PatientUpdateHealth /> },
+        { path: "messages", element: <PatientMessages /> },
+        { path: "records", element: <PatientMedicalRecords /> },
+        { path: "stories", element: <PatientStories /> },
+        { path: "stories/:id", element: <PatientStoryDetails /> },
+        { path: "stories/:id/comments", element: <PatientAllComments /> },
+        { path: "write-story", element: <WriteStory /> },
+        { path: "prescription", element: <PatientPrescriptions /> },
+        { path: "prescription/:id", element: <PrescriptionDetail /> },
       ]
     },
 
-    // 5. لوحة تحكم الأطباء (داخل DoctorLayout)
     {
       path: "/doctor",
       element: <DoctorLayout />,
       children: [
-        { index: true,       element: <DoctorDashboard /> },
+        { index: true, element: <DoctorDashboard /> },
         { path: "dashboard", element: <DoctorDashboard /> },
       ]
     },
 
-    // 6. الـ Global Catch-all (NotFound)
     { path: "*", element: <NotFound /> }
   ]);
 
   return (
-    <RouterProvider router={routing} />
+ <ErrorBoundary> 
+      <Suspense fallback={<PageLoader />}>
+        <RouterProvider router={routing} />
+      </Suspense>
+    </ErrorBoundary>
   )
 }
 

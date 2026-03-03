@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './PatientStories.module.css';
 import { HiOutlineArrowRight, HiOutlinePencilAlt, HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import { SiMicrodotblog } from "react-icons/si";
-
+import { RiChatAiFill } from "react-icons/ri";
 const PatientStories = () => {
   const navigate = useNavigate();
 
@@ -34,38 +33,71 @@ const PatientStories = () => {
 
   return (
  <>
-      <header className={styles.header}>
-        <div className="flex items-center gap-3">
-          <SiMicrodotblog className="text-3xl text-[#010218]" />
-          <h1 className={styles.title}>Stories</h1>
-        </div>
-        <p className={styles.subtitle}>Read and share inspiring patient journeys.</p>
-      </header>
+ <section className='p-5 '>
+   <header className="flex flex-col gap-2 pb-4 border-b border-gray-100 mb-8">
+  
+  {/* السطر الأول: الأيقونة + العنوان */}
+  <div className="flex items-center gap-1">
+    {/* حاوية الأيقونة - استخدمنا اللون الأسود كما في كودك الأصلي */}
+    <div className="w-10 h-10 flex items-center justify-center rounded-full  text-white text-[20px] shrink-0">
+      <RiChatAiFill className='text-black-main-text' />
+    </div>
 
-      {/* Grid using Flex as requested */}
-      <div className={styles.storiesGrid}>
+    {/* العنوان H1 */}
+    <h1 className="text-[18px] font-bold text-black-main-text">
+      Stories
+    </h1>
+  </div>
+
+  {/* السطر الثاني: الوصف ينزل تحتهم */}
+  <p className="text-[12px] text-gray-500 leading-relaxed max-w-2xl">
+    Read and share inspiring patient journeys.
+  </p>
+  
+</header>
+
+      {/* Stories grid — 2 cols */}
+      <div className="flex flex-wrap gap-6">
         {currentStories.map(story => (
-          <div key={story.id} className={styles.storyCard}>
-            <div className={styles.authorInfo}>
-              <img src={story.img} alt={story.author} className={styles.avatar} />
+          <div
+            key={story.id}
+            className="flex-[0_0_calc(50%-12px)] bg-white p-8 rounded-[24px] border border-gray-100 shadow-sm hover:-translate-y-1 hover:border-brand-main transition-all duration-300"
+          >
+            {/* Author */}
+            <div className="flex items-center gap-4 mb-6">
+              <img src={story.img} alt={story.author} className="w-12 h-12 rounded-full object-cover" />
               <div>
-                <h4>{story.author}</h4>
-                <span className='text-[#6B7280]'>{story.date}</span>
+                <h4 className="text-[14px] font-semibold text-black-main-text">{story.author}</h4>
+                <span className="text-[12px] text-gray-400">{story.date}</span>
               </div>
             </div>
-            <h3 className={styles.storyTitle}>{story.title}</h3>
-            <p className={styles.excerpt}>
+
+            {/* Title */}
+            <h3 className="text-[16px] font-bold text-black-main-text leading-snug mb-3">{story.title}</h3>
+
+            {/* Excerpt */}
+            <p className="text-[13px] text-gray-500 leading-relaxed mb-6 line-clamp-3">
               "Last year, my heart health was at a critical point. Thanks to the right care and community support, I transformed my life..."
             </p>
-            <div className={styles.cardFooter}>
-              <div className={styles.tags}>
+
+            {/* Footer */}
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2">
                 {story.tags.map(tag => (
-                  <span key={tag} className={`${styles.tag} ${tag === 'Lifestyle' ? styles.orange : styles.blue}`}>
+                  <span
+                    key={tag}
+                    className={`px-4 py-1 rounded-full text-[11px] font-medium ${
+                      tag === 'Lifestyle' ? 'bg-orange-100 text-orange-600' : 'bg-blue-50 text-brand-main'
+                    }`}
+                  >
                     {tag}
                   </span>
                 ))}
               </div>
-              <button className={styles.readBtn} onClick={() => navigate(`/patient/stories/${story.id}`)}>
+              <button
+                className="flex items-center gap-2 text-[12px] font-semibold text-brand-main hover:gap-3 transition-all"
+                onClick={() => navigate(`/patient/stories/${story.id}`)}
+              >
                 Read Story <HiOutlineArrowRight />
               </button>
             </div>
@@ -73,40 +105,48 @@ const PatientStories = () => {
         ))}
       </div>
 
-      {/* Dynamic Slider/Pagination Navigation */}
-      <div className={styles.paginationRow}>
-        <div className={styles.pagination}>
-          <button 
-            className={styles.pageBtn} 
+      {/* Pagination */}
+      <div className="relative mt-12 flex justify-center items-center py-5">
+        <div className="flex items-center gap-2">
+          <button
+            className="w-11 h-11 rounded-full border border-gray-200 bg-white flex items-center justify-center transition-colors hover:border-brand-main disabled:opacity-40 disabled:cursor-not-allowed"
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
           >
             <HiOutlineChevronLeft />
           </button>
-          
+
           {[...Array(totalPages)].map((_, i) => (
-            <button 
-              key={i + 1} 
-              className={`${styles.pageBtn} ${currentPage === i + 1 ? styles.activePage : ''}`}
+            <button
+              key={i + 1}
+              className={`w-11 h-11 rounded-full border flex items-center justify-center text-[13px] font-semibold transition-colors ${
+                currentPage === i + 1
+                  ? 'bg-brand-main text-white border-brand-main'
+                  : 'bg-white border-gray-200 text-black-main-text hover:border-brand-main'
+              }`}
               onClick={() => setCurrentPage(i + 1)}
             >
               {i + 1}
             </button>
           ))}
 
-          <button 
-            className={styles.pageBtn} 
+          <button
+            className="w-11 h-11 rounded-full border border-gray-200 bg-white flex items-center justify-center transition-colors hover:border-brand-main disabled:opacity-40 disabled:cursor-not-allowed"
             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
           >
             <HiOutlineChevronRight />
           </button>
         </div>
-        
-        <button className={styles.writeBtn} onClick={() => navigate('/patient/write-story')}>
+
+        <button
+          className="absolute right-0 flex items-center gap-2 px-7 py-3.5 rounded-[24px] text-white text-[13px] font-semibold shadow-[0_4px_12px_rgba(51,60,245,0.2)]"
+          style={{ background: 'linear-gradient(90deg, #333CF5 0%, #ED0006 100%)' }}
+          onClick={() => navigate('/patient/write-story')}
+        >
           <HiOutlinePencilAlt /> Write Story
         </button>
-      </div>
+      </div></section>
 </>
   );
 };

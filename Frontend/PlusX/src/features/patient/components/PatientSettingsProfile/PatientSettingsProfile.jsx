@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   LuUser, LuLock, LuBell, LuMoon,
@@ -16,9 +16,9 @@ import ConfirmModal from '../../../admin/components/ConfirmModal/ConfirmModal';
 import Toast from '../../../../components/Toast/Toast';
 import usePatientData from '../../../../PatientHooks/usePatientData';
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Password requirements helper
-───────────────────────────────────── */
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function checkReqs(val) {
   return {
     length: val.length >= 8,
@@ -27,9 +27,9 @@ function checkReqs(val) {
   };
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Mock published stories
-───────────────────────────────────── */
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const MOCK_STORIES = [
   {
     id: 1,
@@ -55,9 +55,9 @@ const MOCK_STORIES = [
   },
 ];
 
-/* ─────────────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Main Component
-───────────────────────────────────────────────────── */
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function PatientSettingsProfile() {
   const { patient } = usePatientData();
   const navigate = useNavigate();
@@ -135,9 +135,9 @@ export default function PatientSettingsProfile() {
     { label: 'Heart Rate', value: `${v?.heartRate?.value ?? 72} bpm`, icon: <FaHeartPulse /> },
   ];
 
-  /* ── render ── */
+  /* â”€â”€ render â”€â”€ */
   return (
-    <div className="flex flex-col gap-6 font-['Inter',sans-serif]">
+    <div className="flex flex-col gap-6 font-['Inter',sans-serif] p-5 ">
 
       {/* Toast */}
       <Toast
@@ -147,19 +147,30 @@ export default function PatientSettingsProfile() {
         type="success"
         onClose={() => setToast(t => ({ ...t, visible: false }))}
       />
+<header className="flex flex-col gap-2 pb-4 border-b border-gray-100">
+  
+  {/* السطر الأول: الأيقونة + العنوان */}
+  <div className="flex items-center gap-1">
+    {/* حاوية الأيقونة */}
+    <div className="w-10 h-10 flex items-center text-black-main-text justify-center text-[25px] shrink-0">
+      <HiOutlineCog6Tooth />
+    </div>
 
-      {/* ── Page header ─────────────────────────────── */}
-      <div>
-        <h1 className="text-2xl font-extrabold flex items-center gap-2 text-[#010218]">
-          <HiOutlineCog6Tooth className="text-gray-500" />
-          Settings &amp; Profile
-        </h1>
-        <p className="text-sm text-gray-400 mt-1">
-          Manage your personal details, health data, and account preferences.
-        </p>
-      </div>
+    {/* العنوان H1 */}
+    <h1 className="text-[18px] font-bold text-black-main-text">
+      Settings & Profile
+    </h1>
+  </div>
 
-      {/* ══ 1. Personal Information ════════════════════ */}
+  {/* السطر الثاني: الوصف (ينزل تحتهم) */}
+  <p className="text-[12px] text-gray-500 leading-relaxed">
+    Manage your personal details, health data, and account preferences.
+  </p>
+  
+</header>
+
+
+      {/* â•â• 1. Personal Information â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <div className="bg-white rounded-[22px] border border-gray-100 shadow-sm overflow-hidden">
 
         {/* card header */}
@@ -168,7 +179,7 @@ export default function PatientSettingsProfile() {
           style={{ background: 'linear-gradient(to right,#EFF6FF,#EEF2FF)' }}
         >
           <LuUser size={18} className="text-[#155DFC]" />
-          <span className="text-[#101828] text-base font-bold">Personal Information</span>
+          <span className="text-[#101828] text-[14px] font-bold">Personal Information</span>
         </div>
 
         <div className="p-6">
@@ -217,7 +228,7 @@ export default function PatientSettingsProfile() {
           <div className="flex justify-end mt-6">
             <button
               onClick={handleSaveProfile}
-              className="bg-[#333CF5] hover:bg-blue-700 text-white px-7 py-3 rounded-xl font-bold flex items-center gap-2 transition-colors text-sm"
+              className="bg-brand-main hover:bg-blue-700 text-white px-7 py-3 rounded-xl font-bold flex items-center gap-2 transition-colors text-sm"
             >
               <LuCheck size={16} /> Save Changes
             </button>
@@ -225,7 +236,7 @@ export default function PatientSettingsProfile() {
         </div>
       </div>
 
-      {/* ══ 2. Health Information ══════════════════════ */}
+      {/* â•â• 2. Health Information â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <div className="bg-white rounded-[22px] border border-[#E5E7EB] shadow-sm overflow-hidden">
 
         {/* card header */}
@@ -234,7 +245,7 @@ export default function PatientSettingsProfile() {
           style={{ background: 'linear-gradient(to right,#FAF5FF,#FDF2F8)' }}
         >
           <FaHeartPulse size={18} className="text-[#9810FA]" />
-          <span className="text-[#010218] text-base font-bold">Health Information</span>
+          <span className="text-black-main-text text-[14px] font-bold">Health Information</span>
         </div>
 
         <div className="p-6">
@@ -245,21 +256,21 @@ export default function PatientSettingsProfile() {
                   <span className="text-[13px]">{c.icon}</span>
                   {c.label}
                 </div>
-                <p className="text-[#010218] font-extrabold text-lg leading-tight">{c.value}</p>
+                <p className="text-black-main-text font-extrabold text-lg leading-tight">{c.value}</p>
               </div>
             ))}
           </div>
 
           <button
             onClick={() => navigate('/patient/update-health')}
-            className="border border-[#333CF5] text-[#333CF5] hover:bg-[#EEF2FF] transition-colors px-6 py-2.5 rounded-full text-sm font-bold"
+            className="border border-brand-main text-brand-main hover:bg-[#EEF2FF] transition-colors px-6 py-2.5 rounded-full text-sm font-bold"
           >
             Update Health Data
           </button>
         </div>
       </div>
 
-      {/* ══ 3. My Published Stories ════════════════════ */}
+      {/* â•â• 3. My Published Stories â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <div className="bg-white rounded-[22px] border border-gray-100 shadow-sm overflow-hidden">
 
         {/* card header */}
@@ -269,7 +280,7 @@ export default function PatientSettingsProfile() {
         >
           <div className="flex items-center gap-2">
             <LuBookOpen size={18} className="text-[#00A63E]" />
-            <span className="text-[#101828] text-base font-bold">My Published Stories</span>
+            <span className="text-[#101828] text-[14px] font-bold">My Published Stories</span>
           </div>
           <span className="text-xs font-bold text-[#008236] bg-[#DCFCE7] px-3 py-1 rounded-full">
             {stories.length} Published
@@ -301,7 +312,7 @@ export default function PatientSettingsProfile() {
                   {/* info */}
                   <div className="flex-1 min-w-0">
                     <h3
-                      className="font-bold text-[#010218] text-sm sm:text-base cursor-pointer hover:text-[#333CF5] transition-colors line-clamp-1"
+                      className="font-bold text-black-main-text text-sm sm:text-base cursor-pointer hover:text-brand-main transition-colors line-clamp-1"
                       onClick={() => navigate(`/patient/stories/${story.id}`)}
                     >
                       {story.title}
@@ -355,7 +366,7 @@ export default function PatientSettingsProfile() {
           <div className="flex justify-center mt-6">
             <button
               onClick={() => navigate('/patient/write-story')}
-              className="bg-[#333CF5] hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-colors text-sm"
+              className="bg-brand-main hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-colors text-sm"
             >
               + Write Story
             </button>
@@ -363,7 +374,7 @@ export default function PatientSettingsProfile() {
         </div>
       </div>
 
-      {/* ══ 4. Account Settings ════════════════════════ */}
+      {/* â•â• 4. Account Settings â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <div className="bg-white rounded-[22px] border border-gray-100 shadow-sm overflow-hidden">
 
         {/* card header */}
@@ -372,7 +383,7 @@ export default function PatientSettingsProfile() {
           style={{ background: 'linear-gradient(to right,#FFF7ED,#FEF2F2)' }}
         >
           <HiOutlineCog6Tooth size={18} className="text-[#f97316]" />
-          <span className="text-[#101828] text-base font-bold">Account Settings</span>
+          <span className="text-[#101828] text-[14px] font-bold">Account Settings</span>
         </div>
 
         <div className="divide-y divide-gray-50">
@@ -404,7 +415,7 @@ export default function PatientSettingsProfile() {
         </div>
       </div>
 
-      {/* ══ Delete Story ConfirmModal ══════════════════ */}
+      {/* â•â• Delete Story ConfirmModal â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <ConfirmModal
         isOpen={deleteTarget !== null}
         title="Delete Story?"
@@ -413,7 +424,7 @@ export default function PatientSettingsProfile() {
         onCancel={() => setDeleteTarget(null)}
       />
 
-      {/* ══ Change Password Modal ══════════════════════ */}
+      {/* â•â• Change Password Modal â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       {pwModal && (
         <div
           className="fixed inset-0 z-9999 flex items-center justify-center"
@@ -432,7 +443,7 @@ export default function PatientSettingsProfile() {
               <LuX size={18} />
             </button>
 
-            <h2 className="text-xl font-extrabold text-[#010218] mb-0.5">Change Password</h2>
+            <h2 className="text-xl font-extrabold text-black-main-text mb-0.5">Change Password</h2>
             <p className="text-gray-400 text-sm mb-5">Update your password securely</p>
 
             {pwError && (
@@ -485,7 +496,7 @@ export default function PatientSettingsProfile() {
               </button>
               <button
                 onClick={handleSavePassword}
-                className="flex-1 py-3 rounded-2xl bg-[#333CF5] text-white font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors text-sm"
+                className="flex-1 py-3 rounded-2xl bg-brand-main text-white font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors text-sm"
               >
                 <LuShieldCheck size={16} /> Save Password
               </button>
@@ -506,13 +517,13 @@ export default function PatientSettingsProfile() {
   );
 }
 
-/* ─────────────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Sub-components
-───────────────────────────────────────────────────── */
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function InputField({ label, icon, value, onChange, required }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs font-bold text-gray-700">
+      <label className="text-[12px] font-semibold text-[#364153]">
         {label}{required && <span className="text-red-500 ml-0.5">*</span>}
       </label>
       <div className="flex items-center bg-[#f9fafb] border border-gray-200 rounded-xl px-3.5 py-2.5 gap-2.5 focus-within:border-[#155DFC] transition-colors">
@@ -521,7 +532,7 @@ function InputField({ label, icon, value, onChange, required }) {
           type="text"
           value={value}
           onChange={e => onChange(e.target.value)}
-          className="bg-transparent outline-none w-full text-sm text-[#010218]"
+          className="bg-transparent outline-none w-full text-[13px] text-black-main-text"
         />
       </div>
     </div>
@@ -531,7 +542,7 @@ function InputField({ label, icon, value, onChange, required }) {
 function PasswordField({ label, placeholder, value, show, onToggle, onChange }) {
   return (
     <div className="mb-4">
-      <label className="text-xs font-bold text-gray-700 mb-1.5 block">{label}</label>
+      <label className="text-[12px] font-semibold text-[#364153] mb-1.5 block">{label}</label>
       <div className="flex items-center bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 gap-2.5 focus-within:border-[#155DFC] transition-colors">
         <LuLock size={14} className="text-gray-400 shrink-0" />
         <input
@@ -539,7 +550,7 @@ function PasswordField({ label, placeholder, value, show, onToggle, onChange }) 
           placeholder={placeholder}
           value={value}
           onChange={e => onChange(e.target.value)}
-          className="outline-none w-full text-sm text-[#010218] bg-transparent"
+          className="outline-none w-full text-[13px] text-black-main-text bg-transparent"
         />
         <button type="button" onClick={onToggle} className="text-gray-400 hover:text-gray-600 transition-colors shrink-0">
           {show ? <LuEyeOff size={14} /> : <LuEye size={14} />}
@@ -564,8 +575,8 @@ function SettingRow({ icon, title, desc, action }) {
       <div className="flex items-center gap-3">
         <span className="text-gray-400 text-lg shrink-0">{icon}</span>
         <div>
-          <h4 className="font-bold text-sm text-[#010218]">{title}</h4>
-          <p className="text-gray-400 text-xs mt-0.5">{desc}</p>
+          <h4 className="font-bold text-[13px] text-black-main-text">{title}</h4>
+          <p className="text-gray-400 text-[11px] mt-0.5">{desc}</p>
         </div>
       </div>
       {action}

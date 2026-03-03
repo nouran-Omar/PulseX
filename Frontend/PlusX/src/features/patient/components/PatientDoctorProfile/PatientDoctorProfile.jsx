@@ -34,7 +34,7 @@ const StatItem = ({ icon, bg, color, label, value }) => (
     <div className={`w-9 h-9 rounded-full ${bg} ${color} flex items-center justify-center text-lg shrink-0`}>{icon}</div>
     <div>
       <p className="text-xs text-[#757575]">{label}</p>
-      <p className="text-sm font-semibold text-[#010218]">{value}</p>
+      <p className="text-sm font-semibold text-black-main-text">{value}</p>
     </div>
   </div>
 );
@@ -50,10 +50,10 @@ const PatientDoctorProfile = () => {
   };
 
   return (
-    <div className="min-h-screen sm:p-6 lg:p-8">
+    <div className="min-h-screen">
 
       {/* ── Hero Card ── */}
-      <div className="bg-[#333CF5] rounded-2xl p-5 sm:p-7 mb-5 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+      <div className="bg-brand-main rounded-2xl p-5 sm:p-7 mb-5 flex flex-col sm:flex-row items-start sm:items-center gap-5">
         <div className="flex items-center gap-4 flex-1">
           <img
             src={doctor.img} alt={doctor.name}
@@ -73,7 +73,7 @@ const PatientDoctorProfile = () => {
         <div className="flex flex-col gap-2.5 w-full sm:w-auto shrink-0">
           <button
             onClick={() => navigate(`/patient/booking/${id}`)}
-            className="bg-white text-[#333CF5] font-semibold text-sm px-6 py-2.5 rounded-xl hover:bg-blue-50 transition w-full sm:w-44"
+            className="bg-white text-brand-main font-semibold text-sm px-6 py-2.5 rounded-xl hover:bg-blue-50 transition w-full sm:w-44"
           >
             Book Appointment
           </button>
@@ -83,7 +83,7 @@ const PatientDoctorProfile = () => {
             title={!doctor.hasAppointment ? 'Book an appointment first to message' : 'Go to messages'}
             className={`flex items-center justify-center gap-2 font-semibold text-sm px-6 py-2.5 rounded-xl border transition w-full sm:w-44
               ${doctor.hasAppointment
-                ? '"bg-white text-[#333CF5] border-white/30 hover:bg-white/20 cursor-pointer'
+                ? 'bg-white text-brand-main border-white/30 hover:bg-white cursor-pointer'
                 : 'bg-[#E5E7EB] border-white/15 text-[#757575] cursor-not-allowed'}`}
           >
             <HiOutlineChat className="text-base" />
@@ -91,18 +91,18 @@ const PatientDoctorProfile = () => {
           </button>
         </div>
       </div>
-
+      <div className='p-5 '>
       {/* ── Stats Row ── */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-4 sm:px-8 py-4 mb-5 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-0">
         <StatItem icon={<MdOutlineAttachMoney />} bg="bg-[#DCFCE7]"  color="text-[#00A63E]"  label="Price"      value={`$${doctor.price} / session`} />
-        <StatItem icon={<HiOutlineLocationMarker />} bg="bg-[#DBEAFE]" color="text-[#333CF5]"  label="Location"   value={doctor.loc} />
+        <StatItem icon={<HiOutlineLocationMarker />} bg="bg-[#DBEAFE]" color="text-brand-main"  label="Location"   value={doctor.loc} />
         <StatItem icon={<HiOutlineUserGroup />}    bg="bg-[#F3E8FF]" color="text-[#9810FA]" label="Patients"   value={doctor.patients} />
         <StatItem icon={<HiOutlineBriefcase />}    bg="bg-[#FFEDD4]" color="text-[#F54900]" label="Experience" value={doctor.exp} />
       </div>
 
       {/* ── About ── */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-7 mb-5">
-        <h2 className="text-base font-bold text-[#010218] mb-3">About {doctor.name}</h2>
+        <h2 className="text-base font-bold text-black-main-text mb-3">About {doctor.name}</h2>
         <p className="text-sm text-[#4A5565] leading-relaxed">
           {doctor.name} is a highly experienced cardiologist with over a decade of practice in cardiovascular medicine.
           They specialize in preventive cardiology, heart disease management, and interventional procedures, committed to
@@ -113,7 +113,7 @@ const PatientDoctorProfile = () => {
 
       {/* ── Professional Experience ── */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-7">
-        <h2 className="text-base font-bold text-[#010218] mb-4">Professional Experience</h2>
+        <h2 className="text-base font-bold text-black-main-text mb-4">Professional Experience</h2>
         <div className="flex flex-col gap-5">
           {EXPERIENCE.map((item, i) => (
             <div key={i} className="flex gap-3">
@@ -121,7 +121,7 @@ const PatientDoctorProfile = () => {
                 {item.icon}
               </div>
               <div>
-                <h3 className="text-sm font-bold text-[#010218]">{item.title}</h3>
+                <h3 className="text-sm font-bold text-black-main-text">{item.title}</h3>
                 {item.place && <p className="text-xs text-[#757575] mt-0.5">{item.place}</p>}
                 <p className="text-xs text-[#757575] mt-1 whitespace-pre-line">{item.desc}</p>
               </div>
@@ -129,7 +129,7 @@ const PatientDoctorProfile = () => {
           ))}
         </div>
       </div>
-
+</div>
     </div>
   );
 };

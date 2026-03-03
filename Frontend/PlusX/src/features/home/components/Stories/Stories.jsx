@@ -5,7 +5,7 @@ import { MdVerified } from "react-icons/md";
 import { FaQuoteLeft } from "react-icons/fa"; // أيقونة الاقتباس المطابقة
 import { LuQuote } from "react-icons/lu";
 import Container from '../HomeSectionWrapper/HomeSectionWrapper';
-import styles from './Stories.module.css';
+
 
 const STORIES_DATA = [
     {
@@ -72,7 +72,7 @@ const Stories = () => {
     const story = STORIES_DATA[currentIndex];
 
     return (
-        <section id="stories" className={styles.section}>
+        <section id="stories" className="py-24 bg-[#FAFAFA] overflow-hidden">
             <Container>
         <motion.div
           className="text-center mb-16 space-y-3 font-inter"
@@ -81,7 +81,7 @@ const Stories = () => {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-4xl font-bold text-[#010218]">Recovery Stories</h2>
+          <h2 className="text-4xl font-bold text-black-main-text">Recovery Stories</h2>
           <p className="text-[#757575] text-lg">Real patients, real results — inspiring journeys to better heart health</p>
         </motion.div>
 
@@ -93,7 +93,7 @@ const Stories = () => {
                   transition={{ duration: 0.7, delay: 0.15 }}
                 >
                     {/* الكارد الرئيسي */}
-                    <div className={styles.card}>
+                    <div className="bg-white shadow-lg rounded-[32px] relative z-10 min-h-[480px]">
                         <AnimatePresence mode="wait">
                             <motion.div 
                                 key={currentIndex}
@@ -106,19 +106,19 @@ const Stories = () => {
                                 {/* الجزء الأيسر: بيانات المريض */}
                                 <div className="w-full md:w-1/3 flex flex-col items-center text-center space-y-5 border-b md:border-b-0 md:border-r border-gray-100 pb-8 md:pb-0 md:pr-12">
                                     <div className="relative">
-                                        <img src={story.image} alt={story.name} className={styles.patientImage} />
-                                        <div className={styles.verifiedBadge}>
+                                        <img src={story.image} alt={story.name} className="w-40 h-40 rounded-full object-cover border-[6px] border-[#F1F5F9] shadow-inner" />
+                                        <div className="absolute bottom-2 right-4 w-7 h-7 bg-[#10B981] border-4 border-white rounded-full flex items-center justify-center text-white shadow-md">
                                             <MdVerified size={18} />
                                         </div>
                                     </div>
                                     <div className="space-y-1">
-                                        <h3 className="text-2xl font-extrabold text-[#010218]">{story.name}</h3>
+                                        <h3 className="text-2xl font-extrabold text-black-main-text">{story.name}</h3>
                                         <p className="text-[#757575] font-medium">Age {story.age}</p>
-                                        <p className="text-[#333CF5] font-bold text-lg">{story.condition}</p>
+                                        <p className="text-brand-main font-bold text-lg">{story.condition}</p>
                                     </div>
-                                    <div className="flex  justify-center text-[#333CF5] ">
+                                    <div className="flex  justify-center text-brand-main ">
                                         {story.tags.map((tag, i) => (
-                                            <span key={i} className={styles.tag}>{tag}</span>
+                                            <span key={i} className="text-[10px] bg-blue-50/50 text-brand-main px-2 py-1 rounded-md font-bold tracking-wide">{tag}</span>
                                         ))}
                                     </div>
                                 </div>
@@ -126,8 +126,8 @@ const Stories = () => {
                                 {/* الجزء الأيمن: القصة والإحصائيات */}
                                 <div className="w-full md:w-2/3 space-y-8 relative">
                                     <div className="relative">
-                                        <LuQuote className="text-[#333CF5] w-12 h-12 absolute -top-8 -left-10" />
-                                        <p className="text-lg text-[#010218] leading-relaxed font-medium italic">
+                                        <LuQuote className="text-brand-main w-12 h-12 absolute -top-8 -left-10" />
+                                        <p className="text-lg text-black-main-text leading-relaxed font-medium italic">
                                             "{story.quote}"
                                         </p>
                                     </div>
@@ -135,7 +135,7 @@ const Stories = () => {
                                     {/* الإحصائيات الملونة */}
                                     <div className="flex justify-between items-center py-6">
                                         <StatBlock label="Risk Reduction" value={story.stats.risk} color="text-[#059669]" />
-                                        <StatBlock label="Recovery Time" value={story.stats.time} color="text-[#333CF5]" />
+                                        <StatBlock label="Recovery Time" value={story.stats.time} color="text-brand-main" />
                                         <StatBlock label="BPM Improved" value={story.stats.bpm} color="text-[#D97706]" />
                                     </div>
 
@@ -143,11 +143,11 @@ const Stories = () => {
                                     <div className="space-y-4">
                                         <div className="flex justify-between items-end">
                                             <span className="text-xs font-bold text-[#757575] tracking-[0.15em]">Recovery Progress</span>
-                                            <span className="text-sm font-bold text-[#010218]">{story.progress}%</span>
+                                            <span className="text-sm font-bold text-black-main-text">{story.progress}%</span>
                                         </div>
-                                        <div className={styles.progressBarBase}>
+                                        <div className="h-2 bg-gray-100 rounded-full w-full overflow-hidden">
                                             <motion.div 
-                                                className={styles.progressBarFill} 
+                                                className="h-full rounded-full bg-brand-main"
                                                 initial={{ width: 0 }}
                                                 animate={{ width: `${story.progress}%` }}
                                                 transition={{ duration: 1, ease: "easeOut" }}
@@ -164,10 +164,10 @@ const Stories = () => {
                     </div>
 
                     {/* أزرار التنقل الدائرية */}
-                    <button onClick={prevSlide} className={`${styles.navBtn} left-[-55px] ${currentIndex === 0 ? 'opacity-0' : 'opacity-100'}`}>
+                    <button onClick={prevSlide} className={`absolute top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#757575] transition-all z-20 hover:bg-brand-main hover:text-white border border-gray-100 left-[-55px] ${currentIndex === 0 ? 'opacity-0' : 'opacity-100'}`}>
                         <HiChevronLeft size={24} />
                     </button>
-                    <button onClick={nextSlide} className={`${styles.navBtn} right-[-55px] ${currentIndex === STORIES_DATA.length - 1 ? 'opacity-0' : 'opacity-100'}`}>
+                    <button onClick={nextSlide} className={`absolute top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#757575] transition-all z-20 hover:bg-brand-main hover:text-white border border-gray-100 right-[-55px] ${currentIndex === STORIES_DATA.length - 1 ? 'opacity-0' : 'opacity-100'}`}>
                         <HiChevronRight size={24} />
                     </button>
                 </motion.div>
@@ -179,7 +179,7 @@ const Stories = () => {
                             <div 
                                 key={i} 
                                 onClick={() => setCurrentIndex(i)}
-                                className={`${styles.barDot} ${currentIndex === i ? styles.barDotActive : styles.barDotInactive}`}
+                                className={`h-1.5 rounded-full cursor-pointer transition-all duration-300 w-[40px] ${currentIndex === i ? 'bg-brand-main' : 'bg-gray-200 hover:bg-gray-300'}`}
                             />
                         ))}
                     </div>

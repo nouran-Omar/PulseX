@@ -24,14 +24,14 @@ const UploadCard = ({ title, desc, Icon, onUpload }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col gap-4">
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-4 p-4">
       {/* header */}
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-[#333CF5] flex items-center justify-center shrink-0">
+        <div className="w-10 h-10 rounded-xl bg-brand-main flex items-center justify-center shrink-0">
           <Icon className="text-white text-xl" />
         </div>
         <div>
-          <p className="text-sm font-bold text-[#010218]">{title}</p>
+          <p className="text-sm font-bold text-black-main-text">{title}</p>
           <p className="text-xs text-[#757575]">{desc}</p>
         </div>
       </div>
@@ -41,7 +41,7 @@ const UploadCard = ({ title, desc, Icon, onUpload }) => {
         onClick={() => fileRef.current.click()}
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}
-        className="border border-[#E5E7EB] rounded-xl bg-white h-[140px] flex flex-col items-center justify-center cursor-pointer hover:border-[#333CF5] transition"
+        className="border border-[#E5E7EB] rounded-xl bg-white h-[140px] flex flex-col items-center justify-center cursor-pointer hover:border-brand-main transition"
       >
         <div className="w-10 h-10 rounded-full flex items-center justify-center mb-2"
         style={{ background: 'linear-gradient(135deg, #DBEAFE 0%, #BEDBFF 100%)' }}
@@ -63,7 +63,7 @@ const UploadCard = ({ title, desc, Icon, onUpload }) => {
        <div className='bg-[#DCFCE7] p-2 rounded-lg '>
           <LuCircleCheck className="text-[#00A63E]  text-lg shrink-0" />
          </div> <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-[#010218] truncate">{file.name}</p>
+            <p className="text-xs font-semibold text-black-main-text truncate">{file.name}</p>
             <p className="text-[10px] text-[#757575]">{(file.size / 1024).toFixed(2)} KB</p>
           </div>
           <button onClick={() => setFile(null)} className="text-gray-400 hover:text-red-500 transition">
@@ -78,7 +78,7 @@ const UploadCard = ({ title, desc, Icon, onUpload }) => {
         onClick={() => file && onUpload(file)}
         className={`w-full py-2.5 rounded-xl text-sm font-semibold transition
           ${file
-            ? 'bg-[#333CF5] text-white hover:bg-[#2730d4] shadow-sm'
+            ? 'bg-brand-main text-white hover:bg-[#2730d4] shadow-sm'
             : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
       >
         Upload
@@ -143,7 +143,7 @@ const RiskGauge = ({ percentage = 84 }) => {
     </svg>
         {/* percentage text */}
         <div className="absolute inset-0  flex items-end justify-center pb-1">
-          <span className="text-2xl font-bold text-[#010218]">{clamp}%</span>
+          <span className="text-2xl font-bold text-black-main-text">{clamp}%</span>
         </div>
       </div>
 
@@ -163,7 +163,7 @@ const CriticalAlert = ({ onFindDoctors }) => (
     <div className="w-10 h-10 rounded-full bg-[#FFE2E2] flex items-center justify-center">
       <LuTriangleAlert className="text-[#E7000B] text-xl" />
     </div>
-    <h3 className="text-base font-bold text-[#010218]">Critical Alert: Medical Consultation Recommended</h3>
+    <h3 className="text-base font-bold text-black-main-text">Critical Alert: Medical Consultation Recommended</h3>
     <p className="text-sm text-[#364153] max-w-sm w-full leading-relaxed">
       Based on our AI analysis of your uploaded X-rays, we have detected indicators that require
       immediate medical attention. Your health is our priority; we have curated a list of top
@@ -171,7 +171,7 @@ const CriticalAlert = ({ onFindDoctors }) => (
     </p>
     <button
       onClick={onFindDoctors}
-      className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#333CF5] text-white text-sm font-semibold hover:bg-[#2730d4] transition mt-1"
+      className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-main text-white text-sm font-semibold hover:bg-[#2730d4] transition mt-1"
     >
       Find Doctors <IoSearchOutline className="text-base" />
     </button>
@@ -192,13 +192,13 @@ const PatientHeartRisk = () => {
   const mockResult = { percentage: 84, level: 'high' };
 
   return (
-    <div className="min-h-screen   sm:p-6 lg:p-8">
+    <div className="min-h-screen p-5 sm:p-5 ">
 
       {/* ── Header ── */}
       <div className="mb-6">
         <div className="flex items-center gap-2 mb-1">
-          <LuSearch className="text-xl text-[#010218]" />
-          <h1 className="text-xl font-bold text-[#010218]">Heart Risk Assessment</h1>
+          <LuSearch className="text-xl text-black-main-text" />
+          <h1 className="text-xl font-bold text-black-main-text">Heart Risk Assessment</h1>
         </div>
         <p className="text-sm text-[#757575]">Upload and view your medical health easily.</p>
       </div>

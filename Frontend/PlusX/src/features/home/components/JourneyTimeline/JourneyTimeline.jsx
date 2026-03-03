@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Container from '../HomeSectionWrapper/HomeSectionWrapper';
-import styles from './JourneyTimeline.module.css';
+
 import { 
   HiOutlineUserCircle, HiOutlineBolt, HiOutlineHeart, 
   HiOutlineSparkles, HiOutlineQrCode, HiOutlineUsers, 
@@ -119,14 +119,14 @@ const TimelineItem = ({ step, isFirst }) => {
         transition={{ duration: 0.6 }}
         className="w-full md:w-[46%]"
       >
-        <div className={styles.card}>
+        <div className="relative shadow-lg bg-white p-6 rounded-3xl overflow-hidden transition-transform duration-300 hover:-translate-y-[5px]">
           <div className="flex justify-between items-center mb-3">
             <h3 className="text-xl font-bold text-[#1C1C1E]">{step.title}</h3>
             <span className="px-2 py-1 bg-gray-100 rounded-lg text-sm font-medium">{step.tag}</span>
           </div>
           <p className="text-[#757575] leading-relaxed mb-10">{step.desc}</p>
           
-          <div className={styles.progressBarBase}>
+          <div className="absolute bottom-6 left-6 right-6 h-2.5 bg-gray-100 rounded-full overflow-hidden">
             <motion.div
               style={{ width: progressBarWidth, background: `linear-gradient(to right, #FF0000, #2564EB)` }}
               className="h-full rounded-full"
@@ -141,7 +141,7 @@ const TimelineItem = ({ step, isFirst }) => {
           initial={{ scale: 0, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
-          className={styles.iconCircle}
+          className="w-11 h-11 rounded-full flex items-center justify-center shadow-lg border-[4px] border-white relative z-20 transition-all duration-500"
           style={{ backgroundColor: step.iconColor, color: 'white' }}
         >
           <span className="text-2xl">{step.icon}</span>
@@ -159,7 +159,7 @@ const JourneyTimeline = () => {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="about" ref={containerRef} className={styles.section}>
+    <section id="about" ref={containerRef} className="py-24 bg-[#FAFAFA] overflow-hidden font-inter">
       <Container>
         <motion.div
           className="text-center mb-24"
@@ -168,14 +168,14 @@ const JourneyTimeline = () => {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-4xl font-bold text-[#010218] mb-4">Your Heart Health Journey</h2>
+          <h2 className="text-4xl font-bold text-black-main-text mb-4">Your Heart Health Journey</h2>
           <p className="text-lg text-[#757575]">A comprehensive pathway to better cardiovascular health with AI guidance</p>
         </motion.div>
 
         <div className="relative max-w-[1160px] mx-auto ">
           {/* الخط الزمني العمودي */}
-          <div className={styles.timelineLine}>
-            <motion.div style={{ height: lineHeight }} className={styles.activeLine} />
+          <div className="absolute shadow-lg left-1/2 -translate-x-1/2 top-[22px] bottom-0 w-1 bg-gray-200 rounded-full hidden md:block overflow-hidden">
+            <motion.div style={{ height: lineHeight }} className="w-full rounded-full origin-top bg-brand-main" />
           </div>
 
           <div className="relative z-10 pt-8"> 

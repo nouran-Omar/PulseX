@@ -84,29 +84,29 @@ const ReportModal = ({ onClose, onSubmit }) => {
     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl w-full max-w-sm p-6 shadow-xl">
         <div className="flex items-center justify-between mb-5">
-          <h3 className="text-base font-bold text-[#010218]">Report Comment</h3>
+          <h3 className="text-base font-bold text-black-main-text">Report Comment</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600"><HiX className="text-xl" /></button>
         </div>
         <div className="flex flex-col gap-4">
           <div>
-            <label className="text-xs font-semibold text-[#010218] mb-1 block">Category</label>
+            <label className="text-xs font-semibold text-black-main-text mb-1 block">Category</label>
             <select value={cat} onChange={(e) => setCat(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 bg-[#F6F7F8] text-sm outline-none focus:border-[#333CF5]">
+              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 bg-[#F6F7F8] text-sm outline-none focus:border-brand-main">
               <option value="" />
               {REPORT_CATS.map((c) => <option key={c}>{c}</option>)}
             </select>
           </div>
           <div>
-            <label className="text-xs font-semibold text-[#010218] mb-1 block">Reason</label>
+            <label className="text-xs font-semibold text-black-main-text mb-1 block">Reason</label>
             <textarea rows={4} value={reason} onChange={(e) => setReason(e.target.value)}
               placeholder="Please provide details about why you're reporting this..."
-              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 bg-[#F6F7F8] text-sm outline-none resize-none focus:border-[#333CF5]" />
+              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 bg-[#F6F7F8] text-sm outline-none resize-none focus:border-brand-main" />
           </div>
         </div>
         <div className="flex gap-3 mt-5">
-          <button onClick={onClose} className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-semibold text-[#010218] hover:bg-gray-50">Cancel</button>
+          <button onClick={onClose} className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-semibold text-black-main-text hover:bg-gray-50">Cancel</button>
           <button onClick={() => { onSubmit(); onClose(); }}
-            className="flex-1 py-2.5 rounded-xl bg-[#333CF5] text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-[#2730d4]">
+            className="flex-1 py-2.5 rounded-xl bg-brand-main text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-[#2730d4]">
             <IoSendSharp /> Submit Report
           </button>
         </div>
@@ -182,12 +182,12 @@ const PatientAllComments = () => {
         />
       )}
 
-      <div className="w-full  flex flex-col gap-5">
+      <div className="w-full  flex flex-col gap-5 p-5">
 
         {/* ── Back ── */}
         <button
           onClick={() => navigate(`/patient/stories/${id}`)}
-          className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#333CF5] transition w-fit"
+          className="flex items-center gap-1 text-sm text-gray-500 hover:text-brand-main transition w-fit"
         >
           <HiOutlineChevronLeft /> Back to Story
         </button>
@@ -195,26 +195,26 @@ const PatientAllComments = () => {
         {/* ── Header ── */}
         <div className="bg-white rounded-2xl p-5">
           <div className="flex items-center gap-2 mb-1">
-            <HiOutlineChatBubbleLeftRight className="text-xl text-[#010218]" />
-            <h1 className="text-xl font-bold text-[#010218]">All Comments</h1>
+            <HiOutlineChatBubbleLeftRight className="text-xl text-black-main-text" />
+            <h1 className="text-xl font-bold text-black-main-text">All Comments</h1>
           </div>
           <p className="text-sm text-[#757575]">{comments.length} comments on "{storyTitle}"</p>
         </div>
 
         {/* ── Add Comment ── */}
         <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
-          <h2 className="text-sm font-bold text-[#010218] mb-3">Add a Comment</h2>
+          <h2 className="text-sm font-bold text-black-main-text mb-3">Add a Comment</h2>
           <div className="flex items-start gap-3">
             <Avatar img="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100" initials="Y" size="w-10 h-10" />
             <textarea
               rows={3} value={newComment} onChange={(e) => setNewComment(e.target.value)}
               placeholder="Share your thoughts..."
-              className="flex-1 px-4 py-3 rounded-xl border border-gray-200 bg-[#F9FAFB] text-sm outline-none resize-none focus:border-[#333CF5] transition"
+              className="flex-1 px-4 py-3 rounded-xl border border-gray-200 bg-[#F9FAFB] text-sm outline-none resize-none focus:border-brand-main transition"
             />
           </div>
           <div className="flex justify-end mt-3">
             <button onClick={handlePostComment}
-              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#333CF5] text-white text-sm font-semibold hover:bg-[#2730d4] transition">
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-brand-main text-white text-sm font-semibold hover:bg-[#2730d4] transition">
               <IoSendSharp /> Post Comment
             </button>
           </div>
@@ -233,7 +233,7 @@ const PatientAllComments = () => {
                   <Avatar img={c.avatar} initials={c.initials} size="w-11 h-11" />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between flex-wrap gap-1">
-                      <p className="text-sm font-semibold text-[#010218]">{c.user}</p>
+                      <p className="text-sm font-semibold text-black-main-text">{c.user}</p>
                       <p className="text-xs text-[#6A7282]">{c.time}</p>
                     </div>
                     <p className="text-sm text-[#364153] mt-1 leading-relaxed">{c.text}</p>
@@ -243,13 +243,13 @@ const PatientAllComments = () => {
                       <button
                         onClick={() => handleLike(c.id)}
                         className={`flex items-center gap-1 text-xs font-medium transition
-                          ${liked ? 'text-[#333CF5]' : 'text-[#4A5565] hover:text-[#333CF5]'}`}
+                          ${liked ? 'text-brand-main' : 'text-[#4A5565] hover:text-brand-main'}`}
                       >
                         <AiOutlineLike className="text-base" /> {c.likes}
                       </button>
                       <button
                         onClick={() => { setReplyingTo(replyingTo === c.id ? null : c.id); setReplyText(''); }}
-                        className="flex items-center gap-1 text-xs font-medium text-[#4A5565] hover:text-[#333CF5] transition"
+                        className="flex items-center gap-1 text-xs font-medium text-[#4A5565] hover:text-brand-main transition"
                       >
                         <HiOutlineReply className="text-base" /> Reply
                       </button>
@@ -264,17 +264,17 @@ const PatientAllComments = () => {
                     {/* Reply input */}
                     {replyingTo === c.id && (
                       <div className="mt-3 flex items-start gap-2">
-                        <div className="w-7 h-7 rounded-full bg-[#333CF5]/10 flex items-center justify-center text-[#333CF5] text-xs font-bold shrink-0">Y</div>
+                        <div className="w-7 h-7 rounded-full bg-brand-main/10 flex items-center justify-center text-brand-main text-xs font-bold shrink-0">Y</div>
                         <div className="flex-1 flex flex-col gap-2">
                           <textarea
                             rows={2} value={replyText} onChange={(e) => setReplyText(e.target.value)}
                             placeholder={`Reply to ${c.user}...`}
-                            className="w-full px-3 py-2 rounded-xl border border-gray-200 bg-[#F6F7F8] text-xs outline-none resize-none focus:border-[#333CF5]"
+                            className="w-full px-3 py-2 rounded-xl border border-gray-200 bg-[#F6F7F8] text-xs outline-none resize-none focus:border-brand-main"
                           />
                           <div className="flex justify-end gap-2">
                             <button onClick={() => setReplyingTo(null)} className="text-xs text-gray-400 hover:text-gray-600">Cancel</button>
                             <button onClick={() => handlePostReply(c.id)}
-                              className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#333CF5] text-white text-xs font-semibold hover:bg-[#2730d4]">
+                              className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-brand-main text-white text-xs font-semibold hover:bg-[#2730d4]">
                               <IoSendSharp /> Reply
                             </button>
                           </div>
@@ -295,14 +295,14 @@ const PatientAllComments = () => {
                           <Avatar img={r.avatar} initials={r.initials} size="w-7 h-7" />
                           <div className="flex-1">
                             <div className="flex items-center justify-between flex-wrap gap-1">
-                              <p className="text-xs font-semibold text-[#010218]">{r.user}</p>
+                              <p className="text-xs font-semibold text-black-main-text">{r.user}</p>
                               <p className="text-xs text-[#6A7282]">{r.time}</p>
                             </div>
                             <p className="text-xs text-[#364153] mt-0.5 leading-relaxed">{r.text}</p>
                             <button
                               onClick={() => handleLike(c.id, r.id)}
                               className={`flex items-center gap-1 text-xs mt-2 transition
-                                ${rLiked ? 'text-[#333CF5]' : 'text-gray-400 hover:text-[#333CF5]'}`}
+                                ${rLiked ? 'text-brand-main' : 'text-gray-400 hover:text-brand-main'}`}
                             >
                               <AiOutlineLike /> {r.likes}
                             </button>

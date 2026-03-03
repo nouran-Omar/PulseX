@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styles from './PatientHeader.module.css';
 import { HiOutlineBell, HiOutlineEnvelope, HiOutlineCheck, HiXMark } from 'react-icons/hi2';
 import { LuCalendarDays, LuClock } from 'react-icons/lu';
 import { MdOutlineReply, MdOutlineDelete, MdOutlineSend } from 'react-icons/md';
@@ -78,37 +77,41 @@ const ReplyModal = ({ target, onClose, onSend }) => {
   const [text, setText] = useState('');
   if (!target) return null;
   return (
-    <div className={styles.modalOverlay} onClick={onClose}>
-      <div className={styles.replyModal} onClick={e => e.stopPropagation()}>
-        <div className={styles.replyModalHeader}>
-          <span className={styles.replyModalTitle}>Reply to {target.name || target.title}</span>
-          <button className={styles.replyModalClose} onClick={onClose}><HiXMark /></button>
+    <div className="fixed inset-0 bg-[#010218]/45 flex items-center justify-center z-[1000] p-4 animate-[fadeIn_0.15s_ease]" onClick={onClose}>
+      <div className="bg-white rounded-[20px] w-full max-w-[440px] shadow-[0_25px_60px_rgba(0,0,0,0.18)] overflow-hidden animate-[slideUp_0.2s_ease]" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-br from-[#155DFC] to-[#4A7FFF]">
+          <span className="text-[14px] font-bold text-white font-['Roboto']">Reply to {target.name || target.title}</span>
+          <button className="bg-white/20 rounded-lg w-7 h-7 flex items-center justify-center text-white cursor-pointer hover:bg-white/35 transition-colors" onClick={onClose}><HiXMark /></button>
         </div>
+        
         {target.avatar && (
-          <div className={styles.replyModalMeta}>
-            <img src={target.avatar} alt="" className={styles.replyModalAvatar} />
+          <div className="flex items-center gap-[10px] px-5 pt-4">
+            <img src={target.avatar} alt="" className="w-[38px] h-[38px] rounded-full object-cover border-2 border-gray-200 shrink-0" />
             <div>
-              <div className={styles.replyModalName}>{target.name}</div>
-              <div className={styles.replyModalRole}>{target.role}</div>
+              <div className="text-[13px] font-bold text-[#010218] font-['Roboto']">{target.name}</div>
+              <div className="text-[11px] text-[#9ca3af] font-['Roboto']">{target.role}</div>
             </div>
           </div>
         )}
-        <div className={styles.replyModalOrig}>
-          <span className={styles.replyModalOrigLabel}>Original:</span>
-          <span className={styles.replyModalOrigText}>{target.text || target.desc}</span>
+
+        <div className="mx-5 mt-3 p-3 bg-[#f8fafc] border-l-[3px] border-[#155DFC] rounded-r-lg">
+          <span className="block text-[10px] font-bold text-[#9ca3af] uppercase mb-1 font-['Roboto']">Original:</span>
+          <span className="text-[12px] text-[#4b5563] leading-relaxed font-['Roboto']">{target.text || target.desc}</span>
         </div>
+
         <textarea
-          className={styles.replyTextarea}
+          className="block w-full mt-3 px-5 py-3 border-none border-t border-gray-100 resize-none text-[13px] font-['Roboto'] text-[#010218] outline-none placeholder:text-[#9ca3af]"
           placeholder="Write your reply..."
           value={text}
           onChange={e => setText(e.target.value)}
           rows={3}
           autoFocus
         />
-        <div className={styles.replyModalFooter}>
-          <button className={styles.cancelReplyBtn} onClick={onClose}>Cancel</button>
+
+        <div className="flex items-center justify-end gap-[10px] px-5 py-4 border-t border-gray-100">
+          <button className="bg-none border-[1.5px] border-gray-200 rounded-[20px] px-[18px] py-[7px] text-[12px] font-semibold text-[#6b7280] cursor-pointer hover:border-gray-400 font-['Roboto'] transition-colors" onClick={onClose}>Cancel</button>
           <button
-            className={styles.sendReplyBtn}
+            className="flex items-center gap-1.5 bg-[#333CF5] border-none rounded-[20px] px-5 py-[7px] text-[12px] font-bold text-white cursor-pointer shadow-[0_4px_12px_rgba(51,60,245,0.25)] hover:bg-[#2430e0] hover:-translate-y-px transition-all disabled:opacity-45 disabled:cursor-not-allowed font-['Roboto']"
             onClick={() => { if (text.trim()) { onSend(text); onClose(); } }}
             disabled={!text.trim()}
           >
@@ -124,113 +127,107 @@ const ReplyModal = ({ target, onClose, onSend }) => {
    PatientHeader Component
 ══════════════════════════════════════════════════════ */
 const PatientHeader = () => {
-  const [now, setNow]               = useState(new Date());
-  const [notifOpen, setNotifOpen]   = useState(false);
-  const [msgOpen, setMsgOpen]       = useState(false);
+  const [now, setNow] = useState(new Date());
+  const [notifOpen, setNotifOpen] = useState(false);
+  const [msgOpen, setMsgOpen] = useState(false);
   const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS);
-  const [messages, setMessages]     = useState(MOCK_MESSAGES);
-  const [replyTarget, setReplyTarget] = useState(null); // { name, text/desc, avatar?, role? }
+  const [messages, setMessages] = useState(MOCK_MESSAGES);
+  const [replyTarget, setReplyTarget] = useState(null);
 
   const notifRef = useRef(null);
-  const msgRef   = useRef(null);
+  const msgRef = useRef(null);
 
-  /* Live clock */
   useEffect(() => {
     const t = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(t);
   }, []);
 
-  /* Close panels on outside click */
   useEffect(() => {
     const handler = (e) => {
       if (notifRef.current && !notifRef.current.contains(e.target)) setNotifOpen(false);
-      if (msgRef.current   && !msgRef.current.contains(e.target))   setMsgOpen(false);
+      if (msgRef.current && !msgRef.current.contains(e.target)) setMsgOpen(false);
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  /* Counts */
   const unreadNotif = notifications.filter(n => n.unread).length;
-  const unreadMsg   = messages.filter(m => m.unread > 0).length;
+  const unreadMsg = messages.filter(m => m.unread > 0).length;
 
-  /* Actions — Notifications */
   const markOneRead = (id) => setNotifications(p => p.map(n => n.id === id ? { ...n, unread: false } : n));
   const deleteNotif = (id) => setNotifications(p => p.filter(n => n.id !== id));
-  const markAllRead = ()   => setNotifications(p => p.map(n => ({ ...n, unread: false })));
+  const markAllRead = () => setNotifications(p => p.map(n => ({ ...n, unread: false })));
+  const deleteMsg = (id) => setMessages(p => p.filter(m => m.id !== id));
 
-  /* Actions — Messages */
-  const deleteMsg   = (id) => setMessages(p => p.filter(m => m.id !== id));
-
-  /* Send reply (mock — logs to console, ready for API) */
   const handleSendReply = (text) => {
     console.log('[Reply sent]', { to: replyTarget?.name, message: text });
-    // TODO: replace with API call: api.post('/messages/reply', { to: replyTarget.id, text })
   };
 
   return (
     <>
-      <header className={styles.headerWrapper}>
-
+      <header className="flex items-center justify-between w-full h-full relative gap-3">
+        
         {/* ── Left: Date & Time ── */}
-        <div className={styles.leftSection}>
-          <div className={styles.dateChip}>
-            <LuCalendarDays className={styles.chipIcon} />
-            <span className={styles.chipText}>{formatDate(now)}</span>
+        <div className="flex items-center gap-[10px] shrink-0">
+          <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-[10px]  ">
+            <LuCalendarDays className="text-[15px] text-[#155dfc] shrink-0" />
+            <span className="text-[13px] font-bold text-[#010218] whitespace-nowrap font-['Roboto']">{formatDate(now)}</span>
           </div>
-          <div className={styles.timeChip}>
-            <LuClock className={`${styles.chipIcon} ${styles.timeIcon}`} />
-            <span className={styles.chipText}>{formatTime(now)}</span>
+          <div className="hidden min-[480px]:flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] bg-white ">
+            <LuClock className="text-[15px] text-[#00a63e] shrink-0" />
+            <span className="text-[13px] font-bold text-[#010218] whitespace-nowrap font-['Roboto']">{formatTime(now)}</span>
           </div>
         </div>
 
         {/* ── Right: Icons + Avatar ── */}
-        <div className={styles.rightSection}>
+        <div className="flex items-center gap-2 md:gap-3">
 
           {/* ── Messages Button ── */}
-          <div className={styles.notifWrapper} ref={msgRef}>
+          <div className="relative" ref={msgRef}>
             <button
-              className={`${styles.bellBtn} ${msgOpen ? styles.bellActive : ''}`}
+              className={`relative w-10 h-10 flex items-center justify-center rounded-full bg-white border-[1.5px] border-gray-200 cursor-pointer transition-all shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:bg-[#EEF3FF] hover:border-[#155DFC] group ${msgOpen ? 'bg-[#155DFC]! border-[#155DFC]! shadow-[0_4px_16px_rgba(21,93,252,0.3)]!' : ''}`}
               onClick={() => { setMsgOpen(p => !p); setNotifOpen(false); }}
             >
-              <HiOutlineEnvelope className={`${styles.bellIcon} ${msgOpen ? styles.bellIconActive : ''}`} />
-              {unreadMsg > 0 && <span className={styles.badge}>{unreadMsg}</span>}
+              <HiOutlineEnvelope className={`text-[18px] transition-colors group-hover:text-[#155DFC] ${msgOpen ? 'text-white!' : 'text-[#6b7280]'}`} />
+              {unreadMsg > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-[#00C950] text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white font-['Roboto']">
+                  {unreadMsg}
+                </span>
+              )}
             </button>
 
             {msgOpen && (
-              <div className={styles.msgPanel}>
-                <div className={styles.msgHeader}>
+              <div className="absolute top-[calc(100%+10px)] right-0 w-[290px] sm:w-[360px] bg-white rounded-[20px] border border-gray-200 shadow-[0_20px_50px_rgba(0,0,0,0.13)] overflow-hidden z-[300] animate-[fadeDown_0.18s_ease]">
+                <div className="flex items-center justify-between px-[18px] py-4 bg-gradient-to-br from-[#16a34a] to-[#22c55e]">
                   <div>
-                    <div className={styles.notifTitle}>Messages</div>
-                    <div className={styles.notifSub}>{unreadMsg} unread messages</div>
+                    <div className="text-[15px] font-bold text-white font-['Roboto']">Messages</div>
+                    <div className="text-[11px] text-white/75 mt-0.5 font-['Roboto']">{unreadMsg} unread messages</div>
                   </div>
-                  <button className={styles.notifClose} onClick={() => setMsgOpen(false)}>
-                    <HiXMark />
-                  </button>
+                  <button className="bg-white/20 rounded-lg w-7 h-7 flex items-center justify-center text-white cursor-pointer hover:bg-white/35 transition-colors" onClick={() => setMsgOpen(false)}><HiXMark /></button>
                 </div>
 
-                <div className={styles.notifList}>
+                <div className="max-h-[340px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-50">
                   {messages.map(msg => (
-                    <div key={msg.id} className={styles.msgItem}>
-                      <div className={styles.msgAvatarWrap}>
-                        <img src={msg.avatar} alt={msg.name} className={styles.msgAvatar} />
-                        {msg.unread > 0 && <span className={styles.msgOnlineDot} />}
+                    <div key={msg.id} className="flex items-start gap-3 px-4 py-3 border-bottom border-gray-100 transition-colors hover:bg-gray-50">
+                      <div className="relative shrink-0">
+                        <img src={msg.avatar} alt={msg.name} className="w-[42px] h-[42px] rounded-full object-cover border-2 border-gray-200" />
+                        {msg.unread > 0 && <span className="absolute bottom-0.5 right-0.5 w-2.5 h-2.5 bg-[#22c55e] border-2 border-white rounded-full" />}
                       </div>
-                      <div className={styles.notifContent}>
-                        <div className={styles.msgTopRow}>
-                          <span className={styles.msgName}>{msg.name}</span>
-                          <div className={styles.msgMeta}>
-                            <span className={styles.notifItemTime}>{msg.time}</span>
-                            {msg.unread > 0 && <span className={styles.msgUnreadBadge}>{msg.unread}</span>}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-0.5">
+                          <span className="text-[13px] font-bold text-[#010218] font-['Roboto'] truncate">{msg.name}</span>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[10px] text-[#9ca3af] font-['Roboto']">{msg.time}</span>
+                            {msg.unread > 0 && <span className="min-w-[18px] h-[18px] px-1 bg-[#22c55e] text-white text-[10px] font-bold rounded-full flex items-center justify-center font-['Roboto']">{msg.unread}</span>}
                           </div>
                         </div>
-                        <span className={styles.msgRole}>{msg.role}</span>
-                        <p className={styles.notifItemDesc}>{msg.text}</p>
-                        <div className={styles.msgActions}>
-                          <button className={styles.replyBtn} onClick={() => { setReplyTarget(msg); setMsgOpen(false); }}>
+                        <span className="block text-[11px] text-[#9ca3af] mb-1 font-['Roboto']">{msg.role}</span>
+                        <p className="text-[12px] text-[#6b7280] leading-[1.4] font-['Roboto'] line-clamp-2">{msg.text}</p>
+                        <div className="flex gap-2.5 mt-1.5">
+                          <button className="flex items-center gap-1 text-[11px] font-semibold text-[#22c55e] cursor-pointer hover:underline font-['Roboto']" onClick={() => { setReplyTarget(msg); setMsgOpen(false); }}>
                             <MdOutlineReply /> Reply
                           </button>
-                          <button className={`${styles.replyBtn} ${styles.deleteBtn}`} onClick={() => deleteMsg(msg.id)}>
+                          <button className="flex items-center gap-1 text-[11px] font-semibold text-[#ef4444] cursor-pointer hover:underline font-['Roboto']" onClick={() => deleteMsg(msg.id)}>
                             <MdOutlineDelete /> Delete
                           </button>
                         </div>
@@ -243,63 +240,62 @@ const PatientHeader = () => {
           </div>
 
           {/* ── Notifications Button ── */}
-          <div className={styles.notifWrapper} ref={notifRef}>
+          <div className="relative" ref={notifRef}>
             <button
-              className={`${styles.bellBtn} ${notifOpen ? styles.bellActive : ''}`}
+              className={`relative w-10 h-10 flex items-center justify-center rounded-full bg-white border-[1.5px] border-gray-200 cursor-pointer transition-all shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:bg-[#EEF3FF] hover: group ${notifOpen ? 'shadow-[0_4px_16px_rgba(21,93,252,0.3)]!' : ''}`}
               onClick={() => { setNotifOpen(p => !p); setMsgOpen(false); }}
             >
-              <HiOutlineBell className={`${styles.bellIcon} ${notifOpen ? styles.bellIconActive : ''}`} />
-              {unreadNotif > 0 && <span className={styles.badge}>{unreadNotif}</span>}
+              <HiOutlineBell className={`text-[18px] transition-colors group-hover:text-[#155DFC] ${notifOpen ? 'text-[#6b7280]!' : 'text-[#6b7280]'}`} />
+              {unreadNotif > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-[#FB2C36] text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white font-['Roboto']">
+                  {unreadNotif}
+                </span>
+              )}
             </button>
 
             {notifOpen && (
-              <div className={styles.notifPanel}>
-                <div className={styles.notifHeader}>
+              <div className="absolute top-[calc(100%+10px)] right-0 w-[290px] sm:w-[360px] bg-white rounded-[20px] border border-gray-200 shadow-[0_20px_50px_rgba(0,0,0,0.13)] overflow-hidden z-[300] animate-[fadeDown_0.18s_ease]">
+                <div className="flex items-center justify-between px-[18px] py-4 bg-gradient-to-br from-[#155dfc] to-[#4a7fff]">
                   <div>
-                    <div className={styles.notifTitle}>Notifications</div>
-                    <div className={styles.notifSub}>{unreadNotif} unread notifications</div>
+                    <div className="text-[15px] font-bold text-white font-['Roboto']">Notifications</div>
+                    <div className="text-[11px] text-white/75 mt-0.5 font-['Roboto']">{unreadNotif} unread notifications</div>
                   </div>
-                  <div className={styles.notifHeaderRight}>
-                    <button className={styles.markAllBtn} onClick={markAllRead}>
-                      <HiOutlineCheck /> Mark all as read
+                  <div className="flex items-center gap-2">
+                    <button className="bg-transparent border-none text-white/90 text-[11px] font-semibold cursor-pointer underline font-['Roboto']" onClick={markAllRead}>
+                      <HiOutlineCheck className="inline mr-1" /> Mark all
                     </button>
-                    <button className={styles.notifClose} onClick={() => setNotifOpen(false)}>
-                      <HiXMark />
-                    </button>
+                    <button className="bg-white/20 rounded-lg w-7 h-7 flex items-center justify-center text-white cursor-pointer hover:bg-white/35 transition-colors" onClick={() => setNotifOpen(false)}><HiXMark /></button>
                   </div>
                 </div>
 
-                <div className={styles.notifList}>
+                <div className="max-h-[340px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-50">
                   {notifications.map(n => (
-                    <div key={n.id} className={`${styles.notifItem} ${n.unread ? styles.notifUnread : ''}`}>
-                      <div className={styles.notifDot} style={{ background: n.bg }}>
-                        <span style={{ fontSize: 15 }}>{n.icon}</span>
+                    <div key={n.id} className={`flex items-start gap-3 px-4 py-3 border-b border-gray-50 last:border-none transition-colors hover:bg-gray-50 ${n.unread ? 'bg-[#FAFCFF]' : ''}`}>
+                      <div className="w-[38px] h-[38px] rounded-full flex items-center justify-center shrink-0 shadow-sm" style={{ background: n.bg }}>
+                        <span className="text-[15px]">{n.icon}</span>
                       </div>
-                      <div className={styles.notifContent}>
-                        <div className={styles.notifItemTitle}>{n.title}</div>
-                        <div className={styles.notifItemDesc}>{n.desc}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[13px] font-bold text-[#010218] mb-0.5 font-['Roboto']">{n.title}</div>
+                        <div className="text-[12px] text-[#6b7280] leading-[1.4] font-['Roboto']">{n.desc}</div>
                         {n.tag && (
-                          <span className={styles.notifTag} style={{ color: n.tagColor, borderColor: n.tagColor }}>
-                            ⚠️ {n.tag}
+                          <span className="inline-block mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full border-[1.5px] bg-[#fef2f2] font-['Roboto']" style={{ color: n.tagColor, borderColor: n.tagColor }}>
+                             ⚠️ {n.tag}
                           </span>
                         )}
-                        <div className={styles.notifFooter}>
-                          <span className={styles.notifItemTime}>{n.time}</span>
-                          <div className={styles.notifActions}>
-                            {/* Reply button on notification */}
+                        <div className="flex items-center justify-between mt-2">
+                          <span className="text-[10px] text-[#9ca3af] font-['Roboto']">{n.time}</span>
+                          <div className="flex gap-2">
                             {(n.type === 'message' || n.type === 'alert') && (
-                              <button className={styles.replyNotifBtn} onClick={() => { setReplyTarget({ name: n.title, desc: n.desc, avatar: null }); setNotifOpen(false); }}>
+                              <button className="text-[#155dfc] text-[11px] font-semibold cursor-pointer hover:underline font-['Roboto'] flex items-center gap-0.5" onClick={() => { setReplyTarget({ name: n.title, desc: n.desc, avatar: null }); setNotifOpen(false); }}>
                                 <MdOutlineReply /> Reply
                               </button>
                             )}
-                            {n.unread && (
-                              <button className={styles.markReadBtn} onClick={() => markOneRead(n.id)}>Mark read</button>
-                            )}
-                            <button className={styles.deleteNotifBtn} onClick={() => deleteNotif(n.id)}>Delete</button>
+                            {n.unread && <button className="text-[#155dfc] text-[11px] font-semibold cursor-pointer hover:underline font-['Roboto']" onClick={() => markOneRead(n.id)}>Mark read</button>}
+                            <button className="text-[#ef4444] text-[11px] font-semibold cursor-pointer hover:underline font-['Roboto']" onClick={() => deleteNotif(n.id)}>Delete</button>
                           </div>
                         </div>
                       </div>
-                      {n.unread && <span className={styles.unreadDot} style={{ background: '#3B82F6' }} />}
+                      {n.unread && <span className="w-2 h-2 rounded-full shrink-0 mt-1.5 bg-[#3B82F6]" />}
                     </div>
                   ))}
                 </div>
@@ -308,26 +304,35 @@ const PatientHeader = () => {
           </div>
 
           {/* ── Avatar ── */}
-          <div className={styles.avatarWrapper}>
-            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Avatar" className={styles.avatar} />
-            <div className={styles.avatarInfo}>
-              <span className={styles.avatarName}>Mohamed Salem</span>
-              <span className={styles.avatarRole}>Patient</span>
+          <div className="flex items-center gap-[10px] pl-3.5  cursor-pointer group">
+            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Avatar" className="w-10 h-10 rounded-full object-cover border-2 border-[#e0eaff]  " />
+            <div className="hidden md:flex flex-col">
+              <span className="text-[13px] font-bold text-[#010218] whitespace-nowrap font-inter ">Mohamed Salem</span>
+              <span className="text-[10px]  text-[#6b7280] uppercase tracking-wider font-inter">Patient </span>
             </div>
           </div>
 
         </div>
       </header>
 
-      {/* ── Reply Modal (rendered outside header to avoid z-index issues) ── */}
-      <ReplyModal
-        target={replyTarget}
-        onClose={() => setReplyTarget(null)}
-        onSend={handleSendReply}
-      />
+      <ReplyModal target={replyTarget} onClose={() => setReplyTarget(null)} onSend={handleSendReply} />
+
+      <style>{`
+        @keyframes fadeDown {
+          from { opacity: 0; transform: translateY(-8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </>
   );
 };
 
 export default PatientHeader;
-

@@ -67,33 +67,33 @@ const PatientBooking = () => {
                 className="w-16 h-16 rounded-full object-cover border-2 border-gray-100"
                 onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${doctor.name}&background=E8EAF6&color=333CF5`; }}
               />
-              <span className="text-[10px] text-[#010218] mt-1">{doctor.title}</span>
-              <h3 className="text-sm font-bold text-[#010218]">{doctor.name}</h3>
+              <span className="text-[10px] text-black-main-text mt-1">{doctor.title}</span>
+              <h3 className="text-sm font-bold text-black-main-text">{doctor.name}</h3>
               <div className="flex items-center gap-1">
                 <HiStar className="text-yellow-400 text-xs" />
-                <span className="text-xs font-semibold text-[#010218]">{doctor.rate}</span>
+                <span className="text-xs font-semibold text-black-main-text">{doctor.rate}</span>
                 <span className="text-xs text-[#6B7280]">({doctor.reviews} reviews)</span>
               </div>
-              <p className="text-base font-bold text-[#010218] mt-1">${doctor.price}<span className="text-xs text-[#757575]font-normal"> / session</span></p>
+              <p className="text-base font-bold text-black-main-text mt-1">${doctor.price}<span className="text-xs text-[#757575]font-normal"> / session</span></p>
             </div>
 
             {/* Stepper */}
             <div className="flex flex-col gap-0 w-full mt-2">
               {/* Step 1 - Date */}
               <div className="flex items-center gap-3">
-                <div className="w-7 h-7 rounded-full bg-[#333CF5] flex items-center justify-center shrink-0">
+                <div className="w-7 h-7 rounded-full bg-brand-main flex items-center justify-center shrink-0">
                   <HiOutlineCalendar className="text-white text-xs" />
                 </div>
-                <span className="text-xs font-semibold text-[#333CF5]">{selectedDate} Oct, 2025</span>
+                <span className="text-xs font-semibold text-brand-main">{selectedDate} Oct, 2025</span>
               </div>
               <div className="w-px h-8 bg-gray-200 ml-3.5"></div>
 
               {/* Step 2 - Time */}
               <div className="flex items-center gap-3 ">
-                <div className={`w-7 h-7 rounded-full border border-[#BDC6C6]  flex items-center justify-center shrink-0 ${selectedTime ? 'bg-[#333CF5]' : 'bg-[#FFFFFF]'}`}>
+                <div className={`w-7 h-7 rounded-full border border-[#BDC6C6]  flex items-center justify-center shrink-0 ${selectedTime ? 'bg-brand-main' : 'bg-[#FFFFFF]'}`}>
                   <HiOutlineClock className={`text-xs ${selectedTime ? 'text-white' : 'text-[#BDC6C6]'}`} />
                 </div>
-                <span className={`text-xs font-semibold ${selectedTime ? 'text-[#333CF5]' : 'text-[#BDC6C6]'}`}>{selectedTime || 'Time'}</span>
+                <span className={`text-xs font-semibold ${selectedTime ? 'text-brand-main' : 'text-[#BDC6C6]'}`}>{selectedTime || 'Time'}</span>
               </div>
               <div className="w-px h-6 bg-gray-200 ml-3.5"></div>
 
@@ -115,7 +115,7 @@ const PatientBooking = () => {
 
           {/* ── RIGHT - Calendar + Time ── */}
           <div className="flex-1 p-5 sm:p-7">
-            <h2 className="text-2xl font-bold text-[#010218] mb-15">Select date &amp; time</h2>
+            <h2 className="text-2xl font-bold text-black-main-text mb-15">Select date &amp; time</h2>
 
             <div className="flex flex-col lg:flex-row gap-6">
 
@@ -126,8 +126,8 @@ const PatientBooking = () => {
                   <button className="w-7 h-7 rounded-full bg-[#3C46F614] flex items-center justify-center hover:bg-gray-200 transition">
                     <HiChevronLeft className="text-[#BDC6C6] text-sm" />
                   </button>
-                  <span className="text-sm font-semibold text-[#010218]">October 2025</span>
-                  <button className="w-7 h-7 rounded-full bg-[#333CF5] flex items-center justify-center hover:bg-[#2730d4] transition">
+                  <span className="text-sm font-semibold text-black-main-text">October 2025</span>
+                  <button className="w-7 h-7 rounded-full bg-brand-main flex items-center justify-center hover:bg-[#2730d4] transition">
                     <HiChevronRight className="text-white text-sm" />
                   </button>
                 </div>
@@ -155,11 +155,11 @@ const PatientBooking = () => {
                         disabled={!isAvail}
                         className={`mx-auto w-8 h-8 rounded-full  text-xs font-medium flex items-center justify-center transition
                           ${isSelected
-                            ? 'bg-[#333CF5] text-white shadow'
+                            ? 'bg-brand-main text-white shadow'
                             : isToday && !isSelected
-                            ? 'bg-[#333CF514] text-[#333CF5] font-bold'
+                            ? 'bg-[#333CF514] text-brand-main font-bold'
                             : isAvail
-                            ? 'bg-[#333CF514] hover:bg-[#333CF514] text-[#010218]'
+                            ? 'bg-[#333CF514] hover:bg-[#333CF514] text-black-main-text'
                             : 'text-gray-300 cursor-not-allowed'}`}
                       >
                         {day}
@@ -175,7 +175,7 @@ const PatientBooking = () => {
 
               {/* Time Slots */}
               <div className="lg:w-40">
-                <p className="text-xs font-semibold text-[#010218] mb-3">
+                <p className="text-xs font-semibold text-black-main-text mb-3">
                   {dayOfWeek}, {selectedDate}. October
                 </p>
                 <div className="flex flex-col gap-2">
@@ -185,12 +185,12 @@ const PatientBooking = () => {
                       onClick={() => setSelectedTime(t)}
                       className={`flex items-center gap-2 border border-[#333CF54D] rounded-full px-3 py-2.5 text-sm transition
                         ${selectedTime === t
-                          ? 'border-[#333CF5] bg-[#EEF0FF] text-[#333CF5] font-semibold'
-                          : 'border-[#333CF54D] text-[#0102188e] hover:border-[#333CF5] hover:text-[#333CF5]'}`}
+                          ? 'border-brand-main bg-[#EEF0FF] text-brand-main font-semibold'
+                          : 'border-[#333CF54D] text-[#0102188e] hover:border-brand-main hover:text-brand-main'}`}
                     >
                       <div className={`w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center shrink-0
-                        ${selectedTime === t ? 'border-[#333CF5]' : 'border-gray-300'}`}>
-                        {selectedTime === t && <div className="w-1.5 h-1.5 rounded-full bg-[#333CF5]" />}
+                        ${selectedTime === t ? 'border-brand-main' : 'border-gray-300'}`}>
+                        {selectedTime === t && <div className="w-1.5 h-1.5 rounded-full bg-brand-main" />}
                       </div>
                       {t}
                     </button>
@@ -205,7 +205,7 @@ const PatientBooking = () => {
       {/* ── Confirm Button ── */}
       <button
         onClick={handleConfirm}
-        className="bg-[#333CF5] text-white font-semibold text-sm px-12 py-3 rounded-full hover:bg-[#2730d4] transition shadow-md"
+        className="bg-brand-main text-white font-semibold text-sm px-12 py-3 rounded-full hover:bg-[#2730d4] transition shadow-md"
       >
         Confirm Appointment
       </button>

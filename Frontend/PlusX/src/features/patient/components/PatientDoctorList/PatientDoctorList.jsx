@@ -48,7 +48,7 @@ const DoctorCard = ({ doctor }) => {
         className="w-20 h-20 rounded-full object-cover border-4 border-white shadow"
         onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${doctor.name}&background=E8EAF6&color=333CF5`; }}
       />
-      <h3 className="text-sm font-bold text-[#010218] mt-1">{doctor.name}</h3>
+      <h3 className="text-sm font-bold text-black-main-text mt-1">{doctor.name}</h3>
       <div className="flex items-center gap-1 text-xs text-[#757575]">
         <HiOutlineLocationMarker className="text-[#757575]" /> {doctor.loc}
       </div>
@@ -57,12 +57,12 @@ const DoctorCard = ({ doctor }) => {
         <span className="text-xs text-[#757575]">({doctor.reviews} reviews)</span>
       </div>
       <p className="text-sm text-gray-600 mt-1">
-        <span className="text-lg font-bold text-[#010218]">${doctor.price}</span>
+        <span className="text-lg font-bold text-black-main-text">${doctor.price}</span>
         <span className="text-[#757575]"> / session</span>
       </p>
       <button
         onClick={() => navigate(`/patient/doctor-profile/${doctor.id}`)}
-        className="w-full mt-2 py-2.5 rounded-xl bg-[#333CF5] text-white text-sm font-semibold hover:bg-[#2730d4] transition"
+        className="w-full mt-2 py-2.5 rounded-xl bg-brand-main text-white text-sm font-semibold hover:bg-[#2730d4] transition"
       >
         Book Now
       </button>
@@ -99,13 +99,13 @@ const PatientDoctorList = () => {
   const pageNums = Array.from({ length: totalPages }, (_, i) => i + 1).slice(0, 4);
 
   return (
-    <div className="min-h-screen sm:p-6 lg:p-8">
+    <div className="min-h-screen sm:p-5 lg:p-5">
 
       {/* ── Header ── */}
       <div className="mb-6">
         <div className="flex items-center gap-2 mb-1">
-          <FaUserDoctor className="text-xl text-[#010218]" />
-          <h1 className="text-xl font-bold text-[#010218]">Doctor List</h1>
+          <FaUserDoctor className="text-xl text-black-main-text" />
+          <h1 className="text-xl font-bold text-black-main-text">Doctor List</h1>
         </div>
         <p className="text-sm text-[#757575]">Find and connect with heart specialists easily.</p>
       </div>
@@ -120,7 +120,7 @@ const PatientDoctorList = () => {
           </div>
           <div>
             <p className="text-xs text-[#ACACAC]">Total Doctors</p>
-            <p className="text-2xl font-bold text-[#333CF5]">{ALL_DOCTORS.length}</p>
+            <p className="text-2xl font-bold text-brand-main">{ALL_DOCTORS.length}</p>
           </div>
         </div>
 
@@ -150,54 +150,54 @@ const PatientDoctorList = () => {
         </div>
       </div>
 
-      {/* ── Filter & Search Bar ── */}
-      <div className="flex flex-wrap items-center gap-3 mb-6 bg-[#F1F2F5] p-5 rounded-lg">
-        {/* Rating */}
-        <div className="flex items-center gap-2 text-sm text-[#010218]">
-          <span className="font-medium">Rating:</span>
-          <select
-            value={rating} onChange={(e) => { setRating(e.target.value); setPage(1); }}
-            className="border text-[#757575B2] border-gray-200 rounded-lg px-3 py-1.5 text-sm bg-white outline-none focus:border-[#333CF5] cursor-pointer"
-          >
-            <option value="all">Highest Rated</option>
-            <option value="5">5 Stars</option>
-            <option value="4">4+ Stars</option>
-            <option value="3">3+ Stars</option>
-          </select>
-        </div>
+{/* ── Filter & Search Bar ── */}
+<div className="flex flex-wrap items-center gap-2 mb-6 bg-[#F1F2F5] p-3 lg:p-5 rounded-lg">
+  {/* Rating */}
+  <div className="flex items-center gap-1.5 text-xs lg:text-sm text-black-main-text">
+    <span className="font-medium whitespace-nowrap">Rating:</span>
+    <select
+      value={rating} onChange={(e) => { setRating(e.target.value); setPage(1); }}
+      className="border text-[#757575B2] border-gray-200 rounded-lg px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm bg-white outline-none focus:border-brand-main cursor-pointer"
+    >
+      <option value="all">Highest Rated</option>
+      <option value="5">5 Stars</option>
+      <option value="4">4+ Stars</option>
+      <option value="3">3+ Stars</option>
+    </select>
+  </div>
 
-        {/* Location */}
-        <div className="flex items-center gap-2 text-sm text-[#010218]">
-          <span className="font-medium">Location:</span>
-          <select
-            value={location} onChange={(e) => { setLocation(e.target.value); setPage(1); }}
-            className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm bg-white outline-none focus:border-[#333CF5] cursor-pointer"
-          >
-            {LOCATIONS.map(l => <option key={l}>{l}</option>)}
-          </select>
-        </div>
+  {/* Location */}
+  <div className="flex items-center gap-1.5 text-xs lg:text-sm text-black-main-text">
+    <span className="font-medium whitespace-nowrap">Location:</span>
+    <select
+      value={location} onChange={(e) => { setLocation(e.target.value); setPage(1); }}
+      className="border border-gray-200 rounded-lg px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm bg-white outline-none focus:border-brand-main cursor-pointer"
+    >
+      {LOCATIONS.map(l => <option key={l}>{l}</option>)}
+    </select>
+  </div>
 
-        {/* Price Range */}
-        <div className="flex items-center gap-2 text-sm text-[#010218]">
-          <span className="font-medium">Price Range:</span>
-          <select
-            value={priceRange} onChange={(e) => { setPriceRange(Number(e.target.value)); setPage(1); }}
-            className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm bg-white outline-none focus:border-[#333CF5] cursor-pointer"
-          >
-            {PRICE_RANGES.map((r, i) => <option key={r.label} value={i}>{r.label}</option>)}
-          </select>
-        </div>
+  {/* Price Range */}
+  <div className="flex items-center gap-1.5 text-xs lg:text-sm text-black-main-text">
+    <span className="font-medium whitespace-nowrap">Price Range:</span>
+    <select
+      value={priceRange} onChange={(e) => { setPriceRange(Number(e.target.value)); setPage(1); }}
+      className="border border-gray-200 rounded-lg px-2 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm bg-white outline-none focus:border-brand-main cursor-pointer"
+    >
+      {PRICE_RANGES.map((r, i) => <option key={r.label} value={i}>{r.label}</option>)}
+    </select>
+  </div>
 
-        {/* Search */}
-        <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 py-1.5 bg-white ml-auto w-full sm:w-auto">
-          <HiSearch className="text-gray-400 text-base shrink-0" />
-          <input
-            type="text" value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-            placeholder="Search by name"
-            className="text-sm outline-none bg-transparent text-[#010218] placeholder:text-gray-400 w-full sm:w-40"
-          />
-        </div>
-      </div>
+  {/* Search */}
+  <div className="flex items-center gap-1.5 border border-gray-200 rounded-xl px-2 py-1 lg:px-3 lg:py-1.5 bg-white ml-auto w-full sm:w-auto">
+    <HiSearch className="text-gray-400 text-sm lg:text-base shrink-0" />
+    <input
+      type="text" value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+      placeholder="Search by name"
+      className="text-xs lg:text-sm outline-none bg-transparent text-black-main-text placeholder:text-gray-400 w-full sm:w-32 lg:w-40"
+    />
+  </div>
+</div>
 
       {/* ── Doctor Grid ── */}
       {visible.length > 0 ? (
@@ -216,7 +216,7 @@ const PatientDoctorList = () => {
         <div className="flex items-center justify-center gap-2">
           <button
             onClick={() => goTo(safePage - 1)} disabled={safePage === 1}
-            className="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-500 hover:border-[#333CF5] hover:text-[#333CF5] disabled:opacity-40 transition"
+            className="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-500 hover:border-brand-main hover:text-brand-main disabled:opacity-40 transition"
           >
             <HiChevronLeft />
           </button>
@@ -226,8 +226,8 @@ const PatientDoctorList = () => {
               key={n} onClick={() => goTo(n)}
               className={`w-8 h-8 rounded-full text-sm font-semibold transition
                 ${safePage === n
-                  ? 'bg-[#333CF5] text-white shadow'
-                  : 'bg-white border border-gray-200 text-gray-600 hover:border-[#333CF5] hover:text-[#333CF5]'}`}
+                  ? 'bg-brand-main text-white shadow'
+                  : 'bg-white border border-gray-200 text-gray-600 hover:border-brand-main hover:text-brand-main'}`}
             >
               {n}
             </button>
@@ -235,7 +235,7 @@ const PatientDoctorList = () => {
 
           <button
             onClick={() => goTo(safePage + 1)} disabled={safePage === totalPages}
-            className="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-500 hover:border-[#333CF5] hover:text-[#333CF5] disabled:opacity-40 transition"
+            className="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-500 hover:border-brand-main hover:text-brand-main disabled:opacity-40 transition"
           >
             <HiChevronRight />
           </button>

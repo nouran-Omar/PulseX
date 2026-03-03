@@ -24,7 +24,6 @@
  *   <Toast {...toast} onClose={() => setToast(t => ({ ...t, visible: false }))} />
  */
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './Toast.module.css';
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
 
 export default function Toast({
@@ -57,21 +56,24 @@ export default function Toast({
   if (!shouldRender) return null;
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.toast}>
-        
-        {/* الشعاع الدائري */}
-        <div className={styles.glowBeam} />
+    <div className="fixed top-[130px] right-[22px] z-[99999] pointer-events-none flex justify-end">
+      <div className="relative w-[403px] min-h-[82px] bg-[#F3F5F6] rounded-[8px] px-4 py-3 flex items-center gap-4 overflow-hidden pointer-events-auto shadow-[0px_8px_10px_rgba(0,0,0,0.20),0px_6px_30px_rgba(0,0,0,0.12),0px_16px_24px_rgba(0,0,0,0.14)] animate-[slideIn_0.4s_cubic-bezier(0.34,1.56,0.64,1)_both]">
 
-        {/* الأيقونة */}
-        <div className={styles.iconCircle}>
-          <IoCheckmarkCircleSharp className={styles.icon} />
+        {/* Radial glow */}
+        <div
+          className="absolute inset-0 z-[1]"
+          style={{ background: 'radial-gradient(circle at 30px 50%, rgba(0,237,81,0.15) 0%, rgba(0,237,123,0.05) 40%, transparent 70%)' }}
+        />
+
+        {/* Icon circle */}
+        <div className="relative z-[2] w-[35px] h-[35px] rounded-full bg-[#303746] flex items-center justify-center shrink-0">
+          <IoCheckmarkCircleSharp className="text-[24px] text-[#00DF80]" />
         </div>
 
-        {/* النصوص */}
-        <div className={styles.textBlock}>
-          <h4 className={styles.title}>{title}</h4>
-          <p className={styles.sub}>{message}</p>
+        {/* Text */}
+        <div className="flex-1 z-[2]">
+          <h4 className="text-[16px] font-semibold text-black-main-text m-0">{title}</h4>
+          <p className="text-[13px] text-gray-500 mt-0.5 m-0">{message}</p>
         </div>
 
       </div>

@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './StoriesManagement.module.css';
 import { FaTrash } from "react-icons/fa";
 import {
   HiOutlineMagnifyingGlass,
@@ -11,8 +10,7 @@ import {
   HiChevronRight,
   HiOutlineEyeSlash,
 } from 'react-icons/hi2';
-import { FaEyeSlash } from "react-icons/fa";
-import { FaEye } from "react-icons/fa";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { MdOutlineAutoStories } from 'react-icons/md';
 import { FaBookOpen } from 'react-icons/fa6';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
@@ -119,230 +117,163 @@ export default function StoriesManagement() {
   }), [stories]);
 
   return (
-    <div className={styles.container}>
+    <section className="flex flex-col gap-6 p-5 " aria-label="Stories Management">
 
-      {/* Toast */}
-      <Toast
-        visible={toast.visible}
-        title={toast.title}
-        message={toast.message}
-        type="success"
-        onClose={() => setToast(t => ({ ...t, visible: false }))}
-      />
+      <Toast visible={toast.visible} title={toast.title} message={toast.message} type="success" onClose={() => setToast(t => ({ ...t, visible: false }))} />
+      <ConfirmModal isOpen={deleteModal.open} title="Delete Story?" desc="Are you sure you want to delete this story? This action is permanent." onConfirm={handleDeleteConfirm} onCancel={() => setDeleteModal({ open: false, story: null })} />
 
-      {/* Delete Confirm Modal */}
-      <ConfirmModal
-        isOpen={deleteModal.open}
-        title="Delete Story?"
-        desc="Are you sure you want to delete this story? This action is permanent and cannot be undone."
-        onConfirm={handleDeleteConfirm}
-        onCancel={() => setDeleteModal({ open: false, story: null })}
-      />
-
-      {/* ── Page Header ──────────────────────────────── */}
-      <div className={styles.pageHeader}>
-        <div>
-          <div className={styles.titleRow}>
-             <HiOutlinePencilSquare className={styles.editIcon} />
-            <h1 className={styles.pageTitle}>Patient Stories</h1>
-           </div>
-          <p className={styles.pageSubtitle}>Read and share inspiring patient journeys.</p>
+      {/* ── Header ── */}
+      <div className="flex flex-col gap-1">
+        <div className="flex items-center gap-2 mb-2">
+          <HiOutlinePencilSquare className="text-[22px] text-black-main-text " aria-hidden="true" />
+          <h1 className="text-[18px] sm:text-[20px] font-bold text-black-main-text leading-none">Patient Stories</h1>
         </div>
+        <p className="text-[12px] text-[#757575] ">Read and share inspiring patient journeys.</p>
       </div>
 
-      {/* ── Stat Cards ───────────────────────────────── */}
-      <div className={styles.statsRow}>
+      {/* ── Stat Cards ── */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <StatCard label="Total Stories"     value={liveStats.total}     icon={<FaBookOpen />} iconBg="#EEF2FF" iconColor="#333CF5" />
-        <StatCard label="Published Stories" value={liveStats.published} icon={<FaEye/>} iconBg="#ECFDF5" iconColor="#16A34A" />
-        <StatCard label="Hidden Stories"    value={liveStats.hidden}    icon={ <FaEyeSlash/>} iconBg="#FFF7ED" iconColor="#757575" />
-        <StatCard label="Deleted Stories"   value={liveStats.deleted}   icon={<FaTrash />}       iconBg="#FEF2F2" iconColor="#EF4444" />
+        <StatCard label="Published Stories" value={liveStats.published} icon={<FaEye />}       iconBg="#ECFDF5" iconColor="#16A34A" />
+        <StatCard label="Hidden Stories"    value={liveStats.hidden}    icon={<FaEyeSlash />}  iconBg="#FFF7ED" iconColor="#757575" />
+        <StatCard label="Deleted Stories"   value={liveStats.deleted}   icon={<FaTrash />}     iconBg="#FEF2F2" iconColor="#EF4444" />
       </div>
 
-      {/* ── Filters Bar ──────────────────────────────── */}
-      <div className={styles.filtersBar}>
-        <div className={styles.filterGroup}>
-          <label className={styles.filterLabel}>Tags:</label>
-          <select className={styles.select} value={tag} onChange={e => { setTag(e.target.value); setPage(1); }}>
-            {TAG_OPTIONS.map(t => <option key={t}>{t}</option>)}
-          </select>
-        </div>
-
-        <div className={styles.filterGroup}>
-          <label className={styles.filterLabel}>Status:</label>
-          <select className={styles.select} value={status} onChange={e => { setStatus(e.target.value); setPage(1); }}>
-            {STATUS_OPTIONS.map(s => <option key={s}>{s}</option>)}
-          </select>
-        </div>
-
-        <div className={styles.filterGroup}>
-          <label className={styles.filterLabel}>Sort By:</label>
-          <select className={styles.select} value={sort} onChange={e => setSort(e.target.value)}>
-            {SORT_OPTIONS.map(s => <option key={s}>{s}</option>)}
-          </select>
-        </div>
-
-        <div className={styles.searchBox}>
-          <HiOutlineMagnifyingGlass className={styles.searchIcon} />
+      {/* ── Filters Bar ── */}
+      <div className="flex flex-col rounded-xl bg-[#F1F2F5] p-3 sm:flex-row flex-wrap gap-3 items-start sm:items-center">
+        {[
+          { label: 'Tags:', val: tag, setter: setTag, opts: TAG_OPTIONS },
+          { label: 'Status:', val: status, setter: setStatus, opts: STATUS_OPTIONS },
+          { label: 'Sort By:', val: sort, setter: setSort, opts: SORT_OPTIONS },
+        ].map(({ label, val, setter, opts }) => (
+          <div key={label} className="flex items-center gap-2">
+            <label className="text-[12px] font-semibold text-gray-500 whitespace-nowrap">{label}</label>
+            <select
+              value={val}
+              onChange={e => { setter(e.target.value); setPage(1); }}
+              className="text-[12px] border border-gray-200 rounded-[8px] px-2.5 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-[#155dfc]/30 cursor-pointer"
+            >
+              {opts.map(o => <option key={o}>{o}</option>)}
+            </select>
+          </div>
+        ))}
+        <div className="relative sm:ml-auto">
+          <HiOutlineMagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[14px]" aria-hidden="true" />
           <input
-            type="text"
-            placeholder="Search by name"
-            className={styles.searchInput}
+            type="search"
+            placeholder="Search stories…"
+            aria-label="Search stories"
             value={search}
             onChange={e => { setSearch(e.target.value); setPage(1); }}
+            className="pl-9 pr-4 py-2 text-[12px] border border-gray-200 rounded-[8px] bg-white focus:outline-none focus:ring-2 focus:ring-[#155dfc]/30 w-full sm:w-[200px]"
           />
         </div>
       </div>
 
-      {/* ── Table ────────────────────────────────────── */}
-      <div className={styles.tableCard}>
+      {/* ── Table ── */}
+      <div className="overflow-x-auto  border border-gray-200/70">
         {paginated.length === 0 ? (
-          <EmptyState
-            icon={<FaBookOpen />}
-            title="No Stories Yet"
-            description="No stories have been submitted by patients. They will appear here once published."
-            accentColor="#FFF7ED"
-            iconColor="#EA580C"
-          />
+          <EmptyState icon={<FaBookOpen />} title="No Stories Yet" description="No stories have been submitted by patients. They will appear here once published." accentColor="#FFF7ED" iconColor="#EA580C" />
         ) : (
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Story</th>
-              <th>Author</th>
-              <th>Date Published</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginated.map(story => (
+          <table className="w-full min-w-[620px] border-collapse">
+            <thead>
+              <tr className="bg-[#333CF5] text-white text-left">
+                {['Story', 'Author', 'Date Published', 'Status', 'Actions'].map(h => (
+                  <th key={h} className="px-3 py-5 text-[12px] font-semibold whitespace-nowrap">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {paginated.map((story, idx) => (
                 <tr
                   key={story.id}
-                  className={styles.clickableRow}
+                  className={`border-b border-gray-100 cursor-pointer transition-colors ${idx % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'} hover:bg-[#EFF6FF]/60`}
                   onClick={() => handleRowClick(story)}
                 >
-                  {/* Story col */}
-                  <td>
-                    <div className={styles.storyCell}>
-                      <img src={story.cover} alt={story.title} className={styles.storyCover} />
-                      <div className={styles.storyInfo}>
-                        <p className={styles.storyTitle}>{story.title}</p>
-                        <p className={styles.storyDesc}>{story.desc}</p>
+                  <td className="px-3 py-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <img src={story.cover} alt={story.title} className="w-10 h-10 rounded-[8px] object-cover shrink-0 border border-gray-100" />
+                      <div className="min-w-0">
+                        <p className="text-[13px] font-semibold text-black-main-text truncate max-w-[160px]">{story.title}</p>
+                        <p className="text-[11px] text-[#757575] truncate max-w-[160px]">{story.desc}</p>
                       </div>
                     </div>
                   </td>
-
-                  {/* Author col */}
-                  <td>
-                    <div className={styles.authorCell}>
-                      <img src={story.avatar} alt={story.author} className={styles.authorAvatar} />
-                      <span className={styles.authorName}>{story.author}</span>
+                  <td className="px-3 py-2.5">
+                    <div className="flex items-center gap-2">
+                      <img src={story.avatar} alt={story.author} className="w-7 h-7 rounded-full object-cover shrink-0 border border-gray-100" />
+                      <span className="text-[12px] font-semibold text-black-main-text truncate max-w-[120px]">{story.author}</span>
                     </div>
                   </td>
-
-                  {/* Date col */}
-                  <td className={styles.dateCell}>{story.date}</td>
-
-                  {/* Status col */}
-                  <td>
-                    <span className={
-                      story.status === 'Published' ? styles.badgePublished :
-                      story.status === 'Hidden'    ? styles.badgeHidden    :
-                      styles.badgeDeleted
-                    }>
-                      {story.status}
-                    </span>
+                  <td className="px-3 py-2.5 text-[12px] text-[#757575] whitespace-nowrap">{story.date}</td>
+                  <td className="px-3 py-2.5">
+                    <span className={`inline-block px-2.5 py-0.5 text-[11px] font-semibold rounded-full ${
+                      story.status === 'Published' ? 'bg-[#DCFCE7] text-[#15803D]' :
+                      story.status === 'Hidden'    ? ' text-[#757575]' :
+                      'bg-[#FEF2F2] text-[#EF4444]'
+                    }`}>{story.status}</span>
                   </td>
-
-                  {/* Actions col */}
-                  <td onClick={e => e.stopPropagation()}>
-                    <div className={styles.actions}>
-                      {/* Hide / Unhide */}
+                  <td className="px-3 py-2.5" onClick={e => e.stopPropagation()}>
+                    <div className="flex items-center gap-2">
                       <button
-                        className={`${styles.actionBtn} ${story.status === 'Hidden' ? styles.actionUnhide : styles.actionHide}`}
                         title={story.status === 'Hidden' ? 'Unhide Story' : 'Hide Story'}
                         onClick={(e) => handleToggleHide(e, story)}
                         disabled={story.status === 'Deleted'}
-                        style={{
-                          color: story.status === 'Hidden' ? '#8B8C8D' : '#333CF5',
-                          background: story.status === 'Hidden' ? '#f3f4f6' : '#eef2ff',
-                        }}
+                        className={`w-7 h-7 flex items-center justify-center rounded-[7px] transition-colors disabled:opacity-40 ${
+                          story.status === 'Hidden' ? ' text-[#757575] ' : ' text-brand-main '
+                        }`}
                       >
-                        {story.status === 'Hidden' ? <HiOutlineEyeSlash /> : <HiOutlineEye />}
+                        {story.status === 'Hidden' ? <HiOutlineEyeSlash size={13} /> : <HiOutlineEye size={13} />}
                       </button>
-
-                      {/* Delete */}
                       <button
-                        className={`${styles.actionBtn} ${styles.actionDelete}`}
                         title="Delete Story"
                         onClick={(e) => handleDeleteClick(e, story)}
                         disabled={story.status === 'Deleted'}
+                        className="w-7 h-7 flex items-center justify-center rounded-[7px]  text-[#DC2626] hover: transition-colors disabled:opacity-40"
                       >
-                        <HiOutlineTrash />
+                        <HiOutlineTrash size={13} />
                       </button>
                     </div>
                   </td>
                 </tr>
               ))}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
         )}
 
-        {/* ── Pagination ─────────────────────────────── */}
-        <div className={styles.pagination}>
-          <span className={styles.paginationInfo}>
-            Showing {paginated.length === 0 ? 0 : (page - 1) * PAGE_SIZE_REAL + 1} to {Math.min(page * PAGE_SIZE_REAL, filtered.length)} of {filtered.length} stories
+        {/* Pagination */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 border-t border-gray-100">
+          <span className="text-[12px] text-gray-400">
+            Showing {paginated.length === 0 ? 0 : (page - 1) * PAGE_SIZE_REAL + 1}–{Math.min(page * PAGE_SIZE_REAL, filtered.length)} of {filtered.length} stories
           </span>
-          <div className={styles.paginationControls}>
-            <button
-              className={styles.pageArrow}
-              onClick={() => handlePageChange(page - 1)}
-              disabled={page === 1}
-            >
-              <HiChevronLeft />
-            </button>
-
+          <div className="flex items-center gap-1">
+            <button disabled={page === 1} onClick={() => handlePageChange(page - 1)} className="w-7 h-7 flex items-center justify-center rounded-[7px] border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"><HiChevronLeft size={14} /></button>
             {pageNums.map((n, idx) =>
               n === '...' ? (
-                <span key={`ellipsis-${idx}`} className={styles.ellipsis}>...</span>
+                <span key={`ellipsis-${idx}`} className="px-1 text-[12px] text-gray-400">…</span>
               ) : (
-                <button
-                  key={n}
-                  className={`${styles.pageBtn} ${page === n ? styles.pageBtnActive : ''}`}
-                  onClick={() => handlePageChange(n)}
-                >
-                  {n}
-                </button>
+                <button key={n} onClick={() => handlePageChange(n)} className={`w-7 h-7 flex items-center justify-center rounded-[7px] text-[12px] font-semibold transition-colors ${page === n ? 'bg-[#155dfc] text-white' : 'border border-gray-200 text-gray-600 hover:bg-gray-50'}`}>{n}</button>
               )
             )}
-
-            <button
-              className={styles.pageArrow}
-              onClick={() => handlePageChange(page + 1)}
-              disabled={page === totalPages || totalPages === 0}
-            >
-              <HiChevronRight />
-            </button>
+            <button disabled={page === totalPages || totalPages === 0} onClick={() => handlePageChange(page + 1)} className="w-7 h-7 flex items-center justify-center rounded-[7px] border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"><HiChevronRight size={14} /></button>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-// ── StatCard sub-component ─────────────────────────────────────
+// ── StatCard sub-component ────────────────────────────────────
 function StatCard({ label, value, icon, iconBg, iconColor }) {
   return (
-    <div className={styles.statCard}>
-      <div className={styles.statInfo}>
-        <p className={styles.statLabel}>{label}</p>
-        <p className={styles.statValue}>{value.toLocaleString()}</p>
+    <div className="flex items-center justify-between shadow-xl rounded-[14px] border-[#757575] py-8 px-4">
+      <div className="flex flex-col gap-1">
+        <p className="text-[11px] font-semibold text-[#757575]  tracking-wide mb-2">{label}</p>
+        <p className="text-[22px] font-bold text-black-main-text leading-none">{value.toLocaleString()}</p>
       </div>
-      <div className={styles.statIconWrap} style={{ background: iconBg, color: iconColor }}>
+      <div className="w-10 h-10 rounded-[12px] flex items-center justify-center text-[18px] shrink-0" style={{ background: iconBg, color: iconColor }}>
         {icon}
       </div>
     </div>
   );
 }
-
-

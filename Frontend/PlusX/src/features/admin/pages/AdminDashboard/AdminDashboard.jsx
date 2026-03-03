@@ -35,7 +35,7 @@ const Avatar = ({ name, src }) => {
   if (src)
     return <img src={src} alt={name} className="w-11 h-11 rounded-full object-cover border-2 border-gray-100 shrink-0" />;
   return (
-    <div className="w-11 h-11 rounded-full bg-linear-to-br from-blue-400 to-[#333CF5] flex items-center justify-center text-white font-bold text-sm shrink-0">
+    <div className="w-11 h-11 rounded-full bg-linear-to-br from-blue-400 to-brand-main flex items-center justify-center text-white font-bold text-sm shrink-0">
       {name.charAt(0)}
     </div>
   );
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
             </button>
             <button
               onClick={() => navigate('/admin/AddPatientBtn')}
-              className="px-5 py-2.5 bg-[#0913C3] text-white font-semibold text-sm rounded-xl hover:bg-[#333CF5] transition-colors shadow-md font-['inter']"
+              className="px-5 py-2.5 bg-[#0913C3] text-white font-semibold text-sm rounded-xl hover:bg-brand-main transition-colors shadow-md font-['inter']"
             >
               + Add Patient
             </button>
@@ -135,12 +135,12 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <div className="flex items-center gap-2">
-              <FaUserMd className="text-[#333CF5] text-lg" />
-              <h2 className="text-base font-bold text-[#010218] font-['inter']">Recent Doctors</h2>
+              <FaUserMd className="text-brand-main text-lg" />
+              <h2 className="text-base font-bold text-black-main-text font-['inter']">Recent Doctors</h2>
             </div>
             <button
               onClick={() => navigate('/admin/doctor-management')}
-              className="text-sm text-[#333CF5] font-semibold hover:underline font-['inter']"
+              className="text-sm text-brand-main font-semibold hover:underline font-['inter']"
             >
               View All
             </button>
@@ -156,12 +156,12 @@ export default function AdminDashboard() {
                   >
                     <Avatar name={doc.name} src={doc.avatar} />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-[#010218] font-['inter'] truncate">{doc.name}</p>
+                      <p className="text-sm font-semibold text-black-main-text font-['inter'] truncate">{doc.name}</p>
                       <p className="text-xs text-gray-500 font-['inter'] truncate">{doc.email}</p>
                     </div>
                     <button
                       onClick={() => navigate(`/admin/edit-doctor/${doc.id}`)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#333CF5] border border-[#333CF5]/30 rounded-lg hover:bg-blue-50 transition-colors font-['inter'] shrink-0"
+                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-brand-main border border-brand-main/30 rounded-lg hover:bg-blue-50 transition-colors font-['inter'] shrink-0"
                     >
                       <HiOutlinePencilSquare className="text-sm" />
                       Edit
@@ -175,13 +175,13 @@ export default function AdminDashboard() {
                 <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <FaUserMd className="text-3xl text-blue-300" />
                 </div>
-                <p className="text-base font-bold text-[#010218] font-['inter'] mb-1">No Doctors Added Yet</p>
+                <p className="text-base font-bold text-black-main-text font-['inter'] mb-1">No Doctors Added Yet</p>
                 <p className="text-sm text-gray-400 font-['inter'] mb-5">
                   Start by adding your first doctor to the system
                 </p>
                 <button
                   onClick={() => navigate('/admin/AddDoctorBtn')}
-                  className="px-6 py-2.5 bg-[#333CF5] text-white text-sm font-semibold rounded-3xl hover:bg-[#0913C3] transition-colors font-['inter']"
+                  className="px-6 py-2.5 bg-brand-main text-white text-sm font-semibold rounded-3xl hover:bg-[#0913C3] transition-colors font-['inter']"
                 >
                   Add First Doctor
                 </button>
@@ -195,11 +195,11 @@ export default function AdminDashboard() {
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <div className="flex items-center gap-2">
               <HiOutlineUserCircle className="text-green-600 text-xl" />
-              <h2 className="text-base font-bold text-[#010218] font-['inter']">Recent Patients</h2>
+              <h2 className="text-base font-bold text-black-main-text font-['inter']">Recent Patients</h2>
             </div>
             <button
               onClick={() => navigate('/admin/patient-management')}
-              className="text-sm text-[#333CF5] font-semibold hover:underline font-['inter']"
+              className="text-sm text-brand-main font-semibold hover:underline font-['inter']"
             >
               View All
             </button>
@@ -215,7 +215,7 @@ export default function AdminDashboard() {
                   >
                     <Avatar name={pat.name} src={pat.avatar} />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-[#010218] font-['inter'] truncate">{pat.name}</p>
+                      <p className="text-sm font-semibold text-black-main-text font-['inter'] truncate">{pat.name}</p>
                       <p className="text-xs text-gray-500 font-['inter'] truncate">{pat.email}</p>
                     </div>
                     <button
@@ -234,7 +234,7 @@ export default function AdminDashboard() {
                 <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <HiOutlineUserGroup className="text-3xl text-green-300" />
                 </div>
-                <p className="text-base font-bold text-[#010218] font-['inter'] mb-1">No Patients Registered</p>
+                <p className="text-base font-bold text-black-main-text font-['inter'] mb-1">No Patients Registered</p>
                 <p className="text-sm text-gray-400 font-['inter'] mb-5">
                   No patients have been registered in the system yet
                 </p>

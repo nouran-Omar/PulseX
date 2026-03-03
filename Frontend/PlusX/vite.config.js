@@ -1,13 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import tailwindcss from "@tailwindcss/vite";
-import flowbiteReact from "flowbite-react/plugin/vite";
-
-
+import tailwindcss from "@tailwindcss/vite"
+import flowbiteReact from "flowbite-react/plugin/vite"
 export default defineConfig({
-  plugins: [  
+  plugins: [
     tailwindcss(),
     react(),
     flowbiteReact()
   ],
+esbuild: {
+    drop: ['console', 'debugger'],
+  },
 })

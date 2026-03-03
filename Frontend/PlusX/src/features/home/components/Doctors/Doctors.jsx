@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Container from '../HomeSectionWrapper/HomeSectionWrapper';
 import { RiPulseLine } from "react-icons/ri";
-import styles from './Doctors.module.css';
+
 
 // Icons
 import { HiStar, HiChevronRight, HiChevronLeft } from "react-icons/hi2";
@@ -105,7 +105,7 @@ const Doctors = () => {
   transition={{ duration: 0.8, ease: "easeOut" }}
 >
   {/* العنوان الرئيسي - بنفس الحجم واللون الداكن */}
-  <h2 className="text-[32px] md:text-[40px] font-bold text-[#010218] tracking-tight mb-4">
+  <h2 className="text-[32px] md:text-[40px] font-bold text-black-main-text tracking-tight mb-4">
     Expert Cardiologists
   </h2>
 
@@ -133,7 +133,7 @@ const Doctors = () => {
           {/* زرار الشمال - بيختفي لو إحنا في أول صورة */}
           <button 
             onClick={prevSlide}
-            className={`${styles.navBtn} left-[-20px] md:left-[-60px] ${currentIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            className={`absolute top-1/2 -translate-y-1/2 w-[54px] h-[54px] bg-white rounded-full flex items-center justify-center text-[#94a3b8] shadow-[0_10px_25px_rgba(0,0,0,0.06)] border border-[#f1f5f9] cursor-pointer z-30 transition-all duration-300 hover:bg-brand-main hover:text-white hover:shadow-[0_10px_20px_rgba(51,60,245,0.2)] left-[-20px] md:left-[-60px] ${currentIndex === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
           >
             <HiChevronLeft size={24} />
           </button>
@@ -159,14 +159,14 @@ const Doctors = () => {
                     />
                  <div className="absolute bottom-5 right-5 w-4 h-4 bg-[#DCEDE8] border-3 border-[#079A6B] rounded-full"></div></div>
                   
-                  <h3 className="text-2xl font-bold text-[#010218] mb-1">{doctor.name}</h3>
-                  <p className="text-[#333CF5] font-semibold text-lg mb-1">{doctor.role}</p>
+                  <h3 className="text-2xl font-bold text-black-main-text mb-1">{doctor.name}</h3>
+                  <p className="text-brand-main font-semibold text-lg mb-1">{doctor.role}</p>
                   <p className="text-[#757575] text-sm mb-6">{doctor.exp} years</p>
 
                   <div className="flex items-center gap-6 mb-4">
                     <div className="flex items-center gap-1.5">
                       <HiStar className="text-[#F59E0B] size-5" />
-                      <span className="font-bold text-[#010218]">{doctor.rating}</span>
+                      <span className="font-bold text-black-main-text">{doctor.rating}</span>
                    <span className="text-[#757575] text-sm ml-1 flex items-center gap-1">
   <FaUserGroup className="text-xs" /> {doctor.patients}
 </span></div>
@@ -180,8 +180,8 @@ const Doctors = () => {
 
                 {/* الجزء اليمين: الـ Metrics */}
                 <div className="w-full md:w-[50%]">
-                  <div className="flex items-center gap-2 text-[#010218] font-bold text-lg mb-8">
-                    <span className="text-[#333CF5]"> <RiPulseLine className=" w-5 h-5 " />
+                  <div className="flex items-center gap-2 text-black-main-text font-bold text-lg mb-8">
+                    <span className="text-brand-main"> <RiPulseLine className=" w-5 h-5 " />
             </span> 
                     Patient Metrics
                   </div>
@@ -193,7 +193,7 @@ const Doctors = () => {
                           <span style={{ color: m.color }} className="text-xl">{m.icon}</span>
                           {m.label}
                         </div>
-                        <span className={`font-bold ${m.isStatus ? 'text-[#00C853]' : 'text-[#010218]'}`}>
+                        <span className={`font-bold ${m.isStatus ? 'text-[#00C853]' : 'text-black-main-text'}`}>
                           {m.value}
                         </span>
                       </div>
@@ -220,7 +220,7 @@ const Doctors = () => {
           {/* زرار اليمين - بيختفي لو إحنا في آخر صورة */}
           <button 
             onClick={nextSlide}
-            className={`${styles.navBtn} right-[-20px] md:right-[-60px] ${currentIndex === DOCTORS.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            className={`absolute top-1/2 -translate-y-1/2 w-[54px] h-[54px] bg-white rounded-full flex items-center justify-center text-[#94a3b8] shadow-[0_10px_25px_rgba(0,0,0,0.06)] border border-[#f1f5f9] cursor-pointer z-30 transition-all duration-300 hover:bg-brand-main hover:text-white hover:shadow-[0_10px_20px_rgba(51,60,245,0.2)] right-[-20px] md:right-[-60px] ${currentIndex === DOCTORS.length - 1 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
           >
             <HiChevronRight size={24} />
           </button>
@@ -231,7 +231,7 @@ const Doctors = () => {
               <button 
                 key={i}
                 onClick={() => setCurrentIndex(i)}
-                className={`h-2.5 transition-all duration-500 rounded-full ${currentIndex === i ? 'w-2.5 bg-[#333CF5]' : 'w-2.5 bg-gray-200'}`}
+                className={`h-2.5 transition-all duration-500 rounded-full ${currentIndex === i ? 'w-2.5 bg-brand-main' : 'w-2.5 bg-gray-200'}`}
               />
             ))}
           </div>
@@ -249,7 +249,11 @@ const ECGAnimation = () => (
       stroke="#10B981"
       strokeWidth="2.5"
       strokeLinecap="round"
-      className={styles.ecgPath}
+      style={{
+        strokeDasharray: 1000,
+        strokeDashoffset: 1000,
+        animation: 'drawECG 5s linear infinite',
+      }}
     />
   </svg>
 );

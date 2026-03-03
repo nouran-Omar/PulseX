@@ -106,21 +106,21 @@ const AdminHeader = () => {
       ref={notifRef}
     >
       {/* ── Left: Date + Time ── */}
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg">
-          <FiCalendar className="text-[#333CF5] text-lg" />
-          <span className="text-sm font-bold text-[#010218]">
+      <div className="flex items-center gap-2 md:gap-4 min-w-0">
+        <div className="hidden sm:flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-lg">
+          <FiCalendar className="text-brand-main text-base md:text-lg shrink-0" />
+          <span className="text-xs md:text-sm font-bold text-black-main-text truncate">
             {currentTime.toLocaleDateString('en-US', {
-              weekday: 'long',
+              weekday: 'short',
               year: 'numeric',
-              month: 'long',
+              month: 'short',
               day: 'numeric',
             })}
           </span>
         </div>
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg">
-          <HiOutlineClock className="text-[#13D486] text-lg" />
-          <span className="text-sm font-bold text-[#010218]">
+        <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-lg">
+          <HiOutlineClock className="text-[#13D486] text-base md:text-lg shrink-0" />
+          <span className="text-xs md:text-sm font-bold text-black-main-text">
             {currentTime.toLocaleTimeString('en-US', {
               hour: '2-digit',
               minute: '2-digit',
@@ -130,24 +130,24 @@ const AdminHeader = () => {
       </div>
 
       {/* ── Right: Bell + Profile ── */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4">
 
         {/* Bell button */}
         <div className="relative">
           <button
             onClick={() => setIsNotifOpen(!isNotifOpen)}
-            className={`relative p-2.5 rounded-full transition-all duration-300 shadow-md border border-gray-100
+            className={`relative p-2 md:p-2.5 rounded-full transition-all duration-300 shadow-md border border-gray-100
               ${isNotifOpen
-                ? 'bg-[#333CF5] text-white shadow-[#333CF5]/40 scale-95'
+                ? 'bg-brand-main text-white shadow-brand-main/40 scale-95'
                 : 'bg-white text-gray-400 hover:bg-gray-50 hover:shadow-lg'
               }`}
           >
-            <HiOutlineBell className="text-2xl" />
+            <HiOutlineBell className="text-xl md:text-2xl" />
             {unreadCount > 0 && (
               <span
                 className={`absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[10px]
                   flex items-center justify-center rounded-full border-2 font-bold
-                  ${isNotifOpen ? 'border-[#333CF5]' : 'border-white'}`}
+                  ${isNotifOpen ? 'border-brand-main' : 'border-white'}`}
               >
                 {unreadCount}
               </span>
@@ -156,10 +156,10 @@ const AdminHeader = () => {
 
           {/* ── Notification Panel ── */}
           {isNotifOpen && (
-            <div className="absolute top-14 right-0 w-[400px] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.15)] rounded-3xl border border-gray-100 z-200 overflow-hidden">
+            <div className="absolute top-12 md:top-14 right-0 w-[calc(100vw-24px)] max-w-[360px] md:max-w-[400px] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.15)] rounded-3xl border border-gray-100 z-[200] overflow-hidden">
 
               {/* Header (blue) */}
-              <div className="px-5 py-4 bg-[#333CF5]">
+              <div className="px-5 py-4 bg-brand-main">
                 <div className="flex justify-between items-center mb-1">
                   <h3 className="text-white text-lg font-bold font-['inter'] leading-7">
                     Notifications
@@ -200,7 +200,7 @@ const AdminHeader = () => {
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
-                          <h4 className="text-sm font-bold text-[#010218] font-['inter'] leading-5">
+                          <h4 className="text-sm font-bold text-black-main-text font-['inter'] leading-5">
                             {n.title}
                           </h4>
                           {!n.isRead && (
@@ -258,12 +258,12 @@ const AdminHeader = () => {
               alt="Admin"
             />
           ) : (
-            <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-400 to-[#333CF5] flex items-center justify-center text-white font-bold text-sm shadow-sm">
+            <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-400 to-brand-main flex items-center justify-center text-white font-bold text-sm shadow-sm">
               {adminData.name.charAt(0)}
             </div>
           )}
           <div className="hidden md:block">
-            <p className="text-sm font-bold text-[#010218] font-['inter']">{adminData.name}</p>
+            <p className="text-sm font-bold text-black-main-text font-['inter']">{adminData.name}</p>
             <p className="text-[11px] font-semibold text-gray-400 font-['inter']">{adminData.role}</p>
           </div>
         </div>

@@ -74,9 +74,9 @@ export default function SettingsProfile() {
 
   /* ─────────── render ─────────── */
   return (
-    <div className="p-10 bg-[#f9fafb] min-h-screen relative">
+    <section className="flex flex-col gap-6 p-5 " aria-label="Settings & Profile">
 
-      {/* ══ Toast ══════════════════════════════════════════════ */}
+      {/* Toast */}
       <Toast
         visible={toast.visible}
         title={toast.title}
@@ -85,131 +85,99 @@ export default function SettingsProfile() {
         onClose={() => setToast(t => ({ ...t, visible: false }))}
       />
 
-      {/* ══ Page heading ══════════════════════════════════════ */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-extrabold flex items-center gap-3 text-[#010218]">
-          <HiOutlineCog6Tooth className="text-gray-600" /> Settings &amp; Profile
-        </h1>
-        <p className="text-gray-500 mt-1 text-base">Manage your personal details, health data, and account preferences.</p>
-      </div>
+      {/* ── Page heading ─────────────────────────── */}
+   <header className="flex flex-col gap-1 pb-4 border-b border-gray-100">
+  {/* السطر الأول: الأيقونة والعنوان */}
+  <div className="flex items-center gap-2 mb-2">
+    <div className="w-9 h-9 flex items-center justify-center rounded-[10px] bg-gray-50 text-black-main-text text-[22px] shrink-0">
+      <HiOutlineCog6Tooth />
+    </div>
+    <h1 className="text-[18px] sm:text-[20px] font-bold text-black-main-text leading-tight">
+      Settings & Profile
+    </h1>
+  </div>
 
-      {/* ══ Personal Information card ══════════════════════════ */}
-      <div className="bg-white rounded-[28px] border border-gray-200 shadow-sm mb-8 overflow-hidden">
+  {/* السطر الثاني: الوصف (مع إزاحة ليكون تحت نص العنوان بالضبط) */}
+  <p className="text-[13px] text-[#757575]  leading-relaxed">
+    Manage your personal details and account preferences.
+  </p>
+</header>
 
-        {/* card header */}
-      <div 
-  className="flex items-center gap-2 px-6 py-4 border-b border-[#E5E7EB]" 
-  style={{
-    background: 'linear-gradient(to right, #EFF6FF, #EEF2FF)'
-  }}
->
-  <LuUser size={20} className="text-[#155DFC]" />
-  <span className="text-[#101828] text-lg font-bold">Personal Information</span>
-</div>
+      {/* ── Personal Information card ─────────────── */}
+      <div className="bg-white rounded-[22px] border border-gray-100 shadow-sm overflow-hidden">
+        <div
+          className="flex items-center gap-2 px-5 py-4 border-b border-gray-100"
+          style={{ background: 'linear-gradient(to right, #EFF6FF, #EEF2FF)' }}
+        >
+          <LuUser size={18} className="text-[#155DFC]" />
+          <span className="text-[#101828] text-[14px] font-bold">Personal Information</span>
+        </div>
 
-        <div className="p-8">
-          <div className="flex flex-col lg:flex-row gap-12">
+        <div className="p-5 lg:p-8">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
 
             {/* Profile Photo */}
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-2 shrink-0">
+              <p className="text-[12px] font-semibold text-[#364153] mb-1 self-start lg:self-center">Profile Photo</p>
               <div
-                className="w-32 h-32 rounded-3xl overflow-hidden cursor-pointer border-2 border-dashed border-gray-300 hover:border-blue-400 transition-colors relative group"
+                className="w-28 h-28 rounded-2xl overflow-hidden cursor-pointer border-2 border-dashed border-gray-300 hover:border-blue-400 transition-colors relative group"
                 onClick={() => fileRef.current.click()}
               >
                 <img
-                  src={photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(form.firstName + ' ' + form.lastName)}&background=333CF5&color=fff`}
+                  src={photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(form.firstName + ' ' + form.lastName)}&background=333CF5&color=fff&size=128`}
                   className="w-full h-full object-cover"
                   alt="Profile"
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="text-white text-xs font-semibold">Change</span>
+                  <span className="text-white text-[11px] font-semibold">Change</span>
                 </div>
               </div>
               <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoChange} />
-              <span className="text-[10px] text-gray-400 text-center w-32">JPG, PNG or GIF<br />Max size 5MB</span>
+              <span className="text-[10px] text-gray-400 text-center leading-relaxed">
+                JPG, PNG or GIF<br />Max size 5MB
+              </span>
             </div>
 
             {/* Form grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
-<InputField 
-  label={<>First Name <span className="text-red-500 text-sm font-bold font-['inter']">*</span></>} 
-  icon={<LuUser />} 
-  value={form.firstName} 
-  onChange={v => handleField('firstName', v)} 
-/>
-
-<InputField 
-  label={<>Last Name <span className="text-red-500 text-sm font-bold font-['inter']">*</span></>} 
-  icon={<LuUser />} 
-  value={form.lastName} 
-  onChange={v => handleField('lastName', v)} 
-/>
-
-<InputField 
-  label={<>Email Address <span className="text-red-500 text-sm font-bold font-['inter']">*</span></>} 
-  icon={<LuMail />} 
-  value={form.email} 
-  onChange={v => handleField('email', v)} 
-/>
-
-<InputField 
-  label={<>Phone Number <span className="text-red-500 text-sm font-bold font-['inter']">*</span></>} 
-  icon={<LuPhone />} 
-  value={form.phone} 
-  onChange={v => handleField('phone', v)} 
-/>
-
-<InputField 
-  label={<>Date of Birth <span className="text-red-500 text-sm font-bold font-['inter']">*</span></>} 
-  icon={<LuCalendar />} 
-  value={form.dob} 
-  onChange={v => handleField('dob', v)} 
-/>
-
-<InputField 
-  label={<>Location <span className="text-red-500 text-sm font-bold font-['inter']">*</span></>} 
-  icon={<LuMapPin />} 
-  value={form.location} 
-  onChange={v => handleField('location', v)} 
-/>
-           <div  className="mt-2">
-            <GenderToggle
-              value={form.gender === 'male' ? 'Male' : 'Female'}
-              onChange={(val) => handleField('gender', val.toLowerCase())}
-            />
-          </div> </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+              <InputField label="First Name" icon={<LuUser />} value={form.firstName} onChange={v => handleField('firstName', v)} required />
+              <InputField label="Last Name"  icon={<LuUser />} value={form.lastName}  onChange={v => handleField('lastName', v)}  required />
+              <InputField label="Email Address" icon={<LuMail />}     value={form.email}    onChange={v => handleField('email', v)}    required />
+              <InputField label="Phone Number"  icon={<LuPhone />}    value={form.phone}    onChange={v => handleField('phone', v)}    required />
+              <InputField label="Date of Birth" icon={<LuCalendar />} value={form.dob}      onChange={v => handleField('dob', v)}      required />
+              <InputField label="Location"      icon={<LuMapPin />}   value={form.location} onChange={v => handleField('location', v)} required />
+              <div className="sm:col-span-2">
+                <GenderToggle
+                  value={form.gender === 'male' ? 'Male' : 'Female'}
+                  onChange={(val) => handleField('gender', val.toLowerCase())}
+                />
+              </div>
+            </div>
           </div>
 
-          {/* Gender */}
-          
-
           {/* Save button */}
-          <div className="flex justify-end mt-8">
+          <div className="flex justify-end mt-6">
             <button
               onClick={handleSaveProfile}
-              className="bg-[#333CF5] hover:bg-blue-700 text-white px-8 py-3.5 rounded-2xl font-bold flex items-center gap-2 transition-colors"
+              className="bg-brand-main hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-colors text-[13px]"
             >
-              <LuCheck /> Save Changes
+              <LuCheck size={15} /> Save Changes
             </button>
           </div>
         </div>
       </div>
 
-      {/* ══ Account Settings card ══════════════════════════════ */}
-      <div className="bg-white rounded-[28px] border border-gray-200 shadow-sm overflow-hidden">
+      {/* ── Account Settings card ─────────────────── */}
+      <div className="bg-white rounded-[22px] border border-gray-100 shadow-sm overflow-hidden">
+        <div
+          className="flex items-center gap-2 px-5 py-4 border-b border-gray-100"
+          style={{ background: 'linear-gradient(to right, #FFF7ED, #FEF2F2)' }}
+        >
+          <HiOutlineCog6Tooth size={18} className="text-[#F54900]" />
+          <span className="text-[#101828] text-[14px] font-bold">Account Settings</span>
+        </div>
 
-        {/* card header */}
-       <div 
-  className="flex items-center gap-2 px-6 py-4 border-b border-[#E5E7EB] rounded-t-2xl" 
-  style={{
-    background: 'linear-gradient(to right, #FFF7ED, #FEF2F2)'
-  }}
->
-  <HiOutlineCog6Tooth size={20} className="text-[#F54900]" />
-  <span className="text-[#101828] text-lg font-bold">Account Settings</span>
-</div>
-
-        <div className="p-8 space-y-0 divide-y divide-gray-50">
+        <div className="divide-y divide-gray-50">
           <SettingRow
             icon={<LuLock />}
             title="Change Password"
@@ -217,7 +185,7 @@ export default function SettingsProfile() {
             action={
               <button
                 onClick={() => { setPwError(''); setPwModal(true); }}
-                className="text-blue-600 font-bold text-sm hover:underline"
+                className="text-[#155DFC] font-bold text-[13px] hover:underline"
               >
                 Change
               </button>
@@ -238,35 +206,33 @@ export default function SettingsProfile() {
         </div>
       </div>
 
-      {/* ══ Change Password Modal ══════════════════════════════ */}
+      {/* ── Change Password Modal ─────────────────── */}
       {pwModal && (
         <div
           className="fixed inset-0 z-9999 flex items-center justify-center"
-          style={{ background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(2px)' }}
+          style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(3px)' }}
           onClick={e => { if (e.target === e.currentTarget) setPwModal(false); }}
         >
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md mx-4 p-8 relative" style={{ animation: 'slideIn .3s ease' }}>
-
-            {/* close */}
+          <div
+            className="bg-white rounded-3xl shadow-2xl w-full max-w-md mx-4 p-7 relative"
+            style={{ animation: 'pwSlideIn .28s ease' }}
+          >
             <button
               onClick={() => setPwModal(false)}
-              className="absolute top-5 right-5 text-gray-400 hover:text-gray-700 text-xl font-bold transition-colors"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors p-1 rounded-lg hover:bg-gray-100"
             >
               ✕
             </button>
 
-            {/* heading */}
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">Change Password</h2>
-            <p className="text-gray-500 text-sm mb-6">Update your password securely</p>
+            <h2 className="text-[18px] font-bold text-black-main-text mb-0.5">Change Password</h2>
+            <p className="text-[12px] text-gray-400 mb-5">Update your password securely</p>
 
-            {/* error */}
             {pwError && (
-              <div className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2">
+              <div className="mb-4 text-[12px] text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2.5">
                 {pwError}
               </div>
             )}
 
-            {/* Current Password */}
             <PasswordField
               label="Current Password"
               placeholder="Enter current password"
@@ -275,8 +241,6 @@ export default function SettingsProfile() {
               onToggle={() => setShowPw(s => ({ ...s, current: !s.current }))}
               onChange={v => setPwForm(f => ({ ...f, current: v }))}
             />
-
-            {/* New Password */}
             <PasswordField
               label="New Password"
               placeholder="Enter new password"
@@ -285,8 +249,6 @@ export default function SettingsProfile() {
               onToggle={() => setShowPw(s => ({ ...s, newPw: !s.newPw }))}
               onChange={v => setPwForm(f => ({ ...f, newPw: v }))}
             />
-
-            {/* Confirm New Password */}
             <PasswordField
               label="Confirm New Password"
               placeholder="Confirm new password"
@@ -296,38 +258,35 @@ export default function SettingsProfile() {
               onChange={v => setPwForm(f => ({ ...f, confirm: v }))}
             />
 
-            {/* Requirements */}
-            <div className="mt-4 mb-6 bg-gray-50 rounded-2xl p-4">
-              <p className="text-sm font-semibold text-gray-700 mb-2">Password Requirements:</p>
-              <ul className="space-y-1">
+            <div className="mt-3 mb-5 bg-gray-50 rounded-2xl p-4">
+              <p className="text-[12px] font-bold text-gray-700 mb-2">Password Requirements:</p>
+              <ul className="space-y-1.5">
                 <ReqItem met={reqs.length} text="At least 8 characters long" />
                 <ReqItem met={reqs.mixed}  text="Contains uppercase and lowercase letters" />
                 <ReqItem met={reqs.number} text="Contains at least one number" />
               </ul>
             </div>
 
-            {/* Buttons */}
             <div className="flex gap-3">
               <button
                 onClick={() => setPwModal(false)}
-                className="flex-1 py-3 rounded-2xl border border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition-colors"
+                className="flex-1 py-3 rounded-2xl border border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 transition-colors text-[13px]"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSavePassword}
-                className="flex-1 py-3 rounded-2xl bg-[#333CF5] text-white font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors"
+                className="flex-1 py-3 rounded-2xl bg-brand-main text-white font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors text-[13px]"
               >
-                <LuShieldCheck size={18} /> Save Password
+                <LuShieldCheck size={16} /> Save Password
               </button>
             </div>
-
           </div>
         </div>
       )}
 
-      <style>{`@keyframes slideIn { from { transform: translateY(-20px) scale(.97); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }`}</style>
-    </div>
+      <style>{`@keyframes pwSlideIn { from { transform: translateY(-18px) scale(.97); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }`}</style>
+    </section>
   );
 }
 
@@ -335,17 +294,19 @@ export default function SettingsProfile() {
    Sub-components
 ───────────────────────────────────────────────────────── */
 
-function InputField({ label, icon, value, onChange }) {
+function InputField({ label, icon, value, onChange, required }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-sm font-bold text-gray-700">{label}</label>
-      <div className="flex items-center bg-[#f9fafb] border border-gray-200 rounded-2xl px-4 py-3 gap-3 focus-within:border-blue-400 transition-colors">
-        <span className="text-gray-400 shrink-0">{icon}</span>
+      <label className="text-[12px] font-semibold text-[#364153]">
+        {label}{required && <span className="text-red-500 ml-0.5">*</span>}
+      </label>
+      <div className="flex items-center bg-[#f9fafb] border border-gray-200 rounded-xl px-3.5 py-2.5 gap-2.5 focus-within:border-[#155DFC] transition-colors">
+        <span className="text-gray-400 shrink-0 text-[14px]">{icon}</span>
         <input
           type="text"
           value={value}
           onChange={e => onChange(e.target.value)}
-          className="bg-transparent outline-none w-full text-sm text-gray-800"
+          className="bg-transparent outline-none w-full text-[13px] text-black-main-text"
         />
       </div>
     </div>
@@ -355,18 +316,18 @@ function InputField({ label, icon, value, onChange }) {
 function PasswordField({ label, placeholder, value, show, onToggle, onChange }) {
   return (
     <div className="mb-4">
-      <label className="text-sm font-bold text-gray-700 mb-1.5 block">{label}</label>
-      <div className="flex items-center bg-white border border-gray-200 rounded-2xl px-4 py-3 gap-3 focus-within:border-blue-400 transition-colors">
-        <LuLock size={16} className="text-gray-400 shrink-0" />
+      <label className="text-[12px] font-semibold text-[#364153] mb-1.5 block">{label}</label>
+      <div className="flex items-center bg-white border border-gray-200 rounded-xl px-3.5 py-2.5 gap-2.5 focus-within:border-[#155DFC] transition-colors">
+        <LuLock size={14} className="text-gray-400 shrink-0" />
         <input
           type={show ? 'text' : 'password'}
           placeholder={placeholder}
           value={value}
           onChange={e => onChange(e.target.value)}
-          className="outline-none w-full text-sm text-gray-800 bg-transparent"
+          className="outline-none w-full text-[13px] text-black-main-text bg-transparent"
         />
         <button type="button" onClick={onToggle} className="text-gray-400 hover:text-gray-600 transition-colors shrink-0">
-          {show ? <LuEyeOff size={16} /> : <LuEye size={16} />}
+          {show ? <LuEyeOff size={14} /> : <LuEye size={14} />}
         </button>
       </div>
     </div>
@@ -384,12 +345,12 @@ function ReqItem({ met, text }) {
 
 function SettingRow({ icon, title, desc, action }) {
   return (
-    <div className="flex items-center justify-between py-5">
-      <div className="flex items-center gap-4">
-        <div className="text-gray-400 text-xl shrink-0">{icon}</div>
+    <div className="flex items-center justify-between px-6 py-4">
+      <div className="flex items-center gap-3">
+        <span className="text-gray-400 text-lg shrink-0">{icon}</span>
         <div>
-          <h4 className="font-bold text-[15px] text-gray-900">{title}</h4>
-          <p className="text-gray-400 text-xs mt-0.5">{desc}</p>
+          <h4 className="font-bold text-[13px] text-black-main-text">{title}</h4>
+          <p className="text-gray-400 text-[11px] mt-0.5">{desc}</p>
         </div>
       </div>
       {action}

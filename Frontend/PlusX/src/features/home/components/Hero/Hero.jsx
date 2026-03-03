@@ -26,34 +26,34 @@ const HERO_CONTENT = {
 
 const Hero = () => {
   return (
-    <section id="home" className="font-inter relative bg-[#FAFAFA] overflow-hidden min-h-[calc(100vh-82px)] flex items-center justify-center pt-24 pb-32">
+    <section id="home" className="font-inter relative bg-[#FAFAFA] overflow-hidden min-h-[calc(100vh-82px)] flex items-center justify-center pt-16 pb-20">
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
         <div className="lg:grid lg:grid-cols-2 items-center gap-16">
           
           {/* الجانب الأيسر: دخول من الشمال */}
           <div className="z-10 relative flex flex-col justify-center animate-fade-left">
-            <h1 className="text-6xl md:text-[64px] font-bold text-[#010218] mb-6 font-display tracking-tight leading-[1.1]">
-              {HERO_CONTENT.title}<span className="text-[#333CF5] text-7xl md:text-[72px]">{HERO_CONTENT.highlight}</span>
+            <h1 className="text-4xl sm:text-5xl md:text-[56px] font-bold text-black-main-text mb-4 font-display tracking-tight leading-[1.1]">
+              {HERO_CONTENT.title}<span className="text-brand-main text-5xl sm:text-6xl md:text-[64px]">{HERO_CONTENT.highlight}</span>
             </h1>
             
-            <p className="text-xl text-[#757575] font-normal mb-8 leading-relaxed max-w-[600px]">
+            <p className="text-base sm:text-lg text-[#757575] font-normal mb-6 leading-relaxed max-w-[600px]">
               {HERO_CONTENT.subtitle}
             </p>
             
-            <div className="space-y-4 mb-12">
+            <div className="space-y-3 mb-8">
               {HERO_CONTENT.features.map((item, i) => (
                 <div 
                   key={i} 
-                  className="flex items-center gap-4 opacity-0 animate-fade-left" 
+                  className="flex items-center gap-3 opacity-0 animate-fade-left" 
                   style={{ animationDelay: `${0.3 + (i * 0.15)}s`, animationFillMode: 'forwards' }}
                 >
-                  <FaCheck className="text-[#55F1C4] w-6 h-6 flex-shrink-0" />
-                  <span className="text-xl text-[#010218] font-medium">{item}</span>
+                  <FaCheck className="text-[#55F1C4] w-5 h-5 flex-shrink-0" />
+                  <span className="text-base sm:text-lg text-black-main-text font-medium">{item}</span>
                 </div>
               ))}
             </div>
 
-            <Button className="w-[176px] h-[48px] !text-[15px] !rounded-full bg-[#333CF5] hover:bg-[#282eb5] shadow-lg group flex items-center justify-center gap-2 text-white transition-all font-bold">
+            <Button className="w-[176px] h-[48px] !text-[15px] !rounded-full bg-brand-main hover:bg-[#282eb5] shadow-lg group flex items-center justify-center gap-2 text-white transition-all font-bold">
                 <Link to="/register" className="flex items-center gap-2"> Get Started   <FiArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" /></Link>
                      
             </Button>
@@ -76,7 +76,7 @@ const Hero = () => {
             <div className="floating-card top-[15%] left-[-5%] ">
               <div className="flex items-center gap-1">
                 <div className="w-2.5 h-2.5 bg-[#13D486] rounded-full "></div>
-                <p className="text-[#010218] font-bold">BPM: 72</p>
+                <p className="text-black-main-text font-bold">BPM: 72</p>
               </div>
               <p className="text-[#757575] text-[10px] font-bold tracking-widest ">Normal Range</p>
             </div>
@@ -84,11 +84,11 @@ const Hero = () => {
             {/* كارت Risk: يتحرك ببطء بتأخير مختلف */}
             <div className="floating-card bottom-[10%] right-[-5%] ">
                <div className="absolute -top-6 -left-1 w-10 h-10 flex items-center justify-center animate-bounce delay-1">
-                  <IoShieldOutline className="text-[#333CF5] w-5 h-5" />
+                  <IoShieldOutline className="text-brand-main w-5 h-5" />
                </div>
                <div className="flex items-center gap-1.5">
-                 <HiOutlineArrowTrendingUp className="text-[#333CF5] w-5 h-5" />
-                 <p className="text-[#010218] font-bold text-base">Risk: Low</p>
+                 <HiOutlineArrowTrendingUp className="text-brand-main w-5 h-5" />
+                 <p className="text-black-main-text font-bold text-base">Risk: Low</p>
                </div>
                <p className="text-[#757575] text-[10px] font-bold ">AI Assessment</p>
             </div>

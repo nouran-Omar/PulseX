@@ -32,8 +32,8 @@ function SelectField({ label, icon, value, onChange, options, placeholder, requi
   const selected = options.find(o => o.value === value);
 
   return (
-    <div className="flex flex-col gap-1.5 relative">
-      <label className="text-xs font-bold text-[#010218]">
+    <div className="flex flex-col gap-1.5 relative ">
+      <label className="text-xs font-bold text-black-main-text">
         {label}
         {required && <span className="text-[#DC2626] ml-0.5">*</span>}
       </label>
@@ -44,7 +44,7 @@ function SelectField({ label, icon, value, onChange, options, placeholder, requi
       >
         <div className="flex items-center gap-2.5">
           <span className="text-gray-400 text-[14px]">{icon}</span>
-          <span className={selected ? 'text-[#010218]' : 'text-gray-400'}>
+          <span className={selected ? 'text-black-main-text' : 'text-gray-400'}>
             {selected ? selected.label : placeholder}
           </span>
         </div>
@@ -60,8 +60,8 @@ function SelectField({ label, icon, value, onChange, options, placeholder, requi
             <button
               key={opt.value}
               type="button"
-              className={`w-full text-left px-4 py-2.5 text-sm transition-colors hover:bg-[#EEF2FF] hover:text-[#333CF5]
-                ${value === opt.value ? 'bg-[#EEF2FF] text-[#333CF5] font-semibold' : 'text-gray-700'}`}
+              className={`w-full text-left px-4 py-2.5 text-sm transition-colors hover:bg-[#EEF2FF] hover:text-brand-main
+                ${value === opt.value ? 'bg-[#EEF2FF] text-brand-main font-semibold' : 'text-gray-700'}`}
               onClick={() => { onChange(opt.value); setOpen(false); }}
             >
               {opt.label}
@@ -89,7 +89,7 @@ function NumberField({ label, icon, value, onChange, placeholder, unit, required
           value={value}
           onChange={e => onChange(e.target.value)}
           placeholder={placeholder}
-          className="bg-transparent outline-none w-full text-sm text-[#010218] placeholder-gray-400"
+          className="bg-transparent outline-none w-full text-sm text-black-main-text placeholder-gray-400"
         />
         {unit && <span className="text-gray-400 text-xs shrink-0">{unit}</span>}
       </div>
@@ -143,7 +143,7 @@ export default function PatientUpdateHealth() {
   };
 
   return (
-    <div className="flex flex-col gap-6 font-['Inter',sans-serif]">
+    <div className="flex flex-col gap-6 font-['Inter',sans-serif] p-5">
 
       {/* Toast */}
       <Toast
@@ -156,8 +156,8 @@ export default function PatientUpdateHealth() {
 
       {/* ── Page header ─────────────────────────────── */}
       <div>
-        <h1 className="text-2xl font-extrabold flex items-center gap-2 text-[#010218]">
-          <HiOutlineCog6Tooth className="text-[#010218]" />
+        <h1 className="text-2xl font-extrabold flex items-center gap-2 text-black-main-text">
+          <HiOutlineCog6Tooth className="text-black-main-text" />
           Settings &amp; Profile
         </h1>
         <p className="text-sm text-[#757575] mt-1">
@@ -282,7 +282,7 @@ export default function PatientUpdateHealth() {
           <div className="flex justify-center mt-10">
             <button
               onClick={handleSave}
-              className="bg-[#333CF5] hover:bg-blue-700 text-white px-12 py-3 rounded-full font-bold flex items-center gap-2 transition-colors text-sm shadow-md shadow-blue-200 mt-4"
+              className="bg-brand-main hover:bg-blue-700 text-white px-12 py-3 rounded-full font-bold flex items-center gap-2 transition-colors text-sm shadow-md shadow-blue-200 mt-4"
             >
               Save  Changes
             </button>

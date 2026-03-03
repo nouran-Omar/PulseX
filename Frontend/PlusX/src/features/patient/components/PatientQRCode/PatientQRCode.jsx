@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import styles from './PatientQRCode.module.css';
 import { QRCodeSVG } from 'qrcode.react';
 import { jsPDF } from 'jspdf';
 import { LuQrCode, LuCalendarDays } from 'react-icons/lu';
 import { HiOutlineCheckCircle, HiOutlineLightBulb } from 'react-icons/hi2';
 import { RiNumbersLine } from 'react-icons/ri';
+import {RiCheckFill } from 'react-icons/ri';
 
 const PatientQRCode = () => {
   const qrRef = useRef(null);
@@ -22,7 +22,6 @@ const PatientQRCode = () => {
   const downloadPDF = async () => {
     const doc = new jsPDF();
 
-    // QR as SVG → Canvas → Image
     const svgEl = qrRef.current?.querySelector('svg');
     if (svgEl) {
       const svgData = new XMLSerializer().serializeToString(svgEl);
@@ -43,7 +42,6 @@ const PatientQRCode = () => {
         img.src = url;
       });
 
-      // Page 1: Header + QR
       doc.setFontSize(22);
       doc.setTextColor(1, 2, 24);
       doc.text('PulseX - Medical QR Report', 105, 20, { align: 'center' });
@@ -62,7 +60,6 @@ const PatientQRCode = () => {
       doc.text('Scan this QR code to access all medical records securely.', 105, 118, { align: 'center' });
     }
 
-    // Pages: Medical Images
     for (let i = 0; i < userData.medicalImages.length; i++) {
       doc.addPage();
       doc.setFontSize(14);
@@ -81,23 +78,36 @@ const PatientQRCode = () => {
   };
 
   return (
-    <div className={styles.pageWrapper}>
+    <section className="flex flex-col gap-6 p-5 ">
       {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.headerTitle}>
-          <LuQrCode className={styles.headerIcon} />
-          <h1 className={styles.title}>Your Personal QR Code</h1>
-        </div>
-        <p className={styles.subtitle}>
-          Access all your medical records instantly by scanning this code.
-        </p>
-      </header>
+ <header className="flex flex-col gap-2 pb-4 border-b border-gray-100 mb-6">
+  
+  {/* السطر الأول: الأيقونة + العنوان */}
+  <div className="flex items-center gap-1">
+    {/* حاوية الأيقونة - باللون الأزرق المريح */}
+    <div className="w-10 h-10 flex items-center justify-center rounded-[12px]text-black-main-text text-[20px] shrink-0">
+      <LuQrCode />
+    </div>
+
+    {/* العنوان H1 جنب الأيقونة */}
+    <h1 className="text-[18px] font-bold text-black-main-text">
+      Your Personal QR Code
+    </h1>
+  </div>
+
+  {/* السطر الثاني: الوصف تحتهم */}
+  <p className="text-[12px] text-gray-500 leading-relaxed max-w-2xl">
+    Access all your medical records instantly by scanning this code.
+  </p>
+  
+</header>
+
 
       {/* Main Grid */}
-      <div className={styles.mainGrid}>
-        {/* ===== Left: QR Card ===== */}
-        <div className={styles.qrCard}>
-          <div className={styles.qrWrapper} ref={qrRef}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* QR Card */}
+        <div className="bg-white rounded-[22px] border border-gray-100 shadow-sm p-6 flex flex-col items-center gap-5">
+          <div ref={qrRef} className="p-4 bg-gray-50 rounded-[16px] border border-gray-100">
             <QRCodeSVG
               value={`https://pulsex-app.com/records/${userData.name}`}
               size={200}
@@ -107,57 +117,56 @@ const PatientQRCode = () => {
             />
           </div>
 
-          <div className={styles.qrInfo}>
-            <div className={styles.infoRow}>
-              <LuCalendarDays className={styles.infoIcon} />
+          <div className="flex flex-col gap-2 w-full">
+            <div className="flex items-center gap-2 text-[13px] text-black-main-text">
+              <LuCalendarDays className="text-brand-main" />
               <span>Generated on: {userData.generatedDate}</span>
             </div>
-            <div className={styles.infoRow}>
-              <RiNumbersLine className={styles.infoIcon} />
+            <div className="flex items-center gap-2 text-[13px] text-black-main-text">
+              <RiNumbersLine className="text-brand-main" />
               <span>Total Files: {userData.totalFiles}</span>
             </div>
           </div>
 
-          <button className={styles.downloadBtn} onClick={downloadPDF}>
+          <button
+            className="w-full bg-brand-main hover:bg-[#2830d4] text-white font-bold rounded-full py-2.5 text-[13px] transition-colors"
+            onClick={downloadPDF}
+          >
             Download PDF
           </button>
         </div>
 
-        {/* ===== Right: Details Column ===== */}
-        <div className={styles.detailsColumn}>
+        {/* Details Column */}
+        <div className="flex flex-col gap-4">
           {/* What's inside */}
-          <div className={styles.contentCard}>
-            <h3>What's inside your QR Code?</h3>
-            <ul className={styles.checkList}>
-              <li>
-                <HiOutlineCheckCircle className={styles.checkIcon} />
-                Blood Test Results
-              </li>
-              <li>
-                <HiOutlineCheckCircle className={styles.checkIcon} />
-                Radiology Scans
-              </li>
-              <li>
-                <HiOutlineCheckCircle className={styles.checkIcon} />
-                Medication Reports
-              </li>
+          <div className="bg-white rounded-[22px] border border-gray-100 shadow-sm p-5">
+            <h3 className="text-[14px] font-bold text-black-main-text mb-3">What's inside your QR Code?</h3>
+            <ul className="flex flex-col gap-2">
+              {['Blood Test Results', 'Radiology Scans', 'Medication Reports'].map((item) => (
+                <li key={item} className="flex items-center gap-2 text-[13px] text-[#010218B2]">
+                  <RiCheckFill className="text-[#00BC86] text-base shrink-0" />
+                  {item}
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Tip Box */}
-          <div className={styles.tipBox}>
-            <div className={styles.tipTitle}>
-              <HiOutlineLightBulb className={styles.tipIcon} />
-              <span>Tip:</span>
+          <div className="border border-blue-100 rounded-[18px] p-4 flex flex-col gap-2"
+          
+          style={{background: 'linear-gradient(180deg, var(--Blue-1, #333CF5) 0%, var(--Blue-3, #070E92) 100%)'}}
+          >
+            <div className="flex items-center gap-2">
+              <HiOutlineLightBulb className="text-[#FFC500] text-lg" />
+              <span className="text-[13px] font-bold text-white">Tip:</span>
             </div>
-            <p>
-              Show this QR code to your doctor during <br />  appointments — it gives
-              instant access to all your records securely.
+            <p className="text-[12px] text-[#FFFFFFCC] leading-relaxed">
+              Show this QR code to your doctor during appointments — it gives instant access to all your records securely.
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

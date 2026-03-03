@@ -9,9 +9,9 @@ const CATEGORIES = ['Lifestyle', 'Health', 'Challenges', 'Recovery'];
 const chipStyle = (cat, selected) => {
   if (selected) {
     if (cat === 'Lifestyle') return 'bg-[#FFA940] text-white border-[#FFA940]';
-    return 'bg-[#333CF5] text-white border-[#333CF5]';
+    return 'bg-brand-main text-white border-brand-main';
   }
-  return 'bg-white text-[#010218] border-gray-300 hover:border-[#333CF5] hover:text-[#333CF5]';
+  return 'bg-white text-black-main-text border-gray-300 hover:border-brand-main hover:text-brand-main';
 };
 
 const WriteStory = () => {
@@ -130,13 +130,13 @@ const WriteStory = () => {
         onClose={() => setToast((t) => ({ ...t, visible: false }))}
       />
 
-      <div className="w-full  bg-white sm:p-8 flex flex-col gap-7">
+      <div className="w-full  bg-white p-5 flex rounded-full flex-col gap-7">
 
         {/* ── Header ── */}
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <HiOutlinePencilAlt className="text-[#010218] text-xl" />
-            <h1 className="text-xl font-bold text-[#010218]">Write Story</h1>
+            <HiOutlinePencilAlt className="text-black-main-text text-xl" />
+            <h1 className="text-xl font-bold text-black-main-text">Write Story</h1>
           </div>
           <p className="text-sm text-[#757575]">Share your personal health journey to inspire others.</p>
         </div>
@@ -146,7 +146,7 @@ const WriteStory = () => {
 
         {/* ── Story Title ── */}
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-[#010218]">
+          <label className="text-sm font-semibold text-black-main-text">
             Story Title <span className="text-[#E7000B]">*</span>
           </label>
           <input
@@ -155,14 +155,14 @@ const WriteStory = () => {
             onChange={(e) => { setTitle(e.target.value); setErrors((er) => ({ ...er, title: '' })); }}
             placeholder="Give your story a compelling title..."
             className={`w-full px-4 py-3 rounded-xl border  text-sm outline-none transition
-              ${errors.title ? 'border-[#E7000B]' : 'border-[#E5E7EB]  focus:border-[#333CF5]'}`}
+              ${errors.title ? 'border-[#E7000B]' : 'border-[#E5E7EB]  focus:border-brand-main'}`}
           />
           {errors.title && <p className="text-xs text-[#E7000B]">{errors.title}</p>}
         </div>
 
         {/* ── Story Categories ── */}
         <div className="flex flex-col gap-3">
-          <label className="text-sm font-semibold text-[#010218]">Story Categories</label>
+          <label className="text-sm font-semibold text-black-main-text">Story Categories</label>
           <div className="flex flex-wrap gap-2">
             {CATEGORIES.map((cat) => {
               const sel = selectedCats.includes(cat);
@@ -187,12 +187,12 @@ const WriteStory = () => {
 
         {/* ── Cover Image ── */}
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-[#010218]">
+          <label className="text-sm font-semibold text-black-main-text">
             Cover Image <span className="text-gray-400 font-normal">(Optional)</span>
           </label>
           <div
             onClick={() => fileInputRef.current.click()}
-            className="relative h-[200px] rounded-xl border border-gray-200 bg-[#F9FAFB] cursor-pointer flex flex-col items-center justify-center overflow-hidden transition hover:border-[#333CF5]"
+            className="relative h-[200px] rounded-xl border border-gray-200 bg-[#F9FAFB] cursor-pointer flex flex-col items-center justify-center overflow-hidden transition hover:border-brand-main"
           >
             {imagePreview ? (
               <>
@@ -209,7 +209,7 @@ const WriteStory = () => {
                 <div className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-sm">
                   <HiOutlineCloudUpload className="text-xl text-gray-500" />
                 </div>
-                <p className="text-sm font-semibold text-[#010218]">Drag and drop your image here</p>
+                <p className="text-sm font-semibold text-black-main-text">Drag and drop your image here</p>
                 <p className="text-xs text-gray-400">or click to browse files</p>
                 <p className="text-xs text-gray-300 mt-1">Supported formats: JPG, PNG, GIF (Max 5MB)</p>
               </div>
@@ -223,7 +223,7 @@ const WriteStory = () => {
 
         {/* ── Your Story ── */}
         <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-[#010218]">Your Story</label>
+          <label className="text-sm font-semibold text-black-main-text">Your Story</label>
           <div
             ref={editorRef}
             contentEditable
@@ -232,7 +232,7 @@ const WriteStory = () => {
             data-placeholder="Share your health journey in detail. What challenges did you face? How did you overcome them? What was your experience like?"
             className={`w-full min-h-[220px] px-4 py-3.5 rounded-xl border text-sm outline-none leading-relaxed transition bg-[#F6F7F8] whitespace-pre-wrap wrap-break-word
               empty:before:content-[attr(data-placeholder)] empty:before:text-gray-400 empty:before:pointer-events-none
-              ${errors.story ? 'border-red-400' : 'border-[#E5E7EB] focus:border-[#333CF5]'}`}
+              ${errors.story ? 'border-red-400' : 'border-[#E5E7EB] focus:border-brand-main'}`}
           />
           {errors.story && <p className="text-xs text-red-500">{errors.story}</p>}
           <p className="text-xs text-[#6A7282]">{story.length} characters</p>
@@ -242,13 +242,13 @@ const WriteStory = () => {
         <div className="flex justify-end gap-3 pt-2">
           <button
             onClick={() => navigate('/patient/stories')}
-            className="px-7 py-2.5 rounded-full border border-gray-300 text-sm font-semibold text-[#010218] bg-white hover:bg-gray-50 transition"
+            className="px-7 py-2.5 rounded-full border border-gray-300 text-sm font-semibold text-black-main-text bg-white hover:bg-gray-50 transition"
           >
             Cancel
           </button>
           <button
             onClick={handlePublish}
-            className="px-7 py-2.5 rounded-full bg-[#333CF5] text-white text-sm font-semibold hover:bg-[#2730d4] transition shadow-sm"
+            className="px-7 py-2.5 rounded-full bg-brand-main text-white text-sm font-semibold hover:bg-[#2730d4] transition shadow-sm"
           >
             Publish Story
           </button>

@@ -47,7 +47,7 @@ const PrescriptionDetail = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#f6f7f8] flex items-center justify-center">
-        <p className="text-[#333CF5] font-bold text-[16px] animate-pulse">Loading prescription…</p>
+        <p className="text-brand-main font-bold text-[16px] animate-pulse">Loading prescription…</p>
       </div>
     );
   }
@@ -109,7 +109,7 @@ const PrescriptionDetail = () => {
           {/* ── Medications ─────────────────────────────── */}
           <section>
          <div 
-  className="flex items-center gap-2 text-[#010218] font-bold text-[14px] px-4 py-3 rounded-xl mb-5"
+  className="flex items-center gap-2 text-black-main-text font-bold text-[14px] px-4 py-3 rounded-xl mb-5"
   style={{ background: 'linear-gradient(90deg, #FAF5FF 0%, #F3E8FF 100%)' }}
 >
 
@@ -126,16 +126,16 @@ const PrescriptionDetail = () => {
                     {i + 1}
                   </div>
                   <div className="flex-1">
-                    <h5 className="text-[16px] font-bold text-[#010218] m-0 mb-1">{med.name}</h5>
+                    <h5 className="text-[16px] font-bold text-black-main-text m-0 mb-1">{med.name}</h5>
                     <p className="text-[13px] text-[#4A5565] m-0 mb-4">Dosage: {med.dose}</p>
                     <div className="flex gap-4 flex-wrap">
                       <div className="flex-1 min-w-[120px] bg-[#fafafa] border border-[#f3f4f6] rounded-xl p-3">
                         <span className="text-[11px] text-[#4A5565] block mb-1">Frequency</span>
-                        <strong className="text-[13px] text-[#010218] font-semibold">{med.freq}</strong>
+                        <strong className="text-[13px] text-black-main-text font-semibold">{med.freq}</strong>
                       </div>
                       <div className="flex-1 min-w-[100px] bg-[#fafafa] border border-[#f3f4f6] rounded-xl p-3">
                         <span className="text-[11px] text-[#4A5565] block mb-1">Duration</span>
-                        <strong className="text-[13px] text-[#010218]] font-semibold">{med.dur}</strong>
+                        <strong className="text-[13px] text-black-main-text] font-semibold">{med.dur}</strong>
                       </div>
                     </div>
                   </div>
@@ -156,7 +156,7 @@ const PrescriptionDetail = () => {
           {/* ── Labs & Radiology ────────────────────────── */}
           <section>
           <div 
-  className="flex items-center gap-2 text-[#010218] font-bold text-[14px] px-4 py-3 rounded-xl mb-5"
+  className="flex items-center gap-2 text-black-main-text font-bold text-[14px] px-4 py-3 rounded-xl mb-5"
   style={{ background: 'linear-gradient(90deg, #F0FDF4 0%, #DCFCE7 100%)' }}
 >
               <TbClipboardText className="text-[18px] text-[#00A63E]" />
@@ -174,13 +174,13 @@ const PrescriptionDetail = () => {
                         {i + 1}
                       </div>
                       <div>
-                        <h6 className="text-[15px] font-semibold text-[#010218] m-0">{lab.name}</h6>
+                        <h6 className="text-[15px] font-semibold text-black-main-text m-0">{lab.name}</h6>
                         {lab.note && <p className="text-[12px] text-[#4A5565] m-0 mt-[2px]">Note: {lab.note}</p>}
                       </div>
                     </div>
                     <button
                       onClick={() => fileInputRefs.current[lab.id]?.click()}
-                      className="flex items-center gap-2 bg-[#333CF5] text-white font-semibold text-[13px] px-5 py-[9px] rounded-xl border-none cursor-pointer transition-opacity hover:opacity-90 shrink-0"
+                      className="flex items-center gap-2 bg-brand-main text-white font-semibold text-[13px] px-5 py-[9px] rounded-xl border-none cursor-pointer transition-opacity hover:opacity-90 shrink-0"
                     >
                       <HiOutlineArrowUpTray className="text-[15px]" /> Upload Result
                     </button>
@@ -203,7 +203,7 @@ const PrescriptionDetail = () => {
                           className="w-14 h-14 rounded-xl object-cover border-2 border-[#10b981]"
                         />
                         <div className="flex flex-col gap-1">
-                          <span className="text-[14px] font-bold text-[#010218]">{labUploads[lab.id].name}</span>
+                          <span className="text-[14px] font-bold text-black-main-text">{labUploads[lab.id].name}</span>
                           <span className="text-[12px] text-[#6b7280]">{labUploads[lab.id].size} MB • Attached</span>
                           <span className="text-[12px] text-[#00a63e] font-bold flex items-center gap-1">
                             <FaCheckCircle /> Verified Result
@@ -235,7 +235,7 @@ const PrescriptionDetail = () => {
           {/* ── Clinical Notes ───────────────────────────── */}
           <section>
          <div 
-  className="flex items-center gap-2 text-[#010218] font-bold text-[14px] px-4 py-3 rounded-xl mb-5"
+  className="flex items-center gap-2 text-black-main-text font-bold text-[14px] px-4 py-3 rounded-xl mb-5"
   style={{ background: 'linear-gradient(90deg, #FFF7ED 0%, #FFEDD4 100%)' }}
 >
               <TbFileText className="text-[18px] text-[#F54900]" />

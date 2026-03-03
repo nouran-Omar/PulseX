@@ -16,7 +16,6 @@
  */
 
 import React from 'react';
-import styles from './GenderToggle.module.css';
 import { HiOutlineExclamationCircle } from 'react-icons/hi2';
 
 /* Color map — add more keys if you extend options */
@@ -37,15 +36,15 @@ export default function GenderToggle({
   required = true,
 }) {
   return (
-    <div className={styles.group}>
+    <div className="flex flex-col gap-1.5">
       {label && (
-        <label className={styles.label}>
+        <label className="text-[12.5px] font-semibold text-[#364153]">
           {label}
-          {required && <span className={styles.required}> *</span>}
+          {required && <span className="text-red-500 ml-0.5"> *</span>}
         </label>
       )}
 
-      <div className={styles.row}>
+      <div className="flex items-center gap-3 w-full">
         {options.map((opt) => {
           const isSelected = value === opt;
           const colors = OPTION_COLORS[opt] ?? DEFAULT_COLOR;
@@ -54,37 +53,20 @@ export default function GenderToggle({
             <button
               key={opt}
               type="button"
-              className={styles.btn}
+              className="flex-1 flex justify-center items-center gap-2 px-4 py-3 text-[13px] font-semibold rounded-[10px] border transition-all"
               style={
                 isSelected
-                  ? {
-                      background: colors.active,
-                      color: '#fff',
-                      borderColor: colors.active,
-                      boxShadow: `0 4px 14px ${colors.active}44`,
-                    }
-                  : {
-                      background: '#ffffff',
-                      color: '#364153',
-                      borderColor: '#d1d5dc',
-                    }
+                  ? { background: colors.active, color: '#fff', borderColor: colors.active, boxShadow: `0 4px 14px ${colors.active}44` }
+                  : { background: '#ffffff', color: '#364153', borderColor: '#d1d5dc' }
               }
               onClick={() => onChange(opt)}
             >
-              {/* Radio circle */}
               <span
-                className={styles.radio}
+                className="w-3.5 h-3.5 rounded-full border-2 shrink-0"
                 style={
                   isSelected
-                    ? {
-                        borderColor: '#fff',
-                        background: '#fff',
-                        boxShadow: `inset 0 0 0 4px ${colors.dot}`,
-                      }
-                    : {
-                        borderColor: '#d1d5dc',
-                        background: '#fff',
-                      }
+                    ? { borderColor: '#fff', background: '#fff', boxShadow: `inset 0 0 0 2px ${colors.dot}` }
+                    : { borderColor: '#d1d5dc', background: '#fff' }
                 }
               />
               {opt}
@@ -94,8 +76,8 @@ export default function GenderToggle({
       </div>
 
       {error && (
-        <span className={styles.errorText}>
-          <HiOutlineExclamationCircle className={styles.errorIcon} />
+        <span className="flex   flex-1  justify-center items-center gap-1.5 text-[12px] text-red-500 mt-0.5">
+          <HiOutlineExclamationCircle className="text-[14px] shrink-0" />
           {error}
         </span>
       )}

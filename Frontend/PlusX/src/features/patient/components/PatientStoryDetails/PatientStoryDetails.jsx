@@ -45,7 +45,7 @@ const RELATED = [
 
 const TAG_COLOURS = {
   Lifestyle: 'bg-[#FFF3E0] text-[#F57C00] border-[#FFE0B2]',
-  Health: 'bg-[#E8EAF6] text-[#333CF5] border-[#C5CAE9]',
+  Health: 'bg-[#E8EAF6] text-brand-main border-[#C5CAE9]',
   Fitness: 'bg-[#E8F5E9] text-[#2E7D32] border-[#C8E6C9]',
   Recovery: 'bg-[#FCE4EC] text-[#C62828] border-[#FFCDD2]',
   'Mental Health': 'bg-[#F3E5F5] text-[#6A1B9A] border-[#E1BEE7]',
@@ -74,34 +74,34 @@ const ReportModal = ({ title, onClose, onSubmit }) => {
     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl w-full max-w-sm p-6 shadow-xl">
         <div className="flex items-center justify-between mb-5">
-          <h3 className="text-base font-bold text-[#010218]">{title}</h3>
+          <h3 className="text-base font-bold text-black-main-text">{title}</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600"><HiX className="text-xl" /></button>
         </div>
         <div className="flex flex-col gap-4">
           <div>
-            <label className="text-xs font-semibold text-[#010218] mb-1 block">Category</label>
+            <label className="text-xs font-semibold text-black-main-text mb-1 block">Category</label>
             <select
               value={cat} onChange={(e) => setCat(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 bg-[#F6F7F8] text-sm outline-none focus:border-[#333CF5]"
+              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 bg-[#F6F7F8] text-sm outline-none focus:border-brand-main"
             >
               <option value="" />
               {REPORT_CATS.map((c) => <option key={c}>{c}</option>)}
             </select>
           </div>
           <div>
-            <label className="text-xs font-semibold text-[#010218] mb-1 block">Reason</label>
+            <label className="text-xs font-semibold text-black-main-text mb-1 block">Reason</label>
             <textarea
               rows={4} value={reason} onChange={(e) => setReason(e.target.value)}
               placeholder="Please provide details about why you're reporting this..."
-              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 bg-[#F6F7F8] text-sm outline-none resize-none focus:border-[#333CF5]"
+              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 bg-[#F6F7F8] text-sm outline-none resize-none focus:border-brand-main"
             />
           </div>
         </div>
         <div className="flex gap-3 mt-5">
-          <button onClick={onClose} className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-semibold text-[#010218] hover:bg-gray-50 transition">Cancel</button>
+          <button onClick={onClose} className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-semibold text-black-main-text hover:bg-gray-50 transition">Cancel</button>
           <button
             onClick={() => { onSubmit(); onClose(); }}
-            className="flex-1 py-2.5 rounded-xl bg-[#333CF5] text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-[#2730d4] transition"
+            className="flex-1 py-2.5 rounded-xl bg-brand-main text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-[#2730d4] transition"
           >
             <IoSendSharp /> Submit Report
           </button>
@@ -165,19 +165,19 @@ const PatientStoryDetails = () => {
         />
       )}
 
-      <div className="w-full flex flex-col gap-5">
+      <div className="w-full flex flex-col gap-5 p-5">
         {/* ── Page Header ── */}
         <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
           <div className="flex items-center gap-2 mb-1">
-            <TbBook className="text-xl text-[#010218]" />
-            <h1 className="text-lg font-bold text-[#010218]">Patient Story Details</h1>
+            <TbBook className="text-xl text-black-main-text" />
+            <h1 className="text-lg font-bold text-black-main-text">Patient Story Details</h1>
           </div>
           <p className="text-sm text-[#757575]">Read full patient journey and shared experiences.</p>
 
           <div className="mt-4 flex items-start gap-4">
             <Avatar img={story.authorImg} initials={story.author[0]} size="w-14 h-14" />
             <div>
-              <p className="font-semibold text-[#010218]">{story.author}</p>
+              <p className="font-semibold text-black-main-text">{story.author}</p>
               <p className="text-xs text-[#6B7280]">Shared publicly to inspire other patients</p>
               <p className="text-xs text-[#4B5563] mt-0.5">{story.date}</p>
               <div className="flex flex-wrap gap-2 mt-2">
@@ -193,7 +193,7 @@ const PatientStoryDetails = () => {
 
         {/* ── Story Article ── */}
         <div className="bg-white rounded-2xl p-5 sm:p-7 border border-gray-100 shadow-sm">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#010218] mb-5">{story.title}</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-black-main-text mb-5">{story.title}</h2>
           <div className="flex flex-col gap-4 text-sm text-[#374151] leading-relaxed">
             {story.content.slice(0, 2).map((p, i) => <p key={i}>{p}</p>)}
             <img src={story.coverImg} alt="Story cover" className="w-full rounded-xl object-cover max-h-[320px]" />
@@ -213,12 +213,12 @@ const PatientStoryDetails = () => {
 
           <button
             onClick={() => setShowCommentBox(!showCommentBox)}
-            className={`flex items-center gap-1.5 text-sm font-medium transition shrink-0 ${showCommentBox ? 'text-[#333CF5] bg-[#EFF6FF] rounded-full p-1 ' : 'text-[#4B5563] hover:text-[#333CF5]'}`}
+            className={`flex items-center gap-1.5 text-sm font-medium transition shrink-0 ${showCommentBox ? 'text-brand-main bg-[#EFF6FF] rounded-full p-1 ' : 'text-[#4B5563] hover:text-brand-main'}`}
           >
             <HiOutlineChatAlt2 className="text-lg" /> {comments.length + story.commentsCount}
           </button>
 
-          <button onClick={handleShare} className="flex items-center gap-1.5 text-sm font-medium text-[#4B5563] hover:text-[#333CF5] transition shrink-0">
+          <button onClick={handleShare} className="flex items-center gap-1.5 text-sm font-medium text-[#4B5563] hover:text-brand-main transition shrink-0">
             <HiOutlineShare className="text-lg" /> {story.shares}
           </button>
 
@@ -239,7 +239,7 @@ const PatientStoryDetails = () => {
                     autoFocus
                     onChange={(e) => setComment(e.target.value)}
                     placeholder="Write your comment..."
-                    className="w-full bg-transparent text-sm outline-none resize-none text-[#010218] placeholder:text-gray-400"
+                    className="w-full bg-transparent text-sm outline-none resize-none text-black-main-text placeholder:text-gray-400"
                   />
                 </div>
               </div>
@@ -247,7 +247,7 @@ const PatientStoryDetails = () => {
                 <button onClick={() => { setComment(''); setShowCommentBox(false); }} className="text-sm text-gray-500 hover:text-gray-700 transition">Cancel</button>
                 <button
                   onClick={handlePostComment}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#333CF5] text-white text-sm font-semibold hover:bg-[#2730d4] transition"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-brand-main text-white text-sm font-semibold hover:bg-[#2730d4] transition"
                 >
                   <IoSendSharp /> Post Comment
                 </button>
@@ -257,10 +257,10 @@ const PatientStoryDetails = () => {
             {/* ── Comments Preview ── */}
             <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm animate-in fade-in slide-in-from-top-4">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-bold text-[#010218]">Comments ({comments.length + story.commentsCount})</h3>
+                <h3 className="text-sm font-bold text-black-main-text">Comments ({comments.length + story.commentsCount})</h3>
                 <button
                   onClick={() => navigate(`/patient/stories/${id}/comments`)}
-                  className="text-xs font-semibold text-[#333CF5] hover:underline flex items-center gap-1"
+                  className="text-xs font-semibold text-brand-main hover:underline flex items-center gap-1"
                 >
                   View All <span>›</span>
                 </button>
@@ -271,7 +271,7 @@ const PatientStoryDetails = () => {
                     <Avatar img={c.avatar} initials={c.initials} size="w-8 h-8" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <p className="text-xs font-semibold text-[#010218]">{c.user}</p>
+                        <p className="text-xs font-semibold text-black-main-text">{c.user}</p>
                         <p className="text-xs  text-[#6A7282]">{c.time}</p>
                       </div>
                       <p className="text-xs text-[#364153] mt-0.5">{c.text}</p>
@@ -285,24 +285,24 @@ const PatientStoryDetails = () => {
 
         {/* ── You May Also Like ── */}
         <div>
-          <h3 className="text-base font-bold text-[#010218] mb-4">You may also like</h3>
+          <h3 className="text-base font-bold text-black-main-text mb-4">You may also like</h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {RELATED.map((r) => (
               <div key={r.id} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col gap-3">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-gray-200" />
                   <div>
-                    <p className="text-xs font-semibold text-[#010218]">{r.author}</p>
+                    <p className="text-xs font-semibold text-black-main-text">{r.author}</p>
                     <p className="text-xs text-[#6B7280]">{r.date}</p>
                   </div>
                 </div>
-                <p className="text-sm font-semibold text-[#010218] leading-snug">{r.title}</p>
+                <p className="text-sm font-semibold text-black-main-text leading-snug">{r.title}</p>
                 <div className="flex flex-wrap gap-1">
                   {r.tags.map((t) => (
                     <span key={t} className={`px-2 py-0.5 rounded-full text-xs border ${tagCls(t)}`}>{t}</span>
                   ))}
                 </div>
-                <button onClick={() => navigate(`/patient/stories/${r.id}`)} className="text-xs font-semibold text-[#333CF5] hover:underline text-left mt-auto">
+                <button onClick={() => navigate(`/patient/stories/${r.id}`)} className="text-xs font-semibold text-brand-main hover:underline text-left mt-auto">
                   Read Story →
                 </button>
               </div>
@@ -312,10 +312,10 @@ const PatientStoryDetails = () => {
 
         {/* ── Footer Buttons ── */}
         <div className="flex justify-end gap-3 py-2">
-          <button onClick={() => navigate('/patient/stories')} className="px-6 py-2.5 rounded-full border border-gray-300 text-sm font-semibold text-[#010218] bg-white hover:bg-gray-50 transition">
+          <button onClick={() => navigate('/patient/stories')} className="px-6 py-2.5 rounded-full border border-gray-300 text-sm font-semibold text-black-main-text bg-white hover:bg-gray-50 transition">
             Back to Stories
           </button>
-          <button onClick={() => navigate('/patient/write-story')} className="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-[#333CF5] text-white text-sm font-semibold hover:bg-[#2730d4] transition">
+          <button onClick={() => navigate('/patient/write-story')} className="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-brand-main text-white text-sm font-semibold hover:bg-[#2730d4] transition">
             <HiOutlinePencilAlt /> Write Story
           </button>
         </div>

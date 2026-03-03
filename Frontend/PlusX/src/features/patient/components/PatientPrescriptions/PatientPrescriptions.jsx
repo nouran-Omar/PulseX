@@ -310,7 +310,7 @@ const PatientPrescriptions = () => {
     switch (opt) {
       case 'Active Only':    return 'bg-[#00A63E] text-white shadow-md';
       case 'Completed Only': return 'bg-[#4A5565] text-white shadow-md';
-      default:               return 'bg-[#333CF5] text-white shadow-md';
+      default:               return 'bg-brand-main text-white shadow-md';
     }
   };
 
@@ -330,7 +330,7 @@ const PatientPrescriptions = () => {
 
   return (
     <div
-      className="min-h-screen  font-[Inter,sans-serif]"
+      className="min-h-screen p-5   font-[Inter,sans-serif]"
       style={{
         opacity:    visible ? 1 : 0,
         transform:  visible ? 'translateY(0)' : 'translateY(18px)',
@@ -341,7 +341,7 @@ const PatientPrescriptions = () => {
       <div className="flex items-center gap-3 mb-6">
        
         <div>
-          <h1 className="text-[20px] font-bold text-[#010218] m-0 leading-tight flex items-center "> <LuClipboardList className="text-[30px] text-[#010218] mr-2" />Prescription History</h1>
+          <h1 className="text-[20px] font-bold text-black-main-text m-0 leading-tight flex items-center "> <LuClipboardList className="text-[30px] text-black-main-text mr-2" />Prescription History</h1>
           <p className="text-[13px] text-[#757575] mt-[2px] m-0">View and manage all your medical prescriptions</p>
         </div>
       </div>
@@ -361,14 +361,14 @@ const PatientPrescriptions = () => {
             <input
               type="text"
               placeholder="Search by Doctor or Date..."
-              className="w-full bg-transparent outline-none text-[14px] text-[#010218] placeholder-[#9ca3af]"
+              className="w-full bg-transparent outline-none text-[14px] text-black-main-text placeholder-[#9ca3af]"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           <button
             onClick={() => setFilterOpen((o) => !o)}
-            className="flex items-center gap-2 bg-[#333CF5] text-white font-semibold text-[13px] px-4 py-[10px] rounded-xl cursor-pointer border-none shadow-[0_4px_14px_rgba(51,60,245,0.3)] transition-transform active:scale-95"
+            className="flex items-center gap-2 bg-brand-main text-white font-semibold text-[13px] px-4 py-[10px] rounded-xl cursor-pointer border-none shadow-[0_4px_14px_rgba(51,60,245,0.3)] transition-transform active:scale-95"
           >
             <LuFilter className="text-[15px]" />
             Filter
@@ -393,7 +393,7 @@ const PatientPrescriptions = () => {
 
       {/* ── Count ── */}
       <p className="text-[13px] text-[#4A5565] font-medium mb-4">
-        Showing <span className="font-bold text-[#010218]">{filtered.length}</span> prescription{filtered.length !== 1 ? 's' : ''}
+        Showing <span className="font-bold text-black-main-text">{filtered.length}</span> prescription{filtered.length !== 1 ? 's' : ''}
       </p>
 
       {/* ── Cards Grid ── */}
@@ -460,7 +460,7 @@ const PrescriptionCard = ({ item, index, visible, onView }) => {
 
   return (
     <div
-      className="bg-white rounded-3xl overflow-hidden shadow-[0_10px_15px_-3px_rgba(0,0,0,0.05)] transition-transform duration-300 hover:-translate-y-1"
+      className="bg-white  rounded-3xl overflow-hidden shadow-[0_10px_15px_-3px_rgba(0,0,0,0.05)] transition-transform duration-300 hover:-translate-y-1"
       style={{
         opacity:    visible ? 1 : 0,
         transform:  visible ? 'translateY(0) scale(1)' : 'translateY(28px) scale(0.97)',
@@ -475,11 +475,11 @@ const PrescriptionCard = ({ item, index, visible, onView }) => {
     
     {/* صف الدكتور: الأيقونة والاسم والتخصص */}
     <div className="flex items-center gap-3">
-      <div className="w-11 h-11 rounded-full bg-[#333CF5] text-white flex items-center justify-center text-[20px] shrink-0">
+      <div className="w-11 h-11 rounded-full bg-brand-main text-white flex items-center justify-center text-[20px] shrink-0">
         <FaRegUserCircle />
       </div>
       <div>
-        <h4 className="text-[15px] font-bold text-[#010218] m-0 leading-tight">{item.doc}</h4>
+        <h4 className="text-[15px] font-bold text-black-main-text m-0 leading-tight">{item.doc}</h4>
         <p className="text-[12px] text-[#4A5565] m-0 flex items-center gap-1 mt-[2px]">
           <span className="text-[11px]">⚕</span> {item.spec}
         </p>
@@ -489,7 +489,7 @@ const PrescriptionCard = ({ item, index, visible, onView }) => {
     {/* صف التاريخ: يظهر الآن تحت الدكتور مباشرة داخل الخلفية الملونة */}
     <div className="flex items-center gap-2 text-[12px] text-[#4A5565] ml-1">
       <HiOutlineCalendar className="text-[14px] shrink-0 text-[#4A5565]" />
-      <span>Issued: <b className="text-[#010218]">{item.date}</b></span>
+      <span>Issued: <b className="text-black-main-text">{item.date}</b></span>
     </div>
     
   </div>
@@ -506,27 +506,27 @@ const PrescriptionCard = ({ item, index, visible, onView }) => {
 
         <div className="flex justify-between text-[13px] mb-2">
           <span className="text-[#4A5565]">Medications</span>
-          <strong className="text-[#010218]">{medsCount} item{medsCount !== 1 ? 's' : ''}</strong>
+          <strong className="text-black-main-text">{medsCount} item{medsCount !== 1 ? 's' : ''}</strong>
         </div>
         <div className="flex justify-between text-[13px] mb-3">
           <span className="text-[#4A5565]">Tests Requested</span>
-          <strong className="text-[#010218]">{testsCount} item{testsCount !== 1 ? 's' : ''}</strong>
+          <strong className="text-black-main-text">{testsCount} item{testsCount !== 1 ? 's' : ''}</strong>
         </div>
         <p className="text-[11px] text-[#757575] border-t border-[#f3f4f6] pt-3 m-0">ID: {item.id}</p>
         <div className="flex gap-3 mt-4">
           <button
             onClick={onView}
-            className="flex-1 flex items-center justify-center gap-2 bg-[#333CF5] text-white font-semibold text-[13px] py-[10px] rounded-xl cursor-pointer border-none transition-opacity hover:opacity-90"
+            className="flex-1 flex items-center justify-center gap-2 bg-brand-main text-white font-semibold text-[13px] py-[10px] rounded-xl cursor-pointer border-none transition-opacity hover:opacity-90"
           >
             <LuEye className="text-[15px]" /> View
           </button>
           <button
             onClick={handleDownload}
             disabled={loading}
-            className="w-11 h-10 flex items-center justify-center bg-white border border-[#e5e7eb] rounded-xl text-[#364153] text-[18px] cursor-pointer transition-colors hover:bg-[#f9fafb] hover:text-[#333CF5]"
+            className="w-11 h-10 flex items-center justify-center bg-white border border-[#e5e7eb] rounded-xl text-[#364153] text-[18px] cursor-pointer transition-colors hover:bg-[#f9fafb] hover:text-brand-main"
           >
             {loading
-              ? <div className="w-5 h-5 border-2 border-[#333CF5] border-t-transparent rounded-full animate-spin" />
+              ? <div className="w-5 h-5 border-2 border-brand-main border-t-transparent rounded-full animate-spin" />
               : <LuDownload />
             }
           </button>

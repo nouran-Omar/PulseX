@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import styles from "./PatientManagement.module.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import EmptyState from "../shared/EmptyState/EmptyState";
 import { Toast } from "../../../../components";
@@ -165,7 +164,7 @@ export default function PatientManagement() {
   };
 
   return (
-    <div className={styles.page}>
+    <section className="flex flex-col gap-6 p-5 " aria-label="Patient Management">
 
       <Toast
         visible={toast.visible}
@@ -175,57 +174,54 @@ export default function PatientManagement() {
         onClose={() => setToast((t) => ({ ...t, visible: false }))}
       />
 
-      <div className={styles.header}>
-        <div className={styles.titleInfo}>
-          <div className={styles.titleWithIcon}>
-            <MdManageAccounts className={styles.iconSetting} />
-            <h1>Patient Management</h1>
-          </div>
-          <p>View, edit, and manage all registered patients.</p>
+      {/* ── Page Header ── */}
+      <div className="flex flex-col gap-1">
+        <div className="flex items-center gap-2 mb-2 ">
+          <MdManageAccounts className="text-[22px] text-black-main-text" aria-hidden="true" />
+          <h1 className="text-[18px] sm:text-[20px] font-bold text-black-main-text leading-none">
+            Patient Management
+          </h1>
         </div>
+        <p className="text-[12px] text-[#757575] ">View, edit, and manage all registered patients.</p>
       </div>
 
-      <div className={styles.search}>
-        <div className={styles.topActions}>
-          <div className={styles.searchContainer}>
-            <FiSearch className={styles.searchIcon} />
-            <input
-              type="text"
-              placeholder="Search"
-              className={styles.searchInput}
-              value={searchQuery}
-              onChange={handleSearch}
-            />
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <button className={styles.exportBtn} onClick={handleExport}>
-              <FiUpload style={{ marginRight: 6 }} /> Export
-            </button>
-            <button className={styles.addBtn} onClick={() => navigate("/admin/AddPatientBtn")}>
-              <FiPlus style={{ marginRight: 6 }} /> Add Patient
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {selectedIds.length > 0 && (
-        <div className={styles.bulkBar}>
+      {/* ── Search + Actions ── */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <div className="relative flex-1 min-w-0">
+          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[15px]" aria-hidden="true" />
           <input
-            type="checkbox"
-            checked
-            onChange={() => setSelectedIds([])}
-            className={styles.checkbox}
+            type="search"
+            placeholder="Search patients…"
+            aria-label="Search patients"
+            value={searchQuery}
+            onChange={handleSearch}
+            className="pl-9 pr-4 py-2.5 text-[13px] bg-[#F6F7F8] border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#333CF5]/30 focus:border-[#333CF5] transition-colors"
           />
-          <span className={styles.bulkCount}>{selectedIds.length} Selected</span>
-          <button className={styles.bulkDeleteBtn} onClick={openBulkDeleteModal}>
+        </div>
+        <div className="flex items-center gap-3 shrink-0">
+          <button onClick={handleExport} className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-gray-600 bg-white border border-gray-200 rounded-full hover:bg-gray-50 transition-colors">
+            <FiUpload className="text-[14px]" /> Export
+          </button>
+          <button onClick={() => navigate("/admin/AddPatientBtn")} className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-white bg-[#333CF5] rounded-full hover:bg-[#0913C3] transition-colors">
+            <FiPlus className="text-[14px]" /> Add Patient
+          </button>
+        </div>
+      </div>
+
+      {/* ── Bulk Bar ── */}
+      {selectedIds.length > 0 && (
+        <div className="flex items-center gap-4 px-4 py-3 bg-[#EFF6FF] border border-[#bfdbfe] rounded-[10px]">
+          <span className="text-[13px] font-semibold text-[#155dfc]">{selectedIds.length} Selected</span>
+          <button onClick={openBulkDeleteModal} className="px-3 py-1.5 text-[12px] font-semibold text-white bg-red-500 rounded-[8px] hover:bg-red-600 transition-colors">
             Delete Selected
           </button>
-          <button className={styles.bulkCancelBtn} onClick={() => setSelectedIds([])}>
+          <button onClick={() => setSelectedIds([])} className="px-3 py-1.5 text-[12px] font-semibold text-gray-600 bg-white border border-gray-200 rounded-[8px] hover:bg-gray-50 transition-colors">
             Cancel
           </button>
         </div>
       )}
 
+      {/* ── Table / Empty ── */}
       {filtered.length === 0 ? (
         <EmptyState
           icon={<HiOutlineUsers />}
@@ -238,83 +234,46 @@ export default function PatientManagement() {
         />
       ) : (
         <>
-          <div className={styles.tableWrap}>
-            <table className={styles.table}>
+          <div className="overflow-x-auto rounded-[12px] border border-gray-200/70">
+            <table className="w-full min-w-[640px] border-collapse">
               <thead>
-                <tr>
-                  <th className={styles.thCheck}>
-                    <input
-                      type="checkbox"
-                      className={styles.checkbox}
-                      checked={allPageSelected}
-                      onChange={(e) => toggleSelectAll(e.target.checked)}
-                    />
+                <tr className="bg-[#333CF5] text-white text-left">
+                  <th className="w-10 px-3 py-3">
+                    <input type="checkbox" checked={allPageSelected} onChange={(e) => toggleSelectAll(e.target.checked)} className="w-4 h-4 rounded accent-white cursor-pointer" />
                   </th>
-                  <th className={styles.th}>Full Name</th>
-                  <th className={styles.th}>Email</th>
-                  <th className={styles.th}>Phone Number</th>
-                  <th className={`${styles.th} ${styles.thCenter}`}>Age</th>
-                  <th className={`${styles.th} ${styles.thCenter}`}>Gender</th>
-                  <th className={`${styles.th} ${styles.thCenter}`}>Actions</th>
+                  <th className="px-3 py-3 text-[12px] font-semibold whitespace-nowrap">Full Name</th>
+                  <th className="px-3 py-3 text-[12px] font-semibold whitespace-nowrap">Email</th>
+                  <th className="px-3 py-3 text-[12px] font-semibold whitespace-nowrap">Phone</th>
+                  <th className="px-3 py-3 text-[12px] font-semibold text-center whitespace-nowrap">Age</th>
+                  <th className="px-3 py-3 text-[12px] font-semibold text-center whitespace-nowrap">Gender</th>
+                  <th className="px-3 py-3 text-[12px] font-semibold text-center whitespace-nowrap">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {pageItems.map((patient, idx) => {
-                  const isMale     = patient.gender?.toLowerCase() === "male";
+                  const isMale = patient.gender?.toLowerCase() === "male";
                   const isSelected = selectedIds.includes(patient.id);
                   return (
-                    <tr
-                      key={patient.id}
-                      className={`${styles.tr} ${idx % 2 === 0 ? styles.trEven : styles.trOdd}${isSelected ? " " + styles.trSelected : ""}`}
-                    >
-                      <td className={styles.tdCheck}>
-                        <input
-                          type="checkbox"
-                          className={styles.checkbox}
-                          checked={isSelected}
-                          onChange={() => toggleSelect(patient.id)}
-                        />
+                    <tr key={patient.id} className={`border-b border-gray-100 transition-colors ${isSelected ? "bg-[#EFF6FF]" : idx % 2 === 0 ? "bg-white" : "bg-[#F9FAFB]"} hover:bg-[#EFF6FF]/60`}>
+                      <td className="px-3 py-2.5">
+                        <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(patient.id)} className="w-4 h-4 rounded accent-[#155dfc] cursor-pointer" />
                       </td>
-                      <td className={styles.td}>
-                        <div className={styles.nameCell}>
-                          <img
-                            src={patient.image}
-                            alt={patient.fullName}
-                            className={styles.avatar}
-                          />
-                          <span className={styles.nameText}>{patient.fullName}</span>
+                      <td className="px-3 py-2.5">
+                        <div className="flex items-center gap-2.5">
+                          <img src={patient.image} alt={patient.fullName} className="w-8 h-8 rounded-full object-cover shrink-0 border border-gray-100" />
+                          <span className="text-[13px] font-semibold text-black-main-text truncate max-w-[160px]">{patient.fullName}</span>
                         </div>
                       </td>
-                      <td className={styles.td}>
-                        <span className={styles.mutedText}>{patient.email}</span>
+                      <td className="px-3 py-2.5"><span className="text-[12px] text-[#757575] truncate block max-w-[180px]">{patient.email}</span></td>
+                      <td className="px-3 py-2.5"><span className="text-[12px] text-[#757575] whitespace-nowrap">{patient.phone}</span></td>
+                      <td className="px-3 py-2.5 text-center"><span className="text-[12px] text-[#757575]">{patient.age}</span></td>
+                      <td className="px-3 py-2.5 text-center">
+                        <span className={`inline-block px-2.5 py-0.5 text-[11px] font-semibold rounded-full ${isMale ? "bg-[#28A745] text-white" : "bg-[#FD7E14] text-white"}`}>{patient.gender}</span>
                       </td>
-                      <td className={styles.td}>
-                        <span className={styles.mutedText}>{patient.phone}</span>
-                      </td>
-                      <td className={`${styles.td} ${styles.tdCenter}`}>
-                        <span className={styles.mutedText}>{patient.age}</span>
-                      </td>
-                      <td className={`${styles.td} ${styles.tdCenter}`}>
-                        <span className={isMale ? styles.badgeMale : styles.badgeFemale}>
-                          {patient.gender}
-                        </span>
-                      </td>
-                      <td className={`${styles.td} ${styles.tdCenter}`}>
-                        <div className={styles.actionsCell}>
-                          <button
-                            className={styles.editBtn}
-                            onClick={() => navigate(`/admin/edit-patient/${patient.id}`)}
-                            title="Edit"
-                          >
-                            <FiEdit3 size={16} />
-                          </button>
-                          <button
-                            className={styles.deleteBtn}
-                            onClick={() => openSingleDeleteModal(patient)}
-                            title="Delete"
-                          >
-                            <FiTrash2 size={16} />
-                          </button>
+                      <td className="px-3 py-2.5 text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <button onClick={() => navigate(`/admin/edit-patient/${patient.id}`)} className="w-7 h-7 flex items-center justify-center rounded-[7px]  text-[#010218] hover: transition-colors" title="Edit"><FiEdit3 size={13} /></button>
+                          <button onClick={() => openSingleDeleteModal(patient)} className="w-7 h-7 flex items-center justify-center rounded-[7px] text-[#DC3545] hover:bg-red-100 transition-colors" title="Delete"><FiTrash2 size={13} /></button>
                         </div>
                       </td>
                     </tr>
@@ -324,56 +283,31 @@ export default function PatientManagement() {
             </table>
           </div>
 
-          <div className={styles.paginationBar}>
-            <div className={styles.rppGroup}>
-              <span className={styles.rppLabel}>Rows per page</span>
-              <div className={styles.rppSelect} onClick={() => setShowRPPMenu((v) => !v)}>
-                <span>{rowsPerPage}</span>
-                <HiChevronDown size={14} />
-                {showRPPMenu && (
-                  <ul className={styles.rppMenu}>
-                    {ROWS_OPTIONS.map((opt) => (
-                      <li
-                        key={opt}
-                        className={opt === rowsPerPage ? styles.rppActive : ""}
-                        onClick={() => {
-                          setRowsPerPage(opt);
-                          setCurrentPage(1);
-                          setShowRPPMenu(false);
-                        }}
-                      >
-                        {opt}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              <span className={styles.rppTotal}>of {totalRows} rows</span>
+          {/* ── Pagination ── */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+            <div className="relative flex items-center gap-2 text-[12px] text-[#333CF5]">
+              <span>Rows per page</span>
+              <button onClick={() => setShowRPPMenu((v) => !v)} className="flex items-center gap-1 px-2.5 py-1.5 border border-gray-200 rounded-full bg-white hover:bg-gray-50 text-[12px] font-semibold text-[#333CF5]">
+                {rowsPerPage}<HiChevronDown size={12} />
+              </button>
+              {showRPPMenu && (
+                <ul className="absolute left-24 bottom-full mb-1 z-20 bg-white border border-gray-200 rounded-[10px] shadow-lg overflow-hidden min-w-[70px] list-none p-1 m-0">
+                  {ROWS_OPTIONS.map((opt) => (
+                    <li key={opt} onClick={() => { setRowsPerPage(opt); setCurrentPage(1); setShowRPPMenu(false); }} className={`px-3 py-2 text-[12px] cursor-pointer rounded-[6px] transition-colors ${opt === rowsPerPage ? "bg-[#EFF6FF] text-[#155dfc] font-semibold" : "hover:bg-gray-50 text-gray-700"}`}>{opt}</li>
+                  ))}
+                </ul>
+              )}
+              <span>of {totalRows} rows</span>
             </div>
-
-            <div className={styles.pages}>
-              <button
-                className={styles.pageArrow}
-                disabled={safePage === 1}
-                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-              >
-                <HiChevronLeft size={16} />
+            <div className="flex items-center gap-1">
+              <button disabled={safePage === 1} onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} className="w-7 h-7 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed">
+                <HiChevronLeft size={14} />
               </button>
               {getPageNumbers().map((n) => (
-                <button
-                  key={n}
-                  className={n === safePage ? styles.pageActive : styles.pageBtn}
-                  onClick={() => setCurrentPage(n)}
-                >
-                  {n}
-                </button>
+                <button key={n} onClick={() => setCurrentPage(n)} className={`w-7 h-7 flex items-center justify-center rounded-full text-[12px] font-semibold transition-colors ${n === safePage ? "bg-[#333CF5] text-white" : "border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>{n}</button>
               ))}
-              <button
-                className={styles.pageArrow}
-                disabled={safePage === totalPages}
-                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-              >
-                <HiChevronRight size={16} />
+              <button disabled={safePage === totalPages} onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} className="w-7 h-7 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed">
+                <HiChevronRight size={14} />
               </button>
             </div>
           </div>
@@ -382,19 +316,11 @@ export default function PatientManagement() {
 
       <ConfirmModal
         isOpen={modal.open}
-        title={
-          modal.type === "bulk"
-            ? `Delete ${selectedIds.length} Patients?`
-            : "Delete Patient?"
-        }
-        desc={
-          modal.type === "bulk"
-            ? `Are you sure you want to delete ${selectedIds.length} patients? This action is permanent and cannot be undone.`
-            : "Are you sure you want to delete this patient? This action is permanent and cannot be undone."
-        }
+        title={modal.type === "bulk" ? `Delete ${selectedIds.length} Patients?` : "Delete Patient?"}
+        desc={modal.type === "bulk" ? `Are you sure you want to delete ${selectedIds.length} patients? This action is permanent.` : "Are you sure you want to delete this patient? This action is permanent."}
         onCancel={() => setModal({ open: false, type: "single", targetId: null })}
         onConfirm={handleDeleteConfirm}
       />
-    </div>
+    </section>
   );
 }

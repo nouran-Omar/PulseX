@@ -5,7 +5,9 @@ import {
   LuUpload, LuUser, LuMail, LuPhone, LuCalendar, 
   LuMapPin, LuDollarSign, LuLock, LuCheck, LuTrash2 
 } from "react-icons/lu";
-import styles from './EditForm.module.css';
+
+const inputBase = "w-full px-3 py-2 text-[13px] rounded-[10px] border border-gray-200 bg-white text-black-main-text placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#155dfc]/30 focus:border-[#155dfc] transition-colors";
+const iconInputBase = "flex items-center gap-2 px-3 py-2 rounded-[10px] border border-gray-200 bg-white text-[13px] text-black-main-text focus-within:ring-2 focus-within:ring-[#155dfc]/30 focus-within:border-[#155dfc] transition-colors";
 
 export default function EditForm({ title, initialData, onSave, onDelete, type }) {
   
@@ -23,78 +25,79 @@ export default function EditForm({ title, initialData, onSave, onDelete, type })
   });
 
   return (
-    <div className={styles.container}>
-      {/* هيدر أصغر ومضغوط */}
-      <div className={styles.topHeader}>
-        <div className={styles.headerIcon}><LuUser /></div>
-        <div className={styles.headerInfo}>
-          <h2>{title}</h2>
-          <p>Manage registered {type}s details.</p>
+    <section className="flex flex-col gap-5" aria-label={title}>
+      {/* Header */}
+      <div className="flex items-center gap-3 pb-4 border-b border-gray-100">
+        <div className="w-10 h-10 flex items-center justify-center rounded-[12px] bg-[#EFF6FF] text-[#155dfc] text-[18px]"><LuUser /></div>
+        <div>
+          <h2 className="text-[16px] font-bold text-black-main-text">{title}</h2>
+          <p className="text-[12px] text-gray-500">Manage registered {type}s details.</p>
         </div>
       </div>
 
-      <div className={styles.layoutBody}>
-        {/* قسم رفع الصورة */}
-        <aside className={styles.photoSidebar}>
-          <label className={styles.fieldLabel}>Profile Photo</label>
-          <div className={styles.uploadBox}>
-            <div className={styles.uploadCircle}><LuUpload /></div>
-            <strong>Upload Photo</strong>
-            <span>Max 5MB</span>
+      <div className="flex flex-col lg:flex-row gap-5">
+        {/* Photo Upload Sidebar */}
+        <aside className="w-full lg:w-[180px] flex flex-col gap-2">
+          <label className="text-[12px] font-semibold text-[#364153]">Profile Photo</label>
+          <div className="flex flex-col items-center justify-center gap-2 p-5 rounded-[14px] border-2 border-dashed border-gray-200 bg-[#F6F7F8] cursor-pointer hover:border-[#155dfc]/40 transition-colors text-center">
+            <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#155dfc] text-[18px] shadow-sm"><LuUpload /></div>
+            <strong className="text-[12px] font-semibold text-black-main-text">Upload Photo</strong>
+            <span className="text-[11px] text-gray-400">Max 5MB</span>
           </div>
         </aside>
 
-        {/* كارت المعلومات */}
-        <form className={styles.formCard} onSubmit={formik.handleSubmit}>
-          <div className={styles.infoTitle}><LuUser /> Personal Information</div>
+        {/* Form Card */}
+        <form className="flex-1 flex flex-col gap-4" onSubmit={formik.handleSubmit}>
+          <div className="flex items-center gap-2 text-[13px] font-semibold text-[#155dfc]"><LuUser /> Personal Information</div>
           
-          <div className={styles.formGrid}>
-            <div className={styles.inputCell}>
-              <label>First Name <span className={styles.req}>*</span></label>
-              <input name="firstName" {...formik.getFieldProps('firstName')} placeholder="First name" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[12px] font-semibold text-[#364153]">First Name <span className="text-red-500">*</span></label>
+              <input className={inputBase} name="firstName" {...formik.getFieldProps('firstName')} placeholder="First name" />
             </div>
-            <div className={styles.inputCell}>
-              <label>Last Name <span className={styles.req}>*</span></label>
-              <input name="lastName" {...formik.getFieldProps('lastName')} placeholder="Last name" />
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[12px] font-semibold text-[#364153]">Last Name <span className="text-red-500">*</span></label>
+              <input className={inputBase} name="lastName" {...formik.getFieldProps('lastName')} placeholder="Last name" />
             </div>
-            <div className={styles.inputCell}>
-              <label>Email Address <span className={styles.req}>*</span></label>
-              <div className={styles.iconBox}><LuMail /><input name="email" {...formik.getFieldProps('email')} /></div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[12px] font-semibold text-[#364153]">Email Address <span className="text-red-500">*</span></label>
+              <div className={iconInputBase}><LuMail className="text-gray-400 shrink-0" /><input className="flex-1 outline-none bg-transparent text-[13px]" name="email" {...formik.getFieldProps('email')} /></div>
             </div>
-            <div className={styles.inputCell}>
-              <label>Phone Number <span className={styles.req}>*</span></label>
-              <div className={styles.iconBox}><LuPhone /><input name="phone" {...formik.getFieldProps('phone')} /></div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[12px] font-semibold text-[#364153]">Phone Number <span className="text-red-500">*</span></label>
+              <div className={iconInputBase}><LuPhone className="text-gray-400 shrink-0" /><input className="flex-1 outline-none bg-transparent text-[13px]" name="phone" {...formik.getFieldProps('phone')} /></div>
             </div>
-            <div className={styles.inputCell}>
-              <label>Date of Birth <span className={styles.req}>*</span></label>
-              <div className={styles.iconBox}><LuCalendar /><input type="date" name="dob" {...formik.getFieldProps('dob')} /></div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[12px] font-semibold text-[#364153]">Date of Birth <span className="text-red-500">*</span></label>
+              <div className={iconInputBase}><LuCalendar className="text-gray-400 shrink-0" /><input type="date" className="flex-1 outline-none bg-transparent text-[13px]" name="dob" {...formik.getFieldProps('dob')} /></div>
             </div>
-            <div className={styles.inputCell}>
-              <label>Location <span className={styles.req}>*</span></label>
-              <div className={styles.iconBox}><LuMapPin /><input name="location" {...formik.getFieldProps('location')} /></div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[12px] font-semibold text-[#364153]">Location <span className="text-red-500">*</span></label>
+              <div className={iconInputBase}><LuMapPin className="text-gray-400 shrink-0" /><input className="flex-1 outline-none bg-transparent text-[13px]" name="location" {...formik.getFieldProps('location')} /></div>
             </div>
           </div>
 
-          <div className={styles.genderSection}>
-            <label>Gender <span className={styles.req}>*</span></label>
-            <div className={styles.radioGroup}>
-               <label className={formik.values.gender === 'male' ? styles.maleActive : styles.radioLabel}>
-                 <input type="radio" name="gender" value="male" onChange={formik.handleChange} checked={formik.values.gender === 'male'} /> Male
-               </label>
-               <label className={formik.values.gender === 'female' ? styles.femaleActive : styles.radioLabel}>
-                 <input type="radio" name="gender" value="female" onChange={formik.handleChange} checked={formik.values.gender === 'female'} /> Female
-               </label>
+          {/* Gender */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[12px] font-semibold text-[#364153]">Gender <span className="text-red-500">*</span></label>
+            <div className="flex items-center gap-2">
+              {['male','female'].map(g => (
+                <label key={g} className={`flex items-center gap-2 px-4 py-2 rounded-[10px] border cursor-pointer text-[13px] font-semibold transition-all ${formik.values.gender === g ? (g === 'male' ? 'bg-[#155dfc] text-white border-[#155dfc]' : 'bg-[#E60076] text-white border-[#E60076]') : 'bg-white text-[#364153] border-gray-200'}`}>
+                  <input type="radio" name="gender" value={g} onChange={formik.handleChange} checked={formik.values.gender === g} className="hidden" />
+                  {g.charAt(0).toUpperCase() + g.slice(1)}
+                </label>
+              ))}
             </div>
           </div>
         </form>
       </div>
 
-      {/* أزرار التحكم السفلية */}
-      <div className={styles.formActions}>
-        <button type="button" className={styles.cancelBtn}>Cancel</button>
-        <button type="button" className={styles.deleteBtn} onClick={onDelete}><LuTrash2 /> Delete</button>
-        <button type="submit" className={styles.saveBtn} onClick={formik.handleSubmit}><LuCheck /> Save Changes</button>
+      {/* Action Buttons */}
+      <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
+        <button type="button" className="px-4 py-2 text-[13px] font-semibold text-gray-600 bg-[#F6F7F8] rounded-[10px] hover:bg-gray-200 transition-colors">Cancel</button>
+        <button type="button" onClick={onDelete} className="flex items-center gap-2 px-4 py-2 text-[13px] font-semibold text-white bg-red-500 rounded-[10px] hover:bg-red-600 transition-colors"><LuTrash2 /> Delete</button>
+        <button type="submit" onClick={formik.handleSubmit} className="flex items-center gap-2 px-4 py-2 text-[13px] font-semibold text-white bg-[#155dfc] rounded-[10px] hover:bg-[#0913C3] transition-colors"><LuCheck /> Save Changes</button>
       </div>
-    </div>
+    </section>
   );
 }

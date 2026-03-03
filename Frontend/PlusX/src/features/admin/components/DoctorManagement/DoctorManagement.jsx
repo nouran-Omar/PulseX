@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import styles from './DoctorManagement.module.css';
 import DataTable from '../DataTable/DataTable';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import EmptyState from '../shared/EmptyState/EmptyState';
@@ -130,7 +129,7 @@ export default function DoctorManagement() {
   };
 
   return (
-    <div className={styles.page}>
+    <section className="flex flex-col gap-6 p-5 " aria-label="Doctor Management">
 
       {/* ── Global Toast ── */}
       <Toast
@@ -141,37 +140,52 @@ export default function DoctorManagement() {
         onClose={() => setToast(t => ({ ...t, visible: false }))}
       />
 
-      <div className={styles.header}>
-        <div className={styles.titleInfo}>
-          <div className={styles.titleWithIcon}>
-            <MdOutlineManageAccounts className={styles.iconSetting} />
-            <h1>Doctor Management</h1>
+      {/* ── Page Header ── */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-2 mb-2">
+            <MdOutlineManageAccounts className="text-[22px] text-black-main-text" aria-hidden="true" />
+            <h1 className="text-[18px] sm:text-[20px] font-bold text-black-main-text leading-none">
+              Doctor Management
+            </h1>
           </div>
-          <p>View, edit, and manage all platform doctors.</p>
+          <p className="text-[12px] text-[#757575] ">View, edit, and manage all platform doctors.</p>
         </div>
- </div>
-  <div className={styles.search}>
-        <div className={styles.topActions}>
-          <div className={styles.searchContainer}>
-            <FiSearch className={styles.searchIcon} />
-            <input
-              type="text"
-              placeholder="Search"
-              className={styles.searchInput}
-              value={searchQuery}
-              onChange={handleSearch}
-            />
-          </div>
-       <div className='flex items-center gap-4'>
-    <button className={styles.exportBtn} onClick={handleExport}>
-        <FiUpload /> Export
-    </button>
-    <button className={styles.addBtn} onClick={() => navigate('/admin/AddDoctorBtn')}>
-        <FiPlus /> Add Doctor
-    </button>
-</div></div></div>
-     
+      </div>
 
+      {/* ── Search + Actions Bar ── */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        {/* Search */}
+        <div className="relative flex-1 min-w-0">
+          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[15px]" aria-hidden="true" />
+          <input
+            type="search"
+            placeholder="Search doctors…"
+            aria-label="Search doctors"
+            value={searchQuery}
+            onChange={handleSearch}
+            className=" pl-9 pr-4 py-2.5 text-[13px] bg-[#F6F7F8] border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#155dfc]/30 focus:border-[#155dfc] transition-colors"
+          />
+        </div>
+
+        {/* Buttons */}
+        <div className="flex items-center gap-3 shrink-0">
+          <button
+            onClick={handleExport}
+            className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-gray-600 bg-white border border-gray-200 rounded-full hover:bg-gray-50 transition-colors"
+          >
+            <FiUpload className="text-[14px]" /> Export
+          </button>
+          <button
+            onClick={() => navigate('/admin/AddDoctorBtn')}
+            className="flex items-center gap-2 px-4 py-2.5 text-[13px] font-semibold text-white bg-[#333CF5] rounded-full hover:bg-[#0913C3] transition-colors"
+          >
+            <FiPlus className="text-[14px]" /> Add Doctor
+          </button>
+        </div>
+      </div>
+
+      {/* ── Table / Empty State ── */}
       {filteredDoctors.length === 0 ? (
         <EmptyState
           icon={<FaUserDoctor />}
@@ -183,10 +197,10 @@ export default function DoctorManagement() {
           iconColor="#2563EB"
         />
       ) : (
-        <DataTable 
-          data={filteredDoctors} 
-          selectedItems={selectedIds} 
-          onToggle={toggleSelect} 
+        <DataTable
+          data={filteredDoctors}
+          selectedItems={selectedIds}
+          onToggle={toggleSelect}
           onDeleteIndividual={openSingleDeleteModal}
           onEdit={(item) => navigate(`/admin/edit-doctor/${item.id}`)}
           onBulkDelete={openBulkDeleteModal}
@@ -194,17 +208,17 @@ export default function DoctorManagement() {
         />
       )}
 
-      <ConfirmModal 
+      <ConfirmModal
         isOpen={modal.open}
-        title={modal.type === 'bulk' ? `Delete ${selectedIds.length} Doctors?` : "Delete Doctor?"}
+        title={modal.type === 'bulk' ? `Delete ${selectedIds.length} Doctors?` : 'Delete Doctor?'}
         desc={
           modal.type === 'bulk'
-            ? `Are you sure you want to delete ${selectedIds.length} doctors? This action is permanent and cannot be undone.`
-            : "Are you sure you want to delete this doctor? This action is permanent and cannot be undone."
+            ? `Are you sure you want to delete ${selectedIds.length} doctors? This action is permanent.`
+            : 'Are you sure you want to delete this doctor? This action is permanent.'
         }
         onCancel={() => setModal({ open: false, type: 'single', targetId: null })}
         onConfirm={handleDeleteConfirm}
       />
-    </div>
+    </section>
   );
 }

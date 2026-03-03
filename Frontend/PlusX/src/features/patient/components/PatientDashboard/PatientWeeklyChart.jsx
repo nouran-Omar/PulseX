@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styles from './PatientWeeklyChart.module.css';
 import {
   AreaChart,
   Area,
@@ -10,17 +9,16 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-/* ─── Custom Tooltip ────────────────────────────── */
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
   return (
-    <div className={styles.tooltip}>
-      <p className={styles.tooltipLabel}>{label}</p>
+    <div className="bg-white rounded-xl shadow-lg border border-gray-100 px-4 py-3 text-[12px]">
+      <p className="font-bold text-black-main-text mb-2">{label}</p>
       {payload.map((entry) => (
-        <div key={entry.dataKey} className={styles.tooltipRow}>
-          <span className={styles.tooltipDot} style={{ backgroundColor: entry.color }} />
-          <span className={styles.tooltipKey}>{entry.name}:</span>
-          <span className={styles.tooltipVal} style={{ color: entry.color }}>
+        <div key={entry.dataKey} className="flex items-center gap-2 mb-1">
+          <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: entry.color }} />
+          <span className="text-gray-500">{entry.name}:</span>
+          <span className="font-bold ml-auto" style={{ color: entry.color }}>
             {entry.value}
             {entry.dataKey === 'heartRate' ? ' bpm' : entry.dataKey === 'oxygenLevel' ? '%' : ' mg/dl'}
           </span>
@@ -30,14 +28,12 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-/* ─── Metric definitions ─────────────────────────── */
 const METRICS = [
   { key: 'heartRate',   label: 'Heart Rate',   color: '#4F46E5', active: true  },
   { key: 'bloodSugar',  label: 'Blood Sugar',  color: '#00A63E', active: true  },
   { key: 'oxygenLevel', label: 'Oxygen Level', color: '#8B5CF6', active: false },
 ];
 
-/* ─────────────────────────────────────────────────── */
 const PatientWeeklyChart = ({ weeklyData }) => {
   const [activeMetrics, setActiveMetrics] = useState(
     METRICS.filter((m) => m.active).map((m) => m.key)
@@ -49,30 +45,28 @@ const PatientWeeklyChart = ({ weeklyData }) => {
     );
 
   return (
-    <div className={styles.wrapper}>
+    <div className="bg-white rounded-[22px] border border-gray-100 shadow-sm p-5 lg:p-8">
       {/* Header */}
-      <div className={styles.header}>
+      <div className="flex items-start justify-between mb-4">
         <div>
-          <h3 className={styles.title}>Weekly Health Overview</h3>
-          <p className={styles.subtitle}>Analyze how your heart health improves throughout the week</p>
+          <h3 className="text-[14px] font-bold text-black-main-text">Weekly Health Overview</h3>
+          <p className="text-[12px] text-gray-400 mt-0.5">Analyze how your heart health improves throughout the week</p>
         </div>
-        <div className={styles.headerRight}>
-          <span className={styles.thisWeek}>This Week</span>
-        </div>
+        <span className="text-[11px] font-semibold text-[#155DFC] bg-blue-50 px-3 py-1 rounded-full">This Week</span>
       </div>
 
       {/* Metric toggle pills */}
-      <div className={styles.pills}>
+      <div className="flex flex-wrap gap-2 mb-4">
         {METRICS.map((m) => {
           const isOn = activeMetrics.includes(m.key);
           return (
             <button
               key={m.key}
               onClick={() => toggle(m.key)}
-              className={`${styles.pill} ${isOn ? styles.pillActive : ''}`}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-[12px] font-semibold text-gray-500 cursor-pointer transition-all"
               style={isOn ? { borderColor: m.color, color: m.color, background: m.color + '12' } : {}}
             >
-              <span className={styles.pillDot} style={{ background: isOn ? m.color : '#d1d5db' }} />
+              <span className="w-2 h-2 rounded-full" style={{ background: isOn ? m.color : '#d1d5db' }} />
               {m.label}
             </button>
           );
@@ -80,7 +74,7 @@ const PatientWeeklyChart = ({ weeklyData }) => {
       </div>
 
       {/* Chart */}
-      <div className={styles.chartArea}>
+      <div className="mt-2">
         <ResponsiveContainer width="100%" height={240}>
           <AreaChart data={weeklyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>

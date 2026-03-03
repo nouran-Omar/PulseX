@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { HiOutlinePaperClip, HiOutlineFaceSmile, HiOutlineVideoCamera } from 'react-icons/hi2';
 import { MdSend, MdSearch, MdMenu } from 'react-icons/md';
 import { motion, AnimatePresence } from 'framer-motion';
-import styles from './PatientMessages.module.css';
 import PatientRatingModal from '../PatientRatingModal/PatientRatingModal';
 
 /* ═══════════════════════════  MOCK DATA  ═══════════════════════════ */
@@ -126,8 +125,8 @@ const PatientMessages = () => {
 
   /* ─────────────────────────── render ─────────────────────────── */
   return (
-    <div className={styles.root}>
-      {/* ── Rating modal ── */}
+    <div className="h-[calc(100vh-120px)] min-h-[500px]">
+      {/* Rating modal */}
       <PatientRatingModal
         isOpen={showRating}
         onClose={() => setShowRating(false)}
@@ -141,14 +140,14 @@ const PatientMessages = () => {
         }}
       />
 
-      <div className={styles.card}>
+      <div className="bg-white rounded-[22px] border border-gray-100 shadow-sm flex h-full overflow-hidden relative">
 
-        {/* ── mobile backdrop ── */}
+        {/* Mobile backdrop */}
         <AnimatePresence>
           {sidebarOpen && (
             <motion.div
               key="bd"
-              className={styles.backdrop}
+              className="fixed inset-0 z-20 bg-black/40 lg:hidden"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setSidebarOpen(false)}
             />
@@ -156,51 +155,51 @@ const PatientMessages = () => {
         </AnimatePresence>
 
         {/* ═══════════  SIDEBAR  ═══════════ */}
-        <aside className={[styles.sidebar, sidebarOpen ? styles.sidebarOpen : ''].join(' ')}>
+        <aside className={`absolute lg:relative z-30 top-0 left-0 h-full w-72 bg-white border-r border-gray-100 flex flex-col transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
 
-          {/* sidebar header */}
-          <div className={styles.sidebarHeader}>
-            <div className={styles.sidebarTitle}>
-              <span className={styles.titleText}>Messages</span>
-              <span className={styles.titleBadge}>
+          {/* Sidebar header */}
+          <div className="px-4 py-4 border-b border-gray-100">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-[16px] font-bold text-black-main-text">Messages</span>
+              <span className="w-6 h-6 rounded-full bg-brand-main flex items-center justify-center">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="white">
                   <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
                 </svg>
               </span>
             </div>
-            <div className={styles.searchBox}>
-              <MdSearch className={styles.searchIcon} />
+            <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2">
+              <MdSearch className="text-gray-400 shrink-0" />
               <input
                 type="text"
                 placeholder="Search doctor..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className={styles.searchInput}
+                className="bg-transparent outline-none w-full text-[13px] text-black-main-text placeholder:text-gray-400"
               />
             </div>
           </div>
 
-          {/* doctor list */}
-          <div className={styles.docList}>
+          {/* Doctor list */}
+          <div className="flex-1 overflow-y-auto">
             {filtered.map((doc) => {
               const isActive = doc.id === activeId;
               return (
                 <div
                   key={doc.id}
                   onClick={() => selectChat(doc.id)}
-                  className={[styles.docItem, isActive ? styles.docItemActive : ''].join(' ')}
+                  className={`relative flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors ${isActive ? 'bg-blue-50' : 'hover:bg-gray-50'}`}
                 >
-                  {isActive && <span className={styles.activeLine} />}
-                  <div className={styles.avatarWrap}>
-                    <img src={doc.img} alt={doc.name} className={styles.avatar} />
-                    <span className={[styles.statusDot, doc.status === 'online' ? styles.dotOnline : styles.dotOffline].join(' ')} />
+                  {isActive && <span className="absolute left-0 top-2 bottom-2 w-1 bg-brand-main rounded-r-full" />}
+                  <div className="relative shrink-0">
+                    <img src={doc.img} alt={doc.name} className="w-10 h-10 rounded-full object-cover" />
+                    <span className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-white ${doc.status === 'online' ? 'bg-green-500' : 'bg-gray-300'}`} />
                   </div>
-                  <div className={styles.docInfo}>
-                    <div className={styles.docRow}>
-                      <span className={[styles.docName, isActive ? styles.docNameActive : ''].join(' ')}>{doc.name}</span>
-                      <span className={styles.docTime}>{doc.time}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <span className={`text-[13px] font-bold truncate ${isActive ? 'text-brand-main' : 'text-black-main-text'}`}>{doc.name}</span>
+                      <span className="text-[10px] text-gray-400 shrink-0 ml-1">{doc.time}</span>
                     </div>
-                    <p className={styles.docLast}>{doc.lastMsg}</p>
+                    <p className="text-[11px] text-gray-400 truncate mt-0.5">{doc.lastMsg}</p>
                   </div>
                 </div>
               );
@@ -209,30 +208,30 @@ const PatientMessages = () => {
         </aside>
 
         {/* ═══════════  CHAT WINDOW  ═══════════ */}
-        <div className={styles.chatWin}>
+        <div className="flex-1 flex flex-col min-w-0">
 
-          {/* chat header */}
-          <div className={styles.chatHeader}>
-            <div className={styles.chatHeaderLeft}>
-              {/* hamburger mobile */}
-              <button className={styles.hamburger} onClick={() => setSidebarOpen(true)}>
-                <MdMenu className={styles.hamburgerIcon} />
+          {/* Chat header */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 shrink-0">
+            <div className="flex items-center gap-3">
+              {/* Hamburger mobile */}
+              <button className="lg:hidden p-1.5 rounded-lg hover:bg-gray-100 transition-colors" onClick={() => setSidebarOpen(true)}>
+                <MdMenu className="text-xl text-gray-600" />
               </button>
-              <div className={styles.avatarWrap}>
-                <img src={doctor?.img} alt={doctor?.name} className={styles.avatar} />
-                <span className={styles.dotOnlineLg} />
+              <div className="relative shrink-0">
+                <img src={doctor?.img} alt={doctor?.name} className="w-9 h-9 rounded-full object-cover" />
+                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-green-500 border-2 border-white" />
               </div>
               <div>
-                <p className={styles.chatDoctorName}>{doctor?.name}</p>
-                <p className={styles.chatOnline}>Online</p>
+                <p className="text-[14px] font-bold text-black-main-text">{doctor?.name}</p>
+                <p className="text-[11px] text-green-500 font-semibold">Online</p>
               </div>
             </div>
-            <div className={styles.chatHeaderRight}>
-              <button className={styles.videoBtn} title="Video call">
-                <HiOutlineVideoCamera className={styles.videoIcon} />
+            <div className="flex items-center gap-2">
+              <button className="w-9 h-9 rounded-xl bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors" title="Video call">
+                <HiOutlineVideoCamera className="text-[#155dfc] text-lg" />
               </button>
               <button
-                className={styles.endChatBtn}
+                className="bg-[#E7000B] hover:bg-red-700 text-white rounded-xl px-4 py-2 text-[12px] font-bold transition-colors"
                 onClick={() => setShowRating(true)}
                 title="End chat & rate"
               >
@@ -241,29 +240,29 @@ const PatientMessages = () => {
             </div>
           </div>
 
-          {/* messages area */}
-          <div className={styles.msgArea}>
+          {/* Messages area */}
+          <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3">
             {(convos[activeId] ?? []).map((msg) => {
               const isMe = msg.from === 'me';
               return (
-                <div key={msg.id} className={isMe ? styles.rowMe : styles.rowDoc}>
+                <div key={msg.id} className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}>
                   {!isMe && (
-                    <div className={styles.incomingWrap}>
-                      <img src={doctor?.img} alt="av" className={styles.msgAvatar} />
+                    <div className="flex items-end gap-2 max-w-[70%]">
+                      <img src={doctor?.img} alt="av" className="w-7 h-7 rounded-full object-cover shrink-0 mb-1" />
                       <div>
-                        <div className={styles.bubbleDoc}>
-                          {msg.type === 'text' ? msg.text : <img src={msg.text} alt="img" className={styles.chatImg} />}
+                        <div className="bg-gray-100 rounded-[16px] rounded-bl-sm px-4 py-2.5 text-[13px] text-black-main-text">
+                          {msg.type === 'text' ? msg.text : <img src={msg.text} alt="img" className="max-w-[200px] rounded-lg" />}
                         </div>
-                        <span className={styles.msgTime}>{msg.time}</span>
+                        <span className="text-[10px] text-gray-400 mt-1 block">{msg.time}</span>
                       </div>
                     </div>
                   )}
                   {isMe && (
-                    <div className={styles.outgoingWrap}>
-                      <div className={styles.bubbleMe}>
-                        {msg.type === 'text' ? msg.text : <img src={msg.text} alt="img" className={styles.chatImg} />}
+                    <div className="flex flex-col items-end max-w-[70%]">
+                      <div className="bg-brand-main rounded-[16px] rounded-br-sm px-4 py-2.5 text-[13px] text-white">
+                        {msg.type === 'text' ? msg.text : <img src={msg.text} alt="img" className="max-w-[200px] rounded-lg" />}
                       </div>
-                      <span className={[styles.msgTime, styles.msgTimeRight].join(' ')}>{msg.time}</span>
+                      <span className="text-[10px] text-gray-400 mt-1">{msg.time}</span>
                     </div>
                   )}
                 </div>
@@ -272,43 +271,41 @@ const PatientMessages = () => {
             <div ref={bottomRef} />
           </div>
 
-          {/* input bar */}
-          <div className={styles.inputBar}>
-            <p className={styles.privacyNote}>
-              Start a new conversation with your doctor. Your messages are private and encrypted.
-            </p>
-            <div className={styles.inputRow}>
-              {/* attachment */}
-              <input type="file" ref={fileRef} className={styles.hidden} onChange={pickFile} accept="image/*" />
-              <button className={styles.iconBtn} onClick={() => fileRef.current?.click()} title="Attach">
-                <HiOutlinePaperClip className={styles.iconBtnSvg} />
+          {/* Input bar */}
+          <div className="px-4 py-3 border-t border-gray-100 shrink-0">
+            <p className="text-[11px] text-gray-400 text-center mb-2">Start a new conversation with your doctor. Your messages are private and encrypted.</p>
+            <div className="flex items-center gap-2">
+              {/* Attachment */}
+              <input type="file" ref={fileRef} className="hidden" onChange={pickFile} accept="image/*" />
+              <button className="w-9 h-9 rounded-xl bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors" onClick={() => fileRef.current?.click()} title="Attach">
+                <HiOutlinePaperClip className="text-gray-500 text-lg" />
               </button>
 
-              {/* text field */}
-              <div className={styles.textField}>
+              {/* Text field */}
+              <div className="flex-1 flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 gap-2 focus-within:border-brand-main transition-colors">
                 <input
                   type="text"
                   placeholder="Type your message..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && sendMsg(input)}
-                  className={styles.textInput}
+                  className="bg-transparent outline-none flex-1 text-[13px] text-black-main-text placeholder:text-gray-400"
                 />
-                {/* emoji */}
-                <div data-emoji className={styles.emojiWrap}>
+                {/* Emoji */}
+                <div data-emoji className="relative">
                   <button
                     data-emoji
-                    className={styles.iconBtn}
+                    className="w-7 h-7 rounded-lg hover:bg-gray-200 flex items-center justify-center transition-colors"
                     onClick={() => setShowEmoji((s) => !s)}
                     title="Emoji"
                   >
-                    <HiOutlineFaceSmile className={styles.iconBtnSvg} />
+                    <HiOutlineFaceSmile className="text-gray-500 text-lg" />
                   </button>
                   <AnimatePresence>
                     {showEmoji && (
                       <motion.div
                         data-emoji
-                        className={styles.emojiPicker}
+                        className="absolute bottom-10 right-0 bg-white border border-gray-100 rounded-[16px] shadow-xl p-2 grid grid-cols-5 gap-1 z-50"
                         initial={{ opacity: 0, y: 6, scale: 0.94 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 6, scale: 0.94 }}
@@ -318,7 +315,7 @@ const PatientMessages = () => {
                           <button
                             key={em}
                             data-emoji
-                            className={styles.emojiBtn}
+                            className="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center text-lg transition-colors"
                             onClick={() => { setInput((v) => v + em); setShowEmoji(false); }}
                           >
                             {em}
@@ -330,14 +327,14 @@ const PatientMessages = () => {
                 </div>
               </div>
 
-              {/* send */}
+              {/* Send */}
               <button
-                className={[styles.sendBtn, !input.trim() ? styles.sendDisabled : ''].join(' ')}
+                className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${input.trim() ? 'bg-brand-main hover:bg-[#2830d4]' : 'bg-gray-100 cursor-not-allowed'}`}
                 onClick={() => sendMsg(input)}
                 disabled={!input.trim()}
                 title="Send"
               >
-                <MdSend className={styles.sendIcon} />
+                <MdSend className={`text-lg ${input.trim() ? 'text-white' : 'text-gray-400'}`} />
               </button>
             </div>
           </div>
