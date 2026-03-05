@@ -84,7 +84,7 @@ const PatientDoctorProfile = () => {
             className={`flex items-center justify-center gap-2 font-semibold text-sm px-6 py-2.5 rounded-xl border transition w-full sm:w-44
               ${doctor.hasAppointment
                 ? 'bg-white text-brand-main border-white/30 hover:bg-white cursor-pointer'
-                : 'bg-[#E5E7EB] border-white/15 text-[#757575] cursor-not-allowed'}`}
+                : 'bg-[#E5E7EB] border-white/15 text-gray-text-dim2 cursor-not-allowed'}`}
           >
             <HiOutlineChat className="text-base" />
             Message Now
@@ -122,8 +122,8 @@ const PatientDoctorProfile = () => {
               </div>
               <div>
                 <h3 className="text-sm font-bold text-black-main-text">{item.title}</h3>
-                {item.place && <p className="text-xs text-[#757575] mt-0.5">{item.place}</p>}
-                <p className="text-xs text-[#757575] mt-1 whitespace-pre-line">{item.desc}</p>
+                {item.place && <p className="text-xs text-gray-text-dim2 mt-0.5">{item.place}</p>}
+                <p className="text-xs text-gray-text-dim2 mt-1 whitespace-pre-line">{item.desc}</p>
               </div>
             </div>
           ))}

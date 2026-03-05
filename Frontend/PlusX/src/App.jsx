@@ -15,7 +15,6 @@ import AdminLayout from './features/admin/components/AdminLayout/AdminLayout'
 import PatientMainLayout from './features/patient/components/PatientLayout/PatientMainLayout'
 import DoctorLayout from './features/doctor/components/DoctorLayout/DoctorLayout'
 import Layout from './components/Layout/Layout'
-
 // ─── Lazy Loading Pages (نحمل الصفحات بالطلب) ──────────────────
 // Home & Auth
 const Home = lazy(() => import('./features/home/pages/Home/Home'))
@@ -59,6 +58,7 @@ const PatientPrescriptions = lazy(() => import('./features/patient/components/Pa
 const PrescriptionDetail = lazy(() => import('./features/patient/components/PrescriptionDetail/PrescriptionDetail'))
 const PatientSettingsProfile = lazy(() => import('./features/patient/components/PatientSettingsProfile/PatientSettingsProfile'))
 const PatientUpdateHealth = lazy(() => import('./features/patient/components/PatientUpdateHealth/PatientUpdateHealth'))
+const NotFoundpataint = lazy(() => import('./features/patient/components/NotFound/NotFound'))
 
 // Doctor Pages
 const DoctorDashboard = lazy(() => import('./features/doctor/pages/DoctorDashboard/DoctorDashboard'))
@@ -93,6 +93,7 @@ function App() {
         { path: "reports", element: <AdminReports /> },
         { path: "stories/:id", element: <StoryDetails /> },
         { path: "stories/:id/comments", element: <StoryAllComments /> },
+       { path: "*", element: <NotFound /> }
       ]
     },
 
@@ -120,6 +121,8 @@ function App() {
         { path: "write-story", element: <WriteStory /> },
         { path: "prescription", element: <PatientPrescriptions /> },
         { path: "prescription/:id", element: <PrescriptionDetail /> },
+       { path: "*", element: <NotFoundpataint /> },
+      
       ]
     },
 

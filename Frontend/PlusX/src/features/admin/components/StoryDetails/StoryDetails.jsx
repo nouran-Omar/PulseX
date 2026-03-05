@@ -92,7 +92,7 @@ export default function StoryDetails() {
         <img src={story.avatar} alt={story.author} className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm shrink-0" />
         <div className="flex-1 min-w-0">
           <h3 className="text-[15px] font-bold text-black-main-text">{story.author}</h3>
-          <p className="text-[12px] text-[#757575] mt-0.5">Shared publicly to inspire other patients</p>
+          <p className="text-[12px] text-gray-text-dim2 mt-0.5">Shared publicly to inspire other patients</p>
           <p className="text-[12px] text-gray-600 mt-0.5">{story.date}</p>
           <div className="flex flex-wrap gap-1.5 mt-2">
             {(story.tags?.length ? story.tags : ['Success Story', 'Lifestyle', 'Health']).map((tag, i) => (
@@ -112,7 +112,7 @@ export default function StoryDetails() {
           )}
         </div>
         {story.coverFull && (
-          <img src={story.coverFull} alt={story.title} className="w-full rounded-[12px] object-cover max-h-[360px] mt-2" />
+          <img src={story.coverFull} alt={story.title} className="w-full rounded-xl object-cover max-h-[360px] mt-2" />
         )}
       </div>
 

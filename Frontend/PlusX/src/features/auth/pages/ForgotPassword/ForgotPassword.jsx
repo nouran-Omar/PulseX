@@ -45,7 +45,7 @@ const ForgotPassword = () => {
             <input 
               {...emailFormik.getFieldProps('email')}
               type="email" 
-              className={`w-full p-4 rounded-full border bg-[#F8FAFD] outline-none transition-all focus:bg-white focus:ring-4 focus:ring-brand-main/10 ${emailFormik.touched.email && emailFormik.errors.email ? 'border-red-500' : 'border-gray-text-dim2'}`}
+              className={`w-full p-4 rounded-full border bg-[#F8FAFD] outline-none transition-all focus:bg-white focus:ring-4 focus:ring-brand-main/10 ${emailFormik.touched.email && emailFormik.errors.email ? 'border-red-500' : 'border-gray-text-dim2 '}`}
               placeholder="Enter your email" 
             />
             {emailFormik.touched.email && emailFormik.errors.email}
@@ -70,7 +70,7 @@ const ForgotPassword = () => {
             <input 
               {...otpFormik.getFieldProps('otp')}
               maxLength="4"
-              className={`w-full p-4 rounded-full border bg-[#F8FAFD] text-center tracking-[10px] text-xl font-bold outline-none focus:bg-white focus:ring-4 focus:ring-brand-main/10 ${otpFormik.touched.otp && otpFormik.errors.otp ? 'border-red-500' : 'border-gray-text-dim2'}`}
+              className={`w-full p-4 rounded-full border bg-[#F8FAFD] text-center tracking-[10px] text-xl font-bold outline-none focus:bg-white focus:ring-4 focus:ring-brand-main/10 ${otpFormik.touched.otp && otpFormik.errors.otp ? 'border-red-500' : 'border-gray-text-dim2 '}`}
               placeholder="0000" 
             />
             <div className="flex justify-center">
@@ -93,7 +93,7 @@ const ForgotPassword = () => {
               <input 
                 {...resetFormik.getFieldProps('password')}
                 type="password" 
-                className="w-full p-4 rounded-full border border-gray-text-dim2 bg-[#F8FAFD] outline-none focus:bg-white focus:ring-4 focus:ring-brand-main/10"
+                className="w-full p-4 rounded-full border border-gray-text-dim2  bg-[#F8FAFD] outline-none focus:bg-white focus:ring-4 focus:ring-brand-main/10"
                 placeholder="New Password" 
               />
               {resetFormik.touched.password && resetFormik.errors.password}
@@ -102,7 +102,7 @@ const ForgotPassword = () => {
               <input 
                 {...resetFormik.getFieldProps('confirmPassword')}
                 type="password" 
-                className="w-full p-4 rounded-full border border-gray-text-dim2 bg-[#F8FAFD] outline-none focus:bg-white focus:ring-4 focus:ring-brand-main/10"
+                className="w-full p-4 rounded-full border border-gray-text-dim2  bg-[#F8FAFD] outline-none focus:bg-white focus:ring-4 focus:ring-brand-main/10"
                 placeholder="Confirm Password" 
               />
               {resetFormik.touched.confirmPassword && resetFormik.errors.confirmPassword}
@@ -118,7 +118,7 @@ const ForgotPassword = () => {
             <MdCheckCircle className="text-[#00C853] text-7xl" />
           </div>
           <h2 className="text-2xl font-bold text-black-main-text mb-2 tracking-tight">Password changed</h2>
-          <p className="text-gray-text-dim2 text-[15px] mb-10 max-w-[400px]">Your password has been changed successfully</p>
+          <p className="text-gray-text-dim2  text-[15px] mb-10 max-w-[400px]">Your password has been changed successfully</p>
           <button 
             onClick={() => navigate('/login')} 
             className="w-full max-w-[400px] bg-brand-main hover:bg-brand-dark text-white font-bold py-4 rounded-full shadow-lg shadow-brand-main/20 transition-all active:scale-95"

@@ -149,7 +149,7 @@ export default function DoctorManagement() {
               Doctor Management
             </h1>
           </div>
-          <p className="text-[12px] text-[#757575] ">View, edit, and manage all platform doctors.</p>
+          <p className="text-[12px] text-gray-text-dim2 ">View, edit, and manage all platform doctors.</p>
         </div>
       </div>
 

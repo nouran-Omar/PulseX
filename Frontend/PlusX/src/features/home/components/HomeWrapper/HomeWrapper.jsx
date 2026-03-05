@@ -8,7 +8,7 @@ const HomeWrapper = ({ id, title, description, children, className = "" }) => {
           <h2 className="text-3xl md:text-5xl font-bold text-black-main-text mb-5 font-poppins tracking-tight">
             {title}
           </h2>
-          <p className="text-[#757575] text-[16px] leading-relaxed font-medium">
+          <p className="text-gray-text-dim2 text-[16px] leading-relaxed font-medium">
             {description}
           </p>
         </div>

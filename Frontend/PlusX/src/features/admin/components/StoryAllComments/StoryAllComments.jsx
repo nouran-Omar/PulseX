@@ -65,7 +65,7 @@ export default function StoryAllComments() {
           <HiOutlineChatBubbleOvalLeft className="text-[22px] " />
           <h1 className="text-[20px] font-bold text-black-main-text">All Comments</h1>
         </div>
-        <p className="text-[13px] text-[#757575] ">
+        <p className="text-[13px] text-gray-text-dim2 ">
           {comments.length} comments on &ldquo;{story.title}&rdquo;
         </p>
       </div>

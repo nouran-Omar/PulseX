@@ -77,7 +77,7 @@ const ReplyModal = ({ target, onClose, onSend }) => {
   const [text, setText] = useState('');
   if (!target) return null;
   return (
-    <div className="fixed inset-0 bg-[#010218]/45 flex items-center justify-center z-[1000] p-4 animate-[fadeIn_0.15s_ease]" onClick={onClose}>
+    <div className="fixed inset-0 bg-black-main-text/45 flex items-center justify-center z-[1000] p-4 animate-[fadeIn_0.15s_ease]" onClick={onClose}>
       <div className="bg-white rounded-[20px] w-full max-w-[440px] shadow-[0_25px_60px_rgba(0,0,0,0.18)] overflow-hidden animate-[slideUp_0.2s_ease]" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-br from-[#155DFC] to-[#4A7FFF]">
           <span className="text-[14px] font-bold text-white font-['Roboto']">Reply to {target.name || target.title}</span>
@@ -88,7 +88,7 @@ const ReplyModal = ({ target, onClose, onSend }) => {
           <div className="flex items-center gap-[10px] px-5 pt-4">
             <img src={target.avatar} alt="" className="w-[38px] h-[38px] rounded-full object-cover border-2 border-gray-200 shrink-0" />
             <div>
-              <div className="text-[13px] font-bold text-[#010218] font-['Roboto']">{target.name}</div>
+              <div className="text-[13px] font-bold text-black-main-text font-['Roboto']">{target.name}</div>
               <div className="text-[11px] text-[#9ca3af] font-['Roboto']">{target.role}</div>
             </div>
           </div>
@@ -100,7 +100,7 @@ const ReplyModal = ({ target, onClose, onSend }) => {
         </div>
 
         <textarea
-          className="block w-full mt-3 px-5 py-3 border-none border-t border-gray-100 resize-none text-[13px] font-['Roboto'] text-[#010218] outline-none placeholder:text-[#9ca3af]"
+          className="block w-full mt-3 px-5 py-3 border-none border-t border-gray-100 resize-none text-[13px] font-['Roboto'] text-black-main-text outline-none placeholder:text-[#9ca3af]"
           placeholder="Write your reply..."
           value={text}
           onChange={e => setText(e.target.value)}
@@ -171,11 +171,11 @@ const PatientHeader = () => {
         <div className="flex items-center gap-[10px] shrink-0">
           <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-[10px]  ">
             <LuCalendarDays className="text-[15px] text-[#155dfc] shrink-0" />
-            <span className="text-[13px] font-bold text-[#010218] whitespace-nowrap font-['Roboto']">{formatDate(now)}</span>
+            <span className="text-[13px] font-bold text-black-main-text whitespace-nowrap font-['Roboto']">{formatDate(now)}</span>
           </div>
           <div className="hidden min-[480px]:flex items-center gap-2 px-3.5 py-1.5 rounded-[10px] bg-white ">
             <LuClock className="text-[15px] text-[#00a63e] shrink-0" />
-            <span className="text-[13px] font-bold text-[#010218] whitespace-nowrap font-['Roboto']">{formatTime(now)}</span>
+            <span className="text-[13px] font-bold text-black-main-text whitespace-nowrap font-['Roboto']">{formatTime(now)}</span>
           </div>
         </div>
 
@@ -215,7 +215,7 @@ const PatientHeader = () => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-0.5">
-                          <span className="text-[13px] font-bold text-[#010218] font-['Roboto'] truncate">{msg.name}</span>
+                          <span className="text-[13px] font-bold text-black-main-text font-['Roboto'] truncate">{msg.name}</span>
                           <div className="flex items-center gap-1.5">
                             <span className="text-[10px] text-[#9ca3af] font-['Roboto']">{msg.time}</span>
                             {msg.unread > 0 && <span className="min-w-[18px] h-[18px] px-1 bg-[#22c55e] text-white text-[10px] font-bold rounded-full flex items-center justify-center font-['Roboto']">{msg.unread}</span>}
@@ -275,7 +275,7 @@ const PatientHeader = () => {
                         <span className="text-[15px]">{n.icon}</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-[13px] font-bold text-[#010218] mb-0.5 font-['Roboto']">{n.title}</div>
+                        <div className="text-[13px] font-bold text-black-main-text mb-0.5 font-['Roboto']">{n.title}</div>
                         <div className="text-[12px] text-[#6b7280] leading-[1.4] font-['Roboto']">{n.desc}</div>
                         {n.tag && (
                           <span className="inline-block mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full border-[1.5px] bg-[#fef2f2] font-['Roboto']" style={{ color: n.tagColor, borderColor: n.tagColor }}>
@@ -307,7 +307,7 @@ const PatientHeader = () => {
           <div className="flex items-center gap-[10px] pl-3.5  cursor-pointer group">
             <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Avatar" className="w-10 h-10 rounded-full object-cover border-2 border-[#e0eaff]  " />
             <div className="hidden md:flex flex-col">
-              <span className="text-[13px] font-bold text-[#010218] whitespace-nowrap font-inter ">Mohamed Salem</span>
+              <span className="text-[13px] font-bold text-black-main-text whitespace-nowrap font-inter ">Mohamed Salem</span>
               <span className="text-[10px]  text-[#6b7280] uppercase tracking-wider font-inter">Patient </span>
             </div>
           </div>

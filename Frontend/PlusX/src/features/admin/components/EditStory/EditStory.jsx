@@ -49,7 +49,7 @@ export default function EditStory({ story, onSave, onClose }) {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-5">
 
           {/* Cover Preview */}
-          <div className="relative w-full h-[140px] rounded-[12px] overflow-hidden bg-gray-100">
+          <div className="relative w-full h-[140px] rounded-xl overflow-hidden bg-gray-100">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${story.coverFull || story.cover})` }} />
             <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center gap-1 text-white">
               <HiOutlinePhoto className="text-[24px]" />
@@ -58,7 +58,7 @@ export default function EditStory({ story, onSave, onClose }) {
           </div>
 
           {/* Author row */}
-          <div className="flex items-center gap-3 p-3 bg-[#F6F7F8] rounded-[12px]">
+          <div className="flex items-center gap-3 p-3 bg-[#F6F7F8] rounded-xl">
             <img src={story.avatar} alt={story.author} className="w-9 h-9 rounded-full object-cover border border-gray-100 shrink-0" />
             <div>
               <p className="text-[13px] font-semibold text-black-main-text">{story.author}</p>

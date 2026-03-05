@@ -160,7 +160,7 @@ export default function PatientUpdateHealth() {
           <HiOutlineCog6Tooth className="text-black-main-text" />
           Settings &amp; Profile
         </h1>
-        <p className="text-sm text-[#757575] mt-1">
+        <p className="text-sm text-gray-text-dim2 mt-1">
           Manage your personal details, health data, and account preferences.
         </p>
       </div>

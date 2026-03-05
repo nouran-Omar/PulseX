@@ -27,7 +27,7 @@ const NotFound = () => {
 
         {/* زرار العودة للوحة التحكم */}
         <Link 
-          to="/admin/dashboard" 
+          to="/patient/dashboard" 
           className="bg-brand-main hover:bg-[#252CBF] text-white font-bold py-3.5 px-8 rounded-full shadow-lg shadow-brand-main/20 transition-all active:scale-95 inline-flex items-center gap-2"
         >
           <HiArrowSmallLeft className="text-xl" />

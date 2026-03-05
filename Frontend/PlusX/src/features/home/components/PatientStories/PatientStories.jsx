@@ -38,7 +38,7 @@ const PatientStories = () => {
           <SiMicrodotblog className="text-3xl text-black-main-text" />
           <h1 className="text-[28px] font-bold text-black-main-text">Stories</h1>
         </div>
-        <p className="text-[#757575] text-[18px] mt-1">Read and share inspiring patient journeys.</p>
+        <p className="text-gray-text-dim2 text-[18px] mt-1">Read and share inspiring patient journeys.</p>
       </header>
 
       {/* Stories grid */}

@@ -33,7 +33,7 @@ function DeleteContentModal({ report, onConfirm, onCancel }) {
           <h2 className="text-[16px] font-bold text-black-main-text">Delete Content</h2>
           <p className="text-[12px] text-gray-400 mt-0.5">This action cannot be undone</p>
         </div>
-        <div className="bg-[#F6F7F8] rounded-[12px] p-4 flex flex-col gap-1.5">
+        <div className="bg-[#F6F7F8] rounded-xl p-4 flex flex-col gap-1.5">
           <p className="text-[12px] text-gray-600"><strong>Type:</strong> {report.contentType.toLowerCase()}</p>
           <p className="text-[12px] text-gray-600"><strong>Author:</strong> {report.contentAuthor}</p>
           <p className="text-[12px] text-gray-500 italic line-clamp-3">"{report.contentText}"</p>
@@ -91,7 +91,7 @@ export default function ReportsManagement() {
   </div>
   
   {/* الوصف يبدأ تحت العنوان مباشرة (تمت إزاحة النص بمقدار حجم الأيقونة + Gap) */}
-  <p className="text-[13px] text-[#757575]  leading-relaxed">
+  <p className="text-[13px] text-gray-text-dim2  leading-relaxed">
     Review and manage reported content from the community.
   </p>
 </div>
@@ -184,7 +184,7 @@ function ReportCard({ report, onMarkReviewed, onDismiss, onReopen, onDelete, onV
         <div className="flex-1 flex flex-col gap-1 min-w-0">
           {/* Name + time */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[15px] font-semibold text-[#010218] leading-6">
+            <span className="text-[15px] font-semibold text-black-main-text leading-6">
               Reported by {report.reportedBy}
             </span>
             <span className="text-[12px] text-gray-500 font-normal">{report.reporterTime}</span>

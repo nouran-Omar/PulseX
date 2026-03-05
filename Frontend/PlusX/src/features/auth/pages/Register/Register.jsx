@@ -205,7 +205,7 @@ const Register = () => {
                 />
                 <div>
                   <p className="text-[14px] text-black-main-text font-medium">I agree to the <span className="text-brand-main underline cursor-pointer">Terms of Service and Privacy Policy</span></p>
-                  <p className="text-[13px] text-[#757575] mt-1">By checking this box, you agree to our terms and conditions</p>
+                  <p className="text-[13px] text-gray-text-dim2 mt-1">By checking this box, you agree to our terms and conditions</p>
                 </div>
               </div>
               {formik.touched.acceptTerms && formik.errors.acceptTerms}
@@ -234,21 +234,21 @@ const Register = () => {
               <RiGroupLine />
             </div>
             <h4 className="font-bold text-[16px] text-black-main-text">Expert Care Team</h4>
-            <p className="text-[13px] text-[#757575] leading-relaxed max-w-[250px]">Connect with board-certified physicians and specialists.</p>
+            <p className="text-[13px] text-gray-text-dim2 leading-relaxed max-w-[250px]">Connect with board-certified physicians and specialists.</p>
           </div>
           <div className="flex flex-col items-center gap-3">
             <div className="w-14 h-14 bg-[#15A96D]/10 rounded-full flex items-center justify-center text-[#00C853] text-2xl">
               <CiCalendar />
             </div>
             <h4 className="font-bold text-[16px] text-black-main-text">Easy Scheduling</h4>
-            <p className="text-[13px] text-[#757575] leading-relaxed max-w-[250px]">Book appointments 24/7 with our online system.</p>
+            <p className="text-[13px] text-gray-text-dim2 leading-relaxed max-w-[250px]">Book appointments 24/7 with our online system.</p>
           </div>
           <div className="flex flex-col items-center gap-3">
             <div className="w-14 h-14 bg-[#D0791D]/10 rounded-full flex items-center justify-center text-[#D0791D] text-2xl">
               <IoDocumentTextSharp />
             </div>
             <h4 className="font-bold text-[16px] text-black-main-text">Digital Records</h4>
-            <p className="text-[13px] text-[#757575] leading-relaxed max-w-[250px]">Access your medical history anytime, anywhere.</p>
+            <p className="text-[13px] text-gray-text-dim2 leading-relaxed max-w-[250px]">Access your medical history anytime, anywhere.</p>
           </div>
         </footer>
       </div>

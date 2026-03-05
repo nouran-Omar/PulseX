@@ -28,7 +28,7 @@ export default function EditForm({ title, initialData, onSave, onDelete, type })
     <section className="flex flex-col gap-5" aria-label={title}>
       {/* Header */}
       <div className="flex items-center gap-3 pb-4 border-b border-gray-100">
-        <div className="w-10 h-10 flex items-center justify-center rounded-[12px] bg-[#EFF6FF] text-[#155dfc] text-[18px]"><LuUser /></div>
+        <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#EFF6FF] text-[#155dfc] text-[18px]"><LuUser /></div>
         <div>
           <h2 className="text-[16px] font-bold text-black-main-text">{title}</h2>
           <p className="text-[12px] text-gray-500">Manage registered {type}s details.</p>

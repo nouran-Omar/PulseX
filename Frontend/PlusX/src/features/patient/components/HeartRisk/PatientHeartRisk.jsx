@@ -52,7 +52,7 @@ const UploadCard = ({ title, desc, Icon, onUpload }) => {
           Drag & drop {title} files or{' '}
           <span className="text-[#155DFC] font-semibold cursor-pointer">Browse</span>
         </p>
-        <p className="text-[10px] text-[#757575] mt-1">Supported formats: JPEG,</p>
+        <p className="text-[10px] text-gray-text-dim2 mt-1">Supported formats: JPEG,</p>
         <p className="text-[10px] text-[#757575]">PNG</p>
         <input type="file" ref={fileRef} hidden onChange={handleFile} accept="image/*,.pdf" />
       </div>

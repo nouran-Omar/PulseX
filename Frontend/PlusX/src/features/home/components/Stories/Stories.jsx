@@ -82,7 +82,7 @@ const Stories = () => {
           transition={{ duration: 0.7 }}
         >
           <h2 className="text-4xl font-bold text-black-main-text">Recovery Stories</h2>
-          <p className="text-[#757575] text-lg">Real patients, real results — inspiring journeys to better heart health</p>
+          <p className="text-gray-text-dim2 text-lg">Real patients, real results — inspiring journeys to better heart health</p>
         </motion.div>
 
                 <motion.div
@@ -113,7 +113,7 @@ const Stories = () => {
                                     </div>
                                     <div className="space-y-1">
                                         <h3 className="text-2xl font-extrabold text-black-main-text">{story.name}</h3>
-                                        <p className="text-[#757575] font-medium">Age {story.age}</p>
+                                        <p className="text-gray-text-dim2 font-medium">Age {story.age}</p>
                                         <p className="text-brand-main font-bold text-lg">{story.condition}</p>
                                     </div>
                                     <div className="flex  justify-center text-brand-main ">
@@ -142,7 +142,7 @@ const Stories = () => {
                                     {/* بار التقدم */}
                                     <div className="space-y-4">
                                         <div className="flex justify-between items-end">
-                                            <span className="text-xs font-bold text-[#757575] tracking-[0.15em]">Recovery Progress</span>
+                                            <span className="text-xs font-bold text-gray-text-dim2 tracking-[0.15em]">Recovery Progress</span>
                                             <span className="text-sm font-bold text-black-main-text">{story.progress}%</span>
                                         </div>
                                         <div className="h-2 bg-gray-100 rounded-full w-full overflow-hidden">
@@ -164,10 +164,10 @@ const Stories = () => {
                     </div>
 
                     {/* أزرار التنقل الدائرية */}
-                    <button onClick={prevSlide} className={`absolute top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#757575] transition-all z-20 hover:bg-brand-main hover:text-white border border-gray-100 left-[-55px] ${currentIndex === 0 ? 'opacity-0' : 'opacity-100'}`}>
+                    <button onClick={prevSlide} className={`absolute top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-text-dim2 transition-all z-20 hover:bg-brand-main hover:text-white border border-gray-100 left-[-55px] ${currentIndex === 0 ? 'opacity-0' : 'opacity-100'}`}>
                         <HiChevronLeft size={24} />
                     </button>
-                    <button onClick={nextSlide} className={`absolute top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#757575] transition-all z-20 hover:bg-brand-main hover:text-white border border-gray-100 right-[-55px] ${currentIndex === STORIES_DATA.length - 1 ? 'opacity-0' : 'opacity-100'}`}>
+                    <button onClick={nextSlide} className={`absolute top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full flex items-center justify-center text-gray-text-dim2 transition-all z-20 hover:bg-brand-main hover:text-white border border-gray-100 right-[-55px] ${currentIndex === STORIES_DATA.length - 1 ? 'opacity-0' : 'opacity-100'}`}>
                         <HiChevronRight size={24} />
                     </button>
                 </motion.div>
@@ -183,7 +183,7 @@ const Stories = () => {
                             />
                         ))}
                     </div>
-                    <span className="text-[#757575] text-sm font-medium">{currentIndex + 1} of {STORIES_DATA.length} stories</span>
+                    <span className="text-gray-text-dim2 text-sm font-medium">{currentIndex + 1} of {STORIES_DATA.length} stories</span>
                 </div>
             </Container>
         </section>
@@ -193,7 +193,7 @@ const Stories = () => {
 const StatBlock = ({ label, value, color }) => (
     <div className="space-y-1 font-inter">
         <p className={`text-3xl font-black ${color}`}>{value}</p>
-        <p className="text-[10px] text-[#757575] font-bold  tracking-widest">{label}</p>
+        <p className="text-[10px] text-gray-text-dim2 font-bold  tracking-widest">{label}</p>
     </div>
 );
 

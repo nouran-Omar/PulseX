@@ -6,8 +6,8 @@ import {
   HiOutlineArrowTrendingDown,
 } from 'react-icons/hi2';
 import { TbDroplet, TbLungs } from 'react-icons/tb';
-
-/* ─── Single stat card ──────────────────────────── */
+import Heart from '../../../../assets/Images/PatiantHeart.svg'
+/* ─── Single std ──────────────────────────── */
 const StatCard = ({ label, value, unit, status, trend, gradientFrom, gradientTo, icon }) => {
   const isUp   = trend && trend.startsWith('+');
   const isDown = trend && trend.startsWith('-');
@@ -61,7 +61,7 @@ const PatientStatGrid = ({ vitals }) => {
   if (!vitals) return null;
 
   const cards = [
-    { label: 'Heart Rate',     value: vitals.heartRate.value,        unit: vitals.heartRate.unit,        status: vitals.heartRate.status,        trend: vitals.heartRate.trend,        gradientFrom: vitals.heartRate.gradientFrom,        gradientTo: vitals.heartRate.gradientTo,        icon: <FaHeartPulse /> },
+    { label: 'Heart Rate',     value: vitals.heartRate.value,        unit: vitals.heartRate.unit,        status: vitals.heartRate.status,        trend: vitals.heartRate.trend,        gradientFrom: vitals.heartRate.gradientFrom,        gradientTo: vitals.heartRate.gradientTo,        icon: <img src={Heart} alt="Heart" className="w-5 h-5" /> },
     { label: 'Blood Pressure', value: vitals.bloodPressure.display,  unit: vitals.bloodPressure.unit,    status: vitals.bloodPressure.status,    trend: vitals.bloodPressure.trend,    gradientFrom: vitals.bloodPressure.gradientFrom,    gradientTo: vitals.bloodPressure.gradientTo,    icon: <TbDroplet /> },
     { label: 'Blood Sugar',    value: vitals.bloodSugar.value,       unit: vitals.bloodSugar.unit,       status: vitals.bloodSugar.status,       trend: vitals.bloodSugar.trend,       gradientFrom: vitals.bloodSugar.gradientFrom,       gradientTo: vitals.bloodSugar.gradientTo,       icon: <HiOutlineBeaker /> },
     { label: 'Oxygen Level',   value: vitals.oxygenLevel.value,      unit: vitals.oxygenLevel.unit,      status: vitals.oxygenLevel.status,      trend: vitals.oxygenLevel.trend,      gradientFrom: vitals.oxygenLevel.gradientFrom,      gradientTo: vitals.oxygenLevel.gradientTo,      icon: <TbLungs /> },

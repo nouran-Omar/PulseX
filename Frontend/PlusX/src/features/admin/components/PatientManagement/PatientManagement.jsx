@@ -31,26 +31,6 @@ const DUMMY_PATIENTS = [
   { id: 18, fullName: "Yasmin Taha",        email: "yasmin.taha@gmail.com",        phone: "+201077889900", age: 42, gender: "Female", image: "https://randomuser.me/api/portraits/women/27.jpg" },
   { id: 19, fullName: "Mostafa Hamdy",      email: "mostafa.hamdy@gmail.com",      phone: "+201021343546", age: 50, gender: "Male",   image: "https://randomuser.me/api/portraits/men/82.jpg"   },
   { id: 20, fullName: "Nour Eldin Hassan",  email: "nour.hassan@gmail.com",        phone: "+201087654321", age: 36, gender: "Male",   image: "https://randomuser.me/api/portraits/men/93.jpg"   },
-  { id: 21, fullName: "Mariam Youssef",     email: "mariam.youssef@gmail.com",     phone: "+201091122334", age: 28, gender: "Female", image: "https://randomuser.me/api/portraits/women/38.jpg" },
-  { id: 22, fullName: "Karim Zaki",         email: "karim.zaki@gmail.com",         phone: "+201062233445", age: 41, gender: "Male",   image: "https://randomuser.me/api/portraits/men/14.jpg"   },
-  { id: 23, fullName: "Salma Ibrahim",      email: "salma.ibrahim@gmail.com",      phone: "+201053344556", age: 35, gender: "Female", image: "https://randomuser.me/api/portraits/women/49.jpg" },
-  { id: 24, fullName: "Bassem Wael",        email: "bassem.wael@gmail.com",        phone: "+201044455667", age: 47, gender: "Male",   image: "https://randomuser.me/api/portraits/men/66.jpg"   },
-  { id: 25, fullName: "Noha Ramzy",         email: "noha.ramzy@gmail.com",         phone: "+201035566778", age: 32, gender: "Female", image: "https://randomuser.me/api/portraits/women/60.jpg" },
-  { id: 26, fullName: "Sherif Ragab",       email: "sherif.ragab@gmail.com",       phone: "+201026677889", age: 53, gender: "Male",   image: "https://randomuser.me/api/portraits/men/37.jpg"   },
-  { id: 27, fullName: "Doaa Fawzy",         email: "doaa.fawzy@gmail.com",         phone: "+201017788990", age: 39, gender: "Female", image: "https://randomuser.me/api/portraits/women/71.jpg" },
-  { id: 28, fullName: "Islam Magdy",        email: "islam.magdy@gmail.com",        phone: "+201008899001", age: 44, gender: "Male",   image: "https://randomuser.me/api/portraits/men/55.jpg"   },
-  { id: 29, fullName: "Rana Ashraf",        email: "rana.ashraf@gmail.com",        phone: "+201099900112", age: 26, gender: "Female", image: "https://randomuser.me/api/portraits/women/82.jpg" },
-  { id: 30, fullName: "Adel Samir",         email: "adel.samir@gmail.com",         phone: "+201080011223", age: 58, gender: "Male",   image: "https://randomuser.me/api/portraits/men/91.jpg"   },
-  { id: 31, fullName: "Heba Mansour",       email: "heba.mansour@gmail.com",       phone: "+201071122334", age: 33, gender: "Female", image: "https://randomuser.me/api/portraits/women/93.jpg" },
-  { id: 32, fullName: "Magdy El-Gohary",    email: "magdy.elgohary@gmail.com",     phone: "+201062233445", age: 49, gender: "Male",   image: "https://randomuser.me/api/portraits/men/43.jpg"   },
-  { id: 33, fullName: "Amira Soltan",       email: "amira.soltan@gmail.com",       phone: "+201053344556", age: 31, gender: "Female", image: "https://randomuser.me/api/portraits/women/22.jpg" },
-  { id: 34, fullName: "Waleed Fares",       email: "waleed.fares@gmail.com",       phone: "+201044455667", age: 45, gender: "Male",   image: "https://randomuser.me/api/portraits/men/6.jpg"    },
-  { id: 35, fullName: "Samah Gad",          email: "samah.gad@gmail.com",          phone: "+201035566778", age: 37, gender: "Female", image: "https://randomuser.me/api/portraits/women/33.jpg" },
-  { id: 36, fullName: "Tarek Sharaf",       email: "tarek.sharaf@gmail.com",       phone: "+201026677889", age: 54, gender: "Male",   image: "https://randomuser.me/api/portraits/men/77.jpg"   },
-  { id: 37, fullName: "Rania Fouad",        email: "rania.fouad@gmail.com",        phone: "+201017788990", age: 29, gender: "Female", image: "https://randomuser.me/api/portraits/women/44.jpg" },
-  { id: 38, fullName: "Hassan Shehata",     email: "hassan.shehata@gmail.com",     phone: "+201008899001", age: 62, gender: "Male",   image: "https://randomuser.me/api/portraits/men/88.jpg"   },
-  { id: 39, fullName: "Eman Lotfy",         email: "eman.lotfy@gmail.com",         phone: "+201099900112", age: 43, gender: "Female", image: "https://randomuser.me/api/portraits/women/55.jpg" },
-  { id: 40, fullName: "Mahmoud El-Refaay",  email: "mahmoud.refaay@gmail.com",     phone: "+201080011223", age: 36, gender: "Male",   image: "https://randomuser.me/api/portraits/men/62.jpg"   },
 ];
 
 const ROWS_OPTIONS = [5, 10, 20, 50];
@@ -164,7 +144,7 @@ export default function PatientManagement() {
   };
 
   return (
-    <section className="flex flex-col gap-6 p-5 " aria-label="Patient Management">
+    <section className="relative flex flex-col gap-6 p-5 min-h-screen" aria-label="Patient Management">
 
       <Toast
         visible={toast.visible}
@@ -176,13 +156,13 @@ export default function PatientManagement() {
 
       {/* ── Page Header ── */}
       <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-2 mb-2 ">
+        <div className="flex items-center gap-2 mb-2">
           <MdManageAccounts className="text-[22px] text-black-main-text" aria-hidden="true" />
           <h1 className="text-[18px] sm:text-[20px] font-bold text-black-main-text leading-none">
             Patient Management
           </h1>
         </div>
-        <p className="text-[12px] text-[#757575] ">View, edit, and manage all registered patients.</p>
+        <p className="text-[12px] text-[#757575]">View, edit, and manage all registered patients.</p>
       </div>
 
       {/* ── Search + Actions ── */}
@@ -195,7 +175,7 @@ export default function PatientManagement() {
             aria-label="Search patients"
             value={searchQuery}
             onChange={handleSearch}
-            className="pl-9 pr-4 py-2.5 text-[13px] bg-[#F6F7F8] border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#333CF5]/30 focus:border-[#333CF5] transition-colors"
+            className=" pl-9 pr-4 py-2.5 text-[13px] bg-[#F6F7F8] border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#333CF5]/30 focus:border-[#333CF5] transition-colors"
           />
         </div>
         <div className="flex items-center gap-3 shrink-0">
@@ -208,20 +188,28 @@ export default function PatientManagement() {
         </div>
       </div>
 
-      {/* ── Bulk Bar ── */}
+      {/* ── Floating Bulk Bar - Pixel Perfect Style ── */}
       {selectedIds.length > 0 && (
-        <div className="flex items-center gap-4 px-4 py-3 bg-[#EFF6FF] border border-[#bfdbfe] rounded-[10px]">
-          <span className="text-[13px] font-semibold text-[#155dfc]">{selectedIds.length} Selected</span>
-          <button onClick={openBulkDeleteModal} className="px-3 py-1.5 text-[12px] font-semibold text-white bg-red-500 rounded-[8px] hover:bg-red-600 transition-colors">
+        <div className="absolute top-[221px] left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 px-3 py-2 bg-white border border-gray-100 rounded-xl shadow-[0px_10px_30px_rgba(0,0,0,0.15)] animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="px-3 py-2 bg-[#333CF5] text-white text-[12px] font-bold rounded-lg whitespace-nowrap">
+            {selectedIds.length} Patients Selected
+          </div>
+          <button 
+            onClick={openBulkDeleteModal} 
+            className="px-4 py-2 text-[12px] font-bold text-white bg-red-600 rounded-lg hover:bg-red-600 transition-all active:scale-95 shadow-sm shadow-red-200"
+          >
             Delete Selected
           </button>
-          <button onClick={() => setSelectedIds([])} className="px-3 py-1.5 text-[12px] font-semibold text-gray-600 bg-white border border-gray-200 rounded-[8px] hover:bg-gray-50 transition-colors">
+          <button 
+            onClick={() => setSelectedIds([])} 
+            className="px-4 py-2 text-[12px] font-bold text-neutral-500 bg-zinc-100 border border-gray-200 rounded-lg hover: text-neutral-500 bg-zinc-100 transition-all active:scale-95"
+          >
             Cancel
           </button>
         </div>
       )}
 
-      {/* ── Table / Empty ── */}
+      {/* ── Table Area ── */}
       {filtered.length === 0 ? (
         <EmptyState
           icon={<HiOutlineUsers />}
@@ -233,20 +221,25 @@ export default function PatientManagement() {
           iconColor="#059669"
         />
       ) : (
-        <>
-          <div className="overflow-x-auto rounded-[12px] border border-gray-200/70">
+        <div className="flex flex-col gap-4">
+          <div className="overflow-x-auto rounded-xl border border-gray-200/70 bg-white">
             <table className="w-full min-w-[640px] border-collapse">
               <thead>
                 <tr className="bg-[#333CF5] text-white text-left">
-                  <th className="w-10 px-3 py-3">
-                    <input type="checkbox" checked={allPageSelected} onChange={(e) => toggleSelectAll(e.target.checked)} className="w-4 h-4 rounded accent-white cursor-pointer" />
+                  <th className="w-10 px-4 py-4">
+                    <input 
+                      type="checkbox" 
+                      checked={allPageSelected} 
+                      onChange={(e) => toggleSelectAll(e.target.checked)} 
+                      className="w-4 h-4 rounded accent-white cursor-pointer border-2 border-white/30" 
+                    />
                   </th>
-                  <th className="px-3 py-3 text-[12px] font-semibold whitespace-nowrap">Full Name</th>
-                  <th className="px-3 py-3 text-[12px] font-semibold whitespace-nowrap">Email</th>
-                  <th className="px-3 py-3 text-[12px] font-semibold whitespace-nowrap">Phone</th>
-                  <th className="px-3 py-3 text-[12px] font-semibold text-center whitespace-nowrap">Age</th>
-                  <th className="px-3 py-3 text-[12px] font-semibold text-center whitespace-nowrap">Gender</th>
-                  <th className="px-3 py-3 text-[12px] font-semibold text-center whitespace-nowrap">Actions</th>
+                  <th className="px-4 py-4 text-[13px] font-semibold whitespace-nowrap">Full Name</th>
+                  <th className="px-4 py-4 text-[13px] font-semibold whitespace-nowrap">Email</th>
+                  <th className="px-4 py-4 text-[13px] font-semibold whitespace-nowrap">Phone</th>
+                  <th className="px-4 py-4 text-[13px] font-semibold text-center whitespace-nowrap">Age</th>
+                  <th className="px-4 py-4 text-[13px] font-semibold text-center whitespace-nowrap">Gender</th>
+                  <th className="px-4 py-4 text-[13px] font-semibold text-center whitespace-nowrap">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -255,25 +248,25 @@ export default function PatientManagement() {
                   const isSelected = selectedIds.includes(patient.id);
                   return (
                     <tr key={patient.id} className={`border-b border-gray-100 transition-colors ${isSelected ? "bg-[#EFF6FF]" : idx % 2 === 0 ? "bg-white" : "bg-[#F9FAFB]"} hover:bg-[#EFF6FF]/60`}>
-                      <td className="px-3 py-2.5">
+                      <td className="px-4 py-3">
                         <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(patient.id)} className="w-4 h-4 rounded accent-[#155dfc] cursor-pointer" />
                       </td>
-                      <td className="px-3 py-2.5">
-                        <div className="flex items-center gap-2.5">
-                          <img src={patient.image} alt={patient.fullName} className="w-8 h-8 rounded-full object-cover shrink-0 border border-gray-100" />
-                          <span className="text-[13px] font-semibold text-black-main-text truncate max-w-[160px]">{patient.fullName}</span>
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-3">
+                          <img src={patient.image} alt={patient.fullName} className="w-9 h-9 rounded-full object-cover shrink-0 border border-gray-100" />
+                          <span className="text-[14px] font-semibold text-black-main-text truncate max-w-[160px]">{patient.fullName}</span>
                         </div>
                       </td>
-                      <td className="px-3 py-2.5"><span className="text-[12px] text-[#757575] truncate block max-w-[180px]">{patient.email}</span></td>
-                      <td className="px-3 py-2.5"><span className="text-[12px] text-[#757575] whitespace-nowrap">{patient.phone}</span></td>
-                      <td className="px-3 py-2.5 text-center"><span className="text-[12px] text-[#757575]">{patient.age}</span></td>
-                      <td className="px-3 py-2.5 text-center">
-                        <span className={`inline-block px-2.5 py-0.5 text-[11px] font-semibold rounded-full ${isMale ? "bg-[#28A745] text-white" : "bg-[#FD7E14] text-white"}`}>{patient.gender}</span>
+                      <td className="px-4 py-3"><span className="text-[13px] text-gray-text-dim2 truncate block max-w-[180px]">{patient.email}</span></td>
+                      <td className="px-4 py-3"><span className="text-[13px] text-gray-text-dim2 whitespace-nowrap">{patient.phone}</span></td>
+                      <td className="px-4 py-3 text-center"><span className="text-[13px] text-[#757575]">{patient.age}</span></td>
+                      <td className="px-4 py-3 text-center">
+                        <span className={`inline-block px-3 py-1 text-[11px] font-bold rounded-full ${isMale ? "bg-[#28A745] text-white" : "bg-[#FD7E14] text-white"}`}>{patient.gender}</span>
                       </td>
-                      <td className="px-3 py-2.5 text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <button onClick={() => navigate(`/admin/edit-patient/${patient.id}`)} className="w-7 h-7 flex items-center justify-center rounded-[7px]  text-[#010218] hover: transition-colors" title="Edit"><FiEdit3 size={13} /></button>
-                          <button onClick={() => openSingleDeleteModal(patient)} className="w-7 h-7 flex items-center justify-center rounded-[7px] text-[#DC3545] hover:bg-red-100 transition-colors" title="Delete"><FiTrash2 size={13} /></button>
+                      <td className="px-4 py-3 text-center">
+                        <div className="flex items-center justify-center gap-3">
+                          <button onClick={() => navigate(`/admin/edit-patient/${patient.id}`)} className="w-8 h-8 flex items-center justify-center rounded-lg text-black-main-text hover:bg-[#EEF2FF] transition-all" title="Edit"><FiEdit3 size={15} /></button>
+                          <button onClick={() => openSingleDeleteModal(patient)} className="w-8 h-8 flex items-center justify-center rounded-lg text-[#DC3545] hover:bg-red-50 transition-all" title="Delete"><FiTrash2 size={15} /></button>
                         </div>
                       </td>
                     </tr>
@@ -283,35 +276,41 @@ export default function PatientManagement() {
             </table>
           </div>
 
-          {/* ── Pagination ── */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+          {/* ── Pagination / Rows Per Page ── */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
             <div className="relative flex items-center gap-2 text-[12px] text-[#333CF5]">
               <span>Rows per page</span>
-              <button onClick={() => setShowRPPMenu((v) => !v)} className="flex items-center gap-1 px-2.5 py-1.5 border border-gray-200 rounded-full bg-white hover:bg-gray-50 text-[12px] font-semibold text-[#333CF5]">
-                {rowsPerPage}<HiChevronDown size={12} />
-              </button>
-              {showRPPMenu && (
-                <ul className="absolute left-24 bottom-full mb-1 z-20 bg-white border border-gray-200 rounded-[10px] shadow-lg overflow-hidden min-w-[70px] list-none p-1 m-0">
-                  {ROWS_OPTIONS.map((opt) => (
-                    <li key={opt} onClick={() => { setRowsPerPage(opt); setCurrentPage(1); setShowRPPMenu(false); }} className={`px-3 py-2 text-[12px] cursor-pointer rounded-[6px] transition-colors ${opt === rowsPerPage ? "bg-[#EFF6FF] text-[#155dfc] font-semibold" : "hover:bg-gray-50 text-gray-700"}`}>{opt}</li>
-                  ))}
-                </ul>
-              )}
-              <span>of {totalRows} rows</span>
+              <div className="relative">
+                <button 
+                  onClick={() => setShowRPPMenu((v) => !v)} 
+                  className="flex items-center gap-1 px-3 py-1.5 border border-gray-200 rounded-full bg-white hover:bg-gray-50 text-[12px] font-bold text-[#333CF5] transition-all"
+                >
+                  {rowsPerPage}<HiChevronDown size={14} />
+                </button>
+                {showRPPMenu && (
+                  <ul className="absolute left-0 bottom-full mb-2 z-40 bg-white border border-gray-100 rounded-xl shadow-xl overflow-hidden min-w-[80px] list-none p-1 border-gray-100 animate-in fade-in zoom-in-95 duration-200">
+                    {ROWS_OPTIONS.map((opt) => (
+                      <li key={opt} onClick={() => { setRowsPerPage(opt); setCurrentPage(1); setShowRPPMenu(false); }} className={`px-3 py-2 text-[12px] cursor-pointer rounded-lg transition-colors ${opt === rowsPerPage ? "bg-[#EFF6FF] text-[#333CF5] font-bold" : "hover:bg-gray-50 text-gray-700"}`}>{opt}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <span className="font-medium">of {totalRows} rows</span>
             </div>
-            <div className="flex items-center gap-1">
-              <button disabled={safePage === 1} onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} className="w-7 h-7 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed">
-                <HiChevronLeft size={14} />
+            
+            <div className="flex items-center gap-2">
+              <button disabled={safePage === 1} onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+                <HiChevronLeft size={16} />
               </button>
               {getPageNumbers().map((n) => (
-                <button key={n} onClick={() => setCurrentPage(n)} className={`w-7 h-7 flex items-center justify-center rounded-full text-[12px] font-semibold transition-colors ${n === safePage ? "bg-[#333CF5] text-white" : "border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>{n}</button>
+                <button key={n} onClick={() => setCurrentPage(n)} className={`w-8 h-8 flex items-center justify-center rounded-full text-[13px] font-bold transition-all ${n === safePage ? "bg-[#333CF5] text-white shadow-md shadow-blue-200" : "border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>{n}</button>
               ))}
-              <button disabled={safePage === totalPages} onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} className="w-7 h-7 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed">
-                <HiChevronRight size={14} />
+              <button disabled={safePage === totalPages} onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+                <HiChevronRight size={16} />
               </button>
             </div>
           </div>
-        </>
+        </div>
       )}
 
       <ConfirmModal

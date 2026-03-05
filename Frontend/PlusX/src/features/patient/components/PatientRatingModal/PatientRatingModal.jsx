@@ -91,7 +91,7 @@ const PatientRatingModal = ({ isOpen, onClose, onSubmit, doctor }) => {
             </div>
 
             {/* Appointment info pill */}
-            <div className="flex items-center gap-2 sm:gap-3 bg-blue-50 border border-blue-100 rounded-[12px] sm:rounded-[14px] px-3 sm:px-4 py-2 sm:py-2.5 w-full">
+            <div className="flex items-center gap-2 sm:gap-3 bg-blue-50 border border-blue-100 rounded-xl sm:rounded-[14px] px-3 sm:px-4 py-2 sm:py-2.5 w-full">
               <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-brand-main flex items-center justify-center shrink-0">
                 <MdOutlineSchedule className="text-white text-sm sm:text-base" />
               </div>

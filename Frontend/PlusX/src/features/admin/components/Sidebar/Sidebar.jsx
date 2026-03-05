@@ -24,7 +24,7 @@ const MENU_ITEMS = [
   { name: 'Reports',            path: 'reports',             icon: <CiFlag1 /> },
 ];
 
-const linkBase = 'relative flex items-center gap-3 px-4 py-2.5 rounded-[12px] text-[12.5px] font-semibold transition-all duration-200 no-underline cursor-pointer text-[#333CF580] hover:text-[#333CF5] border border-transparent hover:bg-[#155dfc05]';
+const linkBase = 'relative flex items-center gap-3 px-4 py-2.5 rounded-xl text-[12.5px] font-semibold transition-all duration-200 no-underline cursor-pointer text-[#333CF580] hover:text-[#333CF5] border border-transparent hover:bg-[#155dfc05]';
 const linkActiveClass = '!text-[#333CF5] bg-[#155dfc08] ';
 
 const Sidebar = ({ onClose, onLogout }) => {
@@ -36,7 +36,7 @@ const Sidebar = ({ onClose, onLogout }) => {
       {/* ── Logo Section ── */}
       <div className="flex items-center gap-3 px-6 py-6 border-b border-gray-100 shrink-0">
         <img src={logo} alt="PulseX Logo" className="w-7 h-7 shrink-0" />
-        <span className="text-[16px] font-bold text-[#010218] tracking-tight">
+        <span className="text-[16px] font-bold text-black-main-text tracking-tight">
           Pulse<span className="text-[#333CF5]">X</span>
         </span>
       </div>
@@ -100,7 +100,7 @@ const Sidebar = ({ onClose, onLogout }) => {
             <li>
               <button
                 onClick={onLogout}
-                className="w-full flex items-center gap-3 px-4 py-2.5 rounded-[12px] text-[12.5px] font-semibold text-[#333CF580] hover: cursor-pointer"
+                className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-[12.5px] font-semibold text-[#333CF580] hover: cursor-pointer"
               >
                 <HiOutlineArrowLeftOnRectangle className="text-[18px] shrink-0" />
                 <span>Log out</span>

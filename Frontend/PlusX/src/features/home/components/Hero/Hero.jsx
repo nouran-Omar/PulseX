@@ -36,7 +36,7 @@ const Hero = () => {
               {HERO_CONTENT.title}<span className="text-brand-main text-5xl sm:text-6xl md:text-[64px]">{HERO_CONTENT.highlight}</span>
             </h1>
             
-            <p className="text-base sm:text-lg text-[#757575] font-normal mb-6 leading-relaxed max-w-[600px]">
+            <p className="text-base sm:text-lg text-gray-text-dim2 font-normal mb-6 leading-relaxed max-w-[600px]">
               {HERO_CONTENT.subtitle}
             </p>
             
@@ -78,7 +78,7 @@ const Hero = () => {
                 <div className="w-2.5 h-2.5 bg-[#13D486] rounded-full "></div>
                 <p className="text-black-main-text font-bold">BPM: 72</p>
               </div>
-              <p className="text-[#757575] text-[10px] font-bold tracking-widest ">Normal Range</p>
+              <p className="text-gray-text-dim2 text-[10px] font-bold tracking-widest ">Normal Range</p>
             </div>
 
             {/* كارت Risk: يتحرك ببطء بتأخير مختلف */}
@@ -90,14 +90,14 @@ const Hero = () => {
                  <HiOutlineArrowTrendingUp className="text-brand-main w-5 h-5" />
                  <p className="text-black-main-text font-bold text-base">Risk: Low</p>
                </div>
-               <p className="text-[#757575] text-[10px] font-bold ">AI Assessment</p>
+               <p className="text-gray-text-dim2 text-[10px] font-bold ">AI Assessment</p>
             </div>
           </div>
         </div>
 
         {/* سكرول إنديكيتور */}
         <div className=" font-inter absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer opacity-60 animate-bounce">
-          <span className="text-[#757575] text-xs  tracking-widest">Scroll to explore</span>
+          <span className="text-gray-text-dim2 text-xs  tracking-widest">Scroll to explore</span>
           <HiOutlineChevronDown className="w-5 h-5 text-[#757575]" />
         </div>
       </div>

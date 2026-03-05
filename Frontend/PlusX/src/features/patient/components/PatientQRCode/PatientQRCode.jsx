@@ -85,7 +85,7 @@ const PatientQRCode = () => {
   {/* السطر الأول: الأيقونة + العنوان */}
   <div className="flex items-center gap-1">
     {/* حاوية الأيقونة - باللون الأزرق المريح */}
-    <div className="w-10 h-10 flex items-center justify-center rounded-[12px]text-black-main-text text-[20px] shrink-0">
+    <div className="w-10 h-10 flex items-center justify-center rounded-xltext-black-main-text text-[20px] shrink-0">
       <LuQrCode />
     </div>
 

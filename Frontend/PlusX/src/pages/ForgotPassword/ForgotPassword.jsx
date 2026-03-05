@@ -56,7 +56,7 @@ const ForgotPassword = () => {
           <input 
             {...emailFormik.getFieldProps('email')}
             type="email" 
-          className="w-full p-4 rounded-full border border-gray-text-dim2 bg-[#F8FAFD] 
+          className="w-full p-4 rounded-full border border-gray-text-dim2  bg-[#F8FAFD] 
            shadow-sm transition-all outline-none 
            focus:bg-white focus:ring-4 focus:ring-brand-main/10 focus:shadow-md"placeholder="Enter your email" 
           />

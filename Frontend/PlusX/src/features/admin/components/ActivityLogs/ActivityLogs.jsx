@@ -78,7 +78,7 @@ export default function ActivityLogs() {
             Activity Logs
           </h1>
         </div>
-        <p className="text-[12px] text-[#757575] ">Track recent changes, updates, and system activity.</p>
+        <p className="text-[12px] text-gray-text-dim2 ">Track recent changes, updates, and system activity.</p>
       </div>
 
       {/* ── Controls ── */}
@@ -92,7 +92,7 @@ export default function ActivityLogs() {
               className={`px-6 py-1 text-[12px] font-semibold rounded-full transition-colors ${
                 filter === btn
                   ? 'bg-[#333CF5] text-white'
-                  : 'bg-[#F6F7F8] text-[#757575] '
+                  : 'bg-[#F6F7F8] text-gray-text-dim2 '
               }`}
             >
               {btn}
@@ -126,14 +126,14 @@ export default function ActivityLogs() {
             {currentLogs.map(log => {
               const style = ICON_STYLES[log.iconType] ?? ICON_STYLES.plus;
               return (
-                <li key={log.id} className="flex items-start gap-4 p-4  rounded-[12px] hover: transition-colors">
+                <li key={log.id} className="flex items-start gap-4 p-4  rounded-xl hover: transition-colors">
                   <div className={`w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 ${style.bg} ${style.text}`}>
                     {getIcon(log.iconType)}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
                       <h4 className="text-[13px] font-semibold text-black-main-text leading-snug">{log.title}</h4>
-                      <span className="text-[11px] text-[#757575] shrink-0 whitespace-nowrap">{log.time}</span>
+                      <span className="text-[11px] text-gray-text-dim2 shrink-0 whitespace-nowrap">{log.time}</span>
                     </div>
                     <p className="text-[12px] text-[#4B5563] mt-0.5 line-clamp-2">{log.description}</p>
                   </div>

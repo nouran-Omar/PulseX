@@ -96,7 +96,7 @@ const Features = () => {
           <h2 className="text-[32px] md:text-4xl font-bold text-black-main-text mb-4">
             Comprehensive Heart Health Features
           </h2>
-          <p className="text-[#757575] text-lg max-w-2xl mx-auto font-medium">
+          <p className="text-gray-text-dim2 text-lg max-w-2xl mx-auto font-medium">
             Advanced AI-powered tools for complete cardiovascular monitoring and care
           </p>
         </motion.div>
@@ -132,22 +132,22 @@ const Features = () => {
                     <h3 className="text-3xl font-bold text-black-main-text">{current.title}</h3>
                   </div>
 
-                  <p className="text-[#757575] text-lg leading-relaxed mb-12 max-w-[500px]">
+                  <p className="text-gray-text-dim2 text-lg leading-relaxed mb-12 max-w-[500px]">
                     {current.description}
                   </p>
 
                   <div className="flex gap-12 mb-5">
                     <div className="flex flex-col">
                       <span className="text-2xl font-bold text-black-main-text">{current.accuracy}</span>
-                      <span className="text-[12px] font-medium text-[#757575] tracking-wide">Accuracy</span>
+                      <span className="text-[12px] font-medium text-gray-text-dim2 tracking-wide">Accuracy</span>
                     </div>
                     <div className="flex flex-col">
                       <span className="text-2xl font-bold text-black-main-text">{current.dataPoints}</span>
-                      <span className="text-[12px] font-medium text-[#757575] tracking-wide">Data points</span>
+                      <span className="text-[12px] font-medium text-gray-text-dim2 tracking-wide">Data points</span>
                     </div>
                     <div className="flex flex-col">
                       <span className="text-2xl font-bold text-black-main-text">{current.updates}</span>
-                      <span className="text-[12px] font-medium text-[#757575] tracking-wide">Updates</span>
+                      <span className="text-[12px] font-medium text-gray-text-dim2 tracking-wide">Updates</span>
                     </div>
                   </div>
 

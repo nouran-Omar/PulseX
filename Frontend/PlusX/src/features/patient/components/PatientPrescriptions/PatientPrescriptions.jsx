@@ -342,7 +342,7 @@ const PatientPrescriptions = () => {
        
         <div>
           <h1 className="text-[20px] font-bold text-black-main-text m-0 leading-tight flex items-center "> <LuClipboardList className="text-[30px] text-black-main-text mr-2" />Prescription History</h1>
-          <p className="text-[13px] text-[#757575] mt-[2px] m-0">View and manage all your medical prescriptions</p>
+          <p className="text-[13px] text-gray-text-dim2 mt-[2px] m-0">View and manage all your medical prescriptions</p>
         </div>
       </div>
 
@@ -512,7 +512,7 @@ const PrescriptionCard = ({ item, index, visible, onView }) => {
           <span className="text-[#4A5565]">Tests Requested</span>
           <strong className="text-black-main-text">{testsCount} item{testsCount !== 1 ? 's' : ''}</strong>
         </div>
-        <p className="text-[11px] text-[#757575] border-t border-[#f3f4f6] pt-3 m-0">ID: {item.id}</p>
+        <p className="text-[11px] text-gray-text-dim2 border-t border-[#f3f4f6] pt-3 m-0">ID: {item.id}</p>
         <div className="flex gap-3 mt-4">
           <button
             onClick={onView}

@@ -110,12 +110,12 @@ const Doctors = () => {
   </h2>
 
   {/* الجملة الفرعية الأولى - واخدة رمادي أغمق شوية ومسافة بسيطة */}
-  <p className="text-[#757575] text-lg md:text-xl mb-6">
+  <p className="text-gray-text-dim2 text-lg md:text-xl mb-6">
     Connect with certified heart specialists for personalized care and monitoring
   </p>
 
   {/* الفقرة الطويلة - معمولة بمقاس محدد عشان تنزل سطر في نفس الأماكن */}
-  <p className="text-[#757575] text-base md:text-lg max-w-[850px] leading-[1.8] font-light">
+  <p className="text-gray-text-dim2 text-base md:text-lg max-w-[850px] leading-[1.8] font-light">
     Our AI-powered platform connects you with board-certified cardiologists who specialize in remote
     monitoring and preventive care. Get expert insights, personalized recommendations, and continuous 
     support for your heart health journey.
@@ -161,13 +161,13 @@ const Doctors = () => {
                   
                   <h3 className="text-2xl font-bold text-black-main-text mb-1">{doctor.name}</h3>
                   <p className="text-brand-main font-semibold text-lg mb-1">{doctor.role}</p>
-                  <p className="text-[#757575] text-sm mb-6">{doctor.exp} years</p>
+                  <p className="text-gray-text-dim2 text-sm mb-6">{doctor.exp} years</p>
 
                   <div className="flex items-center gap-6 mb-4">
                     <div className="flex items-center gap-1.5">
                       <HiStar className="text-[#F59E0B] size-5" />
                       <span className="font-bold text-black-main-text">{doctor.rating}</span>
-                   <span className="text-[#757575] text-sm ml-1 flex items-center gap-1">
+                   <span className="text-gray-text-dim2 text-sm ml-1 flex items-center gap-1">
   <FaUserGroup className="text-xs" /> {doctor.patients}
 </span></div>
                   </div>
@@ -189,7 +189,7 @@ const Doctors = () => {
                   <div className="space-y-5 mb-10">
                     {doctor.metrics.map((m, i) => (
                       <div key={i} className="flex justify-between items-center border-b border-gray-50 pb-1">
-                        <div className="flex items-center gap-3 text-[#757575] font-medium">
+                        <div className="flex items-center gap-3 text-gray-text-dim2 font-medium">
                           <span style={{ color: m.color }} className="text-xl">{m.icon}</span>
                           {m.label}
                         </div>

@@ -60,7 +60,7 @@ const PatientAppointments = () => {
   {/* السطر الأول: الأيقونة + العنوان بجانب بعض */}
   <div className="flex items-center gap-1">
     {/* حاوية الأيقونة - استخدمت اللون الأزرق المريح اللي في كودك */}
-    <div className="w-10 h-10 flex items-center justify-center rounded-[12px] text-black-main-text text-[20px] shrink-0">
+    <div className="w-10 h-10 flex items-center justify-center rounded-xl text-black-main-text text-[20px] shrink-0">
       <MdOutlineEventNote />
     </div>
 
@@ -111,8 +111,8 @@ const PatientAppointments = () => {
   <button
     className={`px-2 py-2 text-[13px] font-bold transition-all cursor-pointer border-b-2 ${
       activeTab === 'upcoming' 
-        ? 'text-[#010218] border-[#333CF5]' 
-        : 'text-[#757575B2] border-transparent hover:text-[#010218]'
+        ? 'text-black-main-text border-[#333CF5]' 
+        : 'text-[#757575B2] border-transparent hover:text-black-main-text'
     }`}
     onClick={() => setActiveTab('upcoming')}
   >
@@ -122,8 +122,8 @@ const PatientAppointments = () => {
   <button
     className={`px-2 py-2 text-[13px] font-bold transition-all cursor-pointer border-b-2 ${
       activeTab === 'completed' 
-        ? 'text-[#010218] border-[#333CF5]' 
-        : 'text-[#757575B2] border-transparent hover:text-[#010218]'
+        ? 'text-black-main-text border-[#333CF5]' 
+        : 'text-[#757575B2] border-transparent hover:text-black-main-text'
     }`}
     onClick={() => setActiveTab('completed')}
   >

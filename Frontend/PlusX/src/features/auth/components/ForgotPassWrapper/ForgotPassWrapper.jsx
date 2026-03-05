@@ -18,7 +18,7 @@ const ForgotPassWrapper = ({ title, description, children, buttonText, onSubmit,
         <h2 className="text-[28px] font-bold text-black-main-text mb-3 tracking-tight">
           {title}
         </h2>
-        <p className="text-gray-text-dim2 text-[14px] mb-10 leading-relaxed max-w-[340px]">
+        <p className="text-gray-text-dim2  text-[14px] mb-10 leading-relaxed max-w-[340px]">
           {description}
         </p>
 

@@ -124,7 +124,7 @@ const TimelineItem = ({ step, isFirst }) => {
             <h3 className="text-xl font-bold text-[#1C1C1E]">{step.title}</h3>
             <span className="px-2 py-1 bg-gray-100 rounded-lg text-sm font-medium">{step.tag}</span>
           </div>
-          <p className="text-[#757575] leading-relaxed mb-10">{step.desc}</p>
+          <p className="text-gray-text-dim2 leading-relaxed mb-10">{step.desc}</p>
           
           <div className="absolute bottom-6 left-6 right-6 h-2.5 bg-gray-100 rounded-full overflow-hidden">
             <motion.div

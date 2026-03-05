@@ -16,7 +16,7 @@ const PatientUploadCard = ({ title, desc, icon: Icon, onUpload }) => {
   return (
     <div className="bg-white rounded-[22px] border border-gray-100 shadow-sm p-5 flex flex-col gap-4">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-[12px] bg-[#155dfc] flex items-center justify-center shrink-0">
+        <div className="w-10 h-10 rounded-xl bg-[#155dfc] flex items-center justify-center shrink-0">
           <Icon className="text-white text-2xl" />
         </div>
         <div>

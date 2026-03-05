@@ -128,7 +128,7 @@ export default function StoriesManagement() {
           <HiOutlinePencilSquare className="text-[22px] text-black-main-text " aria-hidden="true" />
           <h1 className="text-[18px] sm:text-[20px] font-bold text-black-main-text leading-none">Patient Stories</h1>
         </div>
-        <p className="text-[12px] text-[#757575] ">Read and share inspiring patient journeys.</p>
+        <p className="text-[12px] text-gray-text-dim2 ">Read and share inspiring patient journeys.</p>
       </div>
 
       {/* ── Stat Cards ── */}
@@ -195,7 +195,7 @@ export default function StoriesManagement() {
                       <img src={story.cover} alt={story.title} className="w-10 h-10 rounded-[8px] object-cover shrink-0 border border-gray-100" />
                       <div className="min-w-0">
                         <p className="text-[13px] font-semibold text-black-main-text truncate max-w-[160px]">{story.title}</p>
-                        <p className="text-[11px] text-[#757575] truncate max-w-[160px]">{story.desc}</p>
+                        <p className="text-[11px] text-gray-text-dim2 truncate max-w-[160px]">{story.desc}</p>
                       </div>
                     </div>
                   </td>
@@ -205,7 +205,7 @@ export default function StoriesManagement() {
                       <span className="text-[12px] font-semibold text-black-main-text truncate max-w-[120px]">{story.author}</span>
                     </div>
                   </td>
-                  <td className="px-3 py-2.5 text-[12px] text-[#757575] whitespace-nowrap">{story.date}</td>
+                  <td className="px-3 py-2.5 text-[12px] text-gray-text-dim2 whitespace-nowrap">{story.date}</td>
                   <td className="px-3 py-2.5">
                     <span className={`inline-block px-2.5 py-0.5 text-[11px] font-semibold rounded-full ${
                       story.status === 'Published' ? 'bg-[#DCFCE7] text-[#15803D]' :
@@ -220,7 +220,7 @@ export default function StoriesManagement() {
                         onClick={(e) => handleToggleHide(e, story)}
                         disabled={story.status === 'Deleted'}
                         className={`w-7 h-7 flex items-center justify-center rounded-[7px] transition-colors disabled:opacity-40 ${
-                          story.status === 'Hidden' ? ' text-[#757575] ' : ' text-brand-main '
+                          story.status === 'Hidden' ? ' text-gray-text-dim2 ' : ' text-brand-main '
                         }`}
                       >
                         {story.status === 'Hidden' ? <HiOutlineEyeSlash size={13} /> : <HiOutlineEye size={13} />}
@@ -266,12 +266,12 @@ export default function StoriesManagement() {
 // ── StatCard sub-component ────────────────────────────────────
 function StatCard({ label, value, icon, iconBg, iconColor }) {
   return (
-    <div className="flex items-center justify-between shadow-xl rounded-[14px] border-[#757575] py-8 px-4">
+    <div className="flex items-center justify-between shadow-xl rounded-[14px] border-gray-text-dim2 py-8 px-4">
       <div className="flex flex-col gap-1">
-        <p className="text-[11px] font-semibold text-[#757575]  tracking-wide mb-2">{label}</p>
+        <p className="text-[11px] font-semibold text-gray-text-dim2  tracking-wide mb-2">{label}</p>
         <p className="text-[22px] font-bold text-black-main-text leading-none">{value.toLocaleString()}</p>
       </div>
-      <div className="w-10 h-10 rounded-[12px] flex items-center justify-center text-[18px] shrink-0" style={{ background: iconBg, color: iconColor }}>
+      <div className="w-10 h-10 rounded-xl flex items-center justify-center text-[18px] shrink-0" style={{ background: iconBg, color: iconColor }}>
         {icon}
       </div>
     </div>

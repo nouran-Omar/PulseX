@@ -84,7 +84,7 @@ const PrescriptionDetailModal = ({ data, onClose }) => {
 
           {/* Medications */}
           <section>
-            <div className="flex items-center gap-2 text-[13px] font-bold text-purple-700 bg-purple-50 rounded-[12px] px-4 py-2.5 mb-4">
+            <div className="flex items-center gap-2 text-[13px] font-bold text-purple-700 bg-purple-50 rounded-xl px-4 py-2.5 mb-4">
               <TbCapsule className="text-[16px]" /> <span>Prescribed Medications</span>
             </div>
             <div className="flex flex-col gap-3">
@@ -111,7 +111,7 @@ const PrescriptionDetailModal = ({ data, onClose }) => {
               ))}
             </div>
             {/* Amber alert */}
-            <div className="flex items-start gap-3 mt-4 p-4 bg-amber-50 border border-amber-200 rounded-[12px]">
+            <div className="flex items-start gap-3 mt-4 p-4 bg-amber-50 border border-amber-200 rounded-xl">
               <HiOutlineExclamationTriangle className="text-amber-500 text-[18px] shrink-0 mt-0.5" />
               <div>
                 <strong className="text-[12px] font-bold text-amber-800">Important Instructions</strong>
@@ -122,7 +122,7 @@ const PrescriptionDetailModal = ({ data, onClose }) => {
 
           {/* Lab & Radiology */}
           <section>
-            <div className="flex items-center gap-2 text-[13px] font-bold text-green-700 bg-green-50 rounded-[12px] px-4 py-2.5 mb-4">
+            <div className="flex items-center gap-2 text-[13px] font-bold text-green-700 bg-green-50 rounded-xl px-4 py-2.5 mb-4">
               <HiOutlineBeaker className="text-[16px]" /> <span>Lab & Radiology Requests</span>
             </div>
             <div className="flex flex-col gap-3">
@@ -173,7 +173,7 @@ const PrescriptionDetailModal = ({ data, onClose }) => {
 
           {/* Clinical Notes */}
           <section>
-            <div className="flex items-center gap-2 text-[13px] font-bold text-orange-700 bg-orange-50 rounded-[12px] px-4 py-2.5 mb-4">
+            <div className="flex items-center gap-2 text-[13px] font-bold text-orange-700 bg-orange-50 rounded-xl px-4 py-2.5 mb-4">
               <TbClipboardText className="text-[16px]" /> <span>Clinical Notes & Instructions</span>
             </div>
             <div className="p-4 bg-gray-50 rounded-[14px] border border-gray-100">

@@ -27,7 +27,7 @@ const StatCard = ({ icon, label, value, sub, gradient }) => (
     
     {/* الأيقونة في الأعلى */}
     <div
-      className="w-11 h-11 rounded-[12px] flex items-center justify-center text-white text-xl shrink-0"
+      className="w-11 h-11 rounded-xl flex items-center justify-center text-white text-xl shrink-0"
       style={{ background: gradient }}
     >
       {icon}
@@ -206,7 +206,7 @@ export default function AdminDashboard() {
                     />
                     <div className="min-w-0">
                       <p className="text-[13px] font-semibold text-black-main-text truncate">{doc.name}</p>
-                      <p className="text-[11px] text-[#757575] truncate">{doc.email}</p>
+                      <p className="text-[11px] text-gray-text-dim2 truncate">{doc.email}</p>
                     </div>
                   </div>
                   <button
@@ -263,7 +263,7 @@ export default function AdminDashboard() {
                     />
                     <div className="min-w-0">
                       <p className="text-[13px] font-semibold text-black-main-text truncate">{p.name}</p>
-                      <p className="text-[11px] text-[#757575] truncate">{p.email}</p>
+                      <p className="text-[11px] text-gray-text-dim2 truncate">{p.email}</p>
                     </div>
                   </div>
                   <button

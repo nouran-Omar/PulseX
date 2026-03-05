@@ -47,7 +47,7 @@ const handlePay = (e) => {
             </div>
           </div>
 
-          <h2 className="text-[22px] font-bold text-[#010218] mb-3">
+          <h2 className="text-[22px] font-bold text-black-main-text mb-3">
             {isCash ? 'Booking Confirmed' : 'Payment Successful'}
           </h2>
           

@@ -98,7 +98,7 @@ export default function SettingsProfile() {
   </div>
 
   {/* السطر الثاني: الوصف (مع إزاحة ليكون تحت نص العنوان بالضبط) */}
-  <p className="text-[13px] text-[#757575]  leading-relaxed">
+  <p className="text-[13px] text-gray-text-dim2  leading-relaxed">
     Manage your personal details and account preferences.
   </p>
 </header>

@@ -21,23 +21,23 @@ const Footer = () => {
              </span>
              <FaArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
            </button>
-           <p className=" w-lg text-sm md:text-[15px] text-center text-gray-text-dim2 font-medium m-4 p-4">Join thousands of patients who have improved their heart health with Pulse AI</p>
+           <p className=" w-lg text-sm md:text-[15px] text-center text-gray-text-dim2  font-medium m-4 p-4">Join thousands of patients who have improved their heart health with Pulse AI</p>
            <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-20 text-center">
              <div>
                <p className="text-2xl md:text-[32px] font-bold text-brand-main mb-1">95%</p>
-               <p className="text-sm md:text-[15px] text-gray-text-dim2 font-medium">Success Rate</p>
+               <p className="text-sm md:text-[15px] text-gray-text-dim2  font-medium">Success Rate</p>
              </div>
              <div>
                <p className="text-2xl md:text-[32px] font-bold text-brand-main mb-1">10K+</p>
-               <p className="text-sm md:text-[15px] text-gray-text-dim2 font-medium">Patients Helped</p>
+               <p className="text-sm md:text-[15px] text-gray-text-dim2  font-medium">Patients Helped</p>
              </div>
              <div>
                <p className="text-2xl md:text-[32px] font-bold text-brand-main mb-1">24/7</p>
-               <p className="text-sm md:text-[15px] text-gray-text-dim2 font-medium">Support Available</p>
+               <p className="text-sm md:text-[15px] text-gray-text-dim2  font-medium">Support Available</p>
              </div>
              <div>
                <p className="text-2xl md:text-[32px] font-bold text-brand-main mb-1">50+</p>
-               <p className="text-sm md:text-[15px] text-gray-text-dim2 font-medium">Expert Doctors</p>
+               <p className="text-sm md:text-[15px] text-gray-text-dim2  font-medium">Expert Doctors</p>
              </div>
            </div>
         </div>
@@ -53,10 +53,10 @@ const Footer = () => {
                <img src={logoImg} alt="PulseX" className="w-8 h-8 object-contain" />
                <span className="text-[24px] font-bold text-main font-display tracking-tight">PulseX</span>
              </div>
-             <p className="text-[16px] text-gray-text-dim2 leading-[1.6] max-w-[360px] font-inter">
+             <p className="text-[16px] text-gray-text-dim2  leading-[1.6] max-w-[360px] font-inter">
                PulseX is revolutionizing cardiovascular care with advanced AI-powered monitoring, risk assessment, and personalized treatment recommendations for better heart health outcomes.
              </p>
-             <p className="text-[16px] text-gray-text-dim2 font-medium italic">
+             <p className="text-[16px] text-gray-text-dim2  font-medium italic">
                Empowering heart health through AI innovation
              </p>
           </div>
@@ -68,7 +68,7 @@ const Footer = () => {
             <ul className="space-y-4">
               {['Home', 'About', 'Contact Us'].map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-[16px] text-gray-text-dim2 hover:text-brand-main transition-colors font-medium">
+                  <a href="#" className="text-[16px] text-gray-text-dim2  hover:text-brand-main transition-colors font-medium">
                     {item}
                   </a>
                 </li>
@@ -87,7 +87,7 @@ const Footer = () => {
             <ul className="space-y-4">
               {['Documentation', 'Community'].map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-[16px] text-gray-text-dim2 hover:text-brand-main transition-colors font-medium">
+                  <a href="#" className="text-[16px] text-gray-text-dim2  hover:text-brand-main transition-colors font-medium">
                     {item}
                   </a>
                 </li>
@@ -106,14 +106,14 @@ const Footer = () => {
 
           <div className="flex flex-col gap-2">
             <span className="text-[16px] text-main font-medium">Email</span>
-            <a href="mailto:support@pulseX.health" className="text-[16px] text-gray-text-dim2 hover:text-brand-main transition-colors flex items-center gap-2">
+            <a href="mailto:support@pulseX.health" className="text-[16px] text-gray-text-dim2  hover:text-brand-main transition-colors flex items-center gap-2">
               <div className="w-4 h-4"> <HiOutlineMail  className="w-4 h-4 object-contain" /></div>
               support@pulseX.health
             </a>
           </div>
         </div>
  
-        <div className="mt-12 flex flex-col max-w-7xl mx-auto px-4  bg-white  md:flex-row justify-between items-center text-[14px] text-gray-text-dim2 pt-8 border-t border-[#757575]">
+        <div className="mt-12 flex flex-col max-w-7xl mx-auto px-4  bg-white  md:flex-row justify-between items-center text-[14px] text-gray-text-dim2  pt-8 border-t border-[#757575]">
           
           <p>© 2025 PulseX. All rights reserved.</p>
           <div className="flex items-center gap-8 mt-4 md:mt-0">
