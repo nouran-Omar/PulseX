@@ -1,0 +1,22 @@
+{
+  "model_type": "RF (SMOTE)",
+  "dataset": "framingham",
+  "trained_at": "2026-03-20T22:33:03",
+  "test_accuracy": 0.8526,
+  "threshold": 0.718,
+  "auc_roc": 0.6750,
+  "f1_macro": 0.5510,
+  "sensitivity": 0.1085,
+  "specificity": 0.9861,
+  "feature_names": [
+    "male", "age", "education", "currentSmoker", "cigsPerDay",
+    "BPMeds", "prevalentStroke", "prevalentHyp", "diabetes",
+    "totChol", "sysBP", "diaBP", "BMI", "heartRate", "glucose",
+    "pulse_pressure", "mean_arterial_pressure", "age_sysBP",
+    "chol_age", "bmi_age", "smoking_intensity", "glucose_diabetes",
+    "bp_risk", "chol_risk", "high_risk_combo", "framingham_score"
+  ],
+  "n_features": 26,
+  "n_train_samples": 3392,
+  "n_test_samples": 848
+}
