@@ -53,9 +53,10 @@ const PatientMainLayout = () => {
       <div className="flex-1 flex flex-col gap-[20px] min-w-0">
 
         {/* Header */}
-        <header className="h-[70px] bg-white shadow-sm rounded-[20px] px-6 flex items-center border border-gray-100/60 z-40 shrink-0">
+        <div className="h-[70px] bg-white shadow-sm rounded-[20px] px-6 flex items-center border border-gray-100/60 z-40 shrink-0">
           <button
             className="lg:hidden p-2 rounded-lg text-gray-600 mr-3"
+            aria-label="Open sidebar"
             onClick={() => setSidebarOpen(true)}
           >
             <HiBars3 className="w-6 h-6" />
@@ -63,7 +64,7 @@ const PatientMainLayout = () => {
           <div className="flex-1 min-w-0">
             <PatientHeader onLogout={() => setIsLogoutModalOpen(true)} />
           </div>
-        </header>
+        </div>
 
         {/* Main Content */}
         <main

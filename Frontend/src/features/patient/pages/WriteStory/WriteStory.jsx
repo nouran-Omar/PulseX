@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Toast from '../../../../components/Toast/Toast';
 import CategoriesSection from '../../components/WriteStory/CategoriesSection';
@@ -14,6 +14,14 @@ const WriteStory = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const editorRef = useRef(null);
+
+  useEffect(() => {
+    document.title = 'Write Story | PulseX';
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) {
+      meta.setAttribute('content', 'Share your personal health story to inspire the PulseX community.');
+    }
+  }, []);
 
   const [title, setTitle] = useState('');
   const [selectedCats, setSelectedCats] = useState([]);

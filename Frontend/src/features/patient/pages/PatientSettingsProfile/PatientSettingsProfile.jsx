@@ -22,6 +22,14 @@ export default function PatientSettingsProfile() {
   const { patient } = usePatientData();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = 'Settings & Profile | PulseX';
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) {
+      meta.setAttribute('content', 'Manage your profile, health information, security, and account preferences.');
+    }
+  }, []);
+
   const [toast, setToast] = useState({ visible: false, title: '', msg: '' });
   const showToast = (title, msg) => {
     setToast({ visible: true, title, msg });

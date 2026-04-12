@@ -59,6 +59,7 @@ const PatientSidebar = ({ onClose, onLogout }) => {
                   to={item.path}
                   onClick={onClose}
                   className={({ isActive }) => `${linkBase} ${isActive ? linkActiveClass : ''}`}
+                  aria-label={item.label}
                 >
                   {({ isActive }) => (
                     <>
@@ -82,6 +83,7 @@ const PatientSidebar = ({ onClose, onLogout }) => {
                   to="/patient/settings" 
                   onClick={onClose} 
                   className={({ isActive }) => `${linkBase} ${isActive ? linkActiveClass : ''}`}
+                  aria-label="Settings and profile"
                 >
                   {({ isActive }) => (
                     <>
@@ -96,6 +98,7 @@ const PatientSidebar = ({ onClose, onLogout }) => {
                 <button
                   onClick={onLogout}
                   className="w-full flex items-center gap-2 px-3 py-1.5 rounded-[8px] text-[11px] font-semibold text-[#333CF580] hover:text-red-500 hover:bg-red-50 transition-all border border-transparent bg-transparent cursor-pointer"
+                  aria-label="Log out"
                 >
                   <HiOutlineArrowLeftOnRectangle className="text-[24px] shrink-0" />
                   <span className="text-[14px]">Log out</span>

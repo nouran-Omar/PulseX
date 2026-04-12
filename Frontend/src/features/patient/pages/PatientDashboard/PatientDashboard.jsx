@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import usePatientData from '../../../../PatientHooks/usePatientData';
 import DashboardWelcome from '../../components/PatientDashboard/DashboardWelcome';
@@ -12,6 +12,14 @@ import RightColumn from '../../components/PatientDashboard/RightColumn';
 const PatientDashboard = () => {
   const { patient, isLoading } = usePatientData();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = 'Patient Dashboard | PulseX';
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) {
+      meta.setAttribute('content', 'View your heart health overview, vitals, and recent updates in your patient dashboard.');
+    }
+  }, []);
 
   if (isLoading) return <div className="flex h-screen items-center justify-center text-[#333CF5] font-bold font-['Roboto']">Loading Dashboard…</div>;
 

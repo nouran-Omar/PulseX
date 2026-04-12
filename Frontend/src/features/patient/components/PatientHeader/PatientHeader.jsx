@@ -82,7 +82,13 @@ const ReplyModal = ({ target, onClose, onSend }) => {
       <div className="bg-white rounded-[20px] w-full max-w-[440px] shadow-[0_25px_60px_rgba(0,0,0,0.18)] overflow-hidden animate-[slideUp_0.2s_ease]" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-br from-[#155DFC] to-[#4A7FFF]">
           <span className="text-[14px] font-bold text-white font-roboto">Reply to {target.name || target.title}</span>
-          <button className="bg-white/20 rounded-lg w-7 h-7 flex items-center justify-center text-white cursor-pointer hover:bg-white/35 transition-colors" onClick={onClose}><HiXMark /></button>
+          <button
+            className="bg-white/20 rounded-lg w-7 h-7 flex items-center justify-center text-white cursor-pointer hover:bg-white/35 transition-colors"
+            onClick={onClose}
+            aria-label="Close reply modal"
+          >
+            <HiXMark />
+          </button>
         </div>
         
         {target.avatar && (
@@ -110,11 +116,18 @@ const ReplyModal = ({ target, onClose, onSend }) => {
         />
 
         <div className="flex items-center justify-end gap-[10px] px-5 py-4 border-t border-gray-100">
-          <button className="bg-none border-[1.5px] border-gray-200 rounded-[20px] px-[18px] py-[7px] text-[12px] font-semibold text-[#6b7280] cursor-pointer hover:border-gray-400 font-roboto transition-colors" onClick={onClose}>Cancel</button>
+          <button
+            className="bg-none border-[1.5px] border-gray-200 rounded-[20px] px-[18px] py-[7px] text-[12px] font-semibold text-[#6b7280] cursor-pointer hover:border-gray-400 font-roboto transition-colors"
+            onClick={onClose}
+            aria-label="Cancel reply"
+          >
+            Cancel
+          </button>
           <button
             className="flex items-center gap-1.5 bg-[#333CF5] border-none rounded-[20px] px-5 py-[7px] text-[12px] font-bold text-white cursor-pointer shadow-[0_4px_12px_rgba(51,60,245,0.25)] hover:bg-[#2430e0] hover:-translate-y-px transition-all disabled:opacity-45 disabled:cursor-not-allowed font-roboto"
             onClick={() => { if (text.trim()) { onSend(text); onClose(); } }}
             disabled={!text.trim()}
+            aria-label="Send reply"
           >
             <MdOutlineSend /> Send
           </button>
@@ -189,6 +202,7 @@ const PatientHeader = () => {
             <button
               className={`relative w-10 h-10 flex items-center justify-center rounded-full bg-white border-[1.5px] border-gray-200 cursor-pointer transition-all shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:bg-[#EEF3FF] hover:border-[#155DFC] group ${msgOpen ? 'bg-[#155DFC]! border-[#155DFC]! shadow-[0_4px_16px_rgba(21,93,252,0.3)]!' : ''}`}
               onClick={() => { setMsgOpen(p => !p); setNotifOpen(false); }}
+              aria-label="Toggle messages"
             >
               <HiOutlineEnvelope className={`text-[18px] transition-colors group-hover:text-[#155DFC] ${msgOpen ? 'text-white!' : 'text-[#6b7280]'}`} />
               {unreadMsg > 0 && (
@@ -205,7 +219,13 @@ const PatientHeader = () => {
                     <div className="text-[15px] font-bold text-white font-roboto">Messages</div>
                     <div className="text-[11px] text-white/75 mt-0.5 font-roboto">{unreadMsg} unread messages</div>
                   </div>
-                  <button className="bg-white/20 rounded-lg w-7 h-7 flex items-center justify-center text-white cursor-pointer hover:bg-white/35 transition-colors" onClick={() => setMsgOpen(false)}><HiXMark /></button>
+                  <button
+                    className="bg-white/20 rounded-lg w-7 h-7 flex items-center justify-center text-white cursor-pointer hover:bg-white/35 transition-colors"
+                    onClick={() => setMsgOpen(false)}
+                    aria-label="Close messages"
+                  >
+                    <HiXMark />
+                  </button>
                 </div>
 
                 <div className="max-h-[340px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-50">
@@ -226,10 +246,18 @@ const PatientHeader = () => {
                         <span className="block text-[11px] text-[#9ca3af] mb-1 font-roboto">{msg.role}</span>
                         <p className="text-[12px] text-[#6b7280] leading-[1.4] font-roboto line-clamp-2">{msg.text}</p>
                         <div className="flex gap-2.5 mt-1.5">
-                          <button className="flex items-center gap-1 text-[11px] font-semibold text-[#22c55e] cursor-pointer hover:underline font-roboto" onClick={() => { setReplyTarget(msg); setMsgOpen(false); }}>
+                          <button
+                            className="flex items-center gap-1 text-[11px] font-semibold text-[#22c55e] cursor-pointer hover:underline font-roboto"
+                            onClick={() => { setReplyTarget(msg); setMsgOpen(false); }}
+                            aria-label={`Reply to ${msg.name}`}
+                          >
                             <MdOutlineReply /> Reply
                           </button>
-                          <button className="flex items-center gap-1 text-[11px] font-semibold text-[#ef4444] cursor-pointer hover:underline font-roboto" onClick={() => deleteMsg(msg.id)}>
+                          <button
+                            className="flex items-center gap-1 text-[11px] font-semibold text-[#ef4444] cursor-pointer hover:underline font-roboto"
+                            onClick={() => deleteMsg(msg.id)}
+                            aria-label={`Delete message from ${msg.name}`}
+                          >
                             <MdOutlineDelete /> Delete
                           </button>
                         </div>
@@ -246,6 +274,7 @@ const PatientHeader = () => {
             <button
               className={`relative w-10 h-10 flex items-center justify-center rounded-full bg-white border-[1.5px] border-gray-200 cursor-pointer transition-all shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:bg-[#EEF3FF] group ${notifOpen ? 'shadow-[0_4px_16px_rgba(21,93,252,0.3)]!' : ''}`}
               onClick={() => { setNotifOpen(p => !p); setMsgOpen(false); }}
+              aria-label="Toggle notifications"
             >
               <HiOutlineBell className={`text-[18px] transition-colors group-hover:text-[#155DFC] ${notifOpen ? 'text-[#6b7280]!' : 'text-[#6b7280]'}`} />
               {unreadNotif > 0 && (
@@ -263,10 +292,20 @@ const PatientHeader = () => {
                     <div className="text-[11px] text-white/75 mt-0.5 font-roboto">{unreadNotif} unread notifications</div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button className="bg-transparent border-none text-white/90 text-[11px] font-semibold cursor-pointer underline font-roboto" onClick={markAllRead}>
+                    <button
+                      className="bg-transparent border-none text-white/90 text-[11px] font-semibold cursor-pointer underline font-roboto"
+                      onClick={markAllRead}
+                      aria-label="Mark all notifications as read"
+                    >
                       <HiOutlineCheck className="inline mr-1" /> Mark all
                     </button>
-                    <button className="bg-white/20 rounded-lg w-7 h-7 flex items-center justify-center text-white cursor-pointer hover:bg-white/35 transition-colors" onClick={() => setNotifOpen(false)}><HiXMark /></button>
+                    <button
+                      className="bg-white/20 rounded-lg w-7 h-7 flex items-center justify-center text-white cursor-pointer hover:bg-white/35 transition-colors"
+                      onClick={() => setNotifOpen(false)}
+                      aria-label="Close notifications"
+                    >
+                      <HiXMark />
+                    </button>
                   </div>
                 </div>
 
@@ -288,12 +327,30 @@ const PatientHeader = () => {
                           <span className="text-[10px] text-[#9ca3af] font-roboto">{n.time}</span>
                           <div className="flex gap-2">
                             {(n.type === 'message' || n.type === 'alert') && (
-                              <button className="text-[#155dfc] text-[11px] font-semibold cursor-pointer hover:underline font-roboto flex items-center gap-0.5" onClick={() => { setReplyTarget({ name: n.title, desc: n.desc, avatar: null }); setNotifOpen(false); }}>
+                              <button
+                                className="text-[#155dfc] text-[11px] font-semibold cursor-pointer hover:underline font-roboto flex items-center gap-0.5"
+                                onClick={() => { setReplyTarget({ name: n.title, desc: n.desc, avatar: null }); setNotifOpen(false); }}
+                                aria-label={`Reply to notification: ${n.title}`}
+                              >
                                 <MdOutlineReply /> Reply
                               </button>
                             )}
-                            {n.unread && <button className="text-[#155dfc] text-[11px] font-semibold cursor-pointer hover:underline font-roboto" onClick={() => markOneRead(n.id)}>Mark read</button>}
-                            <button className="text-[#ef4444] text-[11px] font-semibold cursor-pointer hover:underline font-roboto" onClick={() => deleteNotif(n.id)}>Delete</button>
+                            {n.unread && (
+                              <button
+                                className="text-[#155dfc] text-[11px] font-semibold cursor-pointer hover:underline font-roboto"
+                                onClick={() => markOneRead(n.id)}
+                                aria-label={`Mark notification as read: ${n.title}`}
+                              >
+                                Mark read
+                              </button>
+                            )}
+                            <button
+                              className="text-[#ef4444] text-[11px] font-semibold cursor-pointer hover:underline font-roboto"
+                              onClick={() => deleteNotif(n.id)}
+                              aria-label={`Delete notification: ${n.title}`}
+                            >
+                              Delete
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -306,9 +363,13 @@ const PatientHeader = () => {
           </div>
 
           {/* ── Avatar ── */}
-          <div 
+          <div
             className="flex items-center gap-[10px] pl-3.5 cursor-pointer group"
             onClick={() => navigate('/patient/settings')}
+            role="button"
+            tabIndex={0}
+            aria-label="Open settings and profile"
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate('/patient/settings'); }}
           >
             <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Avatar" className="w-10 h-10 rounded-full object-cover border-2 border-[#e0eaff]  " />
             <div className="hidden md:flex flex-col">
