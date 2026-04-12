@@ -1,0 +1,335 @@
+import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaTrash } from "react-icons/fa";
+import {
+  HiOutlineMagnifyingGlass,
+  HiOutlineEye,
+  HiOutlineTrash,
+  HiOutlinePencilSquare,
+  HiChevronLeft,
+  HiChevronRight,
+  HiOutlineEyeSlash,
+} from 'react-icons/hi2';
+import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { MdOutlineAutoStories } from 'react-icons/md';
+import { FaBookOpen } from 'react-icons/fa6';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import Toast from '../../../../components/Toast/Toast';
+import EmptyState from '../shared/EmptyState/EmptyState';
+import {
+  MOCK_STORIES as INITIAL_STORIES,
+  TAG_OPTIONS,
+  STATUS_OPTIONS,
+  SORT_OPTIONS,
+} from './storiesMockData';
+
+const PAGE_SIZE_REAL =3;
+const MAX_VISIBLE_PAGES = 5;
+
+export default function StoriesManagement() {
+  const navigate = useNavigate();
+
+  const [stories, setStories]   = useState(INITIAL_STORIES);
+  const [tag, setTag]           = useState('All');
+  const [status, setStatus]     = useState('All');
+  const [sort, setSort]         = useState('Normal');
+  const [search, setSearch]     = useState('');
+  const [page, setPage]         = useState(1);
+
+  // Modals
+  const [deleteModal, setDeleteModal] = useState({ open: false, story: null });
+
+  // Toast
+  const [toast, setToast] = useState({ visible: false, title: '', message: '' });
+
+  const showToast = (title, message) => {
+    setToast({ visible: true, title, message });
+    setTimeout(() => setToast(t => ({ ...t, visible: false })), 3000);
+  };
+
+  // ── Derived lists ──────────────────────────────────────────
+  const filtered = useMemo(() => {
+    let list = [...stories];
+    if (status !== 'All') list = list.filter(s => s.status === status);
+    if (search.trim())    list = list.filter(s =>
+      s.title.toLowerCase().includes(search.toLowerCase()) ||
+      s.author.toLowerCase().includes(search.toLowerCase())
+    );
+    if (sort === 'Newest') list = list.reverse();
+    if (sort === 'Oldest') list = [...list].reverse();
+    return list;
+  }, [stories, status, search, sort]);
+
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE_REAL);
+  const paginated  = filtered.slice((page - 1) * PAGE_SIZE_REAL, page * PAGE_SIZE_REAL);
+
+  const handlePageChange = (p) => {
+    if (p >= 1 && p <= totalPages) setPage(p);
+  };
+
+  // ── Smart pagination: show first 5 pages, then "..." then last page
+  const buildPageNums = () => {
+    if (totalPages <= MAX_VISIBLE_PAGES) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    const pages = Array.from({ length: MAX_VISIBLE_PAGES }, (_, i) => i + 1);
+    if (page > MAX_VISIBLE_PAGES && totalPages > MAX_VISIBLE_PAGES) {
+      return [...pages, '...', totalPages];
+    }
+    return [...pages, '...', totalPages];
+  };
+  const pageNums = buildPageNums();
+
+  // ── Actions ────────────────────────────────────────────────
+  const handleRowClick = (story) => {
+    navigate(`/admin/stories/${story.id}`);
+  };
+
+  const handleToggleHide = (e, story) => {
+    e.stopPropagation();
+    const newStatus = story.status === 'Hidden' ? 'Published' : 'Hidden';
+    setStories(prev => prev.map(s => s.id === story.id ? { ...s, status: newStatus } : s));
+    if (newStatus === 'Hidden') {
+      showToast('Story Hidden Successfully', 'Your changes have been saved successfully.');
+    } else {
+      showToast('Story Unhidden Successfully', 'Your changes have been saved successfully.');
+    }
+  };
+
+  const handleDeleteClick = (e, story) => {
+    e.stopPropagation();
+    setDeleteModal({ open: true, story });
+  };
+
+  const handleDeleteConfirm = () => {
+    const story = deleteModal.story;
+    setStories(prev => prev.map(s => s.id === story.id ? { ...s, status: 'Deleted' } : s));
+    setDeleteModal({ open: false, story: null });
+    showToast('Story Deleted Successfully', 'Your changes have been saved successfully.');
+  };
+
+  // Live stat counts from state
+  const liveStats = useMemo(() => ({
+    total:     stories.length,
+    published: stories.filter(s => s.status === 'Published').length,
+    hidden:    stories.filter(s => s.status === 'Hidden').length,
+    deleted:   stories.filter(s => s.status === 'Deleted').length,
+  }), [stories]);
+
+  return (
+    <section className="flex flex-col gap-6 p-6 " aria-label="Stories Management">
+
+      <Toast visible={toast.visible} title={toast.title} message={toast.message} type="success" onClose={() => setToast(t => ({ ...t, visible: false }))} />
+      <ConfirmModal isOpen={deleteModal.open} title="Delete Story?" desc="Are you sure you want to delete this story? This action is permanent." onConfirm={handleDeleteConfirm} onCancel={() => setDeleteModal({ open: false, story: null })} />
+
+      {/* ── Header ── */}
+      <div className="flex flex-col gap-1">
+        <div className="flex items-center gap-2 mb-2">
+          <HiOutlinePencilSquare className="text-[22px] text-black-main-text " aria-hidden="true" />
+          <h1 className="text-[24px] sm:text-[24px] font-bold text-black-main-text leading-none">Patient Stories</h1>
+        </div>
+        <p className="text-[18px] text-gray-text-dim2 ">Read and share inspiring patient journeys.</p>
+      </div>
+
+      {/* ── Stat Cards ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <StatCard label="Total Stories"     value={liveStats.total}     icon={<FaBookOpen />} iconBg="#EEF2FF" iconColor="#333CF5" />
+        <StatCard label="Published Stories" value={liveStats.published} icon={<FaEye />}       iconBg="#ECFDF5" iconColor="#16A34A" />
+        <StatCard label="Hidden Stories"    value={liveStats.hidden}    icon={<FaEyeSlash />}  iconBg="#FFF7ED" iconColor="#757575" />
+        <StatCard label="Deleted Stories"   value={liveStats.deleted}   icon={<FaTrash />}     iconBg="#FEF2F2" iconColor="#EF4444" />
+      </div>
+
+      {/* ── Filters Bar ── */}
+  <div className="flex flex-col rounded-xl bg-[#F1F2F5] p-2 sm:p-3 sm:flex-row flex-wrap gap-4 items-start sm:items-center">
+  {[
+    { label: 'Tags:', val: tag, setter: setTag, opts: TAG_OPTIONS },
+    { label: 'Status:', val: status, setter: setStatus, opts: STATUS_OPTIONS },
+    { label: 'Sort By:', val: sort, setter: setSort, opts: SORT_OPTIONS },
+  ].map(({ label, val, setter, opts }) => (
+    <div key={label} className="flex flex-row items-center gap-2 px-1 w-full sm:w-auto order-2 sm:order-1">
+      <label className="text-[14px] font-normal text-gray-500 whitespace-nowrap min-w-15 sm:min-w-0">
+        {label}
+      </label>
+     <select
+  value={val}
+  onChange={e => { setter(e.target.value); setPage(1); }}
+  /* 1. أضفنا appearance-none عشان نلغي السهم القديم لو حبينا نتحكم فيه تماماً */
+  /* 2. الأهم: عدلنا الـ pr-8 عشان السهم الافتراضي يزق لجوه شوية لو المتصفح بيدعم ده */
+  /* 3. استخدمنا bg-no-repeat و background-position لو هنحط سهم مخصص */
+  className="text-[12px] border border-gray-200 rounded-full pl-4 pr-10 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-[#155dfc]/30 cursor-pointer flex-1 sm:w-auto appearance-none"
+  style={{
+    backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3e%3c/svg%3e")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 12px center', // هنا بنتحكم في دخول السهم لجوه (12px من اليمين)
+    backgroundSize: '12px',
+  }}
+>
+  {opts.map(o => <option key={o}>{o}</option>)}
+</select>
+    </div>
+  ))}
+
+  {/* خانة البحث - بتيجي في الأول في الموبايل وفي الآخر في الكمبيوتر */}
+  <div className="relative w-full sm:w-auto order-1 sm:order-2 sm:ml-auto">
+    <HiOutlineMagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[14px]" aria-hidden="true" />
+    <input
+      type="search"
+      placeholder="Search stories…"
+      aria-label="Search stories"
+      value={search}
+      onChange={e => { setSearch(e.target.value); setPage(1); }}
+      className="pl-9 pr-4 py-2 text-[14px] border border-gray-200 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-[#155dfc]/30 w-full sm:w-64"
+    />
+  </div>
+</div>
+
+{/* ── Table Area ── */}
+<div className="w-full overflow-visible sm:overflow-x-auto bg-white">
+  <table className="w-full min-w-full sm:min-w-175 border-collapse">
+    <thead className="hidden sm:table-header-group">
+      <tr className="bg-[#333CF5] text-white">
+        {/* أول خلية left والباقي center */}
+        <th className="px-6 py-5 text-[12px] font-normal text-center whitespace-nowrap uppercase tracking-wider">Story</th>
+        <th className="px-4 py-5 text-[12px] font-normal text-center whitespace-nowrap uppercase tracking-wider">Author</th>
+        <th className="px-4 py-5 text-[12px] font-normal text-center whitespace-nowrap uppercase tracking-wider">Date Published</th>
+        <th className="px-4 py-5 text-[12px] font-normal text-center whitespace-nowrap uppercase tracking-wider">Status</th>
+        <th className="px-4 py-5 text-[12px] font-normal text-center whitespace-nowrap uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      {paginated.map((story, idx) => (
+        <tr
+          key={story.id}
+          onClick={() => handleRowClick(story)}
+          className={`block sm:table-row rounded-[14px] sm:rounded-none border-2 border-gray-100 sm:border-0 mb-3 sm:mb-0 transition-colors cursor-pointer ${idx % 2 === 0 ? 'bg-white' : 'bg-[#F9FAFB]'} hover:bg-[#EFF6FF]/60`}
+        >
+          {/* 1. القصة: محاذاة لليسار مع صورة مطولة */}
+          <td className="block sm:table-cell px-6 py-6 sm:py-8 text-left">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4">
+              {/* الصورة خليناها مطولة (w-16 h-20) عشان تملى الـ Row وتكون واضحة */}
+              <img 
+                src={story.cover} 
+                alt={story.title} 
+                className="w-16 h-20 rounded-xl object-cover shrink-0 border border-gray-100 shadow-sm"
+              />
+              <div className="flex flex-col gap-2 min-w-0">
+                <h3 className="text-[17px] font-bold text-black-main-text leading-tight">
+                  {story.title}
+                </h3>
+                <p className="text-[14px] text-gray-text-dim2 leading-relaxed max-w-87.5">
+                  {story.desc}
+                </p>
+              </div>
+            </div>
+          </td>
+
+          {/* 2. الكاتب: في النص */}
+        <td className="block sm:table-cell px-4 py-4 sm:py-8">
+  <div className="flex items-center justify-center gap-3"> {/* شيلنا flex-col وخليناها flex بس */}
+    <img 
+      src={story.avatar} 
+      alt={story.author} 
+      className="w-8 h-8 rounded-full object-cover border border-gray-200 shrink-0" 
+    />
+    <span className="text-[16px] font-semibold text-black-main-text whitespace-nowrap">
+      {story.author}
+    </span>
+  </div>
+</td>
+
+          {/* 3. التاريخ: في النص */}
+          <td className="block sm:table-cell px-4 py-4 sm:py-8 text-center text-[14px] text-gray-500 font-medium">
+            {story.date}
+          </td>
+
+          {/* 4. الحالة: في النص */}
+          <td className="block sm:table-cell px-4 py-4 sm:py-8 text-center">
+            <span className={`inline-block px-4 py-1.5 text-[12px] font-bold rounded-full ${
+              story.status === 'Published' ? 'bg-[#DCFCE7] text-[#15803D]' :
+              story.status === 'Hidden'    ? 'bg-gray-100 text-gray-text-dim2' :
+              'bg-[#FEF2F2] text-[#EF4444]'
+            }`}>
+              {story.status}
+            </span>
+          </td>
+
+          {/* 5. الأزرار: في النص */}
+          <td className="block sm:table-cell px-4 py-4 sm:py-8 text-center" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-center gap-3">
+              
+              <button
+                onClick={(e) => handleToggleHide(e, story)}
+                title={story.status === 'Hidden' ? 'Unhide Story' : 'Hide Story'}
+                className={`w-10 h-10 cursor-pointer flex items-center justify-center  transition-all 
+                  ${story.status === 'Hidden'
+                    ? ' text-[#3335cf]   hover:text-[#2628a0] '
+                    : ' text-gray-500 hover:text-gray-500'
+                  }`}
+              >
+                {story.status === 'Hidden' ? <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none">
+  <g clip-path="url(#clip0_4004_7074)">
+    <path d="M8.99922 1C6.47422 1 4.45234 2.15 2.98047 3.51875C1.51797 4.875 0.539844 6.5 0.0773437 7.61562C-0.0257813 7.8625 -0.0257813 8.1375 0.0773437 8.38437C0.539844 9.5 1.51797 11.125 2.98047 12.4812C4.45234 13.85 6.47422 15 8.99922 15C11.5242 15 13.5461 13.85 15.018 12.4812C16.4805 11.1219 17.4586 9.5 17.9242 8.38437C18.0273 8.1375 18.0273 7.8625 17.9242 7.61562C17.4586 6.5 16.4805 4.875 15.018 3.51875C13.5461 2.15 11.5242 1 8.99922 1ZM4.49922 8C4.49922 6.80653 4.97332 5.66193 5.81724 4.81802C6.66115 3.97411 7.80574 3.5 8.99922 3.5C10.1927 3.5 11.3373 3.97411 12.1812 4.81802C13.0251 5.66193 13.4992 6.80653 13.4992 8C13.4992 9.19347 13.0251 10.3381 12.1812 11.182C11.3373 12.0259 10.1927 12.5 8.99922 12.5C7.80574 12.5 6.66115 12.0259 5.81724 11.182C4.97332 10.3381 4.49922 9.19347 4.49922 8ZM8.99922 6C8.99922 7.10313 8.10234 8 6.99922 8C6.77734 8 6.56484 7.9625 6.36484 7.89687C6.19297 7.84062 5.99297 7.94688 5.99922 8.12813C6.00859 8.34375 6.03984 8.55937 6.09922 8.775C6.52734 10.375 8.17422 11.325 9.77422 10.8969C11.3742 10.4688 12.3242 8.82188 11.8961 7.22188C11.5492 5.925 10.4023 5.05312 9.12734 5C8.94609 4.99375 8.83984 5.19062 8.89609 5.36562C8.96172 5.56562 8.99922 5.77812 8.99922 6Z" fill="#8B8C8D"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_4004_7074">
+      <path d="M0 0H18V16H0V0Z" fill="white"/>
+    </clipPath>
+  </defs>
+</svg>: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none">
+  <g clip-path="url(#clip0_4004_7369)">
+    <path d="M8.99922 1C6.47422 1 4.45234 2.15 2.98047 3.51875C1.51797 4.875 0.539844 6.5 0.0773437 7.61562C-0.0257813 7.8625 -0.0257813 8.1375 0.0773437 8.38437C0.539844 9.5 1.51797 11.125 2.98047 12.4812C4.45234 13.85 6.47422 15 8.99922 15C11.5242 15 13.5461 13.85 15.018 12.4812C16.4805 11.1219 17.4586 9.5 17.9242 8.38437C18.0273 8.1375 18.0273 7.8625 17.9242 7.61562C17.4586 6.5 16.4805 4.875 15.018 3.51875C13.5461 2.15 11.5242 1 8.99922 1ZM4.49922 8C4.49922 6.80653 4.97332 5.66193 5.81724 4.81802C6.66115 3.97411 7.80574 3.5 8.99922 3.5C10.1927 3.5 11.3373 3.97411 12.1812 4.81802C13.0251 5.66193 13.4992 6.80653 13.4992 8C13.4992 9.19347 13.0251 10.3381 12.1812 11.182C11.3373 12.0259 10.1927 12.5 8.99922 12.5C7.80574 12.5 6.66115 12.0259 5.81724 11.182C4.97332 10.3381 4.49922 9.19347 4.49922 8ZM8.99922 6C8.99922 7.10313 8.10234 8 6.99922 8C6.77734 8 6.56484 7.9625 6.36484 7.89687C6.19297 7.84062 5.99297 7.94688 5.99922 8.12813C6.00859 8.34375 6.03984 8.55937 6.09922 8.775C6.52734 10.375 8.17422 11.325 9.77422 10.8969C11.3742 10.4688 12.3242 8.82188 11.8961 7.22188C11.5492 5.925 10.4023 5.05312 9.12734 5C8.94609 4.99375 8.83984 5.19062 8.89609 5.36562C8.96172 5.56562 8.99922 5.77812 8.99922 6Z" fill="#333CF5"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_4004_7369">
+      <path d="M0 0H18V16H0V0Z" fill="white"/>
+    </clipPath>
+  </defs>
+</svg> }
+              </button>
+              <button onClick={(e) => handleDeleteClick(e, story)} className="w-10 h-10 cursor-pointer flex items-center justify-center rounded-xl text-red-500  hover:text-red-600 transition-all ">
+                <HiOutlineTrash size={20} />
+              </button>
+            </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+      
+
+        {/* Pagination */}
+        <div className="flex mt-3 flex-col sm:flex-row items-center justify-between gap-3 px-4 py-3 border-t border-gray-100">
+          <span className="text-[14px] text-gray-400 w-full sm:w-auto text-center sm:text-left">
+            Showing {paginated.length === 0 ? 0 : (page - 1) * PAGE_SIZE_REAL + 1}–{Math.min(page * PAGE_SIZE_REAL, filtered.length)} of {filtered.length} stories
+          </span>
+          <div className="flex items-center gap-1">
+            <button disabled={page === 1} onClick={() => handlePageChange(page - 1)} className="w-10 h-10  flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"><HiChevronLeft size={14} /></button>
+            {pageNums.map((n, idx) =>
+              n === '...' ? (
+                <span key={`ellipsis-${idx}`} className="px-1 text-[14px] text-gray-400 hidden sm:inline">…</span>
+              ) : (
+                <button key={n} onClick={() => handlePageChange(n)} className={`w-10 h-10 cursor-pointer items-center justify-center rounded-full text-[12px] font-semibold transition-colors hidden sm:flex ${page === n ? 'bg-[#155dfc] text-white' : 'border border-gray-200 text-gray-600 hover:bg-gray-50'}`}>{n}</button>
+              )
+            )}
+            <button disabled={page === totalPages || totalPages === 0} onClick={() => handlePageChange(page + 1)} className="w-10 h-10 cursor-pointer flex items-center justify-center rounded-full border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"><HiChevronRight size={14} /></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+function StatCard({ label, value, icon, iconBg, iconColor }) {
+  return (
+    <div className="flex items-center justify-between shadow-xl rounded-[14px] border-gray-text-dim2 py-8 px-4 w-full">
+      <div className="flex flex-col gap-1">
+        <p className="text-[14px] font-normal text-gray-text-dim2  tracking-wide mb-2">{label}</p>
+        <p className="text-[30px] font-bold text-black-main-text leading-none">{value.toLocaleString()}</p>
+      </div>
+      <div className="w-10 h-10 rounded-xl flex items-center justify-center text-[18px] shrink-0" style={{ background: iconBg, color: iconColor }}>
+        {icon}
+      </div>
+    </div>
+  );
+}
