@@ -182,27 +182,33 @@ const PatientAllComments = () => {
         />
       )}
 
-      <div className="w-full flex flex-col gap-5 p-5">
+      <main className="w-full flex flex-col gap-5 p-5" style={{ "--comments-muted": "#757575" }}>
 
-        {/* ── Back ── */}
-        <button
-          onClick={() => navigate(`/patient/stories/${id}`)}
-          className="cursor-pointer flex items-center gap-1 text-sm text-gray-500 hover:text-brand-main transition w-fit"
-        >
-          <HiOutlineChevronLeft /> Back to Story
-        </button>
+        <header className="flex flex-col gap-3">
+          {/* ── Back ── */}
+          <button
+            onClick={() => navigate(`/patient/stories/${id}`)}
+            className="cursor-pointer flex items-center gap-1 text-sm text-gray-500 hover:text-brand-main transition w-fit"
+          >
+            <HiOutlineChevronLeft /> Back to Story
+          </button>
 
-        {/* ── Header ── */}
-        <div className="bg-white rounded-2xl p-5">
-          <div className="flex items-center gap-2 mb-1">
-            <HiOutlineChatBubbleLeftRight className="text-xl text-black-main-text" />
-            <h1 className="text-xl font-bold text-black-main-text">All Comments</h1>
+          {/* ── Header ── */}
+          <div className="bg-white rounded-2xl p-5">
+            <div className="flex items-center gap-2 mb-1">
+              <HiOutlineChatBubbleLeftRight className="text-xl text-black-main-text" />
+              <h1 className="text-xl font-bold text-black-main-text">All Comments</h1>
+            </div>
+            <p className="text-sm text-[var(--comments-muted)]">{comments.length} comments on "{storyTitle}"</p>
           </div>
-          <p className="text-sm text-[#757575]">{comments.length} comments on "{storyTitle}"</p>
-        </div>
+        </header>
+
+        <aside className="sr-only">
+          <p>Full comments thread with replies and reporting actions.</p>
+        </aside>
 
         {/* ── Add Comment ── */}
-        <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+        <section className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm" aria-label="Add a comment">
           <h2 className="text-sm font-bold text-black-main-text mb-3">Add a Comment</h2>
           <div className="flex items-start gap-3">
             <Avatar img="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100" initials="Y" size="w-10 h-10" />
@@ -218,15 +224,15 @@ const PatientAllComments = () => {
               <IoSendSharp /> Post Comment
             </button>
           </div>
-        </div>
+        </section>
 
         {/* ── Comments List ── */}
-        <div className="flex flex-col gap-4">
+        <section className="flex flex-col gap-4" aria-label="Comments list">
           {comments.map((c) => {
             const likeKey = `${c.id}`;
             const liked = !!likedIds[likeKey];
             return (
-              <div key={c.id} className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+              <article key={c.id} className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
 
                 {/* Comment author */}
                 <div className="flex items-start gap-3">
@@ -286,12 +292,12 @@ const PatientAllComments = () => {
 
                 {/* Nested replies */}
                 {c.replies.length > 0 && (
-                  <div className="mt-4 ml-14 flex flex-col gap-3 border-l-2 border-gray-100 pl-4">
+                  <section className="mt-4 ml-14 flex flex-col gap-3 border-l-2 border-gray-100 pl-4" aria-label="Replies">
                     {c.replies.map((r) => {
                       const rKey = `${c.id}-${r.id}`;
                       const rLiked = !!likedIds[rKey];
                       return (
-                        <div key={r.id} className="flex items-start gap-3">
+                        <article key={r.id} className="flex items-start gap-3">
                           <Avatar img={r.avatar} initials={r.initials} size="w-7 h-7" />
                           <div className="flex-1">
                             <div className="flex items-center justify-between flex-wrap gap-1">
@@ -307,18 +313,22 @@ const PatientAllComments = () => {
                               <AiOutlineLike /> {r.likes}
                             </button>
                           </div>
-                        </div>
+                        </article>
                       );
                     })}
-                  </div>
+                  </section>
                 )}
 
-              </div>
+              </article>
             );
           })}
-        </div>
+        </section>
 
-      </div>
+        <footer className="sr-only">
+          <p>End of comments page.</p>
+        </footer>
+
+      </main>
     </>
   );
 };

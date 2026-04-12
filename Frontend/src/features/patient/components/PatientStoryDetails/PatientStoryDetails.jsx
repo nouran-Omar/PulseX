@@ -253,16 +253,21 @@ const PatientStoryDetails = () => {
         />
       )}
 
-      <div className="story-details-root w-full flex flex-col gap-5 p-4 sm:p-6">
+      <main className="story-details-root w-full flex flex-col gap-5 p-4 sm:p-6" style={{ "--story-muted": "#757575" }}>
         {/* ── Page Header ── */}
-        <div>
+        <header>
           <div className="flex items-center gap-2 mb-1">
             <TbBook className="text-xl text-black-main-text" />
             <h1 className="text-lg font-bold text-black-main-text">Patient Story Details</h1>
           </div>
-          <p className="text-sm text-[#757575]">Read full patient journey and shared experiences.</p>
-        </div>
-        <div className="bg-white rounded-2xl p-5 sm:p-6 border border-gray-100 shadow-sm">
+          <p className="text-sm text-[var(--story-muted)]">Read full patient journey and shared experiences.</p>
+        </header>
+
+        <aside className="sr-only">
+          <p>Story details, engagement actions, and related stories.</p>
+        </aside>
+
+        <section className="bg-white rounded-2xl p-5 sm:p-6 border border-gray-100 shadow-sm" aria-label="Story author">
   
           <div className="mt-4 flex flex-col sm:flex-row items-start gap-4">
             <div className="w-full sm:w-auto flex justify-center sm:justify-start">
@@ -281,20 +286,20 @@ const PatientStoryDetails = () => {
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* ── Story Article ── */}
-        <div className="bg-white rounded-2xl p-5 sm:p-7 border border-gray-100 shadow-sm">
+        <article className="bg-white rounded-2xl p-5 sm:p-7 border border-gray-100 shadow-sm">
           <h2 className="text-3xl sm:text-2xl font-bold text-black-main-text mb-5">{story.title}</h2>
           <div className="flex flex-col gap-4 text-[16px] text-[#374151] leading-relaxed">
             {story.content.slice(0, 2).map((p, i) => <p key={i}>{p}</p>)}
             <img src={story.coverImg} alt="Story cover" className="w-full rounded-xl object-cover max-h-[320px]" />
             {story.content.slice(2).map((p, i) => <p key={i}>{p}</p>)}
           </div>
-        </div>
+        </article>
 
         {/* ── Engagement Bar ── */}
-        <div className="bg-white rounded-2xl px-5 py-4 border border-gray-100 shadow-sm flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-8">
+        <section className="bg-white rounded-2xl px-5 py-4 border border-gray-100 shadow-sm flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-8" aria-label="Engagement">
           <button
             onClick={handleLike}
             className={`cursor-pointer flex items-center gap-1.5 text-sm rounded-full p-1 font-medium transition shrink-0 ${isLiked ? 'text-[#E7000B] bg-[#FEF2F2] rounded-full p-1' : 'text-[#4B5563]  hover:text-[#E7000B]'}`}
@@ -317,12 +322,12 @@ const PatientStoryDetails = () => {
           <button onClick={() => setReportStory(true)} className="cursor-pointer flex items-center gap-1.5 text-sm font-medium text-[#4B5563] hover:text-red-500 transition shrink-0">
             <HiOutlineFlag className="text-lg" /> Report
           </button>
-        </div>
+        </section>
 
         {/* ── Comment Box (Conditional) ── */}
         {showCommentBox && (
           <>
-            <div className="bg-[#EFF6FF] rounded-2xl p-5 border border-[#BEDBFF] shadow-sm transition-all animate-in fade-in slide-in-from-top-2">
+            <section className="bg-[#EFF6FF] rounded-2xl p-5 border border-[#BEDBFF] shadow-sm transition-all animate-in fade-in slide-in-from-top-2" aria-label="Add comment">
               <div className="flex items-start gap-3">
                 <Avatar img={story.authorImg} initials="Y" size="w-9 h-9" />
                 <div className="flex-1 bg-[#FFFFFF] rounded-xl px-4 py-3 min-h-[80px]">
@@ -344,10 +349,10 @@ const PatientStoryDetails = () => {
                   <IoSendSharp /> Post Comment
                 </button>
               </div>
-            </div>
+            </section>
 
             {/* ── Comments Preview ── */}
-            <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm animate-in fade-in slide-in-from-top-4">
+            <section className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm animate-in fade-in slide-in-from-top-4" aria-label="Comments preview">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-bold text-black-main-text">Comments ({comments.length + story.commentsCount})</h3>
                 <button
@@ -359,7 +364,7 @@ const PatientStoryDetails = () => {
               </div>
               <div className="flex flex-col gap-3">
                 {comments.slice(0, 3).map((c) => (
-                  <div key={c.id} className="flex items-start gap-3 bg-[#F9FAFB] rounded-xl p-3">
+                  <article key={c.id} className="flex items-start gap-3 bg-[#F9FAFB] rounded-xl p-3">
                     <Avatar img={c.avatar} initials={c.initials} size="w-8 h-8" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
@@ -368,19 +373,19 @@ const PatientStoryDetails = () => {
                       </div>
                       <p className="text-xs text-[#364153] mt-0.5">{c.text}</p>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
-            </div>
+            </section>
           </>
         )}
 
         {/* ── You May Also Like ── */}
-        <div>
+        <section aria-label="Related stories">
           <h3 className="text-base font-bold text-black-main-text mb-4">You may also like</h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {relatedStories.map((r) => (
-              <div key={r.id} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col gap-3">
+              <article key={r.id} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col gap-3">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-gray-200" />
                   <div>
@@ -397,26 +402,26 @@ const PatientStoryDetails = () => {
                 <button onClick={() => navigate(`/patient/stories/${r.id}`)} className="text-xs font-semibold cursor-pointer text-brand-main hover:underline text-left mt-auto">
                   Read Story →
                 </button>
-              </div>
+              </article>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* ── Footer Buttons ── */}
-      <div className="flex flex-col sm:flex-row justify-end gap-3 py-2">
-  <button 
-    onClick={() => navigate('/patient/stories')} 
-    className="w-full sm:w-auto px-6 py-2.5 cursor-pointer rounded-full border border-gray-300 text-sm font-semibold text-black-main-text bg-white hover:bg-gray-50 transition"
-  >
-    Back to Stories
-  </button>
-  <button 
-    onClick={() => navigate('/patient/write-story')} 
-    className="w-full sm:w-auto flex items-center justify-center cursor-pointer gap-1.5 px-6 py-2.5 rounded-full bg-brand-main text-white text-sm font-semibold hover:bg-[#2730d4] transition"
-  >
-    <HiOutlinePencilAlt /> Write Story
-  </button>
-</div>
+        <footer className="flex flex-col sm:flex-row justify-end gap-3 py-2">
+          <button 
+            onClick={() => navigate('/patient/stories')} 
+            className="w-full sm:w-auto px-6 py-2.5 cursor-pointer rounded-full border border-gray-300 text-sm font-semibold text-black-main-text bg-white hover:bg-gray-50 transition"
+          >
+            Back to Stories
+          </button>
+          <button 
+            onClick={() => navigate('/patient/write-story')} 
+            className="w-full sm:w-auto flex items-center justify-center cursor-pointer gap-1.5 px-6 py-2.5 rounded-full bg-brand-main text-white text-sm font-semibold hover:bg-[#2730d4] transition"
+          >
+            <HiOutlinePencilAlt /> Write Story
+          </button>
+        </footer>
 
         <style dangerouslySetInnerHTML={{ __html: `
           .story-details-root button { cursor: pointer; }
@@ -426,7 +431,7 @@ const PatientStoryDetails = () => {
           .story-details-root::-webkit-scrollbar-thumb:hover { background: #333CF5; }
           @media (max-width: 640px) { .story-details-root::-webkit-scrollbar { width: 4px; } }
         `}} />
-      </div>
+      </main>
     </>
   );
 };

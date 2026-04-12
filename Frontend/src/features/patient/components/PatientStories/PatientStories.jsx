@@ -33,8 +33,8 @@ const PatientStories = () => {
 
   return (
  <>
- <section className='p-[24px] '>
-   <header className="flex flex-col  pb-4 mb-8">
+ <main className="p-[24px]" style={{ "--story-muted": "#757575" }}>
+   <header className="flex flex-col pb-4 mb-8">
   
   {/* السطر الأول: الأيقونة + العنوان */}
   <div className="flex items-center gap-1">
@@ -50,16 +50,20 @@ const PatientStories = () => {
   </div>
 
   {/* السطر الثاني: الوصف ينزل تحتهم */}
-  <p className="text-[18px] text-[#757575] max-w-2xl ml-2">
+  <p className="text-[18px] text-[var(--story-muted)] max-w-2xl ml-2">
     Read and share inspiring patient journeys.
   </p>
   
 </header>
 
+      <aside className="sr-only">
+        <p>Patient stories listing with pagination and quick actions.</p>
+      </aside>
+
       {/* Stories grid — 2 cols */}
-      <div className="flex flex-wrap gap-6">
+      <section className="flex flex-wrap gap-6" aria-label="Stories">
         {currentStories.map(story => (
-          <div
+          <article
             key={story.id}
             className="w-full lg:flex-[1_1_calc(50%-12px)] lg:max-w-[calc(50%-12px)] bg-white p-5 sm:p-8 rounded-[24px] border border-gray-100 shadow-sm hover:-translate-y-1 hover:border-brand-main transition-all duration-300"
           >
@@ -101,12 +105,12 @@ const PatientStories = () => {
                 Read Story <HiOutlineArrowRight />
               </button>
             </div>
-          </div>
+          </article>
         ))}
-      </div>
+      </section>
 
       {/* Pagination & Actions */}
-      <div className="mt-8 md:mt-12 flex flex-col-reverse md:flex-row justify-between items-center gap-6 py-5 relative">
+      <footer className="mt-8 md:mt-12 flex flex-col-reverse md:flex-row justify-between items-center gap-6 py-5 relative">
         
         {/* Pagination Buttons */}
         <div className="flex items-center flex-wrap justify-center gap-2 md:absolute md:left-1/2 md:-translate-x-1/2">
@@ -149,7 +153,8 @@ const PatientStories = () => {
         >
           <HiOutlinePencilAlt /> Write Story
         </button>
-      </div></section>
+      </footer>
+    </main>
 </>
   );
 };
