@@ -54,10 +54,10 @@ const PatientStories = lazy(() => import('./features/patient/pages/Stories/Stori
 const PatientStoryDetails = lazy(() => import('./features/patient/pages/StoryDetails/StoryDetails'))
 const PatientAllComments = lazy(() => import('./features/patient/pages/AllComments/AllComments'))
 const WriteStory = lazy(() => import('./features/patient/pages/WriteStory/WriteStory'))
-const PatientPrescriptions = lazy(() => import('./features/patient/components/PatientPrescriptions/PatientPrescriptions'))
-const PrescriptionDetail = lazy(() => import('./features/patient/components/PrescriptionDetail/PrescriptionDetail'))
+const PatientPrescriptions = lazy(() => import('./features/patient/pages/Prescriptions/Prescriptions'))
+const PrescriptionDetail = lazy(() => import('./features/patient/pages/PrescriptionDetail/PrescriptionDetail'))
 const PatientSettingsProfile = lazy(() => import('./features/patient/pages/PatientSettingsProfile/PatientSettingsProfile'))
-const PatientUpdateHealth = lazy(() => import('./features/patient/components/PatientUpdateHealth/PatientUpdateHealth'))
+const PatientUpdateHealth = lazy(() => import('./features/patient/pages/PatientUpdateHealth/PatientUpdateHealth'))
 const NotFoundpataint = lazy(() => import('./features/patient/components/NotFound/NotFound'))
 
 // Doctor Pages
