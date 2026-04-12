@@ -33,7 +33,7 @@ const StatItem = ({ icon, bg, color, label, value }) => (
   <div className="flex flex-col sm:flex-row items-center sm:items-start lg:items-center gap-2 sm:gap-3 lg:border-r lg:border-gray-100 last:border-0 sm:pr-2 lg:pr-4 text-center sm:text-left justify-center sm:justify-start">
     <div className={`w-9 h-9 rounded-full ${bg} ${color} flex items-center justify-center text-2xl shrink-0`}>{icon}</div>
     <div>
-      <p className="text-sm text-[#757575]">{label}</p>
+      <p className="text-sm text-gray-text-dim2">{label}</p>
       <p className="text-lg font-semibold text-black-main-text">{value}</p>
     </div>
   </div>
@@ -61,7 +61,7 @@ const PatientDoctorProfile = () => {
             onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${doctor.name}&background=5B65F8&color=fff`; }}
           />
           <div className="flex flex-col items-center sm:items-start w-full">
-            <h1 className="text-2xl sm:text-3xl font-bold text-white">{doctor.name}</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white text-center sm:text-left">{doctor.name}</h1>
             <p className="text-[#DBEAFE] text-base sm:text-lg mt-0.5">{doctor.title}</p>
             <div className="flex items-center justify-center sm:justify-start gap-1.5 mt-2 bg-[#FFFFFF33] rounded-full px-3 py-2 w-fit mx-auto sm:mx-0">
               <HiStar className="text-[#FDC700] text-lg " />
@@ -102,7 +102,7 @@ const PatientDoctorProfile = () => {
 
       {/* ── About ── */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-7 mb-5">
-        <h2 className="text-xl font-bold text-black-main-text mb-3">About {doctor.name}</h2>
+        <h2 className="text-xl font-bold text-black-main-text mb-3 text-center sm:text-left">About {doctor.name}</h2>
         <p className="text-base text-[#4A5565] leading-relaxed">
           {doctor.name} is a highly experienced cardiologist with over a decade of practice in cardiovascular medicine.
           They specialize in preventive cardiology, heart disease management, and interventional procedures, committed to
@@ -113,15 +113,15 @@ const PatientDoctorProfile = () => {
 
       {/* ── Professional Experience ── */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-7">
-        <h2 className="text-lg font-bold text-black-main-text mb-4">Professional Experience</h2>
+        <h2 className="text-lg font-bold text-black-main-text mb-4 text-center sm:text-left">Professional Experience</h2>
         <div className="flex flex-col gap-5">
           {EXPERIENCE.map((item, i) => (
-            <div key={i} className="flex gap-3">
+            <div key={i} className="flex flex-col sm:flex-row items-center sm:items-start gap-3 text-center sm:text-left">
               <div className="w-9 h-9 rounded-xl bg-[#4C51F71A] text-[#4C51F7] flex items-center justify-center text-base shrink-0 mt-0.5">
                 {item.icon}
               </div>
               <div>
-                <h3 className="text-base font-bold text-black-main-text">{item.title}</h3>
+                <h3 className="text-base font-bold text-black-main-text text-center sm:text-left">{item.title}</h3>
                 {item.place && <p className="text-sm text-gray-text-dim2 mt-0.5">{item.place}</p>}
                 <p className="text-sm text-gray-text-dim2 mt-1 whitespace-pre-line">{item.desc}</p>
               </div>
