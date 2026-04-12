@@ -24,20 +24,20 @@ const PatientWeeklyChart = () => {
       {/* Header section */}
       <div className="flex items-start justify-between mb-4">
         <div>
-          <h2 className="text-[18px] font-bold text-[#010218] leading-tight font-['Roboto']">
+          <h3 className="text-[18px] font-bold text-black-main-text leading-tight font-['Roboto']">
             Weekly Health Overview
-          </h2>
-          <p className="text-[13px] text-[#757575] mt-1 font-['Roboto']">
+          </h3>
+          <p className="text-[13px] text-gray-text-dim2 mt-1 font-['Roboto']">
             Analyze how your heart health improves throughout the week
           </p>
         </div>
-        <span className="text-[14px] text-[#757575] font-medium font-['Roboto']">
+        <span className="text-[14px] text-gray-text-dim2 font-medium font-['Roboto']">
           This Week
         </span>
       </div>
 
       {/* Chart Container */}
-      <div className="flex-1 w-full min-h-[180px]">
+      <div className="flex-1 w-full min-h-45">
         <ResponsiveContainer width="100%" height="250">
           <AreaChart data={data} margin={{ top: 5, right: 10, left: -25, bottom: 0 }}>
             <defs>
