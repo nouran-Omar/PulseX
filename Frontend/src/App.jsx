@@ -49,7 +49,7 @@ const PatientPayment = lazy(() => import('./features/patient/components/PatientP
 const PatientAppointments = lazy(() => import('./features/patient/components/PatientAppointments/PatientAppointments'))
 const PatientQRCode = lazy(() => import('./features/patient/components/PatientQRCode/PatientQRCode'))
 const PatientMessages = lazy(() => import('./features/patient/components/PatientMessages/PatientMessages'))
-const PatientMedicalRecords = lazy(() => import('./features/patient/components/PatientMedicalRecords/PatientMedicalRecords'))
+const PatientMedicalRecords = lazy(() => import('./features/patient/pages/PatientMedicalRecords/PatientMedicalRecords'))
 const PatientStories = lazy(() => import('./features/patient/components/PatientStories/PatientStories'))
 const PatientStoryDetails = lazy(() => import('./features/patient/components/PatientStoryDetails/PatientStoryDetails'))
 const PatientAllComments = lazy(() => import('./features/patient/components/PatientAllComments/PatientAllComments'))
