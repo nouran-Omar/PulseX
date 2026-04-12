@@ -52,7 +52,7 @@ const PatientMessages = lazy(() => import('./features/patient/components/Patient
 const PatientMedicalRecords = lazy(() => import('./features/patient/pages/PatientMedicalRecords/PatientMedicalRecords'))
 const PatientStories = lazy(() => import('./features/patient/components/PatientStories/PatientStories'))
 const PatientStoryDetails = lazy(() => import('./features/patient/components/PatientStoryDetails/PatientStoryDetails'))
-const PatientAllComments = lazy(() => import('./features/patient/components/PatientAllComments/PatientAllComments'))
+const PatientAllComments = lazy(() => import('./features/patient/pages/AllComments/AllComments'))
 const WriteStory = lazy(() => import('./features/patient/pages/WriteStory/WriteStory'))
 const PatientPrescriptions = lazy(() => import('./features/patient/components/PatientPrescriptions/PatientPrescriptions'))
 const PrescriptionDetail = lazy(() => import('./features/patient/components/PrescriptionDetail/PrescriptionDetail'))
