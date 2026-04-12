@@ -2,16 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import usePatientData from '../../../../PatientHooks/usePatientData';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-
-// Icons
 import { TbDroplet } from 'react-icons/tb';
 import { HiOutlineBeaker, HiOutlineArrowRight } from 'react-icons/hi2';
 import { FaHeartPulse } from 'react-icons/fa6';
-// import Heartpatiant from '../../../../assets/images/PatiantHeart.svg';
 import PatientWeeklyChart  from '../../components/PatientDashboard/PatientWeeklyChart';
-/* ════════════════════════════════════
-   1. SVG Wave & UI Components
-════════════════════════════════════ */
+
 const LowWave = () => (
   <svg width="101" height="65" viewBox="0 0 101 65" fill="none" className="absolute bottom-0 right-0 pointer-events-none">
     <path d="M99.5801 64.6421C94.169 50.1954 89.4171 31.915 76.4486 30.9393C60.6543 29.3206 56.225 44.9508 42.7229 43.0388C19.7846 41.313 31.0898 3.33072 0.0746655 0.997194" stroke="url(#paint0_low)" strokeWidth="2" />
@@ -316,10 +311,9 @@ const PatientDashboard = () => {
     <div className="flex flex-col gap-4 w-full">
       {patient.appointments?.slice(0, 2).map((appointment, index) => (
         <React.Fragment key={index}>
-          {/* تعديل الـ Div الرئيسي لكل موعد ليكون Full width */}
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 group cursor-pointer w-full">
             
-            {/* قسم صورة الطبيب والاسم */}
+   
             <div className="flex items-center gap-4 w-full sm:w-auto">
               <img 
                 src={appointment.img} 

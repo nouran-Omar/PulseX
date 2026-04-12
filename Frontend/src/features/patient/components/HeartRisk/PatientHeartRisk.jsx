@@ -316,6 +316,7 @@ const RiskGauge = ({ percentage = 84, gaugeConfig, level }) => {
 /* ─── Result Details Panel ─── */
 const RiskDetailsPanel = ({ result, onFindDoctors }) => {
   const { panel, level } = result;
+  const isAlertLevel = level === 'high' || level === 'medium';
   const headerTextColor = level === 'high' ? '#82181A' : level === 'medium' ? '#101828' : '#101828';
   const subtitleTextColor = level === 'high' ? '#C10007' : level === 'medium' ? '#4A5565' : '#4A5565';
   const summaryIconColor = level === 'high' ? '#E7000B' : level === 'medium' ? '#D08700' : '#00A63E';
@@ -332,23 +333,25 @@ const RiskDetailsPanel = ({ result, onFindDoctors }) => {
         background: panel.bg
       }}
     >
-      <div className="flex items-start gap-3 mb-4">
-        <div
-          className="w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0"
-          style={{ background: panel.iconBg }}
-        >
-          {getPanelIcon(level)}
+      <div className="mb-4 flex flex-col sm:flex-row items-start gap-2 sm:gap-3">
+        <div className="w-full flex justify-center sm:w-auto sm:block">
+          <div
+            className="w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0"
+            style={{ background: panel.iconBg }}
+          >
+            {getPanelIcon(level)}
+          </div>
         </div>
-        <div>
+        <div className="w-full text-center sm:text-left">
           <h3 className="text-2xl font-bold" style={{ color: headerTextColor }}>{panel.title}</h3>
           <p className="text-base" style={{ color: subtitleTextColor }}>{panel.subtitle}</p>
         </div>
       </div>
 
      
-      <div className="rounded-xl bg-white/80 p-4 border border-white/70 mb-4">
-  <p className="text-lg font-semibold text-black-main-text mb-2 flex items-center gap-2">
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <div className="rounded-xl bg-white/80 p-4 border border-white/70 mb-4">
+      <p className="relative text-lg font-semibold text-black-main-text mb-2 flex items-center justify-center sm:justify-start gap-2 text-center sm:text-left pt-7 sm:pt-0">
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" className="absolute left-1/2 top-0 -translate-x-1/2 sm:static sm:translate-x-0">
   <path d="M8.28086 12.9167C8.20647 12.6283 8.05615 12.3651 7.84555 12.1545C7.63494 11.9439 7.37176 11.7936 7.08336 11.7192L1.97086 10.4009C1.88364 10.3761 1.80687 10.3236 1.75221 10.2512C1.69754 10.1789 1.66797 10.0907 1.66797 10C1.66797 9.90937 1.69754 9.82118 1.75221 9.74884C1.80687 9.6765 1.88364 9.62397 1.97086 9.59921L7.08336 8.28004C7.37166 8.20572 7.63477 8.05552 7.84537 7.84508C8.05596 7.63463 8.20634 7.37162 8.28086 7.08338L9.5992 1.97088C9.6237 1.88331 9.67618 1.80616 9.74863 1.75121C9.82108 1.69625 9.90951 1.6665 10.0004 1.6665C10.0914 1.6665 10.1798 1.69625 10.2523 1.75121C10.3247 1.80616 10.3772 1.88331 10.4017 1.97088L11.7192 7.08338C11.7936 7.37177 11.9439 7.63496 12.1545 7.84556C12.3651 8.05616 12.6283 8.20648 12.9167 8.28088L18.0292 9.59838C18.1171 9.62263 18.1946 9.67505 18.2499 9.74761C18.3052 9.82016 18.3351 9.90884 18.3351 10C18.3351 10.0912 18.3052 10.1799 18.2499 10.2525C18.1946 10.325 18.1171 10.3775 18.0292 10.4017L12.9167 11.7192C12.6283 11.7936 12.3651 11.9439 12.1545 12.1545C11.9439 12.3651 11.7936 12.6283 11.7192 12.9167L10.4009 18.0292C10.3764 18.1168 10.3239 18.1939 10.2514 18.2489C10.179 18.3038 10.0905 18.3336 9.99961 18.3336C9.90868 18.3336 9.82025 18.3038 9.7478 18.2489C9.67535 18.1939 9.62287 18.1168 9.59836 18.0292L8.28086 12.9167Z" stroke={summaryIconColor} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
   <path d="M16.668 2.5V5.83333" stroke={summaryIconColor} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
   <path d="M18.3333 4.1665H15" stroke={summaryIconColor} strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
@@ -363,15 +366,15 @@ const RiskDetailsPanel = ({ result, onFindDoctors }) => {
 
       {(level === 'high' || level === 'medium') && panel.warningTitle && (
         <div
-          className="rounded-xl p-4 border mb-4 flex items-start gap-3"
+          className="rounded-xl p-4 pt-10 sm:pt-4 border mb-4 flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-3 relative"
           style={{ borderColor: warningBorderColor, background: warningBgColor }}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className="shrink-0 mt-0.5" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className="absolute left-1/2 top-3 -translate-x-1/2 shrink-0 sm:static sm:translate-x-0 sm:mt-0.5" aria-hidden="true">
             <path d="M21.7285 18.0002L13.7285 4.00022C13.554 3.69243 13.3011 3.43641 12.9954 3.25829C12.6897 3.08017 12.3423 2.98633 11.9885 2.98633C11.6347 2.98633 11.2872 3.08017 10.9815 3.25829C10.6759 3.43641 10.4229 3.69243 10.2485 4.00022L2.24846 18.0002C2.07215 18.3056 1.97969 18.6521 1.98047 19.0047C1.98125 19.3573 2.07524 19.7035 2.25291 20.008C2.43058 20.3126 2.68561 20.5648 2.99216 20.7391C3.29871 20.9133 3.64587 21.0034 3.99846 21.0002H19.9985C20.3494 20.9999 20.694 20.9072 20.9977 20.7315C21.3015 20.5558 21.5537 20.3033 21.729 19.9993C21.9043 19.6954 21.9965 19.3506 21.9964 18.9997C21.9963 18.6488 21.9039 18.3041 21.7285 18.0002Z" stroke={warningIconColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M12 9V13" stroke={warningIconColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M12 17H12.01" stroke={warningIconColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <div>
+          <div className="w-full text-center sm:text-left">
             <p className="text-base font-semibold mb-1" style={{ color: warningTitleColor }}>{panel.warningTitle}</p>
             <p className="text-base leading-relaxed" style={{ color: warningTextColor }}>{panel.warningText}</p>
           </div>
@@ -381,6 +384,7 @@ const RiskDetailsPanel = ({ result, onFindDoctors }) => {
       <p className="text-lg font-semibold text-black-main-text mb-3">{panel.listTitle}</p>
       <div className="space-y-2.5 sm:space-y-3">
         {panel.list.map((item, idx) => {
+          const isCenteredMobileStep = true;
           let iconBgColor = '';
           let iconTextColor = '';
           if (level === 'high') {
@@ -395,9 +399,9 @@ const RiskDetailsPanel = ({ result, onFindDoctors }) => {
           }
 
           return (
-            <div key={idx} className="rounded-xl bg-white/80 border border-white/70 p-3 sm:p-3.5 flex items-start gap-3 sm:gap-3.5 transition-all">
+            <div key={idx} className={`rounded-xl bg-white/80 border border-white/70 p-3 sm:p-3.5 transition-all ${isCenteredMobileStep ? 'relative pt-9 sm:pt-3.5 block sm:flex sm:items-start sm:gap-3.5' : 'flex items-start gap-3 sm:gap-3.5'}`}>
               <div 
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 ${isCenteredMobileStep ? 'absolute left-1/2 top-2 -translate-x-1/2 sm:static sm:translate-x-0' : 'mt-0.5'}`}
                 style={{ background: iconBgColor, color: iconTextColor }}
               >
                 {level === 'medium' ? (
@@ -408,17 +412,17 @@ const RiskDetailsPanel = ({ result, onFindDoctors }) => {
                   getAdviceIcon(level)
                 )}
               </div>
-              <p className="text-[14px] sm:text-[16px] text-[#364153] leading-relaxed flex-1">{item}</p>
+              <p className={`text-[14px] sm:text-[16px] text-[#364153] leading-relaxed flex-1 ${isCenteredMobileStep ? 'text-center sm:text-left' : ''}`}>{item}</p>
             </div>
           );
         })}
       </div>
 
       {panel.ctaLabel && (
-        <div className="flex justify-center mt-5">
+        <div className="flex justify-center mt-5 px-1 sm:px-0">
          <button
   onClick={onFindDoctors}
-  className="flex items-center gap-2 px-5 py-2.5 cursor-pointer text-white text-lg font-bold transition"
+  className={`flex items-center justify-center gap-2 px-5 py-2.5 cursor-pointer text-white text-lg font-bold transition whitespace-nowrap ${isAlertLevel ? 'w-auto max-w-full' : ''}`}
   style={{
     // استخدام الـ Object وتوزيع القيم بناءً على الشرط
     background: level === 'high'
@@ -466,7 +470,7 @@ const PatientHeartRisk = () => {
   };
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-4 sm:p-6">
       <style>{`
         /* أنيميشن جديد: ظهور تدريجي مع حركة للأعلى */
         @keyframes fadeInUp {
@@ -561,7 +565,7 @@ const PatientHeartRisk = () => {
           
           {/* Gauge card - تظهر أولاً بعد الضغط */}
           <div
-            className="animate-fade-in-up delay-gauge w-full md:w-[80%] max-w-224.25 min-h-55 md:h-62.75 mx-auto bg-white rounded-2xl shadow-sm px-4 sm:px-6 py-4 mb-4 sm:mb-6"
+            className="animate-fade-in-up delay-gauge w-full md:w-[80%] max-w-none md:max-w-224.25 min-h-55 md:h-62.75 mx-auto bg-white rounded-2xl shadow-sm px-4 sm:px-6 py-4 mb-4 sm:mb-6"
           >
             <div className="flex h-full items-center justify-center">
               <RiskGauge percentage={mockResult.percentage} gaugeConfig={mockResult.gauge} level={mockResult.level} />
@@ -570,7 +574,7 @@ const PatientHeartRisk = () => {
           </div>
 
           {/* Risk panel - تختلف حسب نتيجة الـ AI */}
-          <div className="animate-fade-in-up delay-alert w-full md:w-[100%] max-w-252 mx-auto flex justify-center items-center px-4 sm:px-6 lg:px-14.25 pt-6 sm:pt-8.5 pb-9 sm:pb-[71.212px]">
+          <div className="animate-fade-in-up delay-alert w-full md:w-full max-w-none md:max-w-252 mx-auto flex justify-center items-center px-0 sm:px-6 lg:px-14.25 pt-6 sm:pt-8.5 pb-9 sm:pb-[71.212px]">
             <div className="w-full">
               <RiskDetailsPanel result={mockResult} onFindDoctors={() => navigate('/patient/doctors')} />
             </div>

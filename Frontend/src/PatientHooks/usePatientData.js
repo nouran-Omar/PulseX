@@ -108,7 +108,7 @@ const PATIENT_MOCK = {
       name: "Dr. Jehan Osama",
       location: "Menoufia",
       rating: 4,
-      img: "https://images.unsplash.com/photo-1559839734-2b71f1536780?auto=format&fit=crop&w=300&q=80",
+      img: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTgdR8lp26k-DNUdxptoLnrivTqnY5OJqKuBCx81X67D3OSC27wfM14AEN5GmBd",
     },
     {
       id: 3,
