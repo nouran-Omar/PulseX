@@ -45,7 +45,7 @@ const PatientHeartRisk = lazy(() => import('./features/patient/components/HeartR
 const PatientDoctorList = lazy(() => import('./features/patient/pages/PatientDoctorList/PatientDoctorList'))
 const PatientDoctorProfile = lazy(() => import('./features/patient/pages/PatientDoctorProfile/PatientDoctorProfile'))
 const PatientBooking = lazy(() => import('./features/patient/pages/PatientBooking/PatientBooking'))
-const PatientPayment = lazy(() => import('./features/patient/components/PatientPayment/PatientPayment'))
+const PatientPayment = lazy(() => import('./features/patient/pages/PatientPayment/PatientPayment'))
 const PatientAppointments = lazy(() => import('./features/patient/pages/PatientAppointments/PatientAppointments'))
 const PatientQRCode = lazy(() => import('./features/patient/pages/QRCode/QRCode'))
 const PatientMessages = lazy(() => import('./features/patient/pages/PatientMessages/PatientMessages'))
@@ -59,6 +59,7 @@ const PrescriptionDetail = lazy(() => import('./features/patient/pages/Prescript
 const PatientSettingsProfile = lazy(() => import('./features/patient/pages/PatientSettingsProfile/PatientSettingsProfile'))
 const PatientUpdateHealth = lazy(() => import('./features/patient/pages/PatientUpdateHealth/PatientUpdateHealth'))
 const NotFoundpataint = lazy(() => import('./features/patient/components/NotFound/NotFound'))
+const DoctorNotFound = lazy(() => import('./features/doctor/components/NotFound/NotFound'))
 
 // Doctor Pages
 const DoctorDashboard = lazy(() => import('./features/doctor/pages/DoctorDashboard/DoctorDashboard'))
@@ -132,6 +133,7 @@ function App() {
       children: [
         { index: true, element: <DoctorDashboard /> },
         { path: "dashboard", element: <DoctorDashboard /> },
+        { path: "*", element: <DoctorNotFound /> },
       ]
     },
 
