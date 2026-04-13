@@ -5,13 +5,13 @@ This file documents the complete current structure of the `src` directory.
 ## Role Overview
 
 - Admin
-	Manages the platform operations, including dashboard monitoring, doctor and patient management, story moderation, reports handling, and profile settings.
+  Manages the platform operations, including dashboard monitoring, doctor and patient management, story moderation, reports handling, and profile settings.
 
 - Patient
-	Uses the core healthcare journey features such as dashboard insights, doctor browsing, booking, medical records, prescriptions, messages, and personal settings.
+  Uses the core healthcare journey features such as dashboard insights, doctor browsing, booking, medical records, prescriptions, messages, and personal settings.
 
 - Doctor (Coming Soon)
-	Dedicated doctor workflow documentation will be added soon.
+  Dedicated doctor workflow documentation will be added soon.
 
 ```text
 src/
@@ -432,75 +432,75 @@ src/
 ### Root Files
 
 - `App.jsx`
-	Main routing entry. It connects route groups (Admin, Patient, Doctor, Public) and controls the app-level navigation flow.
+  Main routing entry. It connects route groups (Admin, Patient, Doctor, Public) and controls the app-level navigation flow.
 
 - `main.jsx`
-	React bootstrap file. It mounts the app and starts the rendering lifecycle.
+  React bootstrap file. It mounts the app and starts the rendering lifecycle.
 
 - `index.css`
-	Global styling baseline. It is used for shared styles and utility-level visual consistency.
+  Global styling baseline. It is used for shared styles and utility-level visual consistency.
 
 ### Core Directories
 
 - `assets/`
-	Stores static files (images, logos, illustrations). Keeping assets in one place makes media management and reuse easier.
+  Stores static files (images, logos, illustrations). Keeping assets in one place makes media management and reuse easier.
 
 - `components/`
-	Shared reusable UI (layout, navbar, footer, global toast, etc.). This avoids duplicating common building blocks across features.
+  Shared reusable UI (layout, navbar, footer, global toast, etc.). This avoids duplicating common building blocks across features.
 
 - `features/`
-	Domain-based modules. This is the heart of the architecture and keeps code grouped by business role instead of by file type only.
+  Domain-based modules. This is the heart of the architecture and keeps code grouped by business role instead of by file type only.
 
 - `hooks/`
-	Shared hooks used across multiple parts of the app. It centralizes reusable behavior and side-effect logic.
+  Shared hooks used across multiple parts of the app. It centralizes reusable behavior and side-effect logic.
 
 - `schemas/`
-	Validation schemas (Formik/Yup related). Keeping validation in one place improves consistency and maintainability.
+  Validation schemas (Formik/Yup related). Keeping validation in one place improves consistency and maintainability.
 
 - `store/`
-	State/store setup. This is where app-level state configuration is defined.
+  State/store setup. This is where app-level state configuration is defined.
 
 - `pages/`
-	Legacy or top-level route pages outside feature folders. Useful for compatibility and simple route mapping.
+  Legacy or top-level route pages outside feature folders. Useful for compatibility and simple route mapping.
 
 - `PatientHooks/`
-	Patient-specific hooks separated for clearer domain ownership.
+  Patient-specific hooks separated for clearer domain ownership.
 
 - `Button/`
-	Standalone button module used as a dedicated UI utility unit.
+  Standalone button module used as a dedicated UI utility unit.
 
 ### Feature Domains (`features/`)
 
 - `features/admin/`
-	Admin control center: dashboard, management workflows, moderation, reports, logs, and settings.
-	Why: admin workflows are broad and operation-heavy, so they are grouped in a dedicated domain for clarity and scalability.
+  Admin control center: dashboard, management workflows, moderation, reports, logs, and settings.
+  Why: admin workflows are broad and operation-heavy, so they are grouped in a dedicated domain for clarity and scalability.
 
 - `features/auth/`
-	Authentication journey: login, register, forgot password.
-	Why: auth is a cross-cutting concern and should remain isolated, predictable, and easy to evolve.
+  Authentication journey: login, register, forgot password.
+  Why: auth is a cross-cutting concern and should remain isolated, predictable, and easy to evolve.
 
 - `features/doctor/`
-	Doctor-facing experience and layout.
-	Why: role-specific UX and future doctor workflows are easier to scale when isolated in their own domain.
+  Doctor-facing experience and layout.
+  Why: role-specific UX and future doctor workflows are easier to scale when isolated in their own domain.
 
 - `features/patient/`
-	Patient journey modules: appointments, booking, records, stories, chatbot, settings, and more.
-	Why: patient features are extensive and benefit from a dedicated, modular structure.
+  Patient journey modules: appointments, booking, records, stories, chatbot, settings, and more.
+  Why: patient features are extensive and benefit from a dedicated, modular structure.
 
 - `features/home/`
-	Public landing/home sections.
-	Why: home content evolves frequently and is cleaner when separated from authenticated role domains.
+  Public landing/home sections.
+  Why: home content evolves frequently and is cleaner when separated from authenticated role domains.
 
 ### Inside Feature Modules (General Pattern)
 
 - `components/`
-	UI and feature view units.
-	Why: reusable UI blocks stay close to their domain logic.
+  UI and feature view units.
+  Why: reusable UI blocks stay close to their domain logic.
 
 - `pages/`
-	Route-level entry points.
-	Why: keeps navigation layer thin while composing domain components cleanly.
+  Route-level entry points.
+  Why: keeps navigation layer thin while composing domain components cleanly.
 
 - `shared/` (where available)
-	Shared pieces within the same feature (not global).
-	Why: prevents duplication inside a domain without polluting global components.
+  Shared pieces within the same feature (not global).
+  Why: prevents duplication inside a domain without polluting global components.
