@@ -1,46 +1,10 @@
-import React, { useState } from 'react';
-import { HiOutlineClipboardDocumentList } from 'react-icons/hi2';
+import React, { useEffect, useState } from 'react';
 import { MdOutlineBloodtype, MdOutlineFavorite } from 'react-icons/md';
-import { LuMoonStar, LuBeer, LuActivity } from 'react-icons/lu';
+import { LuActivity, LuBeer, LuMoonStar } from 'react-icons/lu';
 import { FaSmoking, FaUsers } from 'react-icons/fa';
-import PatientAIAlert from '../HeartRisk/PatientAIAlert';
-import PatientNextStep from '../PatientNextStep/PatientNextStep';
-
-/* ── reusable question block ── */
-// أضفنا className كـ prop للتحكم في المساحة من الخارج
-const QuestionSection = ({ icon, label, question, options, selected, onSelect, className = "flex-1 w-full" }) => (
-  <div className={className}>
-    <div className="flex items-center gap-2.5 text-black-main-text text-[18px] font-roboto font-semibold   mb-1.5">
-      {icon} {label}
-    </div>
-    <p className="text-[16px] text-black-main-text/80 mb-3 ml-6">{question}</p>
-    <div className="flex flex-wrap gap-3">
-      {options.map(opt => {
-        const active = selected === opt;
-        return (
-          <button
-            key={opt}
-            onClick={() => onSelect(opt)}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-[24px] text-[13px] font-medium border transition-all cursor-pointer ${
-              active
-                ? 'border-brand-main text-black-main-text bg-white'
-                : 'border-gray-200 text-black-main-text bg-white hover:border-brand-main hover:bg-[#f5f5ff]'
-            }`}
-          >
-            <span
-              className={`w-3.5 h-3.5 rounded-full border shrink-0 transition-all ${
-                active
-                  ? 'border-brand-main bg-brand-main shadow-[inset_0_0_0_2.5px_white]'
-                  : 'border-gray-300 bg-white'
-              }`}
-            />
-            {opt}
-          </button>
-        );
-      })}
-    </div>
-  </div>
-);
+import LifestyleSurveyHeader from '../../components/LifestyleSurvey/LifestyleSurveyHeader';
+import LifestyleSurveyResults from '../../components/LifestyleSurvey/LifestyleSurveyResults';
+import QuestionSection from '../../components/LifestyleSurvey/QuestionSection';
 
 const PatientLifestyleSurvey = () => {
   const [formData, setFormData] = useState({
@@ -50,35 +14,41 @@ const PatientLifestyleSurvey = () => {
     alcohol: '',
     activity: '',
     prevIssues: '',
-    familyHistory: ''
+    familyHistory: '',
   });
 
   const [showResults, setShowResults] = useState(false);
 
+  useEffect(() => {
+    document.title = 'Lifestyle Survey | PulseX';
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) {
+      meta.setAttribute('content', 'Complete a quick lifestyle survey to assess heart health.');
+    }
+  }, []);
+
   const handleSelect = (question, value) => {
-    setFormData(prev => ({ ...prev, [question]: value }));
+    setFormData((prev) => ({ ...prev, [question]: value }));
   };
 
   const handleSubmit = () => {
-    console.log("Data to be sent to Backend:", formData);
+    console.log('Data to be sent to Backend:', formData);
     setShowResults(true);
   };
 
   return (
-    <div className="min-h-screen p-[24px] bg-white rounded-full">
-
-      {/* Header */}
-      <header className="flex items-center gap-4 mb-2 rounded-full">
-        <HiOutlineClipboardDocumentList className="text-[32px] text-black-main-text shrink-0" />
-        <h2 className="text-black-main-text text-[24px] font-roboto font-semibold tracking-[0.01em] break-words">Health Lifestyle Survey</h2>
-      </header>
+    <main
+      className="min-h-screen p-[24px] bg-white rounded-full"
+      style={{
+        "--survey-muted": "rgba(1, 2, 24, 0.8)",
+      }}
+    >
+      <LifestyleSurveyHeader />
       <p className="text-[18px] text-gray-500 mb-10">
         Answer these quick questions about your daily habits to help our AI analyze your heart health baseline.
       </p>
 
-      <div className="flex flex-col gap-10">
-
-        {/* Q1: Cholesterol */}
+      <section className="flex flex-col gap-10" aria-label="Survey questions">
         <QuestionSection
           icon={<MdOutlineBloodtype className="text-red-500" />}
           label="Cholesterol Level"
@@ -88,10 +58,9 @@ const PatientLifestyleSurvey = () => {
           onSelect={(v) => handleSelect('cholesterol', v)}
         />
 
-        {/* Q2 + Q3 side by side - التعديل هنا */}
         <div className="flex flex-col md:flex-row gap-8 items-start">
           <QuestionSection
-            className="flex-[2] w-full" // تأخذ مساحة الضعف
+            className="flex-[2] w-full"
             icon={<LuMoonStar className="text-purple-600" />}
             label="Sleep Hours Per Day"
             question="How many hours do you sleep per day?"
@@ -100,7 +69,7 @@ const PatientLifestyleSurvey = () => {
             onSelect={(v) => handleSelect('sleepHours', v)}
           />
           <QuestionSection
-            className="flex-[1] w-full" // تأخذ مساحة واحدة
+            className="flex-[1] w-full"
             icon={<FaSmoking className="text-gray-500" />}
             label="Smoking"
             question="Do you smoke?"
@@ -110,7 +79,6 @@ const PatientLifestyleSurvey = () => {
           />
         </div>
 
-        {/* Q4 + Q5 side by side */}
         <div className="flex flex-col md:flex-row gap-8">
           <QuestionSection
             icon={<LuBeer className="text-blue-400" />}
@@ -130,7 +98,6 @@ const PatientLifestyleSurvey = () => {
           />
         </div>
 
-        {/* Q6 + Q7 side by side */}
         <div className="flex flex-col md:flex-row gap-8">
           <QuestionSection
             icon={<MdOutlineFavorite className="text-red-600" />}
@@ -150,7 +117,6 @@ const PatientLifestyleSurvey = () => {
           />
         </div>
 
-        {/* Submit */}
         <div className="flex justify-center pt-4 pb-8 mt-20">
           <button
             className="px-14 py-3.5 rounded-[28px] bg-brand-main hover:bg-[#2830d4] text-white text-[14px] font-semibold shadow-[0_4px_12px_rgba(51,60,245,0.25)] hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(51,60,245,0.35)] transition-all cursor-pointer"
@@ -159,23 +125,14 @@ const PatientLifestyleSurvey = () => {
             View Results
           </button>
         </div>
-      </div>
+      </section>
 
-      {/* Results */}
-      {showResults && (
-    <div className="mt-16 flex flex-col items-center justify-center w-full space-y-12">
-  {/* العنصر الأول */}
-  <div className="w-full p-5 flex justify-center">
-    <PatientAIAlert />
-  </div>
+      {showResults && <LifestyleSurveyResults />}
 
-  {/* العنصر الثاني */}
-  <div className="w-full p-5 flex justify-center">
-    <PatientNextStep />
-  </div>
-</div>
-      )}
-    </div>
+      <footer className="sr-only">
+        <p>End of lifestyle survey page.</p>
+      </footer>
+    </main>
   );
 };
 

@@ -40,9 +40,9 @@ const StoryAllComments = lazy(() => import('./features/admin/components/StoryAll
 
 // Patient Pages
 const PatientDashboard = lazy(() => import('./features/patient/pages/PatientDashboard/PatientDashboard'))
-const PatientLifestyleSurvey = lazy(() => import('./features/patient/components/PatientLifestyleSurvey/PatientLifestyleSurvey'))
+const PatientLifestyleSurvey = lazy(() => import('./features/patient/pages/PatientLifestyleSurvey/PatientLifestyleSurvey'))
 const PatientHeartRisk = lazy(() => import('./features/patient/components/HeartRisk/PatientHeartRisk'))
-const PatientDoctorList = lazy(() => import('./features/patient/components/PatientDoctorList/PatientDoctorList'))
+const PatientDoctorList = lazy(() => import('./features/patient/pages/PatientDoctorList/PatientDoctorList'))
 const PatientDoctorProfile = lazy(() => import('./features/patient/pages/PatientDoctorProfile/PatientDoctorProfile'))
 const PatientBooking = lazy(() => import('./features/patient/pages/PatientBooking/PatientBooking'))
 const PatientPayment = lazy(() => import('./features/patient/components/PatientPayment/PatientPayment'))
