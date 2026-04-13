@@ -63,7 +63,7 @@ const PatientDoctorList = () => {
 
   return (
     <main
-      className="min-h-screen p-4 sm:p-[24px]"
+      className="min-h-screen p-6 sm:p-[24px]"
       style={{
         "--doc-list-muted": "#757575",
         "--doc-list-muted-2": "#ACACAC",

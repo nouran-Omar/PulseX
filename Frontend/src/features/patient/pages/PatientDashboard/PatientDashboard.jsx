@@ -32,7 +32,7 @@ const PatientDashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFBFF]">
-      <header className="pb-8 pt-4 md:px-6 md:pt-6">
+      <header className="pb-8 pt-4 md:px-6 md:pt-6 px-6">
         <DashboardWelcome patientName={patient.name} />
       </header>
 

@@ -216,7 +216,7 @@ const UploadCard = ({ title, desc, Icon, onUpload }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-4 p-4 transition-all duration-300">
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col gap-4 p-6 transition-all duration-300">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl bg-brand-main flex items-center justify-center shrink-0">
           <Icon className="text-white text-xl" />

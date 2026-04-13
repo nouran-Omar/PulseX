@@ -43,7 +43,7 @@ const PatientAppointments = () => {
 
   return (
     <main
-      className="flex flex-col gap-6 p-4 sm:p-[24px]"
+      className="flex flex-col gap-6 p-6 sm:p-[24px]"
       style={{
         "--appt-muted": "#757575",
         "--appt-muted-2": "#757575B2",
