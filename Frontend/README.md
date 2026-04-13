@@ -1,18 +1,20 @@
-# PulseX Frontend
+# PulseX Frontend 🚀
 
-PulseX Frontend is a React-based web application for a heart-care platform that serves three main user roles:
+PulseX Frontend is the web interface for a heart-care platform built with React, organized clearly around three core user roles:
 
-- Patients
-- Doctors
-- Admins
+- Admin
+- Doctor
+- Patient
 
-The application provides authentication flows, dashboards, appointment and story workflows, AI-powered heart risk presentation, reporting screens, and responsive UI experiences built with Tailwind CSS.
+The current structure is designed to support fast development, clean organization, and long-term scalability as features grow.
 
-## Live Demo
+## Quick Highlights ✨
 
-Production URL:
-
-- https://versionpulsex1.vercel.app/
+- Feature-first architecture
+- Role-oriented route grouping
+- Tailwind CSS-based UI system
+- Lazy-loaded pages for better performance
+- Clear separation between layouts, pages, and reusable components
 
 ## Tech Stack
 
@@ -28,103 +30,79 @@ Production URL:
 - Swiper
 - React Icons
 
-## Project Structure
+## Project Structure (High-Level)
 
-The project follows a feature-first structure under `src/features` and separates reusable UI into `src/components`.
+```text
+Frontend/
+├─ public/
+├─ src/
+├─ templates/
+├─ index.html
+├─ package.json
+├─ vite.config.js
+├─ eslint.config.js
+└─ vercel.json
+```
+
+## src Structure (Main Lines Only)
 
 ```text
 src/
-	components/          # Shared reusable components (Layout, Navbar, Footer, etc.)
-	features/
-		admin/             # Admin feature modules (dashboard, management, reports)
-		auth/              # Login, Register, Forgot Password
-		doctor/            # Doctor dashboard and layout
-		home/              # Home page sections
-		patient/           # Patient modules (risk, booking, stories, records, etc.)
-	hooks/               # Shared hooks
-	schemas/             # Validation schemas
-	store/               # State/store setup
-	App.jsx              # Route definitions and app shell
-	main.jsx             # React app bootstrap
+├─ App.jsx
+├─ main.jsx
+├─ index.css
+├─ assets/
+├─ Button/
+├─ components/
+├─ features/
+├─ hooks/
+├─ pages/
+├─ PatientHooks/
+├─ schemas/
+└─ store/
 ```
 
-## Getting Started
+## Feature Domains
 
-### Prerequisites
+Inside `src/features/`, the main domains are:
 
-- Node.js 18+ (recommended: latest LTS)
-- npm 9+
-
-### Installation
-
-```bash
-npm install
-```
-
-### Run Development Server
-
-```bash
-npm run dev
-```
-
-By default, Vite starts the app at:
-
-- http://localhost:5173
-
-## Available Scripts
-
-- `npm run dev` - Start the local development server
-- `npm run build` - Build the production bundle
-- `npm run preview` - Preview the production build locally
-- `npm run lint` - Run ESLint checks
+- `admin/` for platform administration
+- `auth/` for login, registration, and password recovery
+- `doctor/` for doctor-facing screens and workflows
+- `patient/` for patient-facing modules and journeys
+- `home/` for public landing/home sections
 
 ## Routing Overview
 
-The app uses role-based route groups:
+- `/` public home page
+- `/login`, `/register`, `/forgot-password` authentication routes
+- `/admin/*` admin routes
+- `/doctor/*` doctor routes
+- `/patient/*` patient routes
 
-- `/` for the public home page
-- `/login`, `/register`, `/forgot-password` for authentication
-- `/admin/*` for admin pages
-- `/patient/*` for patient pages
-- `/doctor/*` for doctor pages
-
-Routes are lazy-loaded where applicable and wrapped with `Suspense` for better loading behavior.
-
-## Build and Deployment
-
-### Production Build
+## Run Locally
 
 ```bash
-npm run build
+npm install
+npm run dev
 ```
 
-The output is generated in:
+Default URL:
 
-- `dist/`
+- http://localhost:5173
 
-### Preview Build Locally
+## Scripts
 
-```bash
-npm run preview
-```
+- `npm run dev` start the development server
+- `npm run build` build the production bundle
+- `npm run preview` preview the production build locally
+- `npm run lint` run ESLint checks
 
-### Deployment
+## Deployment
 
-This project is deployed on Vercel:
+- Live: https://versionpulsex1.vercel.app/
+- Platform: Vercel
 
-- https://versionpulsex1.vercel.app/
+## Summary 💙
 
-## Code Quality
-
-- ESLint is configured in `eslint.config.js`
-- Consistent utility-first styling with Tailwind CSS
-- Feature-first folder organization for scalability
-
-## Notes
-
-- This repository currently uses JavaScript (not TypeScript).
-- If environment variables are required in the future, place them in `.env` files using the `VITE_` prefix.
-
-## License
-
-This project is intended for academic/product development use. Add your final license choice before public distribution.
+This project follows a clear and practical structure that helps teams move quickly while keeping the codebase organized and easy to scale.

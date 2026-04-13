@@ -14,11 +14,11 @@ import logo from '../../../../assets/logo/logo.svg';
 
 const MENU_ITEMS = [
   { name: 'Dashboard',          path: 'dashboard',           icon: <LuLayoutDashboard /> },
-  { name: 'Doctor Management',  path: 'doctor-management',   icon: <FaUserDoctor />,
-    extraActivePaths: ['/admin/AddDoctorBtn', '/admin/edit-doctor'] },
-  { name: 'Patient Management', path: 'patient-management', icon: <HiOutlineUsers />,
-    extraActivePaths: ['/admin/AddPatientBtn', '/admin/edit-patient'] },
-  { name: 'Stories Management', path: 'stories-management', icon: <FaBookOpen />,
+  { name: 'Doctor Management',  path: 'doctors/list',   icon: <FaUserDoctor />,
+    extraActivePaths: ['/admin/doctors/create', '/admin/doctors/edit'] },
+  { name: 'Patient Management', path: 'patients/list', icon: <HiOutlineUsers />,
+    extraActivePaths: ['/admin/patients/create', '/admin/patients/edit'] },
+  { name: 'Stories Management', path: 'stories/list', icon: <FaBookOpen />,
     extraActivePaths: ['/admin/add-story', '/admin/edit-story', '/admin/stories'] },
   { name: 'Activity Logs',      path: 'activity-logs',       icon: <HiOutlineClock /> },
   { name: 'Reports',            path: 'reports',             icon: <CiFlag1 /> },

@@ -24,19 +24,19 @@ const ForgotPassword = lazy(() => import('./features/auth/pages/ForgotPassword/F
 const NotFound = lazy(() => import('./features/admin/components/NotFound/NotFound'))
 
 // Admin Pages
-const AdminDashboard = lazy(() => import('./features/admin/components/AdminDashboard/AdminDashboard'))
-const DoctorManagement = lazy(() => import('./features/admin/components/DoctorManagement/DoctorManagement'))
-const PatientManagement = lazy(() => import('./features/admin/components/PatientManagement/PatientManagement'))
-const StoriesManagement = lazy(() => import('./features/admin/components/StoriesManagement/StoriesManagement'))
-const ActivityLogs = lazy(() => import('./features/admin/components/ActivityLogs/ActivityLogs'))
-const SettingsProfile = lazy(() => import('./features/admin/components/SettingsProfile/SettingsProfile'))
-const AddDoctorBtn = lazy(() => import('./features/admin/components/AddDoctorBtn/AddDoctorBtn'))
-const AddPatientBtn = lazy(() => import('./features/admin/components/AddPatientBtn/AddPatientBtn'))
-const EditPatient = lazy(() => import('./features/admin/components/EditPatient/EditPatient'))
-const EditDoctor = lazy(() => import('./features/admin/components/EditDoctor/EditDoctor'))
-const AdminReports = lazy(() => import('./features/admin/components/AdminReports/AdminReports'))
-const StoryDetails = lazy(() => import('./features/admin/components/StoryDetails/StoryDetails'))
-const StoryAllComments = lazy(() => import('./features/admin/components/StoryAllComments/StoryAllComments'))
+const AdminDashboard = lazy(() => import('./features/admin/pages/Dashboard/AdminDashboard'))
+const DoctorManagement = lazy(() => import('./features/admin/pages/Doctors/List/DoctorManagement'))
+const PatientManagement = lazy(() => import('./features/admin/pages/Patients/List/PatientManagement'))
+const StoriesManagement = lazy(() => import('./features/admin/pages/Stories/List/StoriesManagement'))
+const ActivityLogs = lazy(() => import('./features/admin/pages/ActivityLogs/List/ActivityLogs'))
+const SettingsProfile = lazy(() => import('./features/admin/pages/SettingsProfile/Profile/SettingsProfile'))
+const AddDoctorBtn = lazy(() => import('./features/admin/pages/Doctors/Create/AddDoctorBtn'))
+const AddPatientBtn = lazy(() => import('./features/admin/pages/Patients/Create/AddPatientBtn'))
+const EditPatient = lazy(() => import('./features/admin/pages/Patients/Edit/EditPatient'))
+const EditDoctor = lazy(() => import('./features/admin/pages/Doctors/Edit/EditDoctor'))
+const AdminReports = lazy(() => import('./features/admin/pages/Reports/List/ReportsManagement'))
+const StoryDetails = lazy(() => import('./features/admin/pages/Stories/Details/StoryDetails'))
+const StoryAllComments = lazy(() => import('./features/admin/pages/Stories/Comments/StoryAllComments'))
 
 // Patient Pages
 const PatientDashboard = lazy(() => import('./features/patient/pages/PatientDashboard/PatientDashboard'))
@@ -81,16 +81,17 @@ function App() {
       children: [
         { index: true, element: <AdminDashboard /> },
         { path: "dashboard", element: <AdminDashboard /> },
-        { path: "doctor-management", element: <DoctorManagement /> },
-        { path: "patient-management", element: <PatientManagement /> },
+        { path: "doctors/list", element: <DoctorManagement /> },
+        { path: "patients/list", element: <PatientManagement /> },
+        { path: "stories/list", element: <StoriesManagement /> },
         { path: "stories-management", element: <StoriesManagement /> },
         { path: "activity-logs", element: <ActivityLogs /> },
         { path: "settings", element: <SettingsProfile /> },
         // تم تصليح المسارات هنا (شيلنا /admin/ وخليناها Path نضيق)
-        { path: "AddDoctorBtn", element: <AddDoctorBtn /> },
-        { path: "AddPatientBtn", element: <AddPatientBtn /> },
-        { path: "edit-doctor/:id", element: <EditDoctor /> },
-        { path: "edit-patient/:id", element: <EditPatient /> },
+        { path: "doctors/create", element: <AddDoctorBtn /> },
+        { path: "patients/create", element: <AddPatientBtn /> },
+        { path: "doctors/edit/:id", element: <EditDoctor /> },
+        { path: "patients/edit/:id", element: <EditPatient /> },
         { path: "reports", element: <AdminReports /> },
         { path: "stories/:id", element: <StoryDetails /> },
         { path: "stories/:id/comments", element: <StoryAllComments /> },
