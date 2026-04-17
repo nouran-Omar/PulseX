@@ -1,103 +1,108 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { HiOutlineMicrophone, HiOutlineVideoCamera, HiOutlineSpeakerWave } from 'react-icons/hi2';
-import { MdCallEnd, MdArrowBackIosNew, MdMicOff } from 'react-icons/md';
+import { MdCallEnd, MdArrowBackIosNew, MdMicOff, MdVolumeOff } from 'react-icons/md';
 
-const FullVideoScreen = ({ doctor, isMuted, setIsMuted, isVideoOff, setIsVideoOff, onBack, onEndCall, duration }) => {
+const FullVideoScreen = ({ doctor, isMuted, setIsMuted, isVideoOff, setIsVideoOff, isSpeakerOn, setIsSpeakerOn, onBack, onEndCall, duration }) => {
   return (
     <motion.div 
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[60] bg-[#1a1a1a] flex flex-col font-['Inter']"
+      className="fixed inset-0 z-60 bg-[#1a1a1a] flex flex-col font-['Inter']"
     >
-      {/* Background Doctor Image (Placeholder for Video) */}
       <div className="absolute inset-0">
         <img 
           src={doctor.img} 
-          className="w-full h-full object-cover opacity-60" 
+          className="w-full h-full object-cover opacity-75" 
           alt="Video Feed" 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/35 via-transparent to-black/45" />
       </div>
 
-      {/* Top Header Overlay */}
-      <div className="relative p-6 flex justify-between items-start">
-        <div className="bg-black/40 backdrop-blur-md rounded-2xl p-3 flex items-center gap-3 border border-white/10">
-          <img src={doctor.img} className="w-10 h-10 rounded-full object-cover border-2 border-green-500" alt="" />
+      <div className="relative p-4 sm:p-5 flex justify-between items-start">
+        <div className="bg-black/45 backdrop-blur-md rounded-2xl px-3 py-2 flex items-center gap-2.5 border border-white/10 shadow-lg">
+          <div className="relative">
+            <img src={doctor.img} className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-white/30" alt="" />
+            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border border-black/80 rounded-full" />
+          </div>
           <div>
-            <h3 className="text-white text-[14px] font-bold">{doctor.name}</h3>
-            <p className="text-white/80 text-[12px] flex items-center gap-1">
-              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" /> Connected • {duration}
+            <h3 className="text-white text-[12px] sm:text-[13px] font-semibold leading-tight">{doctor.name}</h3>
+            <p className="text-white/75 text-[10px] sm:text-[11px] flex items-center gap-1 mt-0.5">
+              <span>Connected</span>
+              <span className="text-white/40">•</span>
+              <span>{duration}</span>
             </p>
           </div>
         </div>
 
-        {/* User Preview */}
-        <div className="w-32 h-44 md:w-48 md:h-64 bg-gray-800 rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl relative">
+        <div className="w-29.5 h-40 sm:w-33 sm:h-44 bg-gray-800/80 rounded-xl overflow-hidden border border-sky-200/70 shadow-2xl relative">
           <img 
             src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80" 
             className={`w-full h-full object-cover ${isVideoOff ? 'hidden' : 'block'}`} 
             alt="Me" 
           />
-          {isVideoOff && <div className="flex items-center justify-center h-full text-white/50">Camera Off</div>}
-          <div className="absolute bottom-2 left-2 bg-black/40 px-2 py-1 rounded text-[10px] text-white backdrop-blur-sm">
+          {isVideoOff && <div className="flex items-center justify-center h-full text-white/60 text-[11px]">Camera Off</div>}
+          <div className="absolute bottom-1.5 left-1.5 right-1.5 bg-black/45 px-2 py-1 rounded-md text-[9px] text-white/95 backdrop-blur-sm truncate">
             You (Mohamed Salem)
           </div>
         </div>
       </div>
 
-      {/* Action Buttons Container */}
-      <div className="mt-auto relative w-full pb-8 md:pb-12 px-4 flex flex-col items-center gap-5 md:gap-6">
-        
-        {/* Connection Status */}
-        <div className="bg-black/30 backdrop-blur-md px-4 py-2 rounded-full flex items-center gap-2 border border-white/10">
-          <div className="flex gap-0.5">
-            {[1, 2, 3, 4].map(i => <div key={i} className="w-1 h-3 bg-green-500 rounded-full" />)}
-          </div>
-          <span className="text-white text-[12px]">Excellent Connection</span>
-        </div>
-
-        {/* Controls Bar */}
-        <div className="bg-white rounded-[32px] p-2 sm:p-3 shadow-2xl flex flex-wrap justify-center items-center gap-3 sm:gap-4 md:gap-8 transition-all w-full max-w-[360px] md:max-w-none">
+      <div className="mt-auto relative w-full pb-5 sm:pb-6 px-4 flex flex-col items-center gap-3">
+        <div className="bg-white/95 backdrop-blur-xl rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3 shadow-2xl flex justify-center items-center gap-2 sm:gap-3 transition-all w-full max-w-92.5 border border-white/70">
           <button 
             onClick={() => setIsMuted(!isMuted)}
-            className={`cursor-pointer shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${isMuted ? 'bg-red-500 text-white' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}
+            className={`cursor-pointer shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-colors border ${isMuted ? 'bg-red-500 text-white border-red-500' : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'}`}
           >
-            {isMuted ? <MdMicOff size={24} /> : <HiOutlineMicrophone size={24} />}
+            {isMuted ? <MdMicOff size={18} /> : <HiOutlineMicrophone size={18} />}
           </button>
           
           <button 
             onClick={() => setIsVideoOff(!isVideoOff)}
-            className={`cursor-pointer shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${isVideoOff ? 'bg-red-500 text-white' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}
+            className={`cursor-pointer shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-colors border ${isVideoOff ? 'bg-red-500 text-white border-red-500' : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'}`}
           >
-            <HiOutlineVideoCamera size={24} />
+            <HiOutlineVideoCamera size={18} />
           </button>
 
-          <button className="cursor-pointer shrink-0 w-12 h-12 rounded-2xl bg-gray-50 text-gray-700 hover:bg-gray-100 flex items-center justify-center">
-            <HiOutlineSpeakerWave size={24} />
+          <button
+            onClick={() => setIsSpeakerOn(!isSpeakerOn)}
+            className={`cursor-pointer shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-colors border ${isSpeakerOn ? 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50' : 'bg-red-500 text-white border-red-500'}`}
+          >
+            {isSpeakerOn ? <HiOutlineSpeakerWave size={18} /> : <MdVolumeOff size={18} />}
           </button>
 
           <button 
             onClick={onEndCall}
-            className="cursor-pointer shrink-0 bg-[#E7000B] hover:bg-red-700 text-white px-6 sm:px-8 py-3 rounded-2xl flex flex-1 sm:flex-none justify-center items-center gap-2 font-bold text-[16px] transition-transform active:scale-95"
+            className="cursor-pointer shrink-0 bg-[#F0152D] hover:bg-[#e10f25] text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl flex justify-center items-center gap-1.5 font-semibold text-[12px] sm:text-[13px] transition-transform active:scale-95 min-w-27.5"
           >
-            <MdCallEnd size={22} /> End Call
+            <MdCallEnd size={16} /> End Call
           </button>
         </div>
 
-        {/* Back Button */}
+        <div className="bg-black/35 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1.5 border border-white/10 shadow-lg">
+          <div className="flex gap-0.5">
+            {[1, 2, 3].map(i => <div key={i} className="w-0.5 h-2.5 bg-green-500 rounded-full" />)}
+          </div>
+          <span className="text-white text-[9px] sm:text-[10px]">Excellent Connection</span>
+        </div>
+
         <button 
           onClick={onBack}
-          className="cursor-pointer relative mt-2 md:mt-0 md:absolute md:left-6 md:bottom-12 bg-black/40 hover:bg-black/60 text-white px-8 md:px-5 py-3 flex items-center justify-center gap-2 backdrop-blur-md rounded-xl border border-white/10 transition-all"
+          className="cursor-pointer absolute left-4 bottom-5 sm:left-6 sm:bottom-6 bg-black/35 hover:bg-black/55 text-white px-3.5 py-2 flex items-center justify-center gap-1.5 backdrop-blur-md rounded-xl border border-white/10 transition-all text-[11px] sm:text-[12px]"
         >
-          <MdArrowBackIosNew size={16} /> Back
+          <MdArrowBackIosNew size={12} /> Back
         </button>
 
-        {/* Muted Notification Toast */}
         {isMuted && (
-          <div className="absolute top-[-80px] md:top-[-100px] right-4 md:right-6 bg-red-500 text-white px-4 py-2 rounded-xl flex items-center gap-2 shadow-lg animate-bounce">
-            <MdMicOff size={20} /> Muted
+          <div className="absolute -top-14 right-4 sm:right-6 bg-red-500 text-white px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-lg text-[11px] animate-bounce">
+            <MdMicOff size={14} /> Muted
+          </div>
+        )}
+
+        {!isSpeakerOn && (
+          <div className="absolute -top-14 left-4 sm:left-6 bg-red-500 text-white px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-lg text-[11px] animate-bounce">
+            <MdVolumeOff size={14} /> Speaker Off
           </div>
         )}
       </div>
