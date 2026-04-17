@@ -118,15 +118,15 @@ export default function DoctorManagement() {
       </header>
 
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-        <div className="relative flex-1">
-          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+        <div className="relative flex-1 min-w-0">
+          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[16px]" />
           <input
             type="search"
             aria-label="Search doctors"
             placeholder="Search doctors…"
             value={searchQuery}
             onChange={handleSearch}
-            className="w-full sm:max-w-md pl-11 pr-4 py-3 text-[16px] bg-[#F6F7F8] border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#155dfc]/20 transition-all"
+            className="w-full sm:max-w-[275px] pl-9 pr-4 py-2.5 text-[16px] bg-[#F6F7F8] border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#333CF5]/30 focus:border-[#333CF5] transition-colors"
           />
         </div>
 

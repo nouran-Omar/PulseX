@@ -60,7 +60,7 @@ const PatientLifestyleSurvey = () => {
 
         <div className="flex flex-col md:flex-row gap-8 items-start">
           <QuestionSection
-            className="flex-[2] w-full"
+            className="flex-1 w-full"
             icon={<LuMoonStar className="text-purple-600" />}
             label="Sleep Hours Per Day"
             question="How many hours do you sleep per day?"
@@ -69,7 +69,7 @@ const PatientLifestyleSurvey = () => {
             onSelect={(v) => handleSelect('sleepHours', v)}
           />
           <QuestionSection
-            className="flex-[1] w-full"
+            className="flex-1 w-full"
             icon={<FaSmoking className="text-gray-500" />}
             label="Smoking"
             question="Do you smoke?"

@@ -100,7 +100,7 @@ export default function PatientManagement() {
 
   /* ════════════════════════════════════════════════════════ */
   return (
-    <section className="relative flex flex-col gap-6 p-4 sm:p-5 lg:p-6 min-h-screen" aria-label="Patient Management">
+    <section className="relative flex flex-col gap-6 p-6 sm:p-5 lg:p-6 min-h-screen" aria-label="Patient Management">
 
       <Toast
         visible={toast.visible}

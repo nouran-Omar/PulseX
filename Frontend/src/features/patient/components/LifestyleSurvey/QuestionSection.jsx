@@ -16,15 +16,22 @@ const QuestionSection = ({
       {options.map((opt) => {
         const active = selected === opt;
         return (
-          <button
+          <label
             key={opt}
-            onClick={() => onSelect(opt)}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-[24px] text-[13px] font-medium border transition-all cursor-pointer ${
               active
                 ? 'border-brand-main text-black-main-text bg-white'
                 : 'border-gray-200 text-black-main-text bg-white hover:border-brand-main hover:bg-[#f5f5ff]'
             }`}
           >
+            <input
+              type="radio"
+              name={label}
+              value={opt}
+              checked={active}
+              onChange={() => onSelect(opt)}
+              className="sr-only"
+            />
             <span
               className={`w-3.5 h-3.5 rounded-full border shrink-0 transition-all ${
                 active
@@ -33,7 +40,7 @@ const QuestionSection = ({
               }`}
             />
             {opt}
-          </button>
+          </label>
         );
       })}
     </div>

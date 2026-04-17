@@ -63,6 +63,16 @@ const DoctorNotFound = lazy(() => import('./features/doctor/components/NotFound/
 
 // Doctor Pages
 const DoctorDashboard = lazy(() => import('./features/doctor/pages/DoctorDashboard/DoctorDashboard'))
+const DoctorMessages = lazy(() => import('./features/doctor/pages/DoctorMessages/DoctorMessages'))
+const DoctorStories = lazy(() => import('./features/doctor/pages/Stories/Stories'))
+const DoctorStoryDetails = lazy(() => import('./features/doctor/pages/StoryDetails/StoryDetails'))
+const DoctorAllComments = lazy(() => import('./features/doctor/pages/AllComments/AllComments'))
+const DoctorSettingsProfile = lazy(() => import('./features/doctor/pages/DoctorSettingsProfile/DoctorSettingsProfile'))
+const DoctorPatientList = lazy(() => import('./features/doctor/pages/Patients/PatientList'))
+const DoctorPatientDetails = lazy(() => import('./features/doctor/pages/Patients/PatientDetails'))
+const DoctorAddMedicalRecords = lazy(() => import('./features/doctor/pages/Patients/AddMedicalRecords'))
+const DoctorNewPrescription = lazy(() => import('./features/doctor/pages/Patients/NewPrescription'))
+const DoctorPrescriptionPage = lazy(() => import('./features/doctor/pages/Prescription/Prescription'))
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 function App() {
   const routing = createBrowserRouter([
@@ -134,6 +144,16 @@ function App() {
       children: [
         { index: true, element: <DoctorDashboard /> },
         { path: "dashboard", element: <DoctorDashboard /> },
+        { path: "patients", element: <DoctorPatientList /> },
+        { path: "patients/:id", element: <DoctorPatientDetails /> },
+        { path: "patients/:id/medical-records/new", element: <DoctorAddMedicalRecords /> },
+        { path: "patients/:id/prescriptions/new", element: <DoctorNewPrescription /> },
+        { path: "prescription", element: <DoctorPrescriptionPage /> },
+        { path: "messages", element: <DoctorMessages /> },
+        { path: "stories", element: <DoctorStories /> },
+        { path: "stories/:id", element: <DoctorStoryDetails /> },
+        { path: "stories/:id/comments", element: <DoctorAllComments /> },
+        { path: "settings", element: <DoctorSettingsProfile /> },
         { path: "*", element: <DoctorNotFound /> },
       ]
     },

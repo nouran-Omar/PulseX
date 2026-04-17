@@ -2,7 +2,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
   HiOutlineXMark,
-  HiOutlinePaperAirplane,
 } from 'react-icons/hi2';
 
 const chatbotIcon = '/image/chatpot.svg'; // استبدلها بـ /image/chatpot.svg
@@ -32,8 +31,9 @@ const PatientChatbot = () => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isTyping]);
+    if (!isOpen) return;
+    bottomRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' });
+  }, [messages, isTyping, isOpen]);
 
   const sendMessage = () => {
     const text = input.trim();
@@ -68,7 +68,7 @@ const PatientChatbot = () => {
     <>
       {/* Chat Window */}
       <div 
-        className={`fixed inset-0 sm:inset-auto sm:bottom-24 sm:right-6 z-50 w-screen sm:w-96 sm:max-w-[24rem] h-screen sm:h-150 bg-white rounded-none sm:rounded-3xl overflow-hidden shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] outline-0 sm:outline-2 sm:-outline-offset-2 sm:outline-sky-200 transition-all duration-300 transform flex flex-col ${
+        className={`fixed inset-0 sm:inset-auto sm:bottom-24 sm:right-6 z-50 w-screen sm:w-96 sm:max-w-[24rem] h-screen sm:h-[600px] sm:max-h-[calc(100vh-8rem)] bg-white rounded-none sm:rounded-3xl overflow-hidden shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] outline-0 sm:outline-2 sm:-outline-offset-2 sm:outline-sky-200 transition-all duration-300 transform flex flex-col ${
           isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
         }`}
       >
@@ -155,8 +155,8 @@ const PatientChatbot = () => {
           >
       
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-  <path d="M12.1135 18.0716C12.1452 18.1505 12.2002 18.2179 12.2712 18.2646C12.3423 18.3113 12.4259 18.3352 12.5109 18.333C12.5959 18.3308 12.6781 18.3027 12.7467 18.2524C12.8152 18.2021 12.8668 18.1321 12.8943 18.0516L18.311 2.2183C18.3377 2.14446 18.3428 2.06455 18.3257 1.98793C18.3086 1.9113 18.27 1.84113 18.2145 1.78561C18.159 1.7301 18.0888 1.69154 18.0122 1.67446C17.9356 1.65737 17.8557 1.66246 17.7818 1.68913L1.9485 7.1058C1.86808 7.13338 1.79802 7.1849 1.74772 7.25344C1.69743 7.32199 1.66931 7.40428 1.66713 7.48926C1.66495 7.57425 1.68883 7.65787 1.73555 7.7289C1.78226 7.79993 1.84959 7.85497 1.9285 7.88663L8.53683 10.5366C8.74574 10.6203 8.93554 10.7453 9.0948 10.9043C9.25406 11.0633 9.37948 11.2529 9.4635 11.4616L12.1135 18.0716Z" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M18.2114 1.78906L9.09473 10.9049" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M12.1135 18.0716C12.1452 18.1505 12.2002 18.2179 12.2712 18.2646C12.3423 18.3113 12.4259 18.3352 12.5109 18.333C12.5959 18.3308 12.6781 18.3027 12.7467 18.2524C12.8152 18.2021 12.8668 18.1321 12.8943 18.0516L18.311 2.2183C18.3377 2.14446 18.3428 2.06455 18.3257 1.98793C18.3086 1.9113 18.27 1.84113 18.2145 1.78561C18.159 1.7301 18.0888 1.69154 18.0122 1.67446C17.9356 1.65737 17.8557 1.66246 17.7818 1.68913L1.9485 7.1058C1.86808 7.13338 1.79802 7.1849 1.74772 7.25344C1.69743 7.32199 1.66931 7.40428 1.66713 7.48926C1.66495 7.57425 1.68883 7.65787 1.73555 7.7289C1.78226 7.79993 1.84959 7.85497 1.9285 7.88663L8.53683 10.5366C8.74574 10.6203 8.93554 10.7453 9.0948 10.9043C9.25406 11.0633 9.37948 11.2529 9.4635 11.4616L12.1135 18.0716Z" stroke="white" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M18.2114 1.78906L9.09473 10.9049" stroke="white" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
           </button>
         </div>

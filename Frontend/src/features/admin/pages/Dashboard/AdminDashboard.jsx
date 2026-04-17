@@ -117,7 +117,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 p-0 sm:p-5 lg:grid-cols-2 gap-4 sm:gap-8">
+      <div className="grid grid-cols-1 p-3 sm:p-5 lg:grid-cols-2 gap-4 sm:gap-8">
         <div className="bg-white rounded-[16px] p-5 min-h-[280px] flex flex-col shadow-[0_0_20px_rgba(0,0,0,0.08)]">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-[20px] font-bold text-black-main-text">Recent Doctors</h2>
