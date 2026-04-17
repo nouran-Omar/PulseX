@@ -3,12 +3,15 @@ import { AnimatePresence } from 'framer-motion';
 import FullVideoScreen from './FullVideoScreen';
 import MinimizeModal from './MinimizeModal';
 import FloatingCallWindow from './FloatingCallWindow';
+import EndCallModal from './EndCallModal';
 
 const VideoCallContainer = ({ isOpen, onClose, doctor }) => {
   const [isMinimized, setIsMinimized] = useState(false);
   const [showMinimizeModal, setShowMinimizeModal] = useState(false);
+  const [showEndCallModal, setShowEndCallModal] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
+  const [isSpeakerOn, setIsSpeakerOn] = useState(true);
   const [duration, setDuration] = useState(0);
 
   // Timer logic
@@ -28,6 +31,25 @@ const VideoCallContainer = ({ isOpen, onClose, doctor }) => {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+  const resetLocalCallState = () => {
+    setIsMinimized(false);
+    setShowMinimizeModal(false);
+    setShowEndCallModal(false);
+    setIsMuted(false);
+    setIsVideoOff(false);
+    setIsSpeakerOn(true);
+  };
+
+  const handleRequestEndCall = () => {
+    setShowMinimizeModal(false);
+    setShowEndCallModal(true);
+  };
+
+  const handleConfirmEndCall = () => {
+    resetLocalCallState();
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -40,8 +62,10 @@ const VideoCallContainer = ({ isOpen, onClose, doctor }) => {
             setIsMuted={setIsMuted}
             isVideoOff={isVideoOff}
             setIsVideoOff={setIsVideoOff}
+            isSpeakerOn={isSpeakerOn}
+            setIsSpeakerOn={setIsSpeakerOn}
             onBack={() => setShowMinimizeModal(true)}
-            onEndCall={onClose}
+            onEndCall={handleRequestEndCall}
             duration={formatTime(duration)}
           />
         )}
@@ -55,14 +79,27 @@ const VideoCallContainer = ({ isOpen, onClose, doctor }) => {
           setShowMinimizeModal(false);
         }}
         duration={formatTime(duration)}
+        doctorName={doctor?.name || 'your doctor'}
+      />
+
+      <EndCallModal
+        isOpen={showEndCallModal}
+        onClose={() => setShowEndCallModal(false)}
+        onConfirm={handleConfirmEndCall}
+        duration={formatTime(duration)}
+        doctorName={doctor?.name || 'your doctor'}
       />
 
       {isMinimized && (
         <FloatingCallWindow
           doctor={doctor}
           duration={formatTime(duration)}
+          isMuted={isMuted}
+          onToggleMute={() => setIsMuted((prev) => !prev)}
+          isSpeakerOn={isSpeakerOn}
+          onToggleSpeaker={() => setIsSpeakerOn((prev) => !prev)}
           onExpand={() => setIsMinimized(false)}
-          onEndCall={onClose}
+          onEndCall={handleRequestEndCall}
         />
       )}
     </>
