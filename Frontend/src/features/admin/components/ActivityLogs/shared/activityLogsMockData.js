@@ -16,7 +16,7 @@ export const ICON_STYLES = {
 };
 
 export const getMockActivityLogs = () =>
-  Array.from({ length: 35 }, (_, index) => ({
+  Array.from({ length: 60 }, (_, index) => ({
     id: index + 1,
     type: ["Created", "Updated", "Deleted", "Login", "Logout"][index % 5],
     title: [
