@@ -7,18 +7,16 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    // Update state so the fallback UI is shown on the next render
     return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
-    // You can send this error to a service like Sentry for monitoring
+
     console.error("ErrorBoundary caught an error", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      // Fallback UI shown to the user instead of a blank screen
       return (
         <div className="flex h-screen flex-col items-center justify-center bg-gray-50 p-5 text-center">
           <h1 className="text-2xl font-bold text-red-600">Sorry, something went wrong unexpectedly.</h1>
