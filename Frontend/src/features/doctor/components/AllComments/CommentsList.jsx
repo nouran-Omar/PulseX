@@ -11,6 +11,7 @@ const CommentsList = ({
   onLike,
   onReplyToggle,
   onReplyTextChange,
+  onReplyCancel,
   onPostReply,
   onReport,
 }) => {
@@ -62,6 +63,7 @@ const CommentsList = ({
                         className="w-full px-3 py-2 rounded-xl border border-gray-200 bg-[#F6F7F8] text-xs outline-none resize-none focus:border-brand-main"
                       />
                       <div className="flex flex-wrap justify-end gap-2">
+                        <button onClick={onReplyCancel} className="cursor-pointer text-xs text-gray-400 hover:text-gray-600">Cancel</button>
                         <button onClick={() => onPostReply(c.id)}
                           className="cursor-pointer flex items-center gap-1 px-3 py-1.5 rounded-full bg-brand-main text-white text-xs font-semibold hover:bg-[#2730d4]">
                           <IoSendSharp /> Reply

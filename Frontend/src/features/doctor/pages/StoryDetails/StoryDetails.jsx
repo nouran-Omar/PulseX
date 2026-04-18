@@ -131,7 +131,7 @@ const DoctorStoryDetails = () => {
     document.title = 'Story Details | PulseX';
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
-      meta.setAttribute('content', 'Read patient stories in full with comments and related stories.');
+      meta.setAttribute('content', 'Read story details and patient engagement from the doctor workspace.');
     }
   }, []);
 
@@ -235,6 +235,7 @@ const DoctorStoryDetails = () => {
               storyAuthorImg={story.authorImg}
               comment={comment}
               onChange={(e) => setComment(e.target.value)}
+              onCancel={() => { setComment(''); setShowCommentBox(false); }}
               onPost={handlePostComment}
             />
 

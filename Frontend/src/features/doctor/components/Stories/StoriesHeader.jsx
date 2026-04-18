@@ -14,7 +14,7 @@ const StoriesHeader = () => {
       </div>
 
       <p className="text-[18px] text-[var(--story-muted)] max-w-2xl ml-2">
-        Read and share inspiring patient journeys.
+        Review inspiring patient journeys and community feedback.
       </p>
     </header>
   );

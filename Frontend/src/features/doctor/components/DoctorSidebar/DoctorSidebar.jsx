@@ -33,7 +33,7 @@ const DoctorSidebar = ({ onClose, onLogout }) => {
   const { pathname } = useLocation();
 
   return (
-    <div className="group flex flex-col h-full bg-white rounded-[24px] overflow-hidden border border-gray-100/50 shadow-sm">
+    <div className="group flex flex-col w-full sm:w-[260px] md:w-[280px] max-w-full h-[100dvh] sm:h-full min-h-0 bg-white rounded-[24px] overflow-hidden border border-gray-100/50 shadow-sm">
 
       {/* ── Logo Section ── */}
       <div className="flex items-center gap-2 px-4 py-3 shrink-0">
@@ -45,13 +45,13 @@ const DoctorSidebar = ({ onClose, onLogout }) => {
 
       {/* ── Navigation ── */}
       <nav 
-        className="flex-1 py-2 overflow-hidden group-hover:overflow-y-auto flex flex-col justify-between custom-sidebar-scroll" 
+        className="flex-1 min-h-0 py-2 overflow-y-auto overflow-x-hidden overscroll-contain [scrollbar-gutter:stable] custom-sidebar-scroll" 
         aria-label="Doctor menu"
       >
         <div className="px-2">
           {/* Menu Section */}
           <p className="text-[12px] font-normal text-gray-400 px-2 my-[24px]">Menu</p>
-          <ul className="space-y-6 list-none p-0 m-0">
+          <ul className="space-y-4 list-none p-0 m-0">
             {MENU_ITEMS.map((item) => {
               const fullPath = `/doctor/${item.path}`;
               // التأكد من إن اللينك متأكتف لو المسار الحالي زيه
@@ -63,6 +63,7 @@ const DoctorSidebar = ({ onClose, onLogout }) => {
                     to={fullPath}
                     onClick={onClose}
                     className={`${linkBase} ${isActive ? linkActiveClass : ''}`}
+                    aria-label={item.name}
                   >
                     {isActive && (
                       <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-[#333CF5] rounded-r-full" />
@@ -84,6 +85,7 @@ const DoctorSidebar = ({ onClose, onLogout }) => {
                   to="/doctor/settings"
                   onClick={onClose}
                   className={({ isActive }) => `${linkBase} ${isActive ? linkActiveClass : ''}`}
+                  aria-label="Settings and profile"
                 >
                   {({ isActive }) => (
                     <>
@@ -99,6 +101,7 @@ const DoctorSidebar = ({ onClose, onLogout }) => {
                 <button
                   onClick={onLogout}
                   className="w-full flex items-center gap-2 px-3 py-1.5 rounded-[8px] text-[11px] font-semibold text-[#333CF580] hover:text-red-500 hover:bg-red-50 transition-all border border-transparent bg-transparent cursor-pointer"
+                  aria-label="Log out"
                 >
                   <HiOutlineArrowLeftOnRectangle className="text-[24px] shrink-0" />
                   <span className="text-[14px]">Log out</span>
@@ -111,6 +114,10 @@ const DoctorSidebar = ({ onClose, onLogout }) => {
 
       {/* الستايل الخاص بالـ Scrollbar ليكون رفيعاً ومخفياً */}
       <style dangerouslySetInnerHTML={{ __html: `
+        .custom-sidebar-scroll {
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+        }
         .custom-sidebar-scroll::-webkit-scrollbar {
           width: 4px;
         }
@@ -123,6 +130,11 @@ const DoctorSidebar = ({ onClose, onLogout }) => {
         }
         .custom-sidebar-scroll::-webkit-scrollbar-thumb:hover {
           background: #333CF5;
+        }
+        @media (max-width: 640px) {
+          .custom-sidebar-scroll::-webkit-scrollbar {
+            width: 3px;
+          }
         }
       `}} />
     </div>

@@ -9,7 +9,7 @@ const StoryAuthorSection = ({ story, tagCls }) => {
         </div>
         <div className="w-full text-center sm:text-left">
           <p className="font-semibold text-xl text-black-main-text">{story.author}</p>
-          <p className="text-sm text-[#6B7280]">Shared publicly to inspire other patients</p>
+          <p className="text-sm text-[#6B7280]">Shared publicly with the PulseX community</p>
           <p className="text-sm text-[#4B5563] mt-0.5">{story.date}</p>
           <div className="flex flex-wrap gap-2 mt-2">
             {story.categories.map((c) => (

@@ -29,8 +29,9 @@ const ReportModal = ({ onClose, onSubmit, categories }) => {
           </div>
         </div>
         <div className="flex gap-3 mt-5">
+          <button onClick={onClose} className="cursor-pointer flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-semibold text-black-main-text hover:bg-gray-50">Cancel</button>
           <button onClick={() => { onSubmit(); onClose(); }}
-            className="cursor-pointer w-full py-2.5 rounded-xl bg-brand-main text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-[#2730d4]">
+            className="cursor-pointer flex-1 py-2.5 rounded-xl bg-brand-main text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-[#2730d4]">
             <IoSendSharp /> Submit Report
           </button>
         </div>

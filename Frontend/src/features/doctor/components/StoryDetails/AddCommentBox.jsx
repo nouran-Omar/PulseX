@@ -5,6 +5,7 @@ const AddCommentBox = ({
   storyAuthorImg,
   comment,
   onChange,
+  onCancel,
   onPost,
 }) => {
   return (
@@ -22,6 +23,7 @@ const AddCommentBox = ({
         </div>
       </div>
       <div className="flex flex-col sm:flex-row flex-wrap justify-end gap-3 mt-3">
+        <button onClick={onCancel} className="w-full sm:w-auto cursor-pointer text-sm text-gray-500 hover:text-gray-700 transition">Cancel</button>
         <button
           onClick={onPost}
           className="w-full sm:w-auto cursor-pointer flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-brand-main text-white text-sm font-semibold hover:bg-[#2730d4] transition"

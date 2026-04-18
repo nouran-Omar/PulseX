@@ -74,7 +74,7 @@ const DoctorAllComments = () => {
     document.title = 'All Comments | PulseX';
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
-      meta.setAttribute('content', 'Read and join the conversation with patient story comments.');
+      meta.setAttribute('content', 'Read and manage story comments from the doctor workspace.');
     }
   }, []);
 
@@ -165,6 +165,7 @@ const DoctorAllComments = () => {
           onLike={handleLike}
           onReplyToggle={(idValue) => { setReplyingTo(replyingTo === idValue ? null : idValue); setReplyText(''); }}
           onReplyTextChange={(e) => setReplyText(e.target.value)}
+          onReplyCancel={() => setReplyingTo(null)}
           onPostReply={handlePostReply}
           onReport={setReportTarget}
         />

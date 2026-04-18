@@ -100,7 +100,7 @@ Default URL:
 
 ## Deployment
 
-- Live: https://corepulseai.vercel.app/
+- Live: https://versionpulsex1.vercel.app/
 - Platform: Vercel
 
 ## Summary 💙

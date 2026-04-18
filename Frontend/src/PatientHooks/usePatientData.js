@@ -1,3 +1,8 @@
+// ─────────────────────────────────────────────────────
+//  usePatientData  —  Mock Data Hook for Patient Dashboard
+//  PulseX © 2026
+// ─────────────────────────────────────────────────────
+
 import { useState } from "react";
 
 // ─── Static Mock Data ────────────────────────────────
@@ -143,7 +148,11 @@ const PATIENT_MOCK = {
       icon: "risk",
     },
   ],
-}
+};
+
+// ─────────────────────────────────────────────────────
+//  Hook
+// ─────────────────────────────────────────────────────
 const usePatientData = () => {
   const [patient] = useState(PATIENT_MOCK);
   const [isLoading] = useState(false);

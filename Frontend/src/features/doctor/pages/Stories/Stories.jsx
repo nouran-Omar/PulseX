@@ -11,7 +11,7 @@ const DoctorStories = () => {
     document.title = 'Stories | PulseX';
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
-      meta.setAttribute('content', 'Read and share inspiring patient journeys from the PulseX community.');
+      meta.setAttribute('content', 'Review and follow patient stories shared in the PulseX community.');
     }
   }, []);
 
@@ -44,7 +44,7 @@ const DoctorStories = () => {
         <StoriesHeader />
 
         <aside className="sr-only">
-          <p>Patient stories listing with pagination and quick actions.</p>
+          <p>Doctor stories listing with pagination and quick actions.</p>
         </aside>
 
         <StoriesGrid stories={currentStories} onReadStory={(storyId) => navigate(`/doctor/stories/${storyId}`)} />

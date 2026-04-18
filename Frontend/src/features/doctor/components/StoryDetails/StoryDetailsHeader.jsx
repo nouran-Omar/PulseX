@@ -5,9 +5,9 @@ const StoryDetailsHeader = () => {
     <header>
       <div className="flex items-center gap-2 mb-1">
         <TbBook className="text-xl text-black-main-text" />
-        <h1 className="text-lg font-bold text-black-main-text">Patient Story Details</h1>
+        <h1 className="text-lg font-bold text-black-main-text">Story Details</h1>
       </div>
-      <p className="text-sm text-[var(--story-muted)]">Read full patient journey and shared experiences.</p>
+      <p className="text-sm text-[var(--story-muted)]">Read full journey details and shared experiences.</p>
     </header>
   );
 };

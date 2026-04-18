@@ -13,7 +13,7 @@ const PageLoader = () => (
 // ─── Layouts (يفضل تحميلهم عادي لأنهم الهيكل الأساسي) ──────────
 import AdminLayout from './features/admin/components/AdminLayout/AdminLayout'
 import PatientMainLayout from './features/patient/components/PatientLayout/PatientMainLayout'
-import DoctorLayout from './features/doctor/components/DoctorLayout/DoctorLayout'
+import DoctorLayout from './features/doctor/components/doctorlayout/DoctorLayout'
 import Layout from './components/Layout/Layout'
 // ─── Lazy Loading Pages (نحمل الصفحات بالطلب) ──────────────────
 // Home & Auth
@@ -63,16 +63,17 @@ const DoctorNotFound = lazy(() => import('./features/doctor/components/NotFound/
 
 // Doctor Pages
 const DoctorDashboard = lazy(() => import('./features/doctor/pages/DoctorDashboard/DoctorDashboard'))
-const DoctorMessages = lazy(() => import('./features/doctor/pages/DoctorMessages/DoctorMessages'))
+const DoctorAppointments = lazy(() => import('./features/doctor/pages/Appointments/Appointments'))
+const DoctorScheduleSettings = lazy(() => import('./features/doctor/pages/ScheduleSettings/ScheduleSettings'))
+const DoctorSettingsProfile = lazy(() => import('./features/doctor/pages/SettingsProfile/SettingsProfile'))
+const DoctorPatients = lazy(() => import('./features/doctor/pages/Patients/Patients'))
+const DoctorPatientDetails = lazy(() => import('./features/doctor/pages/PatientDetails/PatientDetails'))
+const DoctorAddMedicalRecords = lazy(() => import('./features/doctor/pages/AddMedicalRecords/AddMedicalRecords'))
+const DoctorMessages = lazy(() => import('./features/doctor/pages/doctorMessages/DoctorMessages'))
+const DoctorPrescription = lazy(() => import('./features/doctor/pages/Prescription/Prescription'))
 const DoctorStories = lazy(() => import('./features/doctor/pages/Stories/Stories'))
 const DoctorStoryDetails = lazy(() => import('./features/doctor/pages/StoryDetails/StoryDetails'))
 const DoctorAllComments = lazy(() => import('./features/doctor/pages/AllComments/AllComments'))
-const DoctorSettingsProfile = lazy(() => import('./features/doctor/pages/DoctorSettingsProfile/DoctorSettingsProfile'))
-const DoctorPatientList = lazy(() => import('./features/doctor/pages/Patients/PatientList'))
-const DoctorPatientDetails = lazy(() => import('./features/doctor/pages/Patients/PatientDetails'))
-const DoctorAddMedicalRecords = lazy(() => import('./features/doctor/pages/Patients/AddMedicalRecords'))
-const DoctorNewPrescription = lazy(() => import('./features/doctor/pages/Patients/NewPrescription'))
-const DoctorPrescriptionPage = lazy(() => import('./features/doctor/pages/Prescription/Prescription'))
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 function App() {
   const routing = createBrowserRouter([
@@ -144,16 +145,17 @@ function App() {
       children: [
         { index: true, element: <DoctorDashboard /> },
         { path: "dashboard", element: <DoctorDashboard /> },
-        { path: "patients", element: <DoctorPatientList /> },
+        { path: "patients", element: <DoctorPatients /> },
         { path: "patients/:id", element: <DoctorPatientDetails /> },
         { path: "patients/:id/medical-records/new", element: <DoctorAddMedicalRecords /> },
-        { path: "patients/:id/prescriptions/new", element: <DoctorNewPrescription /> },
-        { path: "prescription", element: <DoctorPrescriptionPage /> },
+        { path: "appointments", element: <DoctorAppointments /> },
+        { path: "schedule", element: <DoctorScheduleSettings /> },
+        { path: "settings", element: <DoctorSettingsProfile /> },
         { path: "messages", element: <DoctorMessages /> },
+        { path: "prescription", element: <DoctorPrescription /> },
         { path: "stories", element: <DoctorStories /> },
         { path: "stories/:id", element: <DoctorStoryDetails /> },
         { path: "stories/:id/comments", element: <DoctorAllComments /> },
-        { path: "settings", element: <DoctorSettingsProfile /> },
         { path: "*", element: <DoctorNotFound /> },
       ]
     },

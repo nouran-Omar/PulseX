@@ -40,6 +40,8 @@ const StoriesFooter = ({
           <HiOutlineChevronRight />
         </button>
       </div>
+
+      <div className="w-full md:w-auto md:ml-auto" aria-hidden="true" />
     </footer>
   );
 };
